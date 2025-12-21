@@ -1,23 +1,25 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { AboutPreview } from "@/components/sections/AboutPreview";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { ContactCTA } from "@/components/sections/ContactCTA";
+import { MinimalHeader } from "@/components/layout/MinimalHeader";
+import { MinimalFooter } from "@/components/layout/MinimalFooter";
+import { CinematicHero } from "@/components/sections/CinematicHero";
+import { HorizontalGallery } from "@/components/sections/HorizontalGallery";
+import { StorySection } from "@/components/sections/StorySection";
+import { ServicesMarquee } from "@/components/sections/ServicesMarquee";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { CinematicCTA } from "@/components/sections/CinematicCTA";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <MinimalHeader />
       <main>
-        <Hero />
-        <FeaturedProjects />
-        <AboutPreview />
-        <Testimonials />
-        <ContactCTA />
+        <CinematicHero />
+        <ServicesMarquee />
+        <HorizontalGallery />
+        <StorySection />
+        <TestimonialsSection />
+        <CinematicCTA />
       </main>
-      <Footer />
+      <MinimalFooter />
     </div>
   );
 };
