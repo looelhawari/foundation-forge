@@ -1,23 +1,27 @@
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { MinimalFooter } from "@/components/layout/MinimalFooter";
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { HorizontalGallery } from "@/components/sections/HorizontalGallery";
-import { StorySection } from "@/components/sections/StorySection";
 import { ServicesMarquee } from "@/components/sections/ServicesMarquee";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
-import { CinematicCTA } from "@/components/sections/CinematicCTA";
+import { FullscreenVideo } from "@/components/sections/FullscreenVideo";
+import { CinematicProjects } from "@/components/sections/CinematicProjects";
+import { ParallaxStats } from "@/components/sections/ParallaxStats";
+import { ImmersiveTestimonials } from "@/components/sections/ImmersiveTestimonials";
+import { MegaCTA } from "@/components/sections/MegaCTA";
+import { ScrollProgress } from "@/components/animations/MotionGraphics";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <ScrollProgress />
       <MinimalHeader />
       <main>
         <CinematicHero />
         <ServicesMarquee />
-        <HorizontalGallery />
-        <StorySection />
-        <TestimonialsSection />
-        <CinematicCTA />
+        <FullscreenVideo />
+        <CinematicProjects />
+        <ParallaxStats />
+        <ImmersiveTestimonials />
+        <MegaCTA />
       </main>
       <MinimalFooter />
     </div>
