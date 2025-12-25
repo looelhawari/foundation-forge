@@ -1,6 +1,6 @@
 ﻿import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { MinimalHeader } from "@/components/layout/MinimalHeader";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
 import { ScrollProgress, MorphingBlob, TiltCard, AnimatedCounter } from "@/components/animations/MotionGraphics";

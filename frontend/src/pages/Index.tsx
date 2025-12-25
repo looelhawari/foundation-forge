@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { CompanyIntro } from "@/components/sections/CompanyIntro";
-import { ServicesBreakdown } from "@/components/sections/ServicesBreakdown";
+
+import { ServicesImageGrid } from "@/components/sections/ServicesImageGrid";
 import { ServicesMarquee } from "@/components/sections/ServicesMarquee";
 import { FullscreenVideo } from "@/components/sections/FullscreenVideo";
 import { ClientLogosShowcase } from "@/components/sections/ClientLogosShowcase";
@@ -422,9 +422,9 @@ const Index = () => {
         <MinimalHeader />
         <main>
           <CinematicHero />
-          <CompanyIntro />
+          
           <ServicesMarquee />
-          <ServicesBreakdown />
+          <ServicesImageGrid />
           <FullscreenVideo />
           <ClientLogosShowcase />
           <WhyChooseUs />
@@ -443,3 +443,4 @@ const Index = () => {
 };
 
 export default Index;
+

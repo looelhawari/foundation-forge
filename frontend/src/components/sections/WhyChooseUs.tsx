@@ -1,42 +1,55 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import whyChooseBg from "@/assets/real-why-choose-bg.jpg";
+import whyChoose1 from "@/assets/why-choose-1.jpg";
+import whyChoose2 from "@/assets/why-choose-2.jpg";
+import whyChoose3 from "@/assets/why-choose-3.jpg";
+import whyChoose4 from "@/assets/why-choose-4.jpg";
+import whyChoose5 from "@/assets/why-choose-5.jpg";
+import whyChoose6 from "@/assets/why-choose-6.jpg";
 
 const advantages = [
     {
         number: "01",
         title: "Proven Track Record",
         description: "Over 57 successfully completed projects with government ministries, international events, and private sector leaders",
-        color: "#fbbf24"
+        color: "#fbbf24",
+        image: whyChoose1
     },
     {
         number: "02",
         title: "Expert Team",
         description: "Highly qualified personnel with specialized expertise in road construction, earthworks, and infrastructure development",
-        color: "#f59e0b"
+        color: "#f59e0b",
+        image: whyChoose2
     },
     {
         number: "03",
         title: "Quality Assurance",
         description: "Rigorous quality control measures ensuring excellence in workmanship and adherence to international standards",
-        color: "#f97316"
+        color: "#f97316",
+        image: whyChoose3
     },
     {
         number: "04",
         title: "Latest Technology",
         description: "Utilizing cutting-edge equipment and modern construction techniques for efficient project delivery",
-        color: "#ea580c"
+        color: "#ea580c",
+        image: whyChoose4
     },
     {
         number: "05",
         title: "Timely Completion",
         description: "Strong project management ensuring on-time delivery without compromising quality or safety standards",
-        color: "#9ca3af"
+        color: "#9ca3af",
+        image: whyChoose5
     },
     {
         number: "06",
         title: "Client Satisfaction",
         description: "Building lasting relationships through exceptional performance and exceeding client expectations",
-        color: "#6b7280"
+        color: "#6b7280",
+        image: whyChoose6
     }
 ];
 
@@ -65,6 +78,16 @@ const Hexagon = ({ color, index }: { color: string; index: number }) => {
 export function WhyChooseUs() {
     return (
         <section className="relative py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                <img
+                    src={whyChooseBg}
+                    alt="CPC construction project"
+                    className="w-full h-full object-cover opacity-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-gray-900/80 to-gray-900/90" />
+            </div>
+
             {/* Floating hexagons background */}
             <div className="absolute inset-0 opacity-10">
                 {[...Array(6)].map((_, i) => (
@@ -155,42 +178,28 @@ export function WhyChooseUs() {
                             }}
                         >
                             {/* Card container */}
-                            <div className="relative h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 overflow-hidden">
-                                {/* Hexagon background */}
-                                <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
-                                    <Hexagon color={advantage.color} index={index} />
+                            <div className="relative h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl overflow-hidden">
+                                {/* Project Image */}
+                                <div className="relative h-48 overflow-hidden">
+                                    <img
+                                        src={advantage.image}
+                                        alt={advantage.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
                                 </div>
 
-                                {/* Animated number with orbital rotation */}
-                                <motion.div
-                                    className="relative w-20 h-20 mb-6"
-                                    animate={{
-                                        rotate: 360
-                                    }}
-                                    transition={{
-                                        duration: 20,
-                                        repeat: Infinity,
-                                        ease: "linear"
-                                    }}
-                                >
+                                <div className="p-8">
+                                    {/* Hexagon background */}
+                                    <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
+                                        <Hexagon color={advantage.color} index={index} />
+                                    </div>
+
+                                    {/* Animated number with orbital rotation */}
                                     <motion.div
-                                        className="absolute inset-0 rounded-full border-2 opacity-30"
-                                        style={{ borderColor: advantage.color }}
+                                        className="relative w-20 h-20 mb-6"
                                         animate={{
-                                            scale: [1, 1.2, 1],
-                                            opacity: [0.3, 0.6, 0.3]
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                    />
-                                    <motion.div
-                                        className="absolute inset-0 flex items-center justify-center text-3xl font-bold"
-                                        style={{ color: advantage.color }}
-                                        animate={{
-                                            rotate: -360
+                                            rotate: 360
                                         }}
                                         transition={{
                                             duration: 20,
@@ -198,85 +207,111 @@ export function WhyChooseUs() {
                                             ease: "linear"
                                         }}
                                     >
-                                        {advantage.number}
-                                    </motion.div>
-                                </motion.div>
-
-                                {/* Title with stagger animation */}
-                                <motion.h3
-                                    className="text-2xl font-bold text-white mb-4"
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                >
-                                    {advantage.title.split("").map((char, i) => (
-                                        <motion.span
-                                            key={i}
-                                            variants={{
-                                                hidden: { opacity: 0, y: 20 },
-                                                visible: { opacity: 1, y: 0 }
-                                            }}
-                                            transition={{
-                                                duration: 0.3,
-                                                delay: index * 0.1 + i * 0.03
-                                            }}
-                                            style={{ display: "inline-block" }}
-                                        >
-                                            {char === " " ? "\u00A0" : char}
-                                        </motion.span>
-                                    ))}
-                                </motion.h3>
-
-                                {/* Animated divider */}
-                                <motion.div
-                                    className="h-px mb-4"
-                                    style={{
-                                        background: `linear-gradient(90deg, ${advantage.color}, transparent)`
-                                    }}
-                                    initial={{ scaleX: 0 }}
-                                    whileInView={{ scaleX: 1 }}
-                                    transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
-                                    viewport={{ once: true }}
-                                />
-
-                                {/* Description */}
-                                <motion.p
-                                    className="text-gray-400 leading-relaxed"
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
-                                    viewport={{ once: true }}
-                                >
-                                    {advantage.description}
-                                </motion.p>
-
-                                {/* Hover glow effect */}
-                                <motion.div
-                                    className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl -z-10"
-                                    style={{
-                                        background: `linear-gradient(135deg, ${advantage.color}, transparent)`
-                                    }}
-                                    transition={{ duration: 0.5 }}
-                                />
-
-                                {/* Corner dots animation */}
-                                <div className="absolute bottom-4 right-4 flex gap-2">
-                                    {[0, 1, 2].map((dot) => (
                                         <motion.div
-                                            key={dot}
-                                            className="w-2 h-2 rounded-full"
-                                            style={{ backgroundColor: advantage.color }}
+                                            className="absolute inset-0 rounded-full border-2 opacity-30"
+                                            style={{ borderColor: advantage.color }}
                                             animate={{
-                                                scale: [1, 1.5, 1],
-                                                opacity: [0.3, 1, 0.3]
+                                                scale: [1, 1.2, 1],
+                                                opacity: [0.3, 0.6, 0.3]
                                             }}
                                             transition={{
-                                                duration: 1.5,
+                                                duration: 2,
                                                 repeat: Infinity,
-                                                delay: dot * 0.2
+                                                ease: "easeInOut"
                                             }}
                                         />
-                                    ))}
+                                        <motion.div
+                                            className="absolute inset-0 flex items-center justify-center text-3xl font-bold"
+                                            style={{ color: advantage.color }}
+                                            animate={{
+                                                rotate: -360
+                                            }}
+                                            transition={{
+                                                duration: 20,
+                                                repeat: Infinity,
+                                                ease: "linear"
+                                            }}
+                                        >
+                                            {advantage.number}
+                                        </motion.div>
+                                    </motion.div>
+
+                                    {/* Title with stagger animation */}
+                                    <motion.h3
+                                        className="text-2xl font-bold text-white mb-4"
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true }}
+                                    >
+                                        {advantage.title.split("").map((char, i) => (
+                                            <motion.span
+                                                key={i}
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: { opacity: 1, y: 0 }
+                                                }}
+                                                transition={{
+                                                    duration: 0.3,
+                                                    delay: index * 0.1 + i * 0.03
+                                                }}
+                                                style={{ display: "inline-block" }}
+                                            >
+                                                {char === " " ? "\u00A0" : char}
+                                            </motion.span>
+                                        ))}
+                                    </motion.h3>
+
+                                    {/* Animated divider */}
+                                    <motion.div
+                                        className="h-px mb-4"
+                                        style={{
+                                            background: `linear-gradient(90deg, ${advantage.color}, transparent)`
+                                        }}
+                                        initial={{ scaleX: 0 }}
+                                        whileInView={{ scaleX: 1 }}
+                                        transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
+                                        viewport={{ once: true }}
+                                    />
+
+                                    {/* Description */}
+                                    <motion.p
+                                        className="text-gray-400 leading-relaxed"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        {advantage.description}
+                                    </motion.p>
+
+                                    {/* Hover glow effect */}
+                                    <motion.div
+                                        className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl -z-10"
+                                        style={{
+                                            background: `linear-gradient(135deg, ${advantage.color}, transparent)`
+                                        }}
+                                        transition={{ duration: 0.5 }}
+                                    />
+
+                                    {/* Corner dots animation */}
+                                    <div className="absolute bottom-4 right-4 flex gap-2">
+                                        {[0, 1, 2].map((dot) => (
+                                            <motion.div
+                                                key={dot}
+                                                className="w-2 h-2 rounded-full"
+                                                style={{ backgroundColor: advantage.color }}
+                                                animate={{
+                                                    scale: [1, 1.5, 1],
+                                                    opacity: [0.3, 1, 0.3]
+                                                }}
+                                                transition={{
+                                                    duration: 1.5,
+                                                    repeat: Infinity,
+                                                    delay: dot * 0.2
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>

@@ -40,7 +40,7 @@
     --gradient-gold: linear-gradient(135deg, hsl(43 96% 56%) 0%, hsl(35 100% 45%) 100%);
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 8%) 100%);
-    
+
     --shadow-gold: 0 0 60px hsl(43 96% 56% / 0.15);
     --shadow-card: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
     --shadow-hover: 0 35px 60px -15px hsl(0 0% 0% / 0.6);
@@ -90,10 +90,36 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    /* Enable hardware acceleration */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-wide;
+  }
+
+  /* Optimize images for performance */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Optimize animations */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -176,20 +202,44 @@
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
+
+  /* Performance optimization utilities */
+  .gpu-accelerate {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .optimize-animations {
+    will-change: transform, opacity;
+  }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+  * {
+    /* Disable expensive effects on mobile */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+  }
 }
 
 @keyframes marquee {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* Smooth scroll - disabled on mobile for performance */
+@media (min-width: 769px) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Custom selection */
