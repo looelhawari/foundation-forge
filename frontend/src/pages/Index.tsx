@@ -12,7 +12,6 @@ import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { QualityAndCertifications } from "@/components/sections/QualityAndCertifications";
 import { FeaturedShowcase } from "@/components/sections/FeaturedShowcase";
-import { EquipmentShowcase } from "@/components/sections/EquipmentShowcase";
 import { ParallaxStats } from "@/components/sections/ParallaxStats";
 import { ImmersiveTestimonials } from "@/components/sections/ImmersiveTestimonials";
 import { MegaCTA } from "@/components/sections/MegaCTA";
@@ -431,7 +430,6 @@ const Index = () => {
           <ProcessTimeline />
           <QualityAndCertifications />
           <FeaturedShowcase />
-          <EquipmentShowcase />
           <ParallaxStats />
           <ImmersiveTestimonials />
           <MegaCTA />

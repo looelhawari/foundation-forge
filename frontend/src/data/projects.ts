@@ -10,6 +10,215 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+    // School Projects - Ministry of Education
+    {
+        id: "al-aqsa-preparatory-girls",
+        title: "Al Aqsa Preparatory School for Girls",
+        category: "Educational",
+        description: "Road work and infrastructure development for Al Aqsa Preparatory School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Ain Khaled, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "audio-education-complex-girls",
+        title: "Audio Education Complex for Girls",
+        category: "Educational",
+        description: "Complete infrastructure and road works for Audio Education Complex for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Old Airport Area, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "fatima-alzahra-preparatory-girls",
+        title: "Fatima Al Zahra Preparatory School for Girls",
+        category: "Educational",
+        description: "Infrastructure development for Fatima Al Zahra Preparatory School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Mansoura, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "qatar-primary-boys",
+        title: "Qatar Primary School for Boys",
+        category: "Educational",
+        description: "Road construction and infrastructure for Qatar Primary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Bin Mahmoud, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-shurooq-model-boys",
+        title: "Al Shurooq Model School for Boys",
+        category: "Educational",
+        description: "Infrastructure and road work for Al Shurooq Model School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Gharafa, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-wakra-primary-girls",
+        title: "Al Wakra Primary School for Girls",
+        category: "Educational",
+        description: "Complete road works and infrastructure for Al Wakra Primary School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Wakra, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "abdul-rahman-bin-auf-boys",
+        title: "Abdul Rahman Bin Auf School for Boys",
+        category: "Educational",
+        description: "Infrastructure development for Abdul Rahman Bin Auf School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Sadd, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "jassim-bin-hamad-secondary-boys",
+        title: "Jassim Bin Hamad Secondary School for Boys",
+        category: "Educational",
+        description: "Road and infrastructure works for Jassim Bin Hamad Secondary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Sadd, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "arwa-bint-abdul-muttalib-secondary-girls",
+        title: "Arwa Bint Abdul Muttalib Secondary School for Girls",
+        category: "Educational",
+        description: "Complete infrastructure for Arwa Bint Abdul Muttalib Secondary School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Wakra, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "omar-bin-abdulaziz-secondary-boys",
+        title: "Omar Bin Abdulaziz Secondary School for Boys",
+        category: "Educational",
+        description: "Road construction and infrastructure for Omar Bin Abdulaziz Secondary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Hilal, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "musab-bin-umair-secondary-boys",
+        title: "Musab Bin Umair Secondary School for Boys",
+        category: "Educational",
+        description: "Infrastructure and road work for Musab Bin Umair Secondary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Thumama, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "rawdat-rashed-primary-boys",
+        title: "Rawdat Rashed Primary School for Boys",
+        category: "Educational",
+        description: "Road works and infrastructure for Rawdat Rashed Primary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Rawdat Rashed, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "rawdat-rashed-secondary-boys",
+        title: "Rawdat Rashed Secondary School for Boys",
+        category: "Educational",
+        description: "Complete infrastructure for Rawdat Rashed Secondary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Rawdat Rashed, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-bayan-school",
+        title: "Al Bayan School",
+        category: "Educational",
+        description: "Road construction and infrastructure development for Al Bayan School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Waab, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-wukair-school",
+        title: "Al Wukair School",
+        category: "Educational",
+        description: "Infrastructure and road work for Al Wukair School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Wukair, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "umm-qarn-school",
+        title: "Umm Qarn School",
+        category: "Educational",
+        description: "Complete infrastructure development for Umm Qarn School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Umm Qarn, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-sailiya-secondary-boys",
+        title: "Al Sailiya Secondary School for Boys",
+        category: "Educational",
+        description: "Road and infrastructure works for Al Sailiya Secondary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Sailiya, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "ibn-taymiyyah-school",
+        title: "Ibn Taymiyyah School",
+        category: "Educational",
+        description: "Infrastructure and road work for Ibn Taymiyyah School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Rayyan, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-shahaniya-independent-school",
+        title: "Al Shahaniya Independent School",
+        category: "Educational",
+        description: "Complete road works and infrastructure for Al Shahaniya Independent School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Shahaniya, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-shahaniya-secondary-school",
+        title: "Al Shahaniya Secondary School",
+        category: "Educational",
+        description: "Infrastructure development for Al Shahaniya Secondary School. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Shahaniya, Qatar",
+        client: "Ministry of Education"
+    },
+    {
+        id: "al-brouq-primary-girls",
+        title: "Al Brouq Primary School for Girls",
+        category: "Educational",
+        description: "Infrastructure and road work for Al Brouq Primary School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Rayyan, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "muaither-primary-boys",
+        title: "Muaither Primary School for Boys",
+        category: "Educational",
+        description: "Complete road works and infrastructure for Muaither Primary School for Boys. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Muaither, Doha",
+        client: "Ministry of Education"
+    },
+    {
+        id: "rafidah-bint-kaab-girls",
+        title: "Rafidah Bint Kaab School for Girls",
+        category: "Educational",
+        description: "Road and infrastructure works for Rafidah Bint Kaab School for Girls. Main contracting by Mesopotamia For General Contracting.",
+        images: [],
+        location: "Al Wakra, Qatar",
+        client: "Ministry of Education"
+    },
+    // Previous Projects
     {
         id: "ministry-education-parking",
         title: "Cars Parking Area - Ministry of Education",
@@ -131,15 +340,6 @@ export const projects: Project[] = [
         client: "Galva Steel"
     },
     {
-        id: "bus-parking",
-        title: "Bus Parking Yard & Staff Parking",
-        category: "Educational",
-        description: "Comprehensive road work and parking infrastructure for public transportation facilities including bus parking yards and staff parking areas.",
-        images: Array.from({ length: 77 }, (_, i) => `/projects/PROJECTS_PHOTO_ROAD_WORK_FOR_BUS_PARKING_YARD_STAFF_PARKING/${String(i + 1).padStart(3, '0')}.png`),
-        year: "2022-2024",
-        location: "Qatar"
-    },
-    {
         id: "factory-stores",
         title: "Factory and Stores Road Work",
         category: "Industrial",
@@ -188,15 +388,6 @@ export const projects: Project[] = [
         client: "FIFA World Cup Qatar 2022"
     },
     {
-        id: "ministry-education",
-        title: "MinEducational",
-        description: "Car parking area construction for the Ministry of Education, supporting educational infrastructure.",
-        images: Array.from({ length: 6 }, (_, i) => `/projects/PROJECT_CAR_PARKING_AREA_FOR_MINISTRY_OF_EDUCATION/${String(i + 1).padStart(3, '0')}.png`),
-        year: "2023",
-        location: "Al Qutaifiya, Qatar",
-        client: "Ministry of Education"
-    },
-    {
         id: "save-storage",
         title: "Warehouse & Accommodation",
         category: "Logistics & Warehouse",
@@ -237,7 +428,6 @@ export const projects: Project[] = [
     {
         id: "general-projects",
         title: "General Construction Projects",
-        category: "Public InfrastructureConstruction Projects",
         category: "Mixed",
         description: "Collection of various construction projects showcasing company capabilities.",
         images: Array.from({ length: 32 }, (_, i) => `/projects/To_Projects/${String(i + 1).padStart(3, '0')}.png`),

@@ -5,97 +5,12 @@ import { Footer } from "@/components/layout/Footer";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { MapPin, Calendar, Clock, Building, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import projectHighway from "@/assets/project-highway.jpg";
-import projectStreet from "@/assets/project-street.jpg";
-import projectInfrastructure from "@/assets/project-infrastructure.jpg";
-import projectInterchange from "@/assets/project-interchange.jpg";
-
-const projectsData = [
-  {
-    id: 1,
-    title: "Desert Highway Expansion",
-    location: "Riyadh - Jeddah Corridor",
-    year: "2023",
-    category: "Highways",
-    client: "Ministry of Transport",
-    duration: "18 months",
-    images: [projectHighway, projectInterchange],
-    description: "Major 120km highway expansion connecting two major cities with state-of-the-art infrastructure.",
-    details: [
-      "120km of 6-lane highway construction",
-      "12 interchange overpasses",
-      "Advanced drainage systems",
-      "LED lighting throughout",
-      "Rest areas and service stations",
-    ],
-    challenge: "The project required working in extreme desert conditions while maintaining strict quality standards and meeting aggressive timelines.",
-    solution: "We deployed specialized equipment and implemented night-shift operations to maximize productivity while ensuring worker safety during peak heat hours.",
-  },
-  {
-    id: 2,
-    title: "Downtown Street Revival",
-    location: "Al Olaya District",
-    year: "2023",
-    category: "Streets",
-    client: "Riyadh Municipality",
-    duration: "12 months",
-    images: [projectStreet, projectInfrastructure],
-    description: "Complete urban street renovation transforming the heart of Riyadh's business district.",
-    details: [
-      "15km of urban street renovation",
-      "Modern pedestrian walkways",
-      "Underground utility integration",
-      "Smart traffic management system",
-      "Landscaping and beautification",
-    ],
-    challenge: "Executing major construction in a busy commercial district while minimizing disruption to businesses and daily traffic.",
-    solution: "Phased construction approach with comprehensive traffic management and stakeholder communication ensured minimal impact on the community.",
-  },
-  {
-    id: 3,
-    title: "Industrial Zone Infrastructure",
-    location: "Jubail Industrial City",
-    year: "2022",
-    category: "Infrastructure",
-    client: "Royal Commission for Jubail",
-    duration: "24 months",
-    images: [projectInfrastructure, projectHighway],
-    description: "Comprehensive infrastructure development supporting the expansion of Saudi Arabia's largest industrial zone.",
-    details: [
-      "Heavy-duty industrial roads",
-      "Stormwater management system",
-      "Underground utilities network",
-      "Bridge and overpass construction",
-      "Environmental protection measures",
-    ],
-    challenge: "Designing infrastructure capable of handling heavy industrial traffic while meeting stringent environmental requirements.",
-    solution: "Innovative pavement design and comprehensive drainage systems ensure longevity and environmental compliance.",
-  },
-  {
-    id: 4,
-    title: "King Fahd Interchange",
-    location: "Central Riyadh",
-    year: "2022",
-    category: "Infrastructure",
-    client: "Arriyadh Development Authority",
-    duration: "30 months",
-    images: [projectInterchange, projectStreet],
-    description: "Complex multi-level highway interchange reducing congestion at one of the city's busiest junctions.",
-    details: [
-      "4-level interchange structure",
-      "8 approach ramps",
-      "Architectural lighting design",
-      "Noise barrier installation",
-      "Landscape integration",
-    ],
-    challenge: "Building a complex multi-level structure in a densely populated urban area with active traffic.",
-    solution: "Advanced construction techniques including pre-fabricated elements and temporary traffic diversions enabled safe and efficient execution.",
-  },
-];
+import { projects } from "@/data/projects";
+import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const project = projectsData.find((p) => p.id === Number(id));
+  const project = projects.find((p) => p.id === id);
 
   if (!project) {
     return (
@@ -110,9 +25,9 @@ const ProjectDetail = () => {
     );
   }
 
-  const currentIndex = projectsData.findIndex((p) => p.id === project.id);
-  const prevProject = projectsData[currentIndex - 1];
-  const nextProject = projectsData[currentIndex + 1];
+  const currentIndex = projects.findIndex((p) => p.id === project.id);
+  const prevProject = projects[currentIndex - 1];
+  const nextProject = projects[currentIndex + 1];
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,7 +37,11 @@ const ProjectDetail = () => {
         <section className="pt-20 relative h-[60vh] min-h-[500px]">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${project.images[0]})` }}
+            style={{
+              backgroundImage: project.images && project.images.length > 0
+                ? `url(${project.images[0]})`
+                : `url(${companyLogo})`
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
           </div>
@@ -169,44 +88,31 @@ const ProjectDetail = () => {
 
                   {/* Gallery */}
                   <div className="grid md:grid-cols-2 gap-4 mb-12">
-                    {project.images.map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                        className="aspect-video rounded-lg overflow-hidden"
-                      >
-                        <img
-                          src={image}
-                          alt={`${project.title} - Image ${index + 1}`}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Key Features */}
-                  <h3 className="font-display text-2xl tracking-wide mb-4">KEY FEATURES</h3>
-                  <ul className="space-y-3 mb-12">
-                    {project.details.map((detail, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
-                        <span className="text-muted-foreground">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Challenge & Solution */}
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-gradient-card border border-border rounded-lg p-6">
-                      <h4 className="font-display text-xl tracking-wide text-primary mb-3">THE CHALLENGE</h4>
-                      <p className="text-muted-foreground text-sm">{project.challenge}</p>
-                    </div>
-                    <div className="bg-gradient-card border border-border rounded-lg p-6">
-                      <h4 className="font-display text-xl tracking-wide text-primary mb-3">OUR SOLUTION</h4>
-                      <p className="text-muted-foreground text-sm">{project.solution}</p>
-                    </div>
+                    {project.images && project.images.length > 0 ? (
+                      project.images.map((image, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                          className="aspect-video rounded-lg overflow-hidden bg-muted/50"
+                        >
+                          <img
+                            src={image}
+                            alt={`${project.title} - Image ${index + 1}`}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                              e.currentTarget.src = companyLogo;
+                              e.currentTarget.className = "w-full h-full object-contain p-12";
+                            }}
+                          />
+                        </motion.div>
+                      ))
+                    ) : (
+                      <div className="col-span-2 aspect-video rounded-lg overflow-hidden bg-muted/50 flex items-center justify-center">
+                        <img src={companyLogo} alt="CPC Logo" className="w-48 h-48 object-contain opacity-50" />
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               </div>
@@ -231,23 +137,18 @@ const ProjectDetail = () => {
                       <Calendar className="w-5 h-5 text-primary" />
                       <div>
                         <div className="text-xs text-muted-foreground">Year</div>
-                        <div className="text-sm">{project.year}</div>
+                        <div className="text-sm">{project.year || "N/A"}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <div>
-                        <div className="text-xs text-muted-foreground">Duration</div>
-                        <div className="text-sm">{project.duration}</div>
+                    {project.client && (
+                      <div className="flex items-center gap-3">
+                        <Building className="w-5 h-5 text-primary" />
+                        <div>
+                          <div className="text-xs text-muted-foreground">Client</div>
+                          <div className="text-sm">{project.client}</div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Building className="w-5 h-5 text-primary" />
-                      <div>
-                        <div className="text-xs text-muted-foreground">Client</div>
-                        <div className="text-sm">{project.client}</div>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-border">
