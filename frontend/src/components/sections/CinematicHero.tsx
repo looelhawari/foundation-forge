@@ -80,7 +80,7 @@ export const CinematicHero = memo(() => {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="font-display text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-[0.02em]"
               >
-                BUILDING THE <span className="text-gradient">ROADS</span> OF TOMORROW
+                CONSTRUCTING THE <span className="text-gradient">ROADS</span> OF TOMORROW
               </motion.h1>
             </div>
           </div>
