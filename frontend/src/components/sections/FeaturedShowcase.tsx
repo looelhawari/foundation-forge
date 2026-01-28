@@ -1,46 +1,68 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
 
+// Import project images
+import busParking2 from "@/assets/bus parking stage 2 .png";
+import busParking1 from "@/assets/bus parking stage 1 .png";
+import warehouseImg from "@/assets/Ware house (instead of main parrking area).png";
+import fwcq2Project from "@/assets/FWCQ2(in project section).png";
+import farmsImg from "@/assets/farms instaed of el meera branch .png";
+
+// Import client logos
+import moeLogo from "@/assets/MOE-removebg-preview.png";
+import fifaLogo from "@/assets/FIFA-removebg-preview.png";
+import waqifLogo from "@/assets/waqif-removebg-preview.png";
+
+// Import client project images (for hover)
+import moeProjectImg from "@/assets/MOE.png";
+import fwcq2ClientImg from "@/assets/FWCQ2(in client section).png";
+import mosquesImg from "@/assets/mosques.png";
+
 const topProjects = [
     {
         id: 1,
         title: "School Bus Parking - Stage 2",
         client: "Ministry of Education",
-        value: "2.1M QR",
         area: "22,000 m²",
-        gradient: ["#fbbf24", "#f59e0b"]
+        status: "Completed",
+        gradient: ["#fbbf24", "#f59e0b"],
+        image: busParking2
     },
     {
         id: 2,
         title: "School Bus Parking - Stage 1",
         client: "Ministry of Education",
-        value: "1.5M QR",
         area: "16,000 m²",
-        gradient: ["#f59e0b", "#f97316"]
+        status: "Completed",
+        gradient: ["#f59e0b", "#f97316"],
+        image: busParking1
     },
     {
         id: 3,
-        title: "Main Car Parking Area",
+        title: "Warehouse",
         client: "Ministry of Education",
-        value: "950K QR",
         area: "11,400 m²",
-        gradient: ["#f97316", "#ea580c"]
+        status: "Completed",
+        gradient: ["#f97316", "#ea580c"],
+        image: warehouseImg
     },
     {
         id: 4,
         title: "FIFA World Cup 2022",
         client: "FIFA Qatar 2022",
-        value: "736K QR",
         area: "45,000 m²",
-        gradient: ["#ea580c", "#f59e0b"]
+        status: "Delivered",
+        gradient: ["#ea580c", "#f59e0b"],
+        image: fwcq2Project
     },
     {
         id: 5,
-        title: "Al Meera Branch",
-        client: "Al Meera",
-        value: "780K QR",
+        title: "Farms",
+        client: "",
         area: "6,800 m²",
-        gradient: ["#9ca3af", "#6b7280"]
+        status: "Completed",
+        gradient: ["#9ca3af", "#6b7280"],
+        image: farmsImg
     }
 ];
 
@@ -48,20 +70,26 @@ const topClients = [
     {
         name: "Ministry of Education",
         projects: "3 Major Projects",
-        value: "4.55M QR",
-        color: "#fbbf24"
+        highlight: "Government Partner",
+        color: "#fbbf24",
+        logo: moeLogo,
+        projectImage: moeProjectImg
     },
     {
         name: "FIFA World Cup Qatar 2022",
         projects: "International Event",
-        value: "736K QR",
-        color: "#f97316"
+        highlight: "Global Event",
+        color: "#f97316",
+        logo: fifaLogo,
+        projectImage: fwcq2ClientImg
     },
     {
-        name: "Qatar Museums",
+        name: "Ministry of Waqif",
         projects: "Heritage Sites",
-        value: "865K QR",
-        color: "#ea580c"
+        highlight: "Cultural Heritage",
+        color: "#ea580c",
+        logo: waqifLogo,
+        projectImage: mosquesImg
     }
 ];
 
@@ -92,9 +120,33 @@ const MinimalProjectCard = ({ project, index }: any) => {
         >
             <motion.div
                 className="relative h-[500px] rounded-3xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10"
-                whileHover={{ scale: 1.02 }}
+                animate={{
+                    y: isHovered ? -20 : 0,
+                    scale: isHovered ? 1.02 : 1
+                }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
             >
+                {/* Project Image Background */}
+                <div className="absolute inset-0">
+                    <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                        animate={{
+                            scale: isHovered ? 1.15 : 1
+                        }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                    />
+                    {/* Overlay fades on hover to reveal image */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"
+                        animate={{
+                            opacity: isHovered ? 0.3 : 1
+                        }}
+                        transition={{ duration: 0.5 }}
+                    />
+                </div>
+
                 {/* Gradient overlay */}
                 <motion.div
                     className="absolute inset-0 opacity-20"
@@ -116,8 +168,15 @@ const MinimalProjectCard = ({ project, index }: any) => {
                     <div className="h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent blur-xl" />
                 </motion.div>
 
-                {/* Content */}
-                <div className="relative h-full p-8 flex flex-col justify-between">
+                {/* Content - hides on hover to show image */}
+                <motion.div
+                    className="relative h-full p-8 flex flex-col justify-between"
+                    animate={{
+                        opacity: isHovered ? 0 : 1,
+                        y: isHovered ? 30 : 0
+                    }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                >
                     {/* Number indicator */}
                     <div className="flex items-start justify-between">
                         <motion.div
@@ -127,9 +186,6 @@ const MinimalProjectCard = ({ project, index }: any) => {
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 opacity: 0.3
-                            }}
-                            animate={{
-                                opacity: isHovered ? 0.5 : 0.3
                             }}
                         >
                             {project.id}
@@ -181,25 +237,44 @@ const MinimalProjectCard = ({ project, index }: any) => {
                             </div>
                             <div className="h-4 w-px bg-gray-700" />
                             <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                                <span className="font-bold text-white">{project.value}</span>
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                <span className="font-bold text-green-400">{project.status}</span>
                             </div>
                         </motion.div>
+                    </div>
+                </motion.div>
 
-                        {/* Hover button */}
-                        <motion.button
-                            className="w-full py-4 rounded-xl font-medium backdrop-blur-sm border border-white/20 text-white"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: isHovered ? 1 : 0 }}
-                            transition={{ duration: 0.3 }}
+                {/* Hover overlay with title only */}
+                <motion.div
+                    className="absolute inset-0 flex flex-col items-center justify-center p-8"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        opacity: isHovered ? 1 : 0
+                    }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                    <motion.div
+                        className="text-center"
+                        animate={{
+                            y: isHovered ? 0 : 20,
+                            scale: isHovered ? 1 : 0.9
+                        }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                    >
+                        <h3 className="text-4xl font-bold text-white mb-3 drop-shadow-2xl">
+                            {project.title}
+                        </h3>
+                        <motion.div
+                            className="px-6 py-3 rounded-full text-sm font-bold backdrop-blur-md inline-block"
                             style={{
-                                background: `linear-gradient(135deg, ${project.gradient[0]}15, ${project.gradient[1]}15)`
+                                background: `linear-gradient(135deg, ${project.gradient[0]}40, ${project.gradient[1]}40)`,
+                                border: `1px solid ${project.gradient[0]}60`
                             }}
                         >
-                            View Project Details
-                        </motion.button>
-                    </div>
-                </div>
+                            <span className="text-white">View Details</span>
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
 
                 {/* Corner accent */}
                 <svg className="absolute top-0 right-0 w-32 h-32 opacity-20" xmlns="http://www.w3.org/2000/svg">
@@ -239,12 +314,13 @@ const OrigamiClientCard = ({ client, index }: any) => {
             onMouseEnter={() => setIsFlipped(true)}
             onMouseLeave={() => setIsFlipped(false)}
         >
-            {/* Front face */}
+            {/* Front face - Logo */}
             <motion.div
-                className="absolute inset-0 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-8 flex flex-col items-center justify-center"
+                className="absolute inset-0 rounded-2xl border border-gray-600 p-8 flex flex-col items-center justify-center overflow-hidden"
                 style={{
                     backfaceVisibility: "hidden",
-                    transformStyle: "preserve-3d"
+                    transformStyle: "preserve-3d",
+                    background: "linear-gradient(145deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%)"
                 }}
                 animate={{
                     rotateY: isFlipped ? 180 : 0,
@@ -252,44 +328,46 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 }}
                 transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             >
-                {/* Paper texture overlay */}
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0icGFwZXIiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwMDAwMCIgb3BhY2l0eT0iMC4wNSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXBlcikiLz48L3N2Zz4=')] opacity-20" />
-
-                {/* Fold crease lines */}
-                <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="50%" x2="100%" y2="50%" stroke={client.color} strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="50%" y1="0" x2="50%" y2="100%" stroke={client.color} strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="0" y1="0" x2="100%" y2="100%" stroke={client.color} strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="100%" y1="0" x2="0" y2="100%" stroke={client.color} strokeWidth="1" strokeDasharray="5,5" />
-                </svg>
-
-                <motion.div
-                    className="text-6xl font-bold mb-4 relative z-10"
-                    style={{ color: client.color }}
-                    animate={{
-                        textShadow: [
-                            `0 0 20px ${client.color}`,
-                            `0 0 40px ${client.color}`,
-                            `0 0 20px ${client.color}`
-                        ]
+                {/* Subtle pattern background */}
+                <div
+                    className="absolute inset-0 opacity-10"
+                    style={{
+                        backgroundImage: `radial-gradient(circle at 20px 20px, ${client.color} 1px, transparent 1px)`,
+                        backgroundSize: "40px 40px"
                     }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                />
+
+                {/* Logo */}
+                <motion.div
+                    className="w-36 h-36 mb-4 relative z-10 flex items-center justify-center"
+                    animate={{
+                        scale: [1, 1.05, 1]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                    {client.name.split(" ").map(word => word[0]).join("")}
+                    <img
+                        src={client.logo}
+                        alt={client.name}
+                        className="w-full h-full object-contain drop-shadow-lg"
+                    />
                 </motion.div>
-                <h4 className="text-xl font-bold text-white text-center relative z-10">
+                <h4 className="text-lg font-bold text-gray-800 text-center relative z-10">
                     {client.name}
                 </h4>
+                <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                    <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
+                    Hover to see project
+                    <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
+                </p>
             </motion.div>
 
-            {/* Back face */}
+            {/* Back face - Project Image */}
             <motion.div
-                className="absolute inset-0 rounded-2xl p-8 flex flex-col justify-center"
+                className="absolute inset-0 rounded-2xl overflow-hidden"
                 style={{
                     backfaceVisibility: "hidden",
                     transformStyle: "preserve-3d",
-                    rotateY: 180,
-                    background: `linear-gradient(135deg, ${client.color}20, ${client.color}40)`
+                    rotateY: 180
                 }}
                 animate={{
                     rotateY: isFlipped ? 360 : 180,
@@ -297,36 +375,25 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 }}
                 transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             >
-                <div className="text-center space-y-4">
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: isFlipped ? 1 : 0 }}
-                        transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                    >
-                        <p className="text-gray-300 text-lg">{client.projects}</p>
-                        <p className="text-3xl font-bold mt-2" style={{ color: client.color }}>
-                            {client.value}
-                        </p>
-                    </motion.div>
+                {/* Project Image */}
+                <img
+                    src={client.projectImage}
+                    alt={`${client.name} project`}
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-                    {/* Accordion stats */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                     <motion.div
-                        className="space-y-2"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                            height: isFlipped ? "auto" : 0,
-                            opacity: isFlipped ? 1 : 0
-                        }}
-                        transition={{ delay: 0.5, duration: 0.5 }}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: isFlipped ? 0 : 20, opacity: isFlipped ? 1 : 0 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
                     >
-                        <div className="bg-black/30 rounded-lg p-3">
-                            <p className="text-white/60 text-sm">Status</p>
-                            <p className="text-white font-bold">Active Partner</p>
-                        </div>
-                        <div className="bg-black/30 rounded-lg p-3">
-                            <p className="text-white/60 text-sm">Rating</p>
-                            <p className="text-amber-400 font-bold">⭐⭐⭐⭐⭐</p>
-                        </div>
+                        <p className="text-lg font-bold text-white mb-1">{client.name}</p>
+                        <p className="text-gray-300 text-sm">{client.projects}</p>
+                        <p className="text-sm font-bold mt-2" style={{ color: client.color }}>
+                            {client.highlight}
+                        </p>
                     </motion.div>
                 </div>
             </motion.div>

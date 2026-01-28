@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, FileText } from "lucide-react";
 import cpcLogo from "@/assets/cpc_logo-removebg-preview.png";
 
 export const Footer = () => {
   return (
     <footer className="bg-secondary border-t border-border">
       <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
             <div>
               <img src={cpcLogo} alt="CPC Logo" className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Building the nation's infrastructure with excellence, precision, and over 25 years of trusted expertise.
+              Building the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise.
             </p>
           </div>
 
@@ -51,6 +51,46 @@ export const Footer = () => {
                   <span className="text-muted-foreground text-sm">{item}</span>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Legal Documents */}
+          <div>
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/certificates"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm flex items-center gap-2"
+                >
+                  <FileText className="w-4 h-4" />
+                  Company Certificates
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/certificates"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
+                >
+                  Commercial Registration
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/certificates"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
+                >
+                  Tax Card
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/certificates"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
+                >
+                  Commercial Permit
+                </Link>
+              </li>
             </ul>
           </div>
 

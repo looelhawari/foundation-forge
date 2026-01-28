@@ -75,6 +75,8 @@ const Hexagon = ({ color, index }: { color: string; index: number }) => {
     );
 };
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 export function WhyChooseUs() {
     return (
         <section className="relative py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
@@ -84,49 +86,42 @@ export function WhyChooseUs() {
                     src={whyChooseBg}
                     alt="CPC construction project"
                     className="w-full h-full object-cover opacity-10"
+                    loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-gray-900/80 to-gray-900/90" />
             </div>
 
-            {/* Floating hexagons background */}
-            <div className="absolute inset-0 opacity-10">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-64 h-64"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`
-                        }}
-                        animate={{
-                            y: [0, -50, 0],
-                            rotate: [0, 120, 240, 360]
-                        }}
-                        transition={{
-                            duration: 20 + i * 2,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: i * 0.5
-                        }}
-                    >
-                        <Hexagon color="#fbbf24" index={i} />
-                    </motion.div>
-                ))}
-            </div>
+            {/* Floating hexagons background - only on desktop, reduced count */}
+            {!isMobile && (
+                <div className="absolute inset-0 opacity-10">
+                    {[...Array(3)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="absolute w-64 h-64"
+                            style={{
+                                top: `${20 + i * 30}%`,
+                                left: `${10 + i * 35}%`
+                            }}
+                        >
+                            <Hexagon color="#fbbf24" index={i} />
+                        </div>
+                    ))}
+                </div>
+            )}
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-50px" }}
                     className="text-center mb-20"
                 >
                     <motion.div
-                        initial={{ scale: 0, rotateY: -180 }}
-                        whileInView={{ scale: 1, rotateY: 0 }}
-                        transition={{ duration: 1, type: "spring", stiffness: 100 }}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">

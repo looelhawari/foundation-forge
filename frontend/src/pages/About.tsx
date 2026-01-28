@@ -10,6 +10,28 @@ import engineerImage from "@/assets/engineer-portrait.jpg";
 import heroImage from "@/assets/hero-construction.jpg";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
+// Import client logos
+import moelogo from "@/assets/MOE-removebg-preview.png";
+import fifaLogo from "@/assets/FIFA-removebg-preview.png";
+import museumLogo from "@/assets/museum-removebg-preview.png";
+import waqifLogo from "@/assets/waqif-removebg-preview.png";
+import dhlLogo from "@/assets/DHL-removebg-preview.png";
+import meeraLogo from "@/assets/meera-removebg-preview.png";
+import arianeLogo from "@/assets/Ariane real state.png";
+import ashghaalLogo from "@/assets/ashghaal.png";
+import fbaLogo from "@/assets/FBA real estate.png";
+import imalcoLogo from "@/assets/imalco.png";
+import qnieLogo from "@/assets/qnie.png";
+
+const majorClients = [
+  { name: "Ministry of Education", logo: moelogo },
+  { name: "Qatar Museums", logo: museumLogo },
+  { name: "FIFA World Cup", logo: fifaLogo },
+  { name: "Ministry of Waqif", logo: waqifLogo },
+  { name: "DHL Qatar", logo: dhlLogo },
+  { name: "Al Meera", logo: meeraLogo },
+];
+
 const values = [
   {
     icon: Target,
@@ -167,7 +189,7 @@ const About = () => {
         <main>
           {/* Company Intro Section */}
           <CompanyIntro />
-          
+
           {/* Cinematic Hero */}
           <section ref={heroRef} className="relative h-[150vh]">
             <div className="sticky top-0 h-screen overflow-hidden">
@@ -493,7 +515,7 @@ const WhatIsCPCSection = () => {
           >
             <h3 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">Trusted by Leading Organizations</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
-              {["Ministry of Education", "Qatar Museums", "FIFA World Cup", "Ministry of Waqif", "DHL Qatar", "Al Meera"].map((client, index) => (
+              {majorClients.map((client, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -501,9 +523,14 @@ const WhatIsCPCSection = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.1 }}
-                  className="bg-background/50 rounded-lg p-4 text-center border border-border hover:border-primary/50 transition-colors cursor-pointer"
+                  className="bg-white/90 rounded-lg p-4 flex flex-col items-center justify-center border border-border hover:border-primary/50 transition-colors cursor-pointer shadow-sm"
                 >
-                  <div className="text-xs text-muted-foreground font-medium">{client}</div>
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-12 sm:h-16 w-auto object-contain mb-2"
+                  />
+                  <div className="text-xs text-gray-600 font-medium text-center">{client.name}</div>
                 </motion.div>
               ))}
             </div>

@@ -5,11 +5,28 @@ import { ArrowRight, Award, Users, Building, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 
+// Import client logos
+import moelogo from "@/assets/MOE-removebg-preview.png";
+import fifaLogo from "@/assets/FIFA-removebg-preview.png";
+import museumLogo from "@/assets/museum-removebg-preview.png";
+import waqifLogo from "@/assets/waqif-removebg-preview.png";
+import dhlLogo from "@/assets/DHL-removebg-preview.png";
+import meeraLogo from "@/assets/meera-removebg-preview.png";
+
+const featuredClients = [
+  { name: "Ministry of Education", logo: moelogo },
+  { name: "Qatar Museums", logo: museumLogo },
+  { name: "FIFA World Cup Qatar 2022", logo: fifaLogo },
+  { name: "Ministry of Waqif", logo: waqifLogo },
+  { name: "DHL Qatar", logo: dhlLogo },
+  { name: "Al Meera", logo: meeraLogo },
+];
+
 const stats = [
-  { icon: Building, value: 57, suffix: "", label: "Projects Completed" },
+  { icon: Building, value: 57, suffix: "+", label: "Projects Completed" },
   { icon: Clock, value: 8, suffix: "+", label: "Years of Experience" },
   { icon: Users, value: 45, suffix: "+", label: "Satisfied Clients" },
-  { icon: Award, value: 26, suffix: "M+", label: "Total Value (QR)" },
+  { icon: Award, value: 100, suffix: "%", label: "Quality Guaranteed" },
 ];
 
 const CountUp = ({ end, suffix = "" }: { end: number; suffix?: string }) => {
@@ -104,6 +121,27 @@ export const AboutPreview = () => {
               prestigious clients including Ministry of Education, Qatar Museums, and FIFA World Cup Qatar 2022.
               Our dedicated team brings expertise, precision, and innovation to every project we undertake.
             </p>
+
+            {/* Featured Client Logos */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {featuredClients.slice(0, 4).map((client, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="bg-white/90 rounded-lg p-2 flex items-center justify-center shadow-sm border border-border/50"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-8 w-auto object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
 
             <Button variant="hero" size="lg" asChild>
               <Link to="/about" className="group">

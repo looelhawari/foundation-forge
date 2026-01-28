@@ -1,9 +1,21 @@
-import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useInView, useSpring, useReducedMotion } from "framer-motion";
+import { useRef, useEffect, useState, useMemo, memo } from "react";
 
-// Floating particles effect
-export const FloatingParticles = () => {
-  const particles = Array.from({ length: 20 });
+// Check if we're on a mobile device or low-performance mode
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Floating particles effect - optimized with fewer particles
+export const FloatingParticles = memo(() => {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Reduce particles on mobile or reduced motion
+  const particleCount = shouldReduceMotion || isMobile ? 5 : 10;
+  const particles = useMemo(() => Array.from({ length: particleCount }), [particleCount]);
+
+  if (shouldReduceMotion) {
+    return null;
+  }
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -11,25 +23,28 @@ export const FloatingParticles = () => {
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-primary/30 rounded-full"
-          initial={{
-            x: Math.random() * 100 + "%",
-            y: Math.random() * 100 + "%",
+          style={{
+            left: `${(i * 10) + 5}%`,
+            top: `${(i * 12) % 100}%`,
+            willChange: 'transform, opacity',
           }}
           animate={{
-            y: [null, "-100vh"],
-            opacity: [0, 1, 0],
+            y: [0, -300],
+            opacity: [0, 0.6, 0],
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: 8 + (i % 4) * 2,
             repeat: Infinity,
-            delay: Math.random() * 5,
+            delay: i * 0.5,
             ease: "linear",
           }}
         />
       ))}
     </div>
   );
-};
+});
+
+FloatingParticles.displayName = 'FloatingParticles';
 
 // Animated counter with spring physics
 interface AnimatedCounterProps {
@@ -327,36 +342,52 @@ export const GlitchText = ({ children, className = "" }: { children: string; cla
   );
 };
 
-// Morphing blob
-export const MorphingBlob = ({ className = "" }: { className?: string }) => {
+// Morphing blob - optimized with CSS animations for better performance
+export const MorphingBlob = memo(({ className = "" }: { className?: string }) => {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Use simpler animation on mobile or reduced motion preference
+  if (shouldReduceMotion || isMobile) {
+    return (
+      <div
+        className={`absolute bg-primary/10 rounded-full blur-3xl ${className}`}
+        style={{ willChange: 'auto' }}
+      />
+    );
+  }
+
   return (
     <motion.div
       className={`absolute bg-primary/10 rounded-full blur-3xl ${className}`}
+      style={{ willChange: 'transform' }}
       animate={{
-        scale: [1, 1.2, 1],
-        borderRadius: ["40% 60% 60% 40%", "60% 40% 40% 60%", "40% 60% 60% 40%"],
+        scale: [1, 1.15, 1],
       }}
       transition={{
-        duration: 8,
+        duration: 12,
         repeat: Infinity,
         ease: "easeInOut",
       }}
     />
   );
-};
+});
 
-// Scroll progress indicator
-export const ScrollProgress = () => {
+MorphingBlob.displayName = 'MorphingBlob';
+
+// Scroll progress indicator - optimized
+export const ScrollProgress = memo(() => {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
 
   return (
     <motion.div
-      style={{ scaleX }}
+      style={{ scaleX, willChange: 'transform' }}
       className="fixed top-0 left-0 right-0 h-1 bg-gradient-gold origin-left z-[100]"
     />
   );
-};
+});
+
+ScrollProgress.displayName = 'ScrollProgress';
 
 // Image reveal on scroll
 interface ImageRevealProps {
