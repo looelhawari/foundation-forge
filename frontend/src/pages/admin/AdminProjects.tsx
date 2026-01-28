@@ -49,6 +49,7 @@ import {
   Pencil,
   Trash2,
   Eye,
+  ExternalLink,
   Star,
   ChevronLeft,
   ChevronRight,
@@ -325,12 +326,18 @@ export default function AdminProjects() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               <DropdownMenuItem asChild>
+                                <Link to={`/admin/projects/${project.id}`}>
+                                  <Eye className="mr-2 h-4 w-4" />
+                                  View Details
+                                </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem asChild>
                                 <Link
                                   to={`/projects/${project.slug}`}
                                   target="_blank"
                                 >
-                                  <Eye className="mr-2 h-4 w-4" />
-                                  View
+                                  <ExternalLink className="mr-2 h-4 w-4" />
+                                  View Public
                                 </Link>
                               </DropdownMenuItem>
                               <DropdownMenuItem asChild>

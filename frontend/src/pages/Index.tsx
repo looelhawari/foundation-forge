@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { CinematicHero } from "@/components/sections/CinematicHero";
-import { CompanyIntro } from "@/components/sections/CompanyIntro";
-import { ServicesBreakdown } from "@/components/sections/ServicesBreakdown";
+
+import { ServicesImageGrid } from "@/components/sections/ServicesImageGrid";
 import { ServicesMarquee } from "@/components/sections/ServicesMarquee";
 import { FullscreenVideo } from "@/components/sections/FullscreenVideo";
 import { ClientLogosShowcase } from "@/components/sections/ClientLogosShowcase";
@@ -12,7 +12,6 @@ import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { QualityAndCertifications } from "@/components/sections/QualityAndCertifications";
 import { FeaturedShowcase } from "@/components/sections/FeaturedShowcase";
-import { EquipmentShowcase } from "@/components/sections/EquipmentShowcase";
 import { ParallaxStats } from "@/components/sections/ParallaxStats";
 import { ImmersiveTestimonials } from "@/components/sections/ImmersiveTestimonials";
 import { MegaCTA } from "@/components/sections/MegaCTA";
@@ -422,16 +421,15 @@ const Index = () => {
         <MinimalHeader />
         <main>
           <CinematicHero />
-          <CompanyIntro />
+          
           <ServicesMarquee />
-          <ServicesBreakdown />
+          <ServicesImageGrid />
           <FullscreenVideo />
           <ClientLogosShowcase />
           <WhyChooseUs />
           <ProcessTimeline />
           <QualityAndCertifications />
           <FeaturedShowcase />
-          <EquipmentShowcase />
           <ParallaxStats />
           <ImmersiveTestimonials />
           <MegaCTA />
@@ -443,3 +441,4 @@ const Index = () => {
 };
 
 export default Index;
+

@@ -87,10 +87,14 @@ const getAllProjects = asyncHandler(async (req, res) => {
     ],
   );
 
-  // Parse images JSON
+  // Ensure images is an array (MySQL JSON columns are already parsed by driver)
   const parsedProjects = projects.map((project) => ({
     ...project,
-    images: project.images ? JSON.parse(project.images) : [],
+    images: Array.isArray(project.images)
+      ? project.images
+      : project.images && typeof project.images === "string"
+        ? JSON.parse(project.images)
+        : [],
   }));
 
   res.json(
@@ -128,7 +132,11 @@ const getProject = asyncHandler(async (req, res) => {
 
   const project = {
     ...projects[0],
-    images: projects[0].images ? JSON.parse(projects[0].images) : [],
+    images: Array.isArray(projects[0].images)
+      ? projects[0].images
+      : projects[0].images && typeof projects[0].images === "string"
+        ? JSON.parse(projects[0].images)
+        : [],
   };
 
   res.json(successResponse(project, "Project retrieved successfully"));
@@ -201,7 +209,11 @@ const createProject = asyncHandler(async (req, res) => {
 
   const project = {
     ...projects[0],
-    images: projects[0].images ? JSON.parse(projects[0].images) : [],
+    images: Array.isArray(projects[0].images)
+      ? projects[0].images
+      : projects[0].images && typeof projects[0].images === "string"
+        ? JSON.parse(projects[0].images)
+        : [],
   };
 
   logger.info(
@@ -334,7 +346,11 @@ const updateProject = asyncHandler(async (req, res) => {
 
   const project = {
     ...projects[0],
-    images: projects[0].images ? JSON.parse(projects[0].images) : [],
+    images: Array.isArray(projects[0].images)
+      ? projects[0].images
+      : projects[0].images && typeof projects[0].images === "string"
+        ? JSON.parse(projects[0].images)
+        : [],
   };
 
   logger.info(`Project updated: ID ${id} by admin ${req.admin.id}`);

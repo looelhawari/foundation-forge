@@ -1,10 +1,31 @@
-﻿import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+﻿import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { Header } from "@/components/layout/Header";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
-import { ScrollProgress, MorphingBlob, TiltCard, AnimatedCounter } from "@/components/animations/MotionGraphics";
-import { Building2, GraduationCap, Factory, Home, ShoppingCart, Warehouse, Landmark, Award, CheckCircle2 } from "lucide-react";
+import {
+  ScrollProgress,
+  MorphingBlob,
+  TiltCard,
+  AnimatedCounter,
+} from "@/components/animations/MotionGraphics";
+import {
+  Building2,
+  GraduationCap,
+  Factory,
+  Home,
+  ShoppingCart,
+  Warehouse,
+  Landmark,
+  Award,
+  CheckCircle2,
+} from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import moelogo from "@/assets/MOE-removebg-preview.png";
 import fifaLogo from "@/assets/FIFA-removebg-preview.png";
@@ -25,10 +46,30 @@ const clientCategories = [
     icon: Building2,
     color: "from-blue-500/20 to-cyan-500/20",
     clients: [
-      { name: "Ministry of Education", logo: moelogo, projects: 5, value: "4.7M QR" },
-      { name: "Ministry of Waqif", logo: waqifLogo, projects: 4, value: "574K QR" },
-      { name: "Qatar Museums", logo: museumLogo, projects: 4, value: "1.2M QR" },
-      { name: "Ministry of Ashghal", logo: ashghaalLogo, projects: 3, value: "800K QR" },
+      {
+        name: "Ministry of Education",
+        logo: moelogo,
+        projects: 5,
+        value: "4.7M QR",
+      },
+      {
+        name: "Ministry of Waqif",
+        logo: waqifLogo,
+        projects: 4,
+        value: "574K QR",
+      },
+      {
+        name: "Qatar Museums",
+        logo: museumLogo,
+        projects: 4,
+        value: "1.2M QR",
+      },
+      {
+        name: "Ministry of Ashghal",
+        logo: ashghaalLogo,
+        projects: 3,
+        value: "800K QR",
+      },
       { name: "Ministry of Health", projects: 1, value: "154K QR" },
     ],
   },
@@ -37,7 +78,12 @@ const clientCategories = [
     icon: Award,
     color: "from-amber-500/20 to-orange-500/20",
     clients: [
-      { name: "FIFA World Cup Qatar 2022", logo: fifaLogo, projects: 1, value: "736K QR" },
+      {
+        name: "FIFA World Cup Qatar 2022",
+        logo: fifaLogo,
+        projects: 1,
+        value: "736K QR",
+      },
       { name: "DHL Qatar", logo: dhlLogo, projects: 1, value: "600K QR" },
       { name: "Al Meera", logo: meeraLogo, projects: 1, value: "780K QR" },
     ],
@@ -103,9 +149,21 @@ const clientCategories = [
     icon: Landmark,
     color: "from-violet-500/20 to-purple-500/20",
     clients: [
-      { name: "Sheikh Khaled Bin Hammad Al Thani", projects: 1, value: "235K QR" },
-      { name: "Sheika Hamad Fahed Ali Abdullah Al Thani", projects: 1, value: "872K QR" },
-      { name: "Sheikh Hamad Bin Abdullah Al Thani", projects: 1, value: "135K QR" },
+      {
+        name: "Sheikh Khaled Bin Hammad Al Thani",
+        projects: 1,
+        value: "235K QR",
+      },
+      {
+        name: "Sheika Hamad Fahed Ali Abdullah Al Thani",
+        projects: 1,
+        value: "872K QR",
+      },
+      {
+        name: "Sheikh Hamad Bin Abdullah Al Thani",
+        projects: 1,
+        value: "135K QR",
+      },
       { name: "Sheikh Abdulla Jasim Al-Thani", projects: 1, value: "179K QR" },
     ],
   },
@@ -114,7 +172,8 @@ const clientCategories = [
 const testimonials = [
   {
     id: 1,
-    quote: "CPC Qatar delivered exceptional quality on our school parking infrastructure project. Their attention to detail and commitment to timely completion made them an invaluable partner for our educational facilities development.",
+    quote:
+      "CPC Qatar delivered exceptional quality on our school parking infrastructure project. Their attention to detail and commitment to timely completion made them an invaluable partner for our educational facilities development.",
     author: "Project Management Team",
     position: "Infrastructure Division",
     company: "Ministry of Education",
@@ -122,7 +181,8 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: "Working with Cosmo Projects has been outstanding. Their expertise in road construction and asphalt works is unmatched. They successfully completed our museum access roads project with excellent workmanship and professionalism.",
+    quote:
+      "Working with Cosmo Projects has been outstanding. Their expertise in road construction and asphalt works is unmatched. They successfully completed our museum access roads project with excellent workmanship and professionalism.",
     author: "Development Department",
     position: "Project Coordinators",
     company: "Qatar Museums",
@@ -130,7 +190,8 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: "The professionalism and quality of work from CPC Qatar is remarkable. They completed our FIFA World Cup parking infrastructure ahead of schedule, demonstrating their capability to handle large-scale projects.",
+    quote:
+      "The professionalism and quality of work from CPC Qatar is remarkable. They completed our FIFA World Cup parking infrastructure ahead of schedule, demonstrating their capability to handle large-scale projects.",
     author: "Infrastructure Team",
     position: "Operations Division",
     company: "FIFA World Cup Qatar 2022",
@@ -140,16 +201,26 @@ const testimonials = [
 
 const getGradientColors = (colorClass: string): string => {
   const colorMap: Record<string, string> = {
-    "from-blue-500/20 to-cyan-500/20": "rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2)",
-    "from-amber-500/20 to-orange-500/20": "rgba(245, 158, 11, 0.2), rgba(249, 115, 22, 0.2)",
-    "from-purple-500/20 to-pink-500/20": "rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2)",
-    "from-green-500/20 to-emerald-500/20": "rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)",
-    "from-rose-500/20 to-red-500/20": "rgba(244, 63, 94, 0.2), rgba(239, 68, 68, 0.2)",
-    "from-yellow-500/20 to-amber-500/20": "rgba(234, 179, 8, 0.2), rgba(245, 158, 11, 0.2)",
-    "from-indigo-500/20 to-blue-500/20": "rgba(99, 102, 241, 0.2), rgba(59, 130, 246, 0.2)",
-    "from-violet-500/20 to-purple-500/20": "rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.2)",
+    "from-blue-500/20 to-cyan-500/20":
+      "rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2)",
+    "from-amber-500/20 to-orange-500/20":
+      "rgba(245, 158, 11, 0.2), rgba(249, 115, 22, 0.2)",
+    "from-purple-500/20 to-pink-500/20":
+      "rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2)",
+    "from-green-500/20 to-emerald-500/20":
+      "rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)",
+    "from-rose-500/20 to-red-500/20":
+      "rgba(244, 63, 94, 0.2), rgba(239, 68, 68, 0.2)",
+    "from-yellow-500/20 to-amber-500/20":
+      "rgba(234, 179, 8, 0.2), rgba(245, 158, 11, 0.2)",
+    "from-indigo-500/20 to-blue-500/20":
+      "rgba(99, 102, 241, 0.2), rgba(59, 130, 246, 0.2)",
+    "from-violet-500/20 to-purple-500/20":
+      "rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.2)",
   };
-  return colorMap[colorClass] || "rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2)";
+  return (
+    colorMap[colorClass] || "rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2)"
+  );
 };
 
 // ============================================
@@ -401,9 +472,7 @@ export default function Clients() {
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {isLoading && (
-          <LoadingScreen onComplete={() => setIsLoading(false)} />
-        )}
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
       <motion.div
@@ -467,7 +536,11 @@ function HeroSection() {
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 0.4,
+              }}
               className="font-display text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
               BUILDING
@@ -477,7 +550,11 @@ function HeroSection() {
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 0.5,
+              }}
               className="font-display text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
             >
               QATAR'S FUTURE
@@ -490,9 +567,9 @@ function HeroSection() {
             transition={{ delay: 1 }}
             className="mt-12 text-xl text-muted-foreground max-w-2xl"
           >
-            Trusted by Qatar's leading government ministries, international corporations,
-            and royal families since 2017. Over 57 completed projects demonstrating
-            excellence in infrastructure development.
+            Trusted by Qatar's leading government ministries, international
+            corporations, and royal families since 2017. Over 57 completed
+            projects demonstrating excellence in infrastructure development.
           </motion.p>
         </motion.div>
       </div>
@@ -521,10 +598,30 @@ function StatsBanner() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {[
-            { value: 45, suffix: "+", label: "MAJOR CLIENTS", description: "Government & Private" },
-            { value: 57, suffix: "+", label: "COMPLETED PROJECTS", description: "Since 2017" },
-            { value: 26, suffix: "M+", label: "TOTAL VALUE (QR)", description: "Project Portfolio" },
-            { value: 100, suffix: "%", label: "SATISFACTION", description: "Client Trust" },
+            {
+              value: 45,
+              suffix: "+",
+              label: "MAJOR CLIENTS",
+              description: "Government & Private",
+            },
+            {
+              value: 57,
+              suffix: "+",
+              label: "COMPLETED PROJECTS",
+              description: "Since 2017",
+            },
+            {
+              value: 26,
+              suffix: "M+",
+              label: "TOTAL VALUE (QR)",
+              description: "Project Portfolio",
+            },
+            {
+              value: 100,
+              suffix: "%",
+              label: "SATISFACTION",
+              description: "Client Trust",
+            },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -541,8 +638,12 @@ function StatsBanner() {
               >
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </motion.div>
-              <div className="text-xs tracking-[0.3em] text-primary font-semibold mb-1">{stat.label}</div>
-              <div className="text-xs text-muted-foreground">{stat.description}</div>
+              <div className="text-xs tracking-[0.3em] text-primary font-semibold mb-1">
+                {stat.label}
+              </div>
+              <div className="text-xs text-muted-foreground">
+                {stat.description}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -586,8 +687,9 @@ function ClientCategoriesSection() {
             transition={{ delay: 0.3 }}
             className="mt-8 text-lg text-muted-foreground max-w-3xl mx-auto"
           >
-            From government ministries to royal families, from international corporations
-            to local businesseswe deliver excellence across all sectors.
+            From government ministries to royal families, from international
+            corporations to local businesseswe deliver excellence across all
+            sectors.
           </motion.p>
         </motion.div>
 
@@ -608,7 +710,9 @@ function ClientCategoriesSection() {
                 className={btnClass}
               >
                 <Icon className="w-5 h-5" />
-                <span className="text-sm font-medium tracking-wide">{category.category}</span>
+                <span className="text-sm font-medium tracking-wide">
+                  {category.category}
+                </span>
               </motion.button>
             );
           })}
@@ -616,9 +720,12 @@ function ClientCategoriesSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {clientCategories[selectedCategory].clients.map((client, index) => {
-            const gradientColors = getGradientColors(clientCategories[selectedCategory].color);
+            const gradientColors = getGradientColors(
+              clientCategories[selectedCategory].color,
+            );
             const gradientStyle = {
-              background: "linear-gradient(to bottom right, " + gradientColors + ")"
+              background:
+                "linear-gradient(to bottom right, " + gradientColors + ")",
             };
 
             return (
@@ -663,13 +770,21 @@ function ClientCategoriesSection() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-border/50">
                       <div>
-                        <div className="font-display text-2xl text-primary">{client.projects}</div>
-                        <div className="text-[10px] text-muted-foreground tracking-wider">PROJECTS</div>
+                        <div className="font-display text-2xl text-primary">
+                          {client.projects}
+                        </div>
+                        <div className="text-[10px] text-muted-foreground tracking-wider">
+                          PROJECTS
+                        </div>
                       </div>
                       {client.value && (
                         <div className="text-right">
-                          <div className="font-semibold text-sm">{client.value}</div>
-                          <div className="text-[10px] text-muted-foreground tracking-wider">VALUE</div>
+                          <div className="font-semibold text-sm">
+                            {client.value}
+                          </div>
+                          <div className="text-[10px] text-muted-foreground tracking-wider">
+                            VALUE
+                          </div>
                         </div>
                       )}
                     </div>
@@ -703,7 +818,10 @@ function TestimonialsSection() {
   }, []);
 
   return (
-    <section ref={ref} className="py-32 md:py-48 bg-secondary relative overflow-hidden">
+    <section
+      ref={ref}
+      className="py-32 md:py-48 bg-secondary relative overflow-hidden"
+    >
       <motion.div
         style={{ y, rotate }}
         className="absolute top-20 left-10 font-display text-[40vw] text-foreground/5 leading-none select-none pointer-events-none z-0"
@@ -739,9 +857,10 @@ function TestimonialsSection() {
         <div className="max-w-5xl mx-auto">
           <div className="relative min-h-[400px]">
             {testimonials.map((testimonial, index) => {
-              const testimonialClassName = index === activeIndex
-                ? "absolute inset-0 pointer-events-auto"
-                : "absolute inset-0 pointer-events-none";
+              const testimonialClassName =
+                index === activeIndex
+                  ? "absolute inset-0 pointer-events-auto"
+                  : "absolute inset-0 pointer-events-none";
 
               return (
                 <motion.div
@@ -779,11 +898,15 @@ function TestimonialsSection() {
                       </p>
 
                       <div className="text-center pt-8 border-t border-border">
-                        <div className="font-display text-xl tracking-wide mb-1">{testimonial.author}</div>
+                        <div className="font-display text-xl tracking-wide mb-1">
+                          {testimonial.author}
+                        </div>
                         <div className="text-sm text-muted-foreground">
                           {testimonial.position}
                         </div>
-                        <div className="text-sm text-primary mt-1">{testimonial.company}</div>
+                        <div className="text-sm text-primary mt-1">
+                          {testimonial.company}
+                        </div>
                       </div>
                     </div>
                   </TiltCard>
@@ -794,9 +917,10 @@ function TestimonialsSection() {
 
           <div className="flex justify-center gap-4 mt-12">
             {testimonials.map((_, index) => {
-              const buttonClassName = index === activeIndex
-                ? "w-3 h-3 rounded-full transition-all duration-500 bg-primary w-12"
-                : "w-3 h-3 rounded-full transition-all duration-500 bg-muted-foreground/30 hover:bg-muted-foreground/50";
+              const buttonClassName =
+                index === activeIndex
+                  ? "w-3 h-3 rounded-full transition-all duration-500 bg-primary w-12"
+                  : "w-3 h-3 rounded-full transition-all duration-500 bg-muted-foreground/30 hover:bg-muted-foreground/50";
 
               return (
                 <motion.button
@@ -819,7 +943,8 @@ function WhyChooseSection() {
   const features = [
     {
       title: "Government Approved",
-      description: "C.R. 108122  Licensed by Qatar authorities  Full compliance",
+      description:
+        "C.R. 108122  Licensed by Qatar authorities  Full compliance",
       icon: CheckCircle2,
     },
     {
@@ -891,8 +1016,12 @@ function WhyChooseSection() {
                     >
                       <Icon className="w-7 h-7 text-primary" />
                     </motion.div>
-                    <h3 className="font-display text-2xl tracking-wide mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                    <h3 className="font-display text-2xl tracking-wide mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
                   </motion.div>
                 </TiltCard>
               </motion.div>

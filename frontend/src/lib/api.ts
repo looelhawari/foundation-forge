@@ -355,9 +355,77 @@ export const dashboardApi = {
     }),
 };
 
+// Upload API
+export interface UploadedImage {
+  url: string;
+  publicId: string;
+  originalName: string;
+  size: number;
+  format: string;
+  isPoster: boolean;
+}
+
+export interface UploadResponse {
+  images: UploadedImage[];
+  count: number;
+}
+
+export const uploadApi = {
+  uploadImages: async (files: File[]): Promise<ApiResponse<UploadResponse>> => {
+    const token = localStorage.getItem("admin_token");
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append("images", file);
+    });
+
+    const response = await fetch(`${API_BASE_URL}/upload/images`, {
+      method: "POST",
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        localStorage.removeItem("admin_token");
+        localStorage.removeItem("admin_user");
+        window.location.href = "/admin/login";
+      }
+      throw new Error(data.message || "Failed to upload images");
+    }
+
+    return data;
+  },
+
+  deleteImage: (publicId: string) =>
+    fetchApi<ApiResponse<null>>(
+      `/upload/images/${encodeURIComponent(publicId)}`,
+      {
+        method: "DELETE",
+      },
+    ),
+
+  deleteImages: (publicIds: string[]) =>
+    fetchApi<ApiResponse<null>>("/upload/images/delete-bulk", {
+      method: "POST",
+      body: JSON.stringify({ publicIds }),
+    }),
+
+  setPoster: (images: UploadedImage[], posterIndex: number) =>
+    fetchApi<ApiResponse<{ images: UploadedImage[] }>>("/upload/set-poster", {
+      method: "POST",
+      body: JSON.stringify({ images, posterIndex }),
+    }),
+};
+
 export default {
   auth: authApi,
   projects: projectsApi,
   contact: contactApi,
   dashboard: dashboardApi,
+  upload: uploadApi,
 };

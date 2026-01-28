@@ -68,7 +68,11 @@ const getDashboardStats = asyncHandler(async (req, res) => {
         },
         recentActivity: recentActivity.map((a) => ({
           ...a,
-          details: a.details ? JSON.parse(a.details) : null,
+          details: a.details
+            ? typeof a.details === "string"
+              ? JSON.parse(a.details)
+              : a.details
+            : null,
         })),
         settings: settingsObj,
       },
@@ -131,7 +135,11 @@ const getActivityLogs = asyncHandler(async (req, res) => {
       {
         logs: logs.map((l) => ({
           ...l,
-          details: l.details ? JSON.parse(l.details) : null,
+          details: l.details
+            ? typeof l.details === "string"
+              ? JSON.parse(l.details)
+              : l.details
+            : null,
         })),
         pagination,
       },

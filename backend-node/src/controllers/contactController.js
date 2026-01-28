@@ -6,6 +6,10 @@ const {
   paginate,
 } = require("../utils/helpers");
 const logger = require("../utils/logger");
+const {
+  sendContactNotification,
+  sendContactAutoReply,
+} = require("../utils/emailService");
 
 /**
  * Submit contact form
@@ -21,6 +25,29 @@ const submitContact = asyncHandler(async (req, res) => {
   );
 
   logger.info(`New contact submission from: ${email}`);
+
+  // Send email notifications asynchronously (don't block the response)
+  const contactData = { name, email, phone, company, subject, message };
+
+  // Send notification to company
+  sendContactNotification(contactData)
+    .then((result) => {
+      if (result.success) {
+        logger.info(
+          `Company notification sent for contact ID: ${result.insertId}`,
+        );
+      }
+    })
+    .catch((err) => logger.error(`Email notification error: ${err.message}`));
+
+  // Send auto-reply to the sender
+  sendContactAutoReply(contactData)
+    .then((result) => {
+      if (result.success) {
+        logger.info(`Auto-reply sent to: ${email}`);
+      }
+    })
+    .catch((err) => logger.error(`Auto-reply error: ${err.message}`));
 
   res.status(201).json(
     successResponse(

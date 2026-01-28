@@ -1,42 +1,55 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import processBg from "@/assets/real-process-bg.jpg";
+import process1 from "@/assets/process-1.jpg";
+import process2 from "@/assets/process-2.jpg";
+import process3 from "@/assets/process-3.jpg";
+import process4 from "@/assets/process-4.jpg";
+import process5 from "@/assets/process-5.jpg";
+import process6 from "@/assets/process-6.jpg";
 
 const processSteps = [
     {
         step: "01",
         title: "Initial Consultation",
         description: "Understanding your project requirements, site conditions, and objectives through detailed discussions",
-        tasks: ["Site Assessment", "Requirements Analysis", "Budget Discussion", "Timeline Planning"]
+        tasks: ["Site Assessment", "Requirements Analysis", "Budget Discussion", "Timeline Planning"],
+        image: process1
     },
     {
         step: "02",
         title: "Planning & Design",
         description: "Developing comprehensive project plans with technical specifications and resource allocation",
-        tasks: ["Technical Design", "Material Selection", "Resource Planning", "Risk Assessment"]
+        tasks: ["Technical Design", "Material Selection", "Resource Planning", "Risk Assessment"],
+        image: process2
     },
     {
         step: "03",
         title: "Approval & Permits",
         description: "Securing necessary approvals and permits from relevant authorities",
-        tasks: ["Documentation", "Authority Coordination", "Permit Acquisition", "Compliance Check"]
+        tasks: ["Documentation", "Authority Coordination", "Permit Acquisition", "Compliance Check"],
+        image: process3
     },
     {
         step: "04",
         title: "Mobilization",
         description: "Deploying equipment, materials, and skilled workforce to the project site",
-        tasks: ["Site Preparation", "Equipment Deployment", "Team Assignment", "Safety Setup"]
+        tasks: ["Site Preparation", "Equipment Deployment", "Team Assignment", "Safety Setup"],
+        image: process4
     },
     {
         step: "05",
         title: "Execution",
         description: "Implementing the project plan with continuous monitoring and quality control",
-        tasks: ["Construction Work", "Quality Testing", "Progress Monitoring", "Safety Inspection"]
+        tasks: ["Construction Work", "Quality Testing", "Progress Monitoring", "Safety Inspection"],
+        image: process5
     },
     {
         step: "06",
         title: "Completion & Handover",
         description: "Final inspection, documentation, and project handover to client",
-        tasks: ["Final Inspection", "Documentation", "Client Training", "Warranty Activation"]
+        tasks: ["Final Inspection", "Documentation", "Client Training", "Warranty Activation"],
+        image: process6
     }
 ];
 
@@ -51,6 +64,16 @@ export function ProcessTimeline() {
 
     return (
         <section ref={containerRef} className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                <img
+                    src={processBg}
+                    alt="CPC construction process"
+                    className="w-full h-full object-cover opacity-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-black/85 to-gray-900/90" />
+            </div>
+
             {/* Animated circuit board pattern */}
             <div className="absolute inset-0 opacity-5">
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -145,80 +168,92 @@ export function ProcessTimeline() {
                                         whileHover={{ scale: 1.05, x: isEven ? 10 : -10 }}
                                         transition={{ type: "spring", stiffness: 300 }}
                                     >
-                                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden group">
-                                            {/* Glow effect on hover */}
-                                            <motion.div
-                                                className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-orange-500/0 group-hover:from-amber-400/10 group-hover:to-orange-500/10"
-                                                transition={{ duration: 0.3 }}
-                                            />
+                                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl overflow-hidden group">
+                                            {/* Project Image */}
+                                            <div className="relative h-48 overflow-hidden">
+                                                <img
+                                                    src={process.image}
+                                                    alt={process.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
 
-                                            {/* Step number with pulse animation */}
-                                            <motion.div
-                                                className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-black font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4"
-                                                animate={{
-                                                    boxShadow: [
-                                                        "0 0 0 0 rgba(251, 191, 36, 0.7)",
-                                                        "0 0 0 20px rgba(251, 191, 36, 0)",
-                                                        "0 0 0 0 rgba(251, 191, 36, 0)"
-                                                    ]
-                                                }}
-                                                transition={{
-                                                    duration: 2,
-                                                    repeat: Infinity,
-                                                    delay: index * 0.3
-                                                }}
-                                            >
-                                                {process.step}
-                                            </motion.div>
+                                                {/* Step number overlay on image */}
+                                                <motion.div
+                                                    className="absolute top-4 right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-bold text-lg sm:text-xl md:text-2xl"
+                                                    animate={{
+                                                        boxShadow: [
+                                                            "0 0 0 0 rgba(251, 191, 36, 0.7)",
+                                                            "0 0 0 20px rgba(251, 191, 36, 0)",
+                                                            "0 0 0 0 rgba(251, 191, 36, 0)"
+                                                        ]
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        delay: index * 0.3
+                                                    }}
+                                                >
+                                                    {process.step}
+                                                </motion.div>
+                                            </div>
 
-                                            {/* Title */}
-                                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
-                                                {process.title}
-                                            </h3>
+                                            <div className="p-4 sm:p-6 md:p-8">
+                                                {/* Glow effect on hover */}
+                                                <motion.div
+                                                    className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-orange-500/0 group-hover:from-amber-400/10 group-hover:to-orange-500/10"
+                                                    transition={{ duration: 0.3 }}
+                                                />
 
-                                            {/* Divider */}
-                                            <motion.div
-                                                className="h-px bg-gradient-to-r from-amber-400 to-transparent mb-4"
-                                                initial={{ scaleX: 0 }}
-                                                whileInView={{ scaleX: 1 }}
-                                                transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
-                                                viewport={{ once: true }}
-                                            />
+                                                {/* Title */}
+                                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
+                                                    {process.title}
+                                                </h3>
 
-                                            {/* Description */}
-                                            <p className="text-sm sm:text-base text-gray-400 mb-3 md:mb-4">
-                                                {process.description}
-                                            </p>
+                                                {/* Divider */}
+                                                <motion.div
+                                                    className="h-px bg-gradient-to-r from-amber-400 to-transparent mb-4"
+                                                    initial={{ scaleX: 0 }}
+                                                    whileInView={{ scaleX: 1 }}
+                                                    transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
+                                                    viewport={{ once: true }}
+                                                />
 
-                                            {/* Tasks list */}
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                                {process.tasks.map((task, taskIndex) => (
-                                                    <motion.div
-                                                        key={task}
-                                                        className="flex items-center gap-2 text-xs sm:text-sm text-gray-500"
-                                                        initial={{ opacity: 0, x: -20 }}
-                                                        whileInView={{ opacity: 1, x: 0 }}
-                                                        transition={{
-                                                            duration: 0.5,
-                                                            delay: index * 0.2 + taskIndex * 0.1
-                                                        }}
-                                                        viewport={{ once: true }}
-                                                    >
+                                                {/* Description */}
+                                                <p className="text-sm sm:text-base text-gray-400 mb-3 md:mb-4">
+                                                    {process.description}
+                                                </p>
+
+                                                {/* Tasks list */}
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                    {process.tasks.map((task, taskIndex) => (
                                                         <motion.div
-                                                            className="w-1.5 h-1.5 rounded-full bg-amber-400"
-                                                            animate={{
-                                                                scale: [1, 1.5, 1],
-                                                                opacity: [0.5, 1, 0.5]
-                                                            }}
+                                                            key={task}
+                                                            className="flex items-center gap-2 text-xs sm:text-sm text-gray-500"
+                                                            initial={{ opacity: 0, x: -20 }}
+                                                            whileInView={{ opacity: 1, x: 0 }}
                                                             transition={{
-                                                                duration: 2,
-                                                                repeat: Infinity,
-                                                                delay: taskIndex * 0.2
+                                                                duration: 0.5,
+                                                                delay: index * 0.2 + taskIndex * 0.1
                                                             }}
-                                                        />
-                                                        {task}
-                                                    </motion.div>
-                                                ))}
+                                                            viewport={{ once: true }}
+                                                        >
+                                                            <motion.div
+                                                                className="w-1.5 h-1.5 rounded-full bg-amber-400"
+                                                                animate={{
+                                                                    scale: [1, 1.5, 1],
+                                                                    opacity: [0.5, 1, 0.5]
+                                                                }}
+                                                                transition={{
+                                                                    duration: 2,
+                                                                    repeat: Infinity,
+                                                                    delay: taskIndex * 0.2
+                                                                }}
+                                                            />
+                                                            {task}
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </motion.div>

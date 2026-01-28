@@ -9,9 +9,13 @@ const routes = require("./routes");
 const { errorHandler, notFoundHandler } = require("./middleware/errorHandler");
 const { apiLimiter } = require("./middleware/rateLimiter");
 const logger = require("./utils/logger");
+const { initializeTransporter } = require("./utils/emailService");
 
 // Initialize express app
 const app = express();
+
+// Initialize email service
+initializeTransporter();
 
 // Trust proxy (for rate limiting behind reverse proxy)
 app.set("trust proxy", 1);
@@ -24,15 +28,34 @@ app.use(
   }),
 );
 
-// CORS configuration
-app.use(
-  cors({
-    origin: config.cors.frontendUrl,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
+// CORS configuration - Allow all localhost ports in development
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) {
+      return callback(null, true);
+    }
+    // Allow all localhost origins in development
+    if (
+      origin.startsWith("http://localhost:") ||
+      origin.startsWith("http://127.0.0.1:")
+    ) {
+      return callback(null, true);
+    }
+    // Check against configured allowed origins
+    const allowedOrigins = Array.isArray(config.cors.frontendUrl)
+      ? config.cors.frontendUrl
+      : [config.cors.frontendUrl];
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 // Body parsing middleware
 app.use(express.json({ limit: "10mb" }));

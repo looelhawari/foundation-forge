@@ -1,9 +1,3 @@
-/**
- * Database Initialization Script
- * Run this once to set up the database schema
- * Usage: npm run db:init
- */
-
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcryptjs");
 const config = require("./index");

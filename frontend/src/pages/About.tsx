@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { MinimalHeader } from "@/components/layout/MinimalHeader";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
+import { CompanyIntro } from "@/components/sections/CompanyIntro";
 import { ScrollProgress, AnimatedCounter, MorphingBlob, ImageReveal, TiltCard } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
 import engineerImage from "@/assets/engineer-portrait.jpg";
@@ -162,8 +163,11 @@ const About = () => {
         transition={{ duration: 0.5 }}
       >
         <ScrollProgress />
-        <MinimalHeader />
+        <Header />
         <main>
+          {/* Company Intro Section */}
+          <CompanyIntro />
+          
           {/* Cinematic Hero */}
           <section ref={heroRef} className="relative h-[150vh]">
             <div className="sticky top-0 h-screen overflow-hidden">

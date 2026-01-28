@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AdminLayout } from "@/components/layout/AdminLayout";
 import { contactApi, ContactSubmission, PaginationInfo } from "@/lib/api";
@@ -65,6 +65,7 @@ import { toast } from "sonner";
 
 export default function AdminMessages() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
@@ -158,6 +159,11 @@ export default function AdminMessages() {
   };
 
   const viewMessage = async (submission: ContactSubmission) => {
+    // Navigate to the detailed message view page
+    navigate(`/admin/messages/${submission.id}`);
+  };
+
+  const viewMessageInDialog = async (submission: ContactSubmission) => {
     setSelectedMessage(submission);
     if (submission.status === "new") {
       // Mark as read

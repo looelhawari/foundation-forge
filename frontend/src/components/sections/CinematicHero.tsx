@@ -1,137 +1,212 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef, memo } from "react";
 import { ArrowDown } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
+import projectHighway from "@/assets/real-project-fifa.jpg";
+import projectStreet from "@/assets/real-project-mosque.jpg";
+import projectInfrastructure from "@/assets/real-project-redevelopment.jpg";
 
-export const CinematicHero = () => {
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+export const CinematicHero = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  // First scene (0 - 0.3)
+  const scene1Opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const scene1Y = useTransform(scrollYProgress, [0, 0.25], ["0%", "-50%"]);
+  const scene1Scale = useTransform(scrollYProgress, [0, 0.25], [1, 0.8]);
+  const scene1Rotate = useTransform(scrollYProgress, [0, 0.25], [0, -15]);
+
+  // Second scene (0.2 - 0.5)
+  const scene2Opacity = useTransform(scrollYProgress, [0.15, 0.3, 0.45, 0.6], [0, 1, 1, 0]);
+  const scene2Y = useTransform(scrollYProgress, [0.2, 0.35, 0.5], ["100%", "0%", "-50%"]);
+  const scene2Scale = useTransform(scrollYProgress, [0.2, 0.3, 0.5, 0.6], [1.2, 1, 1, 0.8]);
+  const scene2Rotate = useTransform(scrollYProgress, [0.45, 0.6], [0, 15]);
+
+  // Third scene (0.5 - 0.8)
+  const scene3Opacity = useTransform(scrollYProgress, [0.5, 0.65, 0.8, 0.95], [0, 1, 1, 0]);
+  const scene3X = useTransform(scrollYProgress, [0.55, 0.7, 0.85], ["-100%", "0%", "100%"]);
+  const scene3Scale = useTransform(scrollYProgress, [0.55, 0.65, 0.85, 0.95], [0.8, 1, 1, 1.2]);
+
+  // Fourth scene (0.75 - 1)
+  const scene4Opacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
+  const scene4Y = useTransform(scrollYProgress, [0.8, 0.95], ["50%", "0%"]);
+  const scene4Scale = useTransform(scrollYProgress, [0.8, 0.95], [0.5, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[200vh]">
+    <section ref={containerRef} className="relative h-[400vh]">
       {/* Fixed Hero Content */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background with Parallax */}
+      <div className="sticky top-0 h-screen overflow-hidden bg-background">
+
+        {/* SCENE 1: Initial Hero */}
         <motion.div
-          style={{ y, scale }}
+          style={{
+            opacity: scene1Opacity,
+            y: scene1Y,
+            scale: scene1Scale,
+            rotate: scene1Rotate,
+            willChange: 'transform, opacity'
+          }}
           className="absolute inset-0"
         >
-          <img
-            src={heroImage}
-            alt="Highway construction at sunset"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent" />
-        </motion.div>
-
-        {/* Content */}
-        <motion.div
-          style={{ opacity }}
-          className="relative z-10 h-full flex flex-col justify-center"
-        >
-          <div className="container mx-auto px-6">
-            {/* Year Badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="mb-8"
-            >
-              <span className="text-primary font-display text-lg tracking-[0.5em]">
-                SINCE 2017
-              </span>
-            </motion.div>
-
-            {/* Main Title - Cinematic Typography */}
-            <div className="overflow-hidden mb-4">
-              <motion.h1
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                className="font-display text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-[0.02em]"
-              >
-                BUILDING
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-4">
-              <motion.h1
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-                className="font-display text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-[0.02em]"
-              >
-                THE <span className="text-gradient">ROADS</span>
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-                className="font-display text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-[0.02em]"
-              >
-                OF TOMORROW
-              </motion.h1>
-            </div>
-
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="mt-12 text-lg md:text-xl text-muted-foreground max-w-xl tracking-wide"
-            >
-              Your trusted partner in road construction and maintenance in Qatar. Excellence in earthworks, asphalt paving, and infrastructure development since 2017.
-            </motion.p>
+          <div className="absolute inset-0">
+            <img
+              src={heroImage}
+              alt="Highway construction at sunset"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
           </div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-          >
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Scroll for details
-            </span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <ArrowDown className="w-5 h-5 text-primary" />
-            </motion.div>
-          </motion.div>
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container mx-auto px-6">
+              <motion.span
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="text-primary font-display text-lg tracking-[0.5em] mb-8 block"
+              >
+                SINCE 2017
+              </motion.span>
+              <motion.h1
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="font-display text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] tracking-[0.02em]"
+              >
+                CONSTRUCTING THE <span className="text-gradient">ROADS</span> OF TOMORROW
+              </motion.h1>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Side Stats */}
+        {/* SCENE 2: Highway Projects */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-8"
+          style={{
+            opacity: scene2Opacity,
+            y: scene2Y,
+            scale: scene2Scale,
+            rotate: scene2Rotate,
+            willChange: 'transform, opacity'
+          }}
+          className="absolute inset-0"
         >
-          {[
-            { value: "57+", label: "Projects" },
-            { value: "Since 2017", label: "Experience" },
-            { value: "45+", label: "Clients" },
-          ].map((stat, index) => (
-            <div key={index} className="text-right">
-              <div className="font-display text-3xl text-primary">{stat.value}</div>
-              <div className="text-xs tracking-widest text-muted-foreground uppercase">{stat.label}</div>
+          <div className="absolute inset-0">
+            <img
+              src={projectHighway}
+              alt="FIFA 2022 road work project"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+          </div>
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container mx-auto px-6">
+              <motion.span className="text-primary font-display text-lg tracking-[0.5em] mb-8 block">
+                HIGHWAYS & INFRASTRUCTURE
+              </motion.span>
+              <motion.h1 className="font-display text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] tracking-[0.02em]">
+                57+ MAJOR PROJECTS<br />
+                <span className="text-gradient">DELIVERED</span>
+              </motion.h1>
+              <motion.p className="mt-8 text-xl text-muted-foreground max-w-2xl">
+                From massive highway expansions to complex interchange systems, we deliver excellence at scale.
+              </motion.p>
             </div>
-          ))}
+          </div>
+        </motion.div>
+
+        {/* SCENE 3: Urban Development */}
+        <motion.div
+          style={{
+            opacity: scene3Opacity,
+            x: scene3X,
+            scale: scene3Scale,
+            willChange: 'transform, opacity'
+          }}
+          className="absolute inset-0"
+        >
+          <div className="absolute inset-0">
+            <img
+              src={projectStreet}
+              alt="Mosque road construction project"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+          </div>
+          <div className="relative z-10 h-full flex items-center">
+            <div className="container mx-auto px-6">
+              <motion.span className="text-primary font-display text-lg tracking-[0.5em] mb-8 block">
+                URBAN EXCELLENCE
+              </motion.span>
+              <motion.h1 className="font-display text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] tracking-[0.02em]">
+                TRANSFORMING<br />
+                <span className="text-gradient">QATAR'S CITIES</span>
+              </motion.h1>
+              <motion.p className="mt-8 text-xl text-muted-foreground max-w-2xl">
+                Modern urban infrastructure that connects communities and drives economic growth.
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* SCENE 4: Innovation & Future */}
+        <motion.div
+          style={{
+            opacity: scene4Opacity,
+            y: scene4Y,
+            scale: scene4Scale,
+            willChange: 'transform, opacity'
+          }}
+          className="absolute inset-0"
+        >
+          <div className="absolute inset-0">
+            <img
+              src={projectInfrastructure}
+              alt="Redevelopment project"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+          </div>
+          <div className="relative z-10 h-full flex items-center justify-center text-center">
+            <div className="container mx-auto px-6">
+              <motion.span className="text-primary font-display text-lg tracking-[0.5em] mb-8 block">
+                YOUR VISION, OUR EXPERTISE
+              </motion.span>
+              <motion.h1 className="font-display text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] tracking-[0.02em]">
+                LET'S BUILD<br />
+                <span className="text-gradient">SOMETHING GREAT</span>
+              </motion.h1>
+              <motion.p className="mt-8 text-xl text-muted-foreground max-w-2xl mx-auto">
+                Partner with Qatar's trusted construction leader. Excellence guaranteed.
+              </motion.p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          style={{ opacity: scene1Opacity }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20"
+        >
+          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            Scroll to explore
+          </span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ArrowDown className="w-5 h-5 text-primary" />
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
-};
+});
+
+CinematicHero.displayName = 'CinematicHero';

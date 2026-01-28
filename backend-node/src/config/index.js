@@ -35,6 +35,10 @@ module.exports = {
 
   // CORS
   cors: {
-    frontendUrl: process.env.FRONTEND_URL || "http://localhost:8080",
+    frontendUrl: process.env.FRONTEND_URL || [
+      "http://localhost:8080",
+      "http://localhost:8081",
+      "http://localhost:5173",
+    ],
   },
 };

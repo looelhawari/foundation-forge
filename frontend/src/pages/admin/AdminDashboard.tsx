@@ -166,28 +166,77 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div className="admin-panel space-y-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              Dashboard Overview
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Track your projects, messages, and business performance
-            </p>
+        {/* Header with Quick Actions */}
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                Dashboard Overview
+              </h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                Track your projects, messages, and business performance
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" size="sm">
+                <Download className="mr-2 h-4 w-4" />
+                Export Report
+              </Button>
+              <Button size="sm" asChild>
+                <Link to="/admin/projects/new">
+                  <Plus className="mr-2 h-4 w-4" />
+                  New Project
+                </Link>
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              <Download className="mr-2 h-4 w-4" />
-              Export Report
-            </Button>
-            <Button size="sm" asChild>
-              <Link to="/admin/projects/new">
-                <Plus className="mr-2 h-4 w-4" />
-                New Project
-              </Link>
-            </Button>
-          </div>
+
+          {/* Quick Actions Bar - Prominent placement */}
+          <Card className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-primary/20">
+            <CardContent className="py-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-sm font-medium text-muted-foreground mr-2">
+                  Quick Actions:
+                </span>
+                <Button size="sm" variant="default" asChild>
+                  <Link to="/admin/projects/new">
+                    <Plus className="mr-2 h-4 w-4" />
+                    Add Project
+                  </Link>
+                </Button>
+                <Button size="sm" variant="secondary" asChild>
+                  <Link to="/admin/messages">
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    Messages
+                    {messagesNew > 0 && (
+                      <Badge variant="destructive" className="ml-2 text-[10px]">
+                        {messagesNew}
+                      </Badge>
+                    )}
+                  </Link>
+                </Button>
+                <Button size="sm" variant="outline" asChild>
+                  <Link to="/admin/projects">
+                    <FolderKanban className="mr-2 h-4 w-4" />
+                    All Projects
+                  </Link>
+                </Button>
+                <Button size="sm" variant="outline" asChild>
+                  <Link to="/admin/settings">
+                    <FileText className="mr-2 h-4 w-4" />
+                    Settings
+                  </Link>
+                </Button>
+                <Button size="sm" variant="ghost" asChild>
+                  <Link to="/" target="_blank">
+                    <Eye className="mr-2 h-4 w-4" />
+                    View Site
+                    <ArrowUpRight className="ml-1 h-3 w-3" />
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Key Metrics Cards */}
@@ -604,19 +653,18 @@ export default function AdminDashboard() {
             </Card>
           </motion.div>
 
-          {/* Quick Stats & Actions */}
+          {/* Quick Stats - Compact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            className="space-y-6"
           >
             {/* Performance Card */}
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-base font-semibold flex items-center gap-2">
                   <Target className="h-5 w-5 text-primary" />
-                  Performance
+                  Performance Metrics
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -645,66 +693,6 @@ export default function AdminDashboard() {
                   </div>
                   <Progress value={98} className="h-2" />
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base font-semibold">
-                  Quick Actions
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-10 text-sm"
-                  asChild
-                >
-                  <Link to="/admin/projects/new">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Add New Project
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-10 text-sm"
-                  asChild
-                >
-                  <Link to="/admin/messages">
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    View Messages
-                    {messagesNew > 0 && (
-                      <Badge
-                        variant="destructive"
-                        className="ml-auto text-[10px]"
-                      >
-                        {messagesNew}
-                      </Badge>
-                    )}
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-10 text-sm"
-                  asChild
-                >
-                  <Link to="/admin/settings">
-                    <FileText className="mr-2 h-4 w-4" />
-                    Site Settings
-                  </Link>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start h-10 text-sm"
-                  asChild
-                >
-                  <Link to="/" target="_blank">
-                    <Eye className="mr-2 h-4 w-4" />
-                    View Website
-                    <ArrowUpRight className="ml-auto h-3 w-3" />
-                  </Link>
-                </Button>
               </CardContent>
             </Card>
           </motion.div>

@@ -5,12 +5,14 @@ const authRoutes = require("./authRoutes");
 const projectRoutes = require("./projectRoutes");
 const contactRoutes = require("./contactRoutes");
 const dashboardRoutes = require("./dashboardRoutes");
+const uploadRoutes = require("./uploadRoutes");
 
 // Mount routes
 router.use("/auth", authRoutes);
 router.use("/projects", projectRoutes);
 router.use("/contact", contactRoutes);
 router.use("/dashboard", dashboardRoutes);
+router.use("/upload", uploadRoutes);
 
 // Health check
 router.get("/health", (req, res) => {

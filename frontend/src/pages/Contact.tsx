@@ -2,11 +2,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  MessageCircle,
+  Loader2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { contactApi } from "@/lib/api";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
 // Loading Screen Component
@@ -71,7 +80,11 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
           >
             <img src={companyLogo} alt="Logo" className="w-32 h-32" />
           </motion.div>
-          <img src={companyLogo} alt="CPC Logo" className="w-32 h-32 relative z-10" />
+          <img
+            src={companyLogo}
+            alt="CPC Logo"
+            className="w-32 h-32 relative z-10"
+          />
         </motion.div>
 
         <motion.h2
@@ -111,24 +124,60 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
 const Contact = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
+    subject: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      await contactApi.submit({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        company: formData.company || undefined,
+        subject: formData.subject || undefined,
+        message: formData.message,
+      });
+
+      toast({
+        title: "Message Sent!",
+        description:
+          "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -161,8 +210,8 @@ const Contact = () => {
                   CONTACT <span className="text-gradient">US</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-2xl">
-                  Ready to start your next project? Reach out to our team of experts
-                  for a consultation and free quote.
+                  Ready to start your next project? Reach out to our team of
+                  experts for a consultation and free quote.
                 </p>
               </motion.div>
             </div>
@@ -185,7 +234,9 @@ const Contact = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm text-muted-foreground mb-2 block">Full Name *</label>
+                        <label className="text-sm text-muted-foreground mb-2 block">
+                          Full Name *
+                        </label>
                         <Input
                           name="name"
                           value={formData.name}
@@ -196,7 +247,9 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <label className="text-sm text-muted-foreground mb-2 block">Email *</label>
+                        <label className="text-sm text-muted-foreground mb-2 block">
+                          Email *
+                        </label>
                         <Input
                           name="email"
                           type="email"
@@ -210,7 +263,9 @@ const Contact = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm text-muted-foreground mb-2 block">Phone</label>
+                        <label className="text-sm text-muted-foreground mb-2 block">
+                          Phone
+                        </label>
                         <Input
                           name="phone"
                           value={formData.phone}
@@ -220,7 +275,9 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <label className="text-sm text-muted-foreground mb-2 block">Company</label>
+                        <label className="text-sm text-muted-foreground mb-2 block">
+                          Company
+                        </label>
                         <Input
                           name="company"
                           value={formData.company}
@@ -231,7 +288,21 @@ const Contact = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="text-sm text-muted-foreground mb-2 block">Message *</label>
+                      <label className="text-sm text-muted-foreground mb-2 block">
+                        Subject
+                      </label>
+                      <Input
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="bg-secondary border-border focus:border-primary"
+                        placeholder="What is this regarding?"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm text-muted-foreground mb-2 block">
+                        Message *
+                      </label>
                       <Textarea
                         name="message"
                         value={formData.message}
@@ -241,9 +312,24 @@ const Contact = () => {
                         placeholder="Tell us about your project..."
                       />
                     </div>
-                    <Button type="submit" variant="hero" size="lg" className="w-full md:w-auto">
-                      <Send className="w-4 h-4" />
-                      Send Message
+                    <Button
+                      type="submit"
+                      variant="hero"
+                      size="lg"
+                      className="w-full md:w-auto"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </motion.div>
@@ -265,10 +351,14 @@ const Contact = () => {
                         <MapPin className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground mb-1">Head Office</h4>
+                        <h4 className="font-semibold text-foreground mb-1">
+                          Head Office
+                        </h4>
                         <p className="text-muted-foreground text-sm">
-                          Mirqab Mall, Area No. 39, Street No.840<br />
-                          Building No.53, Block D – Office No. 307-308<br />
+                          Mirqab Mall, Area No. 39, Street No.840
+                          <br />
+                          Building No.53, Block D – Office No. 307-308
+                          <br />
                           P.O. Box: 15776, Doha, Qatar
                         </p>
                       </div>
@@ -279,13 +369,21 @@ const Contact = () => {
                         <Phone className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground mb-1">Phone</h4>
+                        <h4 className="font-semibold text-foreground mb-1">
+                          Phone
+                        </h4>
                         <p className="text-muted-foreground text-sm">
-                          <a href="tel:+97444322743" className="hover:text-primary transition-colors">
+                          <a
+                            href="tel:+97444322743"
+                            className="hover:text-primary transition-colors"
+                          >
                             +974 4432-2743
                           </a>
                           <br />
-                          <a href="tel:+97440291295" className="hover:text-primary transition-colors">
+                          <a
+                            href="tel:+97440291295"
+                            className="hover:text-primary transition-colors"
+                          >
                             +974 4029-1295 (Fax)
                           </a>
                         </p>
@@ -297,9 +395,14 @@ const Contact = () => {
                         <Mail className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground mb-1">Email</h4>
+                        <h4 className="font-semibold text-foreground mb-1">
+                          Email
+                        </h4>
                         <p className="text-muted-foreground text-sm">
-                          <a href="mailto:Info@ctgroups.net" className="hover:text-primary transition-colors">
+                          <a
+                            href="mailto:Info@ctgroups.net"
+                            className="hover:text-primary transition-colors"
+                          >
                             Info@ctgroups.net
                           </a>
                         </p>
