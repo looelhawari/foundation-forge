@@ -48,7 +48,7 @@ const initDatabase = async () => {
         slug VARCHAR(255) NOT NULL UNIQUE,
         title VARCHAR(500) NOT NULL,
         description TEXT,
-        category VARCHAR(100) NOT NULL,
+        category VARCHAR(100),
         location VARCHAR(255),
         client VARCHAR(255),
         main_contractor VARCHAR(255),
@@ -58,6 +58,7 @@ const initDatabase = async () => {
         year VARCHAR(20),
         status ENUM('active', 'completed', 'in_progress', 'archived') DEFAULT 'completed',
         featured BOOLEAN DEFAULT FALSE,
+        is_legacy BOOLEAN DEFAULT FALSE,
         images JSON,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -66,10 +67,31 @@ const initDatabase = async () => {
         INDEX idx_status (status),
         INDEX idx_slug (slug),
         INDEX idx_featured (featured),
+        INDEX idx_is_legacy (is_legacy),
         FOREIGN KEY (created_by) REFERENCES admins(id) ON DELETE SET NULL
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
     console.log("✅ Projects table created/verified");
+
+    // Add is_legacy column if it doesn't exist (for existing databases)
+    try {
+      await connection.execute(`
+        ALTER TABLE projects ADD COLUMN is_legacy BOOLEAN DEFAULT FALSE AFTER featured
+      `);
+      console.log("✅ Added is_legacy column to projects table");
+    } catch (err) {
+      // Column already exists, ignore
+    }
+
+    // Make category nullable (for existing databases)
+    try {
+      await connection.execute(`
+        ALTER TABLE projects MODIFY COLUMN category VARCHAR(100) NULL
+      `);
+      console.log("✅ Made category column nullable");
+    } catch (err) {
+      // Already nullable or error, ignore
+    }
 
     // Create contact_submissions table
     await connection.execute(`

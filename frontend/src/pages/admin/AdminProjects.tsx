@@ -71,6 +71,7 @@ export default function AdminProjects() {
   const page = parseInt(searchParams.get("page") || "1");
   const category = searchParams.get("category") || "";
   const status = searchParams.get("status") || "";
+  const projectType = searchParams.get("projectType") || "";
 
   const { projects, pagination, isLoading, refetch } = useProjects({
     page,
@@ -78,6 +79,7 @@ export default function AdminProjects() {
     category: category || undefined,
     status: status || undefined,
     search: search || undefined,
+    isLegacy: projectType === "old" ? true : projectType === "new" ? false : undefined,
   });
 
   const { categories } = useCategories();
@@ -192,7 +194,7 @@ export default function AdminProjects() {
                 <SelectContent>
                   <SelectItem value="all">All Categories</SelectItem>
                   {categories.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.slug}>
+                    <SelectItem key={cat.id} value={cat.name}>
                       {cat.name}
                     </SelectItem>
                   ))}
@@ -211,6 +213,19 @@ export default function AdminProjects() {
                   <SelectItem value="completed">Completed</SelectItem>
                   <SelectItem value="in_progress">In Progress</SelectItem>
                   <SelectItem value="archived">Archived</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select
+                value={projectType || "all"}
+                onValueChange={(value) => handleFilterChange("projectType", value)}
+              >
+                <SelectTrigger className="w-full sm:w-[150px]">
+                  <SelectValue placeholder="Project Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Projects</SelectItem>
+                  <SelectItem value="new">New Projects</SelectItem>
+                  <SelectItem value="old">Old Projects</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -311,7 +326,13 @@ export default function AdminProjects() {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">{project.category}</Badge>
+                          {project.is_legacy ? (
+                            <Badge variant="secondary" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">
+                              Old Project
+                            </Badge>
+                          ) : (
+                            <Badge variant="outline">{project.category || "Uncategorized"}</Badge>
+                          )}
                         </TableCell>
                         <TableCell className="text-sm">
                           {project.location || "—"}

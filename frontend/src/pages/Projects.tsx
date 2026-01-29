@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactCTA } from "@/components/sections/ContactCTA";
-import { MapPin, ArrowLeft, Loader2, FolderOpen, Search } from "lucide-react";
+import { MapPin, ArrowLeft, Loader2, FolderOpen, Search, Clock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -139,15 +139,23 @@ const categoryData: Record<string, { icon: string; description: string }> = {
 const Projects = () => {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedProjectType, setSelectedProjectType] = useState<"new" | "old" | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch all projects from API
   const { projects, isLoading, pagination } = useProjects({
     page: currentPage,
-    limit: selectedCategory ? 50 : 100, // Fetch more when viewing category
-    category: selectedCategory || undefined, // selectedCategory now stores the name
+    limit: selectedCategory || selectedProjectType === "old" ? 50 : 100,
+    category: selectedCategory || undefined,
     search: searchQuery || undefined,
+    isLegacy: selectedProjectType === "old" ? true : selectedProjectType === "new" ? false : undefined,
+  });
+
+  // Fetch legacy projects count
+  const { projects: legacyProjects } = useProjects({
+    limit: 1,
+    isLegacy: true,
   });
 
   // Fetch categories from API
@@ -263,10 +271,10 @@ const Projects = () => {
         <Header />
         <main>
           <AnimatePresence mode="wait">
-            {!selectedCategory ? (
-              // Categories Grid View
+            {!selectedCategory && !selectedProjectType ? (
+              // Main Project Type Selection View (New vs Old)
               <motion.div
-                key="categories"
+                key="project-types"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -285,7 +293,7 @@ const Projects = () => {
                         OUR <span className="text-gradient">PROJECTS</span>
                       </h1>
                       <p className="text-xl text-muted-foreground mb-8">
-                        Choose a category to explore our portfolio of excellence
+                        Explore our portfolio of excellence
                       </p>
 
                       {/* Search Bar */}
@@ -355,7 +363,7 @@ const Projects = () => {
                   </div>
                 </section>
 
-                {/* Search Results or Category Cards */}
+                {/* Search Results or Main Project Type Cards */}
                 <section className="pb-24">
                   <div className="container mx-auto px-6">
                     {searchQuery ? (
@@ -399,8 +407,8 @@ const Projects = () => {
                                       }
                                       alt={project.title}
                                       className={`w-full h-full ${getPosterImage(project.images)
-                                          ? "object-cover group-hover:scale-110"
-                                          : "object-contain p-12 opacity-50"
+                                        ? "object-cover group-hover:scale-110"
+                                        : "object-contain p-12 opacity-50"
                                         } transition-transform duration-500`}
                                       loading="lazy"
                                       onError={(e) => {
@@ -441,10 +449,129 @@ const Projects = () => {
                           </div>
                         )}
                       </div>
-                    ) : isCategoriesLoading ? (
+                    ) : (
+                      // Main Project Type Cards (New vs Old)
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        {/* New Projects Card */}
+                        <motion.button
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5, delay: 0.1 }}
+                          onClick={() => setSelectedProjectType("new")}
+                          className="group bg-gradient-card border border-border rounded-xl p-10 hover:border-primary hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 text-left relative overflow-hidden"
+                        >
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="p-4 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
+                                <Sparkles className="w-10 h-10 text-primary" />
+                              </div>
+                            </div>
+                            <h3 className="font-display text-3xl tracking-wide mb-3 group-hover:text-primary transition-colors">
+                              New Projects
+                            </h3>
+                            <p className="text-muted-foreground mb-6">
+                              Explore our latest construction projects organized by category. Modern infrastructure and innovative designs.
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm text-primary font-medium">
+                                {categoriesWithCounts.length} Categories
+                              </span>
+                              <span className="text-primary group-hover:translate-x-2 transition-transform text-2xl">
+                                →
+                              </span>
+                            </div>
+                          </div>
+                        </motion.button>
+
+                        {/* Old Projects Card */}
+                        <motion.button
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5, delay: 0.2 }}
+                          onClick={() => setSelectedProjectType("old")}
+                          className="group bg-gradient-card border border-border rounded-xl p-10 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300 text-left relative overflow-hidden"
+                        >
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-6">
+                              <div className="p-4 bg-amber-500/10 rounded-xl group-hover:bg-amber-500/20 transition-colors">
+                                <Clock className="w-10 h-10 text-amber-500" />
+                              </div>
+                            </div>
+                            <h3 className="font-display text-3xl tracking-wide mb-3 group-hover:text-amber-500 transition-colors">
+                              Old Projects
+                            </h3>
+                            <p className="text-muted-foreground mb-6">
+                              Browse our historical portfolio of completed projects. A testament to our years of experience and expertise.
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm text-amber-500 font-medium">
+                                Legacy Collection
+                              </span>
+                              <span className="text-amber-500 group-hover:translate-x-2 transition-transform text-2xl">
+                                →
+                              </span>
+                            </div>
+                          </div>
+                        </motion.button>
+                      </div>
+                    )}
+                  </div>
+                </section>
+
+                <ContactCTA />
+              </motion.div>
+            ) : selectedProjectType === "new" && !selectedCategory ? (
+              // Categories Grid View for New Projects
+              <motion.div
+                key="categories"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <section className="pt-32 pb-16">
+                  <div className="container mx-auto px-6">
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setSelectedProjectType(null);
+                        setCurrentPage(1);
+                      }}
+                      className="mb-6"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Projects
+                    </Button>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8 }}
+                      className="max-w-4xl"
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-primary/10 rounded-xl">
+                          <Sparkles className="w-8 h-8 text-primary" />
+                        </div>
+                        <div>
+                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                            New <span className="text-gradient">Projects</span>
+                          </h1>
+                          <p className="text-muted-foreground mt-2">
+                            Select a category to explore
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </section>
+
+                <section className="pb-24">
+                  <div className="container mx-auto px-6">
+                    {isCategoriesLoading ? (
                       <CategorySkeleton />
                     ) : (
-                      // Category Cards Grid
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                         {categoriesWithCounts.map((category, index) => (
                           <motion.button
@@ -483,10 +610,160 @@ const Projects = () => {
 
                 <ContactCTA />
               </motion.div>
-            ) : (
-              // Projects List View for Selected Category
+            ) : selectedProjectType === "old" ? (
+              // Old Projects List View
               <motion.div
-                key="projects"
+                key="old-projects"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <section className="pt-32 pb-16">
+                  <div className="container mx-auto px-6">
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setSelectedProjectType(null);
+                        setCurrentPage(1);
+                      }}
+                      className="mb-6"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Projects
+                    </Button>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-amber-500/10 rounded-xl">
+                          <Clock className="w-8 h-8 text-amber-500" />
+                        </div>
+                        <div>
+                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                            Old <span className="text-amber-500">Projects</span>
+                          </h1>
+                          <p className="text-muted-foreground mt-2">
+                            {isLoading ? (
+                              <Skeleton className="h-5 w-24" />
+                            ) : (
+                              `${pagination?.totalItems || filteredProjects.length} Legacy Project${(pagination?.totalItems || filteredProjects.length) !== 1 ? "s" : ""}`
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </section>
+
+                <section className="pb-24">
+                  <div className="container mx-auto px-6">
+                    {isLoading ? (
+                      <ProjectSkeleton />
+                    ) : filteredProjects.length > 0 ? (
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredProjects.map((project, index) => (
+                          <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={`/projects/${project.slug || project.id}`}
+                              className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-amber-500 transition-all duration-300"
+                            >
+                              <div className="aspect-video overflow-hidden bg-muted/50 relative">
+                                <img
+                                  src={
+                                    getPosterImage(project.images) ||
+                                    companyLogo
+                                  }
+                                  alt={project.title}
+                                  className={`w-full h-full ${getPosterImage(project.images)
+                                    ? "object-cover group-hover:scale-110"
+                                    : "object-contain p-12 opacity-50"
+                                    } transition-transform duration-500`}
+                                  loading="lazy"
+                                  onError={(e) => {
+                                    e.currentTarget.src = companyLogo;
+                                    e.currentTarget.className =
+                                      "w-full h-full object-contain p-12 opacity-50";
+                                  }}
+                                />
+                              </div>
+                              <div className="p-6">
+                                <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-amber-500 transition-colors line-clamp-2">
+                                  {project.title}
+                                </h3>
+                                <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                                  {project.description ||
+                                    "Road construction project"}
+                                </p>
+                                <div className="flex items-center justify-between">
+                                  {project.location && (
+                                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                      <MapPin className="w-3 h-3" />
+                                      {project.location}
+                                    </div>
+                                  )}
+                                  {project.year && (
+                                    <span className="text-xs text-amber-500">
+                                      {project.year}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-16">
+                        <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
+                        <h3 className="text-xl font-medium mb-2">
+                          No old projects yet
+                        </h3>
+                        <p className="text-muted-foreground">
+                          Legacy projects will appear here
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Pagination */}
+                    {pagination && pagination.totalPages > 1 && (
+                      <div className="flex justify-center gap-2 mt-12">
+                        <Button
+                          variant="outline"
+                          disabled={!pagination.hasPrevPage}
+                          onClick={() => setCurrentPage((p) => p - 1)}
+                        >
+                          Previous
+                        </Button>
+                        <span className="flex items-center px-4 text-sm text-muted-foreground">
+                          Page {pagination.currentPage} of{" "}
+                          {pagination.totalPages}
+                        </span>
+                        <Button
+                          variant="outline"
+                          disabled={!pagination.hasNextPage}
+                          onClick={() => setCurrentPage((p) => p + 1)}
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </section>
+
+                <ContactCTA />
+              </motion.div>
+            ) : (
+              // Projects List View for Selected Category (inside New Projects)
+              <motion.div
+                key="category-projects"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
@@ -560,8 +837,8 @@ const Projects = () => {
                                   }
                                   alt={project.title}
                                   className={`w-full h-full ${getPosterImage(project.images)
-                                      ? "object-cover group-hover:scale-110"
-                                      : "object-contain p-12 opacity-50"
+                                    ? "object-cover group-hover:scale-110"
+                                    : "object-contain p-12 opacity-50"
                                     } transition-transform duration-500`}
                                   loading="lazy"
                                   onError={(e) => {
@@ -634,6 +911,8 @@ const Projects = () => {
                     )}
                   </div>
                 </section>
+
+                <ContactCTA />
               </motion.div>
             )}
           </AnimatePresence>

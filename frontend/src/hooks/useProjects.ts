@@ -15,6 +15,7 @@ interface UseProjectsOptions {
   status?: string;
   search?: string;
   featured?: boolean;
+  isLegacy?: boolean;
 }
 
 export function useProjects(options: UseProjectsOptions = {}) {
@@ -45,6 +46,7 @@ export function useProjects(options: UseProjectsOptions = {}) {
     options.status,
     options.search,
     options.featured,
+    options.isLegacy,
   ]);
 
   useEffect(() => {

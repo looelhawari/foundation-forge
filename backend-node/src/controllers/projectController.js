@@ -20,6 +20,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
     status,
     search,
     featured,
+    isLegacy,
     sortBy = "created_at",
     sortOrder = "DESC",
   } = req.query;
@@ -40,6 +41,13 @@ const getAllProjects = asyncHandler(async (req, res) => {
 
   if (featured === "true") {
     whereConditions.push("featured = TRUE");
+  }
+
+  // Filter by legacy status (old vs new projects)
+  if (isLegacy === "true") {
+    whereConditions.push("is_legacy = TRUE");
+  } else if (isLegacy === "false") {
+    whereConditions.push("is_legacy = FALSE");
   }
 
   if (search) {
@@ -74,7 +82,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
   // Get projects with pagination
   const [projects] = await pool.execute(
     `SELECT id, slug, title, description, category, location, client, 
-            main_contractor, consultant, area, value, year, status, featured, images, 
+            main_contractor, consultant, area, value, year, status, featured, is_legacy, images, 
             created_at, updated_at
      FROM projects 
      ${whereClause}
@@ -160,6 +168,7 @@ const createProject = asyncHandler(async (req, res) => {
     year,
     status = "completed",
     featured = false,
+    isLegacy = false,
     images = [],
   } = req.body;
 
@@ -181,13 +190,13 @@ const createProject = asyncHandler(async (req, res) => {
   const [result] = await pool.execute(
     `INSERT INTO projects (
       slug, title, description, category, location, client, 
-      main_contractor, consultant, area, value, year, status, featured, images, created_by
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      main_contractor, consultant, area, value, year, status, featured, is_legacy, images, created_by
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       slug,
       title,
       description || null,
-      category,
+      isLegacy ? null : category,
       location || null,
       client || null,
       mainContractor || null,
@@ -197,6 +206,7 @@ const createProject = asyncHandler(async (req, res) => {
       year || null,
       status,
       featured ? 1 : 0,
+      isLegacy ? 1 : 0,
       JSON.stringify(images),
       req.admin.id,
     ],
@@ -244,6 +254,7 @@ const updateProject = asyncHandler(async (req, res) => {
     year,
     status,
     featured,
+    isLegacy,
     images,
   } = req.body;
 
@@ -322,6 +333,15 @@ const updateProject = asyncHandler(async (req, res) => {
   if (featured !== undefined) {
     updates.push("featured = ?");
     values.push(featured ? 1 : 0);
+  }
+  if (isLegacy !== undefined) {
+    updates.push("is_legacy = ?");
+    values.push(isLegacy ? 1 : 0);
+    // If marking as legacy, clear category; if marking as new, category should be set separately
+    if (isLegacy) {
+      updates.push("category = ?");
+      values.push(null);
+    }
   }
   if (images !== undefined) {
     updates.push("images = ?");

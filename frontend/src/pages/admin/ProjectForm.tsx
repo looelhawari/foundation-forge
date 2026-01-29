@@ -79,6 +79,7 @@ export default function ProjectForm() {
     year: "",
     status: "completed",
     featured: false,
+    isLegacy: false,
     images: [],
   });
 
@@ -103,6 +104,7 @@ export default function ProjectForm() {
         year: project.year || "",
         status: project.status || "completed",
         featured: project.featured || false,
+        isLegacy: project.is_legacy || false,
         images: project.images || [],
       });
 
@@ -367,24 +369,26 @@ export default function ProjectForm() {
                 />
               </div>
 
-              <div>
-                <Label htmlFor="category">Category</Label>
-                <Select
-                  value={formData.category}
-                  onValueChange={(value) => handleChange("category", value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.slug}>
-                        {cat.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {!formData.isLegacy && (
+                <div>
+                  <Label htmlFor="category">Category *</Label>
+                  <Select
+                    value={formData.category}
+                    onValueChange={(value) => handleChange("category", value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((cat) => (
+                        <SelectItem key={cat.id} value={cat.name}>
+                          {cat.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
 
               <div>
                 <Label htmlFor="status">Status</Label>
@@ -436,6 +440,34 @@ export default function ProjectForm() {
                   Featured project (displayed on Projects page)
                 </Label>
               </div>
+
+              <div className="flex items-center gap-3 sm:col-span-2">
+                <Switch
+                  id="isLegacy"
+                  checked={formData.isLegacy}
+                  onCheckedChange={(checked) => {
+                    handleChange("isLegacy", checked);
+                    // Clear category when marking as legacy
+                    if (checked) {
+                      handleChange("category", "");
+                    }
+                  }}
+                />
+                <Label htmlFor="isLegacy" className="cursor-pointer">
+                  <span className="font-medium">Old Project</span>
+                  <span className="text-muted-foreground ml-2 text-sm">
+                    (Legacy project without category)
+                  </span>
+                </Label>
+              </div>
+
+              {formData.isLegacy && (
+                <div className="sm:col-span-2 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                  <p className="text-sm text-amber-600 dark:text-amber-400">
+                    ⚠️ This project will be displayed in the "Old Projects" section without a category.
+                  </p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

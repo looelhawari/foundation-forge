@@ -89,7 +89,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string | null;
-  category: string;
+  category: string | null;
   location: string | null;
   client: string | null;
   main_contractor: string | null;
@@ -99,6 +99,7 @@ export interface Project {
   year: string | null;
   status: "active" | "completed" | "in_progress" | "archived";
   featured: boolean;
+  is_legacy: boolean;
   images: string[];
   created_at: string;
   updated_at: string;
@@ -109,7 +110,7 @@ export interface Project {
 export interface ProjectFormData {
   title: string;
   description?: string;
-  category: string;
+  category?: string;
   location?: string;
   client?: string;
   mainContractor?: string;
@@ -119,6 +120,7 @@ export interface ProjectFormData {
   year?: string;
   status?: string;
   featured?: boolean;
+  isLegacy?: boolean;
   images?: string[];
 }
 
@@ -161,12 +163,12 @@ export interface Client {
   name: string;
   logo: string | null;
   category:
-    | "government"
-    | "corporate"
-    | "industrial"
-    | "real_estate"
-    | "retail"
-    | "other";
+  | "government"
+  | "corporate"
+  | "industrial"
+  | "real_estate"
+  | "retail"
+  | "other";
   description: string | null;
   projects_count: number;
   total_value: string | null;
@@ -287,6 +289,7 @@ export const projectsApi = {
     status?: string;
     search?: string;
     featured?: boolean;
+    isLegacy?: boolean;
     sortBy?: string;
     sortOrder?: string;
   }) => {
