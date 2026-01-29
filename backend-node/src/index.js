@@ -73,6 +73,14 @@ app.use(notFoundHandler);
 // Global error handler
 app.use(errorHandler);
 
+// Import cleanup function
+const {
+  cleanupExpiredTestimonials,
+} = require("./controllers/testimonialController");
+
+// Run cleanup every hour
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hour in milliseconds
+
 // Start server
 const startServer = async () => {
   try {
@@ -86,6 +94,13 @@ const startServer = async () => {
       logger.info("Make sure MySQL is running and run: npm run db:init");
       process.exit(1);
     }
+
+    // Run initial cleanup on startup
+    await cleanupExpiredTestimonials();
+
+    // Schedule periodic cleanup
+    setInterval(cleanupExpiredTestimonials, CLEANUP_INTERVAL);
+    logger.info("Testimonial cleanup job scheduled (every hour)");
 
     // Start listening
     app.listen(config.port, () => {

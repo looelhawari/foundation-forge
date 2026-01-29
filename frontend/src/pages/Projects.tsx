@@ -59,6 +59,12 @@ const Projects = () => {
   // Fetch categories from API
   const { categories, isLoading: isCategoriesLoading } = useCategories();
 
+  // Get selected category object for display
+  const selectedCategoryObj = useMemo(() => {
+    if (!selectedCategory || !categories) return null;
+    return categories.find((cat) => cat.slug === selectedCategory);
+  }, [selectedCategory, categories]);
+
   // Get unique categories with project counts from the data
   const categoriesWithCounts = useMemo(() => {
     if (!categories || categories.length === 0) {
@@ -72,13 +78,15 @@ const Projects = () => {
           );
         }
       });
-      return Array.from(categoryMap.entries()).map(([name, count]) => ({
-        name,
+      return Array.from(categoryMap.entries()).map(([slug, count]) => ({
+        name: slug,
+        slug: slug,
         count,
       }));
     }
     return categories.map((cat) => ({
       name: cat.name,
+      slug: cat.slug,
       count: cat.project_count || 0,
     }));
   }, [categories, projects]);
@@ -336,11 +344,11 @@ const Projects = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                       {categoriesWithCounts.map((category, index) => (
                         <motion.button
-                          key={category.name}
+                          key={category.slug}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
-                          onClick={() => setSelectedCategory(category.name)}
+                          onClick={() => setSelectedCategory(category.slug)}
                           className="group bg-gradient-card border border-border rounded-lg p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 text-left"
                         >
                           <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -401,11 +409,12 @@ const Projects = () => {
                   >
                     <div className="flex items-center gap-4 mb-4">
                       <span className="text-6xl">
-                        {categoryData[selectedCategory]?.icon || "📁"}
+                        {categoryData[selectedCategoryObj?.name || ""]?.icon ||
+                          "📁"}
                       </span>
                       <div>
                         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
-                          {selectedCategory}
+                          {selectedCategoryObj?.name || selectedCategory}
                         </h1>
                         <p className="text-muted-foreground mt-2">
                           {isLoading ? (

@@ -257,7 +257,6 @@ export function CompanyIntro() {
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-2">
                                 <CounterNumber target={26} suffix="M+" />
                             </div>
-                            <div className="text-gray-400">QR Value</div>
                         </div>
                     </motion.div>
                 </motion.div>

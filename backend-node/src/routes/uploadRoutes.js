@@ -1,8 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const uploadController = require("../controllers/uploadController");
-const { authenticate } = require("../middleware/auth");
+const { authenticate, optionalAuth } = require("../middleware/auth");
 const { logActivity } = require("../middleware/activityLogger");
+
+/**
+ * @route   POST /api/upload/image
+ * @desc    Upload a single image (for testimonials, client logos - no auth required for testimonials)
+ * @access  Public (rate limited)
+ */
+router.post(
+  "/image",
+  uploadController.handleSingleUpload,
+  uploadController.uploadImage,
+);
 
 /**
  * @route   POST /api/upload/images

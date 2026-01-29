@@ -368,7 +368,7 @@ export default function ProjectForm() {
               </div>
 
               <div>
-                <Label htmlFor="category">Category *</Label>
+                <Label htmlFor="category">Category</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value) => handleChange("category", value)}
@@ -378,7 +378,7 @@ export default function ProjectForm() {
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.name}>
+                      <SelectItem key={cat.id} value={cat.slug}>
                         {cat.name}
                       </SelectItem>
                     ))}
@@ -433,7 +433,7 @@ export default function ProjectForm() {
                   }
                 />
                 <Label htmlFor="featured" className="cursor-pointer">
-                  Featured project (displayed on homepage)
+                  Featured project (displayed on Projects page)
                 </Label>
               </div>
             </div>

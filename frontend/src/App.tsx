@@ -31,6 +31,8 @@ const AdminProjectView = lazy(() => import("./pages/admin/AdminProjectView"));
 const ProjectForm = lazy(() => import("./pages/admin/ProjectForm"));
 const AdminMessages = lazy(() => import("./pages/admin/AdminMessages"));
 const AdminMessageView = lazy(() => import("./pages/admin/AdminMessageView"));
+const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
+const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 
 const queryClient = new QueryClient({
@@ -134,6 +136,22 @@ const App = () => (
                   element={
                     <ProtectedRoute>
                       <AdminMessageView />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/clients"
+                  element={
+                    <ProtectedRoute>
+                      <AdminClients />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/testimonials"
+                  element={
+                    <ProtectedRoute>
+                      <AdminTestimonials />
                     </ProtectedRoute>
                   }
                 />

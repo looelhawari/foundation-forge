@@ -25,6 +25,8 @@ import {
   ChevronRight,
   Building2,
   Home,
+  Users,
+  Star,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -34,6 +36,8 @@ interface AdminLayoutProps {
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Projects", href: "/admin/projects", icon: FolderKanban },
+  { name: "Clients", href: "/admin/clients", icon: Users },
+  { name: "Testimonials", href: "/admin/testimonials", icon: Star },
   { name: "Messages", href: "/admin/messages", icon: MessageSquare },
   { name: "Settings", href: "/admin/settings", icon: Settings },
 ];

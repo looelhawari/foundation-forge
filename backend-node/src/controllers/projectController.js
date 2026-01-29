@@ -392,7 +392,7 @@ const getCategories = asyncHandler(async (req, res) => {
   const [categories] = await pool.execute(
     `SELECT c.*, COUNT(p.id) as project_count
      FROM categories c
-     LEFT JOIN projects p ON p.category = c.name AND p.status != 'archived'
+     LEFT JOIN projects p ON p.category = c.slug AND p.status != 'archived'
      WHERE c.is_active = TRUE
      GROUP BY c.id
      ORDER BY c.display_order ASC`,

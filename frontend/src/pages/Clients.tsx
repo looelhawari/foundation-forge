@@ -4,7 +4,7 @@
   useTransform,
   AnimatePresence,
 } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { Header } from "@/components/layout/Header";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
@@ -25,7 +25,25 @@ import {
   Landmark,
   Award,
   CheckCircle2,
+  Star,
+  Upload,
+  Loader2,
+  Send,
+  User,
 } from "lucide-react";
+import {
+  clientsApi,
+  testimonialsApi,
+  Client,
+  Testimonial,
+  TestimonialFormData,
+  uploadApi,
+} from "@/lib/api";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 import heroImage from "@/assets/hero-construction.jpg";
 import moelogo from "@/assets/MOE-removebg-preview.png";
 import fifaLogo from "@/assets/FIFA-removebg-preview.png";
@@ -39,6 +57,21 @@ import fbaLogo from "@/assets/FBA real estate.png";
 import imalcoLogo from "@/assets/imalco.png";
 import qnieLogo from "@/assets/qnie.png";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+
+// Map for legacy logo imports
+const logoImportMap: Record<string, string> = {
+  "Ministry of Education": moelogo,
+  "Ministry of Waqif": waqifLogo,
+  "Qatar Museums": museumLogo,
+  "Ministry of Ashghal": ashghaalLogo,
+  "FIFA World Cup Qatar 2022": fifaLogo,
+  "DHL Qatar": dhlLogo,
+  "Al Meera": meeraLogo,
+  IMALCO: imalcoLogo,
+  "Ariane Real Estate": arianeLogo,
+  "FBA Real Estate": fbaLogo,
+  QNIE: qnieLogo,
+};
 
 const clientCategories = [
   {
@@ -166,36 +199,6 @@ const clientCategories = [
       },
       { name: "Sheikh Abdulla Jasim Al-Thani", projects: 1, value: "179K QR" },
     ],
-  },
-];
-
-const testimonials = [
-  {
-    id: 1,
-    quote:
-      "CPC Qatar delivered exceptional quality on our school parking infrastructure project. Their attention to detail and commitment to timely completion made them an invaluable partner for our educational facilities development.",
-    author: "Project Management Team",
-    position: "Infrastructure Division",
-    company: "Ministry of Education",
-    logo: moelogo,
-  },
-  {
-    id: 2,
-    quote:
-      "Working with Cosmo Projects has been outstanding. Their expertise in road construction and asphalt works is unmatched. They successfully completed our museum access roads project with excellent workmanship and professionalism.",
-    author: "Development Department",
-    position: "Project Coordinators",
-    company: "Qatar Museums",
-    logo: museumLogo,
-  },
-  {
-    id: 3,
-    quote:
-      "The professionalism and quality of work from CPC Qatar is remarkable. They completed our FIFA World Cup parking infrastructure ahead of schedule, demonstrating their capability to handle large-scale projects.",
-    author: "Infrastructure Team",
-    position: "Operations Division",
-    company: "FIFA World Cup Qatar 2022",
-    logo: fifaLogo,
   },
 ];
 
@@ -801,6 +804,9 @@ function ClientCategoriesSection() {
 
 function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSubmitForm, setShowSubmitForm] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -810,12 +816,49 @@ function TestimonialsSection() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const rotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
 
+  // Fetch approved testimonials
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await testimonialsApi.getApproved({ limit: 10 });
+        if (response.data && response.data.length > 0) {
+          setTestimonials(response.data);
+        } else {
+          // No testimonials in database - show empty state
+          setTestimonials([]);
+        }
+      } catch {
+        // Error fetching - show empty state
+        setTestimonials([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchTestimonials();
+  }, []);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 7000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
+
+  const renderStars = (rating: number) => (
+    <div className="flex items-center justify-center gap-1 mb-4">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          className={`h-5 w-5 ${
+            i < rating
+              ? "fill-yellow-500 text-yellow-500"
+              : "text-muted-foreground/30"
+          }`}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <section
@@ -854,88 +897,428 @@ function TestimonialsSection() {
           </div>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
-          <div className="relative min-h-[400px]">
-            {testimonials.map((testimonial, index) => {
-              const testimonialClassName =
-                index === activeIndex
-                  ? "absolute inset-0 pointer-events-auto"
-                  : "absolute inset-0 pointer-events-none";
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : testimonials.length === 0 ? (
+          <div className="max-w-2xl mx-auto text-center py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-gradient-card border border-border rounded-3xl p-12"
+            >
+              <div className="text-6xl mb-6">💬</div>
+              <h3 className="font-display text-2xl mb-4">No Testimonials Yet</h3>
+              <p className="text-muted-foreground mb-8">
+                Be the first to share your experience working with CPC Qatar!
+                Your feedback helps us improve and showcases our commitment to excellence.
+              </p>
+              <Button
+                onClick={() => setShowSubmitForm(true)}
+                size="lg"
+                className="px-8"
+              >
+                <Send className="h-4 w-4 mr-2" />
+                Submit Your Testimonial
+              </Button>
+            </motion.div>
+          </div>
+        ) : (
+          <div className="max-w-5xl mx-auto">
+            <div className="relative min-h-[400px]">
+              {testimonials.map((testimonial, index) => {
+                const testimonialClassName =
+                  index === activeIndex
+                    ? "absolute inset-0 pointer-events-auto"
+                    : "absolute inset-0 pointer-events-none";
 
-              return (
-                <motion.div
-                  key={testimonial.id}
-                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                  animate={{
-                    opacity: index === activeIndex ? 1 : 0,
-                    scale: index === activeIndex ? 1 : 0.9,
-                    y: index === activeIndex ? 0 : 30,
-                  }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className={testimonialClassName}
-                >
-                  <TiltCard className="h-full">
-                    <div className="bg-gradient-card border border-border rounded-3xl p-8 md:p-12 h-full flex flex-col">
-                      <div className="flex justify-center mb-8">
-                        <motion.div
-                          initial={{ scale: 0, rotate: -180 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          transition={{ delay: 0.2, type: "spring" }}
-                          className="h-16 w-32 flex items-center justify-center"
-                        >
-                          {testimonial.logo && (
-                            <img
-                              src={testimonial.logo}
-                              alt={testimonial.company}
-                              className="max-h-full w-auto object-contain"
-                            />
+                return (
+                  <motion.div
+                    key={testimonial.id}
+                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                    animate={{
+                      opacity: index === activeIndex ? 1 : 0,
+                      scale: index === activeIndex ? 1 : 0.9,
+                      y: index === activeIndex ? 0 : 30,
+                    }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className={testimonialClassName}
+                  >
+                    <TiltCard className="h-full">
+                      <div className="bg-gradient-card border border-border rounded-3xl p-8 md:p-12 h-full flex flex-col">
+                        <div className="flex justify-center mb-8">
+                          <motion.div
+                            initial={{ scale: 0, rotate: -180 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{ delay: 0.2, type: "spring" }}
+                            className="h-16 w-32 flex items-center justify-center"
+                          >
+                            {testimonial.company_logo && (
+                              <img
+                                src={testimonial.company_logo}
+                                alt={testimonial.company_name || ""}
+                                className="max-h-full w-auto object-contain"
+                              />
+                            )}
+                          </motion.div>
+                        </div>
+
+                        {renderStars(testimonial.rating)}
+
+                        <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-center flex-1 mb-8">
+                          "{testimonial.content}"
+                        </p>
+
+                        <div className="text-center pt-8 border-t border-border">
+                          <div className="font-display text-xl tracking-wide mb-1">
+                            {testimonial.client_name}
+                          </div>
+                          {testimonial.position && (
+                            <div className="text-sm text-muted-foreground">
+                              {testimonial.position}
+                            </div>
                           )}
-                        </motion.div>
-                      </div>
-
-                      <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-center flex-1 mb-8">
-                        "{testimonial.quote}"
-                      </p>
-
-                      <div className="text-center pt-8 border-t border-border">
-                        <div className="font-display text-xl tracking-wide mb-1">
-                          {testimonial.author}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {testimonial.position}
-                        </div>
-                        <div className="text-sm text-primary mt-1">
-                          {testimonial.company}
+                          {testimonial.company_name && (
+                            <div className="text-sm text-primary mt-1">
+                              {testimonial.company_name}
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
-                  </TiltCard>
-                </motion.div>
-              );
-            })}
+                    </TiltCard>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <div className="flex justify-center gap-4 mt-12">
+              {testimonials.map((_, index) => {
+                const buttonClassName =
+                  index === activeIndex
+                    ? "w-3 h-3 rounded-full transition-all duration-500 bg-primary w-12"
+                    : "w-3 h-3 rounded-full transition-all duration-500 bg-muted-foreground/30 hover:bg-muted-foreground/50";
+
+                return (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={buttonClassName}
+                  />
+                );
+              })}
+            </div>
           </div>
+        )}
 
-          <div className="flex justify-center gap-4 mt-12">
-            {testimonials.map((_, index) => {
-              const buttonClassName =
-                index === activeIndex
-                  ? "w-3 h-3 rounded-full transition-all duration-500 bg-primary w-12"
-                  : "w-3 h-3 rounded-full transition-all duration-500 bg-muted-foreground/30 hover:bg-muted-foreground/50";
+        {/* Share Your Experience Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-24 max-w-2xl mx-auto text-center"
+        >
+          <h3 className="font-display text-2xl md:text-3xl mb-4">
+            Share Your Experience
+          </h3>
+          <p className="text-muted-foreground mb-8">
+            Have you worked with CPC Qatar? We'd love to hear about your
+            experience! Your testimonial helps us improve and showcases our
+            commitment to excellence.
+          </p>
 
-              return (
-                <motion.button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: 0.9 }}
-                  className={buttonClassName}
+          <AnimatePresence mode="wait">
+            {!showSubmitForm ? (
+              <motion.div
+                key="button"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <Button
+                  onClick={() => setShowSubmitForm(true)}
+                  size="lg"
+                  className="px-8"
+                >
+                  <Send className="h-4 w-4 mr-2" />
+                  Submit Your Testimonial
+                </Button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="form"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+              >
+                <TestimonialSubmitForm
+                  onClose={() => setShowSubmitForm(false)}
                 />
-              );
-            })}
-          </div>
-        </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
+  );
+}
+
+function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
+  const [formData, setFormData] = useState<TestimonialFormData>({
+    client_name: "",
+    company_name: "",
+    position: "",
+    content: "",
+    rating: 5,
+    email: "",
+    phone: "",
+  });
+  const [companyLogo, setCompanyLogo] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("Logo file must be less than 2MB");
+        return;
+      }
+      setCompanyLogo(file);
+      const reader = new FileReader();
+      reader.onload = () => setLogoPreview(reader.result as string);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.client_name.trim()) {
+      toast.error("Please enter your name");
+      return;
+    }
+    if (!formData.content.trim() || formData.content.trim().length < 20) {
+      toast.error("Testimonial must be at least 20 characters");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      let logoUrl: string | undefined;
+
+      // Upload logo if provided
+      if (companyLogo) {
+        setIsUploading(true);
+        try {
+          const uploadResponse = await uploadApi.uploadImage(
+            companyLogo,
+            "testimonial",
+          );
+          logoUrl = uploadResponse.data.url;
+        } catch {
+          toast.error("Failed to upload logo. Submitting without logo.");
+        }
+        setIsUploading(false);
+      }
+
+      // Submit testimonial
+      await testimonialsApi.submit({
+        ...formData,
+        company_logo: logoUrl,
+      });
+
+      toast.success(
+        "Thank you! Your testimonial has been submitted for review.",
+      );
+      onClose();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to submit testimonial";
+      toast.error(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <motion.form
+      onSubmit={handleSubmit}
+      className="bg-gradient-card border border-border rounded-2xl p-6 md:p-8 text-left"
+    >
+      <div className="grid gap-4">
+        {/* Name and Company */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="client_name">Your Name *</Label>
+            <Input
+              id="client_name"
+              placeholder="John Doe"
+              value={formData.client_name}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  client_name: e.target.value,
+                }))
+              }
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="company_name">Company Name</Label>
+            <Input
+              id="company_name"
+              placeholder="Your Company"
+              value={formData.company_name}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  company_name: e.target.value,
+                }))
+              }
+            />
+          </div>
+        </div>
+
+        {/* Position and Email */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="position">Your Position</Label>
+            <Input
+              id="position"
+              placeholder="Project Manager"
+              value={formData.position}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, position: e.target.value }))
+              }
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email (Optional)</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="your@email.com"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
+              }
+            />
+          </div>
+        </div>
+
+        {/* Company Logo */}
+        <div className="space-y-2">
+          <Label>Company Logo (Optional)</Label>
+          <div className="flex items-center gap-4">
+            <label className="flex items-center gap-2 px-4 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
+              <Upload className="h-4 w-4" />
+              <span className="text-sm">Upload Logo</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleLogoChange}
+                className="hidden"
+              />
+            </label>
+            {logoPreview && (
+              <div className="h-12 w-12 rounded border overflow-hidden bg-white">
+                <img
+                  src={logoPreview}
+                  alt="Logo preview"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Max 2MB. PNG or JPG recommended.
+          </p>
+        </div>
+
+        {/* Rating */}
+        <div className="space-y-2">
+          <Label>Rating</Label>
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                onClick={() =>
+                  setFormData((prev) => ({ ...prev, rating: star }))
+                }
+                className="p-1 hover:scale-110 transition-transform"
+              >
+                <Star
+                  className={`h-6 w-6 ${
+                    star <= formData.rating
+                      ? "fill-yellow-500 text-yellow-500"
+                      : "text-muted-foreground/30"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonial Content */}
+        <div className="space-y-2">
+          <Label htmlFor="content">Your Testimonial *</Label>
+          <Textarea
+            id="content"
+            placeholder="Share your experience working with CPC Qatar... (minimum 20 characters)"
+            value={formData.content}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, content: e.target.value }))
+            }
+            rows={4}
+            required
+            minLength={20}
+          />
+          <p className="text-xs text-muted-foreground text-right">
+            {formData.content.length}/2000 characters
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div className="flex gap-4 pt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onClose}
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={isSubmitting || isUploading}
+            className="flex-1"
+          >
+            {isSubmitting || isUploading ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                {isUploading ? "Uploading..." : "Submitting..."}
+              </>
+            ) : (
+              <>
+                <Send className="h-4 w-4 mr-2" />
+                Submit Testimonial
+              </>
+            )}
+          </Button>
+        </div>
+
+        <p className="text-xs text-center text-muted-foreground pt-2">
+          Your testimonial will be reviewed by our team before being published.
+          Pending reviews expire after 72 hours.
+        </p>
+      </div>
+    </motion.form>
   );
 }
 

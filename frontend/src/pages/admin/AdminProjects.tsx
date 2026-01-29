@@ -192,7 +192,7 @@ export default function AdminProjects() {
                 <SelectContent>
                   <SelectItem value="all">All Categories</SelectItem>
                   {categories.map((cat) => (
-                    <SelectItem key={cat.id} value={cat.name}>
+                    <SelectItem key={cat.id} value={cat.slug}>
                       {cat.name}
                     </SelectItem>
                   ))}

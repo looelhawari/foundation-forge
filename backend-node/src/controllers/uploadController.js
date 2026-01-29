@@ -1,11 +1,33 @@
 const {
   upload,
+  uploadSingleImage,
   deleteImage,
   deleteImages,
   getPublicIdFromUrl,
 } = require("../config/cloudinary");
 const { asyncHandler, ApiError, successResponse } = require("../utils/helpers");
 const logger = require("../utils/logger");
+
+/**
+ * Upload a single image (for testimonials, client logos, etc.)
+ * POST /api/upload/image
+ */
+const uploadImage = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    throw new ApiError(400, "No image uploaded");
+  }
+
+  const uploadedImage = {
+    url: req.file.path,
+    publicId: req.file.filename,
+  };
+
+  logger.info(`Single image uploaded: ${req.file.filename}`);
+
+  res
+    .status(201)
+    .json(successResponse(uploadedImage, "Image uploaded successfully"));
+});
 
 /**
  * Upload multiple images to Cloudinary
@@ -114,7 +136,10 @@ const setPosterImage = asyncHandler(async (req, res) => {
 // Multer middleware for handling multiple file uploads
 const uploadMiddleware = upload.array("images", 20);
 
-// Error handling wrapper for multer
+// Multer middleware for handling single file upload
+const uploadSingleMiddleware = upload.single("image");
+
+// Error handling wrapper for multer (multiple)
 const handleUpload = (req, res, next) => {
   uploadMiddleware(req, res, (err) => {
     if (err) {
@@ -133,11 +158,29 @@ const handleUpload = (req, res, next) => {
   });
 };
 
+// Error handling wrapper for multer (single)
+const handleSingleUpload = (req, res, next) => {
+  uploadSingleMiddleware(req, res, (err) => {
+    if (err) {
+      if (err.code === "LIMIT_FILE_SIZE") {
+        return next(new ApiError(400, "File too large. Maximum size is 10MB"));
+      }
+      if (err.message) {
+        return next(new ApiError(400, err.message));
+      }
+      return next(new ApiError(500, "Error uploading file"));
+    }
+    next();
+  });
+};
+
 module.exports = {
+  uploadImage,
   uploadImages,
   deleteSingleImage,
   deleteMultipleImages,
   setPosterImage,
   handleUpload,
+  handleSingleUpload,
   getPublicIdFromUrl,
 };
