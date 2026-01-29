@@ -71,7 +71,11 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
           >
             <img src={companyLogo} alt="Logo" className="w-32 h-32" />
           </motion.div>
-          <img src={companyLogo} alt="CPC Logo" className="w-32 h-32 relative z-10" />
+          <img
+            src={companyLogo}
+            alt="CPC Logo"
+            className="w-32 h-32 relative z-10"
+          />
         </motion.div>
 
         <motion.h2
@@ -260,7 +264,9 @@ const Projects = () => {
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {showLoadingScreen && <LoadingScreen onComplete={() => setShowLoadingScreen(false)} />}
+        {showLoadingScreen && (
+          <LoadingScreen onComplete={() => setShowLoadingScreen(false)} />
+        )}
       </AnimatePresence>
 
       <motion.div
@@ -287,367 +293,369 @@ const Projects = () => {
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8 }}
-                    className="max-w-4xl mx-auto text-center"
-                  >
-                    <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
-                      OUR <span className="text-gradient">PROJECTS</span>
-                    </h1>
-                    <p className="text-xl text-muted-foreground mb-8">
-                      Choose a category to explore our portfolio of excellence
-                    </p>
+                      className="max-w-4xl mx-auto text-center"
+                    >
+                      <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
+                        OUR <span className="text-gradient">PROJECTS</span>
+                      </h1>
+                      <p className="text-xl text-muted-foreground mb-8">
+                        Choose a category to explore our portfolio of excellence
+                      </p>
 
-                    {/* Search Bar */}
-                    <div className="max-w-md mx-auto relative">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                      <Input
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search projects..."
-                        className="pl-12 h-12 bg-card border-border text-base"
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-              </section>
+                      {/* Search Bar */}
+                      <div className="max-w-md mx-auto relative">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                        <Input
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          placeholder="Search projects..."
+                          className="pl-12 h-12 bg-card border-border text-base"
+                        />
+                      </div>
+                    </motion.div>
+                  </div>
+                </section>
 
-              {/* Stats */}
-              <section className="pb-16">
-                <div className="container mx-auto px-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-                  >
-                    <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                      <div className="font-display text-4xl text-gradient mb-2">
+                {/* Stats */}
+                <section className="pb-16">
+                  <div className="container mx-auto px-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+                    >
+                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
+                        <div className="font-display text-4xl text-gradient mb-2">
+                          {isLoading ? (
+                            <Skeleton className="h-10 w-16 mx-auto" />
+                          ) : (
+                            `${pagination?.totalItems || projects.length}+`
+                          )}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Total Projects
+                        </div>
+                      </div>
+                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
+                        <div className="font-display text-4xl text-gradient mb-2">
+                          {isCategoriesLoading ? (
+                            <Skeleton className="h-10 w-10 mx-auto" />
+                          ) : (
+                            categoriesWithCounts.length
+                          )}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Categories
+                        </div>
+                      </div>
+                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
+                        <div className="font-display text-4xl text-gradient mb-2">
+                          100%
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Success Rate
+                        </div>
+                      </div>
+                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
+                        <div className="font-display text-4xl text-gradient mb-2">
+                          15+
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Years Experience
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </section>
+
+                {/* Search Results or Category Cards */}
+                <section className="pb-24">
+                  <div className="container mx-auto px-6">
+                    {searchQuery ? (
+                      // Search Results
+                      <div>
+                        <div className="flex items-center justify-between mb-8">
+                          <h2 className="text-2xl font-display">
+                            Search Results for "{searchQuery}"
+                          </h2>
+                          <Button
+                            variant="ghost"
+                            onClick={() => setSearchQuery("")}
+                            size="sm"
+                          >
+                            Clear Search
+                          </Button>
+                        </div>
                         {isLoading ? (
-                          <Skeleton className="h-10 w-16 mx-auto" />
-                        ) : (
-                          `${pagination?.totalItems || projects.length}+`
-                        )}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Total Projects
-                      </div>
-                    </div>
-                    <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                      <div className="font-display text-4xl text-gradient mb-2">
-                        {isCategoriesLoading ? (
-                          <Skeleton className="h-10 w-10 mx-auto" />
-                        ) : (
-                          categoriesWithCounts.length
-                        )}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Categories
-                      </div>
-                    </div>
-                    <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                      <div className="font-display text-4xl text-gradient mb-2">
-                        100%
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Success Rate
-                      </div>
-                    </div>
-                    <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                      <div className="font-display text-4xl text-gradient mb-2">
-                        15+
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Years Experience
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </section>
-
-              {/* Search Results or Category Cards */}
-              <section className="pb-24">
-                <div className="container mx-auto px-6">
-                  {searchQuery ? (
-                    // Search Results
-                    <div>
-                      <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-2xl font-display">
-                          Search Results for "{searchQuery}"
-                        </h2>
-                        <Button
-                          variant="ghost"
-                          onClick={() => setSearchQuery("")}
-                          size="sm"
-                        >
-                          Clear Search
-                        </Button>
-                      </div>
-                      {isLoading ? (
-                        <ProjectSkeleton />
-                      ) : filteredProjects.length > 0 ? (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                          {filteredProjects.map((project, index) => (
-                            <motion.div
-                              key={project.id}
-                              initial={{ opacity: 0, y: 30 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                duration: 0.6,
-                                delay: index * 0.05,
-                              }}
-                            >
-                              <Link
-                                to={`/projects/${project.slug || project.id}`}
-                                className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-primary transition-all duration-300"
+                          <ProjectSkeleton />
+                        ) : filteredProjects.length > 0 ? (
+                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filteredProjects.map((project, index) => (
+                              <motion.div
+                                key={project.id}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                  duration: 0.6,
+                                  delay: index * 0.05,
+                                }}
                               >
-                                <div className="aspect-video overflow-hidden bg-muted/50 relative">
-                                  <img
-                                    src={
-                                      getPosterImage(project.images) ||
-                                      companyLogo
-                                    }
-                                    alt={project.title}
-                                    className={`w-full h-full ${
-                                      getPosterImage(project.images)
-                                        ? "object-cover group-hover:scale-110"
-                                        : "object-contain p-12 opacity-50"
-                                    } transition-transform duration-500`}
-                                    loading="lazy"
-                                    onError={(e) => {
-                                      e.currentTarget.src = companyLogo;
-                                      e.currentTarget.className =
-                                        "w-full h-full object-contain p-12 opacity-50";
-                                    }}
-                                  />
-                                </div>
-                                <div className="p-6">
-                                  <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                                    {project.title}
-                                  </h3>
-                                  <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-                                    {project.description ||
-                                      "Road construction project"}
-                                  </p>
+                                <Link
+                                  to={`/projects/${project.slug || project.id}`}
+                                  className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-primary transition-all duration-300"
+                                >
+                                  <div className="aspect-video overflow-hidden bg-muted/50 relative">
+                                    <img
+                                      src={
+                                        getPosterImage(project.images) ||
+                                        companyLogo
+                                      }
+                                      alt={project.title}
+                                      className={`w-full h-full ${
+                                        getPosterImage(project.images)
+                                          ? "object-cover group-hover:scale-110"
+                                          : "object-contain p-12 opacity-50"
+                                      } transition-transform duration-500`}
+                                      loading="lazy"
+                                      onError={(e) => {
+                                        e.currentTarget.src = companyLogo;
+                                        e.currentTarget.className =
+                                          "w-full h-full object-contain p-12 opacity-50";
+                                      }}
+                                    />
+                                  </div>
+                                  <div className="p-6">
+                                    <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                      {project.title}
+                                    </h3>
+                                    <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                                      {project.description ||
+                                        "Road construction project"}
+                                    </p>
+                                    {project.location && (
+                                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                        <MapPin className="w-3 h-3" />
+                                        {project.location}
+                                      </div>
+                                    )}
+                                  </div>
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-center py-16">
+                            <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
+                            <h3 className="text-xl font-medium mb-2">
+                              No projects found
+                            </h3>
+                            <p className="text-muted-foreground">
+                              Try a different search term
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    ) : isCategoriesLoading ? (
+                      <CategorySkeleton />
+                    ) : (
+                      // Category Cards Grid
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                        {categoriesWithCounts.map((category, index) => (
+                          <motion.button
+                            key={category.slug}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            onClick={() => setSelectedCategory(category.slug)}
+                            className="group bg-gradient-card border border-border rounded-lg p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 text-left"
+                          >
+                            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                              {categoryData[category.name]?.icon || "📁"}
+                            </div>
+                            <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors">
+                              {category.name}
+                            </h3>
+                            <p className="text-sm text-muted-foreground mb-4">
+                              {categoryData[category.name]?.description ||
+                                "Construction projects"}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs text-primary font-medium">
+                                {category.count} Project
+                                {category.count !== 1 ? "s" : ""}
+                              </span>
+                              <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                →
+                              </span>
+                            </div>
+                          </motion.button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </section>
+
+                <ContactCTA />
+              </motion.div>
+            ) : (
+              // Projects List View for Selected Category
+              <motion.div
+                key="projects"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Header */}
+                <section className="pt-32 pb-16">
+                  <div className="container mx-auto px-6">
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setSelectedCategory(null);
+                        setCurrentPage(1);
+                      }}
+                      className="mb-6"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Categories
+                    </Button>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8 }}
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="text-6xl">
+                          {categoryData[selectedCategoryObj?.name || ""]
+                            ?.icon || "📁"}
+                        </span>
+                        <div>
+                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                            {selectedCategoryObj?.name || selectedCategory}
+                          </h1>
+                          <p className="text-muted-foreground mt-2">
+                            {isLoading ? (
+                              <Skeleton className="h-5 w-24" />
+                            ) : (
+                              `${filteredProjects.length} Project${
+                                filteredProjects.length !== 1 ? "s" : ""
+                              }`
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </section>
+
+                {/* Projects Grid */}
+                <section className="pb-24">
+                  <div className="container mx-auto px-6">
+                    {isLoading ? (
+                      <ProjectSkeleton />
+                    ) : filteredProjects.length > 0 ? (
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredProjects.map((project, index) => (
+                          <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: index * 0.05 }}
+                          >
+                            <Link
+                              to={`/projects/${project.slug || project.id}`}
+                              className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-primary transition-all duration-300"
+                            >
+                              <div className="aspect-video overflow-hidden bg-muted/50 relative">
+                                <img
+                                  src={
+                                    getPosterImage(project.images) ||
+                                    companyLogo
+                                  }
+                                  alt={project.title}
+                                  className={`w-full h-full ${
+                                    getPosterImage(project.images)
+                                      ? "object-cover group-hover:scale-110"
+                                      : "object-contain p-12 opacity-50"
+                                  } transition-transform duration-500`}
+                                  loading="lazy"
+                                  onError={(e) => {
+                                    e.currentTarget.src = companyLogo;
+                                    e.currentTarget.className =
+                                      "w-full h-full object-contain p-12 opacity-50";
+                                  }}
+                                />
+                              </div>
+                              <div className="p-6">
+                                <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                  {project.title}
+                                </h3>
+                                <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                                  {project.description ||
+                                    "Road construction project"}
+                                </p>
+                                <div className="flex items-center justify-between">
                                   {project.location && (
                                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                       <MapPin className="w-3 h-3" />
                                       {project.location}
                                     </div>
                                   )}
+                                  {project.year && (
+                                    <span className="text-xs text-primary">
+                                      {project.year}
+                                    </span>
+                                  )}
                                 </div>
-                              </Link>
-                            </motion.div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-16">
-                          <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
-                          <h3 className="text-xl font-medium mb-2">
-                            No projects found
-                          </h3>
-                          <p className="text-muted-foreground">
-                            Try a different search term
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ) : isCategoriesLoading ? (
-                    <CategorySkeleton />
-                  ) : (
-                    // Category Cards Grid
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                      {categoriesWithCounts.map((category, index) => (
-                        <motion.button
-                          key={category.slug}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5, delay: index * 0.1 }}
-                          onClick={() => setSelectedCategory(category.slug)}
-                          className="group bg-gradient-card border border-border rounded-lg p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 text-left"
-                        >
-                          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                            {categoryData[category.name]?.icon || "📁"}
-                          </div>
-                          <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors">
-                            {category.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground mb-4">
-                            {categoryData[category.name]?.description ||
-                              "Construction projects"}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-primary font-medium">
-                              {category.count} Project
-                              {category.count !== 1 ? "s" : ""}
-                            </span>
-                            <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                              →
-                            </span>
-                          </div>
-                        </motion.button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </section>
-
-              <ContactCTA />
-            </motion.div>
-          ) : (
-            // Projects List View for Selected Category
-            <motion.div
-              key="projects"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Header */}
-              <section className="pt-32 pb-16">
-                <div className="container mx-auto px-6">
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      setSelectedCategory(null);
-                      setCurrentPage(1);
-                    }}
-                    className="mb-6"
-                  >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Categories
-                  </Button>
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="text-6xl">
-                        {categoryData[selectedCategoryObj?.name || ""]?.icon ||
-                          "📁"}
-                      </span>
-                      <div>
-                        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
-                          {selectedCategoryObj?.name || selectedCategory}
-                        </h1>
-                        <p className="text-muted-foreground mt-2">
-                          {isLoading ? (
-                            <Skeleton className="h-5 w-24" />
-                          ) : (
-                            `${filteredProjects.length} Project${
-                              filteredProjects.length !== 1 ? "s" : ""
-                            }`
-                          )}
+                              </div>
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-16">
+                        <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
+                        <h3 className="text-xl font-medium mb-2">
+                          No projects yet
+                        </h3>
+                        <p className="text-muted-foreground">
+                          Projects in this category will appear here
                         </p>
                       </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </section>
+                    )}
 
-              {/* Projects Grid */}
-              <section className="pb-24">
-                <div className="container mx-auto px-6">
-                  {isLoading ? (
-                    <ProjectSkeleton />
-                  ) : filteredProjects.length > 0 ? (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {filteredProjects.map((project, index) => (
-                        <motion.div
-                          key={project.id}
-                          initial={{ opacity: 0, y: 30 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: index * 0.05 }}
+                    {/* Pagination */}
+                    {pagination && pagination.totalPages > 1 && (
+                      <div className="flex justify-center gap-2 mt-12">
+                        <Button
+                          variant="outline"
+                          disabled={!pagination.hasPrevPage}
+                          onClick={() => setCurrentPage((p) => p - 1)}
                         >
-                          <Link
-                            to={`/projects/${project.slug || project.id}`}
-                            className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-primary transition-all duration-300"
-                          >
-                            <div className="aspect-video overflow-hidden bg-muted/50 relative">
-                              <img
-                                src={
-                                  getPosterImage(project.images) || companyLogo
-                                }
-                                alt={project.title}
-                                className={`w-full h-full ${
-                                  getPosterImage(project.images)
-                                    ? "object-cover group-hover:scale-110"
-                                    : "object-contain p-12 opacity-50"
-                                } transition-transform duration-500`}
-                                loading="lazy"
-                                onError={(e) => {
-                                  e.currentTarget.src = companyLogo;
-                                  e.currentTarget.className =
-                                    "w-full h-full object-contain p-12 opacity-50";
-                                }}
-                              />
-                            </div>
-                            <div className="p-6">
-                              <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                                {project.title}
-                              </h3>
-                              <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-                                {project.description ||
-                                  "Road construction project"}
-                              </p>
-                              <div className="flex items-center justify-between">
-                                {project.location && (
-                                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <MapPin className="w-3 h-3" />
-                                    {project.location}
-                                  </div>
-                                )}
-                                {project.year && (
-                                  <span className="text-xs text-primary">
-                                    {project.year}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-16">
-                      <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
-                      <h3 className="text-xl font-medium mb-2">
-                        No projects yet
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Projects in this category will appear here
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Pagination */}
-                  {pagination && pagination.totalPages > 1 && (
-                    <div className="flex justify-center gap-2 mt-12">
-                      <Button
-                        variant="outline"
-                        disabled={!pagination.hasPrevPage}
-                        onClick={() => setCurrentPage((p) => p - 1)}
-                      >
-                        Previous
-                      </Button>
-                      <span className="flex items-center px-4 text-sm text-muted-foreground">
-                        Page {pagination.currentPage} of {pagination.totalPages}
-                      </span>
-                      <Button
-                        variant="outline"
-                        disabled={!pagination.hasNextPage}
-                        onClick={() => setCurrentPage((p) => p + 1)}
-                      >
-                        Next
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </section>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-      <Footer />
+                          Previous
+                        </Button>
+                        <span className="flex items-center px-4 text-sm text-muted-foreground">
+                          Page {pagination.currentPage} of{" "}
+                          {pagination.totalPages}
+                        </span>
+                        <Button
+                          variant="outline"
+                          disabled={!pagination.hasNextPage}
+                          onClick={() => setCurrentPage((p) => p + 1)}
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+        <Footer />
       </motion.div>
     </div>
   );

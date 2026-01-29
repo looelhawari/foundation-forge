@@ -909,10 +909,13 @@ function TestimonialsSection() {
               className="bg-gradient-card border border-border rounded-3xl p-12"
             >
               <div className="text-6xl mb-6">💬</div>
-              <h3 className="font-display text-2xl mb-4">No Testimonials Yet</h3>
+              <h3 className="font-display text-2xl mb-4">
+                No Testimonials Yet
+              </h3>
               <p className="text-muted-foreground mb-8">
                 Be the first to share your experience working with CPC Qatar!
-                Your feedback helps us improve and showcases our commitment to excellence.
+                Your feedback helps us improve and showcases our commitment to
+                excellence.
               </p>
               <Button
                 onClick={() => setShowSubmitForm(true)}
