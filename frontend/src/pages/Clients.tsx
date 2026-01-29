@@ -427,8 +427,6 @@ export default function Clients() {
         <ScrollProgress />
         <MinimalHeader />
         <main>
-          <HeroSection />
-          <StatsBanner />
           <ClientCategoriesSection />
           <TestimonialsSection />
           <WhyChooseSection />
@@ -867,8 +865,8 @@ function TestimonialsSection() {
         <Star
           key={i}
           className={`h-5 w-5 ${i < rating
-              ? "fill-yellow-500 text-yellow-500"
-              : "text-muted-foreground/30"
+            ? "fill-yellow-500 text-yellow-500"
+            : "text-muted-foreground/30"
             }`}
         />
       ))}
@@ -964,44 +962,45 @@ function TestimonialsSection() {
                     className={testimonialClassName}
                   >
                     <TiltCard className="h-full">
-                      <div className="bg-gradient-card border border-border rounded-3xl p-8 md:p-12 h-full flex flex-col">
-                        <div className="flex justify-center mb-8">
-                          <motion.div
-                            initial={{ scale: 0, rotate: -180 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: 0.2, type: "spring" }}
-                            className="h-16 w-32 flex items-center justify-center"
-                          >
-                            {testimonial.company_logo && (
-                              <img
-                                src={testimonial.company_logo}
-                                alt={testimonial.company_name || ""}
-                                className="max-h-full w-auto object-contain"
-                              />
-                            )}
-                          </motion.div>
+                      <div className="bg-gradient-card border border-border rounded-2xl p-8 md:p-12 h-full flex flex-col">
+                        {/* Rating */}
+                        <div className="flex gap-1 mb-8">
+                          {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
+                            <motion.svg
+                              key={i}
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.1 }}
+                              className="w-5 h-5 text-primary fill-primary"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </motion.svg>
+                          ))}
                         </div>
 
-                        {renderStars(testimonial.rating)}
-
-                        <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-center flex-1 mb-8">
+                        {/* Quote */}
+                        <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed flex-1">
                           "{testimonial.content}"
                         </p>
 
-                        <div className="text-center pt-8 border-t border-border">
-                          <div className="font-display text-xl tracking-wide mb-1">
-                            {testimonial.client_name}
-                          </div>
-                          {testimonial.position && (
+                        {/* Author */}
+                        <div className="mt-8 pt-8 border-t border-border flex items-center gap-6">
+                          {testimonial.company_logo && (
+                            <div className="w-16 h-16 flex items-center justify-center">
+                              <img
+                                src={testimonial.company_logo}
+                                alt={testimonial.company_name || ""}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <div className="font-display text-xl tracking-wide">{testimonial.client_name}</div>
                             <div className="text-sm text-muted-foreground">
-                              {testimonial.position}
+                              {testimonial.position}{testimonial.company_name && ` • ${testimonial.company_name}`}
                             </div>
-                          )}
-                          {testimonial.company_name && (
-                            <div className="text-sm text-primary mt-1">
-                              {testimonial.company_name}
-                            </div>
-                          )}
+                          </div>
                         </div>
                       </div>
                     </TiltCard>
@@ -1011,22 +1010,27 @@ function TestimonialsSection() {
             </div>
 
             <div className="flex justify-center gap-4 mt-12">
-              {testimonials.map((_, index) => {
-                const buttonClassName =
-                  index === activeIndex
-                    ? "w-3 h-3 rounded-full transition-all duration-500 bg-primary w-12"
-                    : "w-3 h-3 rounded-full transition-all duration-500 bg-muted-foreground/30 hover:bg-muted-foreground/50";
-
-                return (
-                  <motion.button
-                    key={index}
-                    onClick={() => setActiveIndex(index)}
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={buttonClassName}
-                  />
-                );
-              })}
+              {testimonials.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`relative w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
+                    ? "bg-primary"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    }`}
+                >
+                  {index === activeIndex && (
+                    <motion.div
+                      layoutId="activeTestimonialClient"
+                      className="absolute inset-0 rounded-full bg-primary"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                </motion.button>
+              ))}
             </div>
           </div>
         )}
@@ -1273,8 +1277,8 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
               >
                 <Star
                   className={`h-6 w-6 ${star <= formData.rating
-                      ? "fill-yellow-500 text-yellow-500"
-                      : "text-muted-foreground/30"
+                    ? "fill-yellow-500 text-yellow-500"
+                    : "text-muted-foreground/30"
                     }`}
                 />
               </button>
