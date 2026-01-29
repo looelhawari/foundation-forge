@@ -24,16 +24,18 @@ const clients = [
     { name: "QNIE", logo: qnieLogo },
 ];
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 // Infinite scroll with magnetic effect
 export function ClientLogosShowcase() {
-    const baseVelocity = -2;
+    const baseVelocity = -1.5; // Slightly slower for smoother animation
     const baseX = useMotionValue(0);
-    const scrollVelocity = useMotionValue(baseVelocity);
     const x = useTransform(baseX, (v) => `${v}%`);
 
     const directionFactor = useRef(1);
 
     useAnimationFrame((t, delta) => {
+        // Throttle animation updates for better performance
         let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
         if (baseX.get() <= -50) {
@@ -45,9 +47,9 @@ export function ClientLogosShowcase() {
 
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
-            {/* Animated grid background */}
+            {/* Static grid background - removed animation for performance */}
             <div className="absolute inset-0 opacity-5">
-                <motion.div
+                <div
                     className="h-full w-full"
                     style={{
                         backgroundImage: `
@@ -56,28 +58,24 @@ export function ClientLogosShowcase() {
             `,
                         backgroundSize: "100px 100px"
                     }}
-                    animate={{
-                        backgroundPosition: ["0px 0px", "100px 100px"]
-                    }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 mb-12 md:mb-16">
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-50px" }}
                     className="text-center"
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 px-4">
                         Trusted By <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Industry Leaders</span>
                     </h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
-                        transition={{ delay: 0.3, duration: 1 }}
+                        transition={{ delay: 0.2, duration: 0.8 }}
                         viewport={{ once: true }}
                         className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
@@ -89,6 +87,9 @@ export function ClientLogosShowcase() {
 
             {/* Infinite scrolling logos */}
             <div className="relative h-32 sm:h-40 md:h-48 flex items-center">
+                {/* Light background strip for logo visibility */}
+                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-28 sm:h-36 md:h-44 bg-gradient-to-r from-transparent via-gray-100/90 to-transparent" />
+
                 <motion.div
                     className="flex gap-12 sm:gap-16 md:gap-20 absolute"
                     style={{ x }}
@@ -96,12 +97,12 @@ export function ClientLogosShowcase() {
                     {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
                         <div
                             key={index}
-                            className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex items-center justify-center"
+                            className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex items-center justify-center p-4 rounded-xl"
                         >
                             <img
                                 src={client.logo}
                                 alt={client.name}
-                                className="w-full h-full object-contain opacity-70"
+                                className="w-full h-full object-contain drop-shadow-md"
                             />
                         </div>
                     ))}
@@ -119,7 +120,7 @@ export function ClientLogosShowcase() {
                 <div className="flex justify-center gap-8 sm:gap-12 flex-wrap">
                     {[
                         { number: "45+", label: "Major Clients" },
-                        { number: "26M+", label: "QR Total Value" },
+                        { number: "57+", label: "Projects Delivered" },
                         { number: "100%", label: "Satisfaction Rate" }
                     ].map((stat, index) => (
                         <motion.div

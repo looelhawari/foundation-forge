@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { MorphingBlob, TiltCard } from "../animations/MotionGraphics";
 import moelogo from "@/assets/MOE-removebg-preview.png";
@@ -59,57 +59,75 @@ export const ImmersiveTestimonials = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+  // Simplified parallax - only on desktop
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [50, -50]);
+
+  // Marquee animation using motion values
+  const marqueeX = useMotionValue(0);
+  const marqueeTransform = useTransform(marqueeX, (v) => `${v}%`);
+
+  useAnimationFrame((_, delta) => {
+    // Move left continuously - slow and smooth
+    const moveBy = -0.015 * (delta / 16.67); // Slow speed normalized for frame time
+    let newX = marqueeX.get() + moveBy;
+
+    // Reset when moved 50% (since we duplicate the array)
+    if (newX <= -50) {
+      newX = 0;
+    }
+
+    marqueeX.set(newX);
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section ref={containerRef} className="relative py-32 md:py-48 bg-background overflow-hidden">
-      {/* Background elements */}
-      <MorphingBlob className="w-[600px] h-[600px] -top-48 -right-48" />
-      <MorphingBlob className="w-[400px] h-[400px] bottom-0 -left-48" />
+    <section ref={containerRef} className="relative py-24 md:py-32 bg-background overflow-hidden">
+      {/* Background elements - only on desktop */}
+      {!isMobile && (
+        <>
+          <MorphingBlob className="w-[500px] h-[500px] -top-48 -right-48" />
+          <MorphingBlob className="w-[350px] h-[350px] bottom-0 -left-48" />
+        </>
+      )}
 
-      {/* Animated quote marks */}
-      <motion.div
-        style={{ y, rotate }}
-        className="absolute top-32 left-12 font-display text-[30vw] text-foreground/5 leading-none select-none pointer-events-none"
-      >
-        "
-      </motion.div>
+      {/* Animated quote marks - simplified */}
+      {!isMobile && (
+        <motion.div
+          style={{ y }}
+          className="absolute top-32 left-12 font-display text-[25vw] text-foreground/5 leading-none select-none pointer-events-none will-change-transform"
+        >
+          "
+        </motion.div>
+      )}
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
             What They Say
           </span>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
-            >
-              CLIENT <span className="text-gradient">TESTIMONIALS</span>
-            </motion.h2>
-          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
+            CLIENT <span className="text-gradient">TESTIMONIALS</span>
+          </h2>
         </motion.div>
 
         {/* Testimonials */}
@@ -206,21 +224,28 @@ export const ImmersiveTestimonials = () => {
           viewport={{ once: true }}
           className="mt-32"
         >
-          <div className="relative overflow-hidden py-8">
-            <div className="flex animate-marquee items-center">
-              {[...clients, ...clients].map((client, index) => (
+          {/* Light background strip for better logo visibility */}
+          <div className="relative overflow-hidden py-8 bg-gradient-to-r from-transparent via-white/10 to-transparent">
+            <motion.div
+              className="flex items-center"
+              style={{
+                x: marqueeTransform,
+                width: 'max-content'
+              }}
+            >
+              {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
                 <div
                   key={index}
-                  className="mx-8 md:mx-12 flex-shrink-0"
+                  className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg hover:scale-105 transition-transform"
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-12 md:h-16 w-auto object-contain"
+                    className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
                   />
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

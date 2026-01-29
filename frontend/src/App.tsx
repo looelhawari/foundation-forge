@@ -21,6 +21,7 @@ const Clients = lazy(() => import("./pages/Clients"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const Certificates = lazy(() => import("./pages/Certificates"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Lazy load Admin Pages
@@ -72,6 +73,7 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/privacy" element={<Privacy />} />
+                <Route path="/certificates" element={<Certificates />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />

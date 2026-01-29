@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -10,6 +10,109 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 import { useProjects, useCategories } from "@/hooks/useProjects";
+
+// Loading Screen Component
+function LoadingScreen({ onComplete }: { onComplete: () => void }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(onComplete, 300);
+          return 100;
+        }
+        return prev + 3.5;
+      });
+    }, 30);
+    return () => clearInterval(timer);
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Animated grid */}
+      <div className="absolute inset-0 opacity-10">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-px bg-primary"
+            style={{
+              top: `${(i + 1) * 5}%`,
+              left: 0,
+              right: 0,
+            }}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: i * 0.05, duration: 0.5 }}
+          />
+        ))}
+      </div>
+
+      {/* Central content */}
+      <div className="relative z-10 flex flex-col items-center">
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 150, damping: 20 }}
+          className="relative mb-8"
+        >
+          <motion.div
+            className="absolute inset-0 blur-2xl"
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <img src={companyLogo} alt="Logo" className="w-32 h-32" />
+          </motion.div>
+          <img src={companyLogo} alt="CPC Logo" className="w-32 h-32 relative z-10" />
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="font-display text-4xl md:text-5xl tracking-[0.3em] text-gradient mb-4"
+        >
+          PROJECTS
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-muted-foreground text-sm tracking-wider mb-8"
+        >
+          Excellence in Every Build
+        </motion.p>
+
+        <div className="w-64">
+          <div className="h-1 bg-muted-foreground/10 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary to-accent"
+              style={{ width: `${progress}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+          <motion.div
+            className="mt-2 text-center text-sm text-primary font-medium"
+            key={Math.floor(progress)}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {Math.floor(progress)}%
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 // Category data with icons and descriptions
 const categoryData: Record<string, { icon: string; description: string }> = {
@@ -44,6 +147,7 @@ const categoryData: Record<string, { icon: string; description: string }> = {
 };
 
 const Projects = () => {
+  const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -155,25 +259,34 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <AnimatePresence mode="wait">
-          {!selectedCategory ? (
-            // Categories Grid View
-            <motion.div
-              key="categories"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Hero Section */}
-              <section className="pt-32 pb-16">
-                <div className="container mx-auto px-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+      <AnimatePresence mode="wait">
+        {showLoadingScreen && <LoadingScreen onComplete={() => setShowLoadingScreen(false)} />}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showLoadingScreen ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Header />
+        <main>
+          <AnimatePresence mode="wait">
+            {!selectedCategory ? (
+              // Categories Grid View
+              <motion.div
+                key="categories"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Hero Section */}
+                <section className="pt-32 pb-16">
+                  <div className="container mx-auto px-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8 }}
                     className="max-w-4xl mx-auto text-center"
                   >
                     <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
@@ -535,6 +648,7 @@ const Projects = () => {
         </AnimatePresence>
       </main>
       <Footer />
+      </motion.div>
     </div>
   );
 };
