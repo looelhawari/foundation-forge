@@ -118,36 +118,22 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-// Category data with icons and descriptions
+// Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
 const categoryData: Record<string, { icon: string; description: string }> = {
-  Educational: { icon: "🎓", description: "Schools & Educational Facilities" },
-  Religious: { icon: "🕌", description: "Mosques & Religious Buildings" },
-  "Commercial & Retail": {
-    icon: "🏪",
-    description: "Shopping Centers & Retail Spaces",
+  School: { icon: "🎓", description: "Educational Facilities & Schools" },
+  Mosque: { icon: "🕌", description: "Religious Buildings & Mosques" },
+  "Commercial Building": {
+    icon: "🏢",
+    description: "Commercial & Residential Buildings",
   },
-  Residential: { icon: "🏘️", description: "Housing & Residential Compounds" },
-  Industrial: { icon: "🏭", description: "Factories & Industrial Facilities" },
-  "Logistics & Warehouse": {
-    icon: "📦",
-    description: "Warehouses & Storage Facilities",
+  "Stores and Factory": {
+    icon: "🏭",
+    description: "Warehouses, Factories & Storage Facilities",
   },
-  "Public Infrastructure": {
+  "Public Project": {
     icon: "🏗️",
-    description: "Roads, Parking & Public Works",
+    description: "Roads, Parking & Public Infrastructure",
   },
-  "Historical & Cultural": {
-    icon: "🏛️",
-    description: "Heritage & Cultural Sites",
-  },
-  "Road Work": { icon: "🛣️", description: "Road Construction & Maintenance" },
-  Parking: { icon: "🅿️", description: "Parking Areas & Facilities" },
-  Farm: { icon: "🌾", description: "Agricultural Facilities" },
-  Commercial: { icon: "🏢", description: "Commercial Buildings" },
-  Souq: { icon: "🛒", description: "Traditional Markets & Souqs" },
-  FIFA: { icon: "⚽", description: "FIFA World Cup Projects" },
-  Mosques: { icon: "🕌", description: "Mosque Construction" },
-  Warehouse: { icon: "📦", description: "Warehouse Construction" },
 };
 
 const Projects = () => {
@@ -160,7 +146,7 @@ const Projects = () => {
   const { projects, isLoading, pagination } = useProjects({
     page: currentPage,
     limit: selectedCategory ? 50 : 100, // Fetch more when viewing category
-    category: selectedCategory || undefined,
+    category: selectedCategory || undefined, // selectedCategory now stores the name
     search: searchQuery || undefined,
   });
 
@@ -170,7 +156,7 @@ const Projects = () => {
   // Get selected category object for display
   const selectedCategoryObj = useMemo(() => {
     if (!selectedCategory || !categories) return null;
-    return categories.find((cat) => cat.slug === selectedCategory);
+    return categories.find((cat) => cat.name === selectedCategory);
   }, [selectedCategory, categories]);
 
   // Get unique categories with project counts from the data
@@ -412,11 +398,10 @@ const Projects = () => {
                                         companyLogo
                                       }
                                       alt={project.title}
-                                      className={`w-full h-full ${
-                                        getPosterImage(project.images)
+                                      className={`w-full h-full ${getPosterImage(project.images)
                                           ? "object-cover group-hover:scale-110"
                                           : "object-contain p-12 opacity-50"
-                                      } transition-transform duration-500`}
+                                        } transition-transform duration-500`}
                                       loading="lazy"
                                       onError={(e) => {
                                         e.currentTarget.src = companyLogo;
@@ -463,11 +448,11 @@ const Projects = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                         {categoriesWithCounts.map((category, index) => (
                           <motion.button
-                            key={category.slug}
+                            key={category.slug || category.name}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            onClick={() => setSelectedCategory(category.slug)}
+                            onClick={() => setSelectedCategory(category.name)}
                             className="group bg-gradient-card border border-border rounded-lg p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 text-left"
                           >
                             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -539,8 +524,7 @@ const Projects = () => {
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />
                             ) : (
-                              `${filteredProjects.length} Project${
-                                filteredProjects.length !== 1 ? "s" : ""
+                              `${filteredProjects.length} Project${filteredProjects.length !== 1 ? "s" : ""
                               }`
                             )}
                           </p>
@@ -575,11 +559,10 @@ const Projects = () => {
                                     companyLogo
                                   }
                                   alt={project.title}
-                                  className={`w-full h-full ${
-                                    getPosterImage(project.images)
+                                  className={`w-full h-full ${getPosterImage(project.images)
                                       ? "object-cover group-hover:scale-110"
                                       : "object-contain p-12 opacity-50"
-                                  } transition-transform duration-500`}
+                                    } transition-transform duration-500`}
                                   loading="lazy"
                                   onError={(e) => {
                                     e.currentTarget.src = companyLogo;

@@ -30,7 +30,7 @@ const getApprovedTestimonials = asyncHandler(async (req, res) => {
 
   if (limit) {
     query += " LIMIT ?";
-    values.push(parseInt(limit));
+    values.push(limit.toString());
   }
 
   const [testimonials] = await pool.execute(query, values);
@@ -192,7 +192,7 @@ const approveTestimonial = asyncHandler(async (req, res) => {
       is_featured = COALESCE(?, is_featured),
       expires_at = NULL
      WHERE id = ?`,
-    [req.admin.id, is_featured, id],
+    [req.admin.id, is_featured !== undefined ? is_featured : null, id],
   );
 
   const [updated] = await pool.execute(

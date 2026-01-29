@@ -58,7 +58,7 @@ import imalcoLogo from "@/assets/imalco.png";
 import qnieLogo from "@/assets/qnie.png";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
-// Map for legacy logo imports
+// Map for legacy logo imports (fallback when DB logo is null)
 const logoImportMap: Record<string, string> = {
   "Ministry of Education": moelogo,
   "Ministry of Waqif": waqifLogo,
@@ -73,134 +73,75 @@ const logoImportMap: Record<string, string> = {
   QNIE: qnieLogo,
 };
 
-const clientCategories = [
-  {
-    category: "Government Ministries",
+// Category configuration for display
+type CategoryKey = "government" | "corporate" | "industrial" | "real_estate" | "retail" | "other";
+
+interface CategoryConfig {
+  displayName: string;
+  icon: typeof Building2;
+  color: string;
+  order: number;
+}
+
+const categoryConfigMap: Record<CategoryKey, CategoryConfig> = {
+  government: {
+    displayName: "Government Ministries",
     icon: Building2,
     color: "from-blue-500/20 to-cyan-500/20",
-    clients: [
-      {
-        name: "Ministry of Education",
-        logo: moelogo,
-        projects: 5,
-        value: "4.7M QR",
-      },
-      {
-        name: "Ministry of Waqif",
-        logo: waqifLogo,
-        projects: 4,
-        value: "574K QR",
-      },
-      {
-        name: "Qatar Museums",
-        logo: museumLogo,
-        projects: 4,
-        value: "1.2M QR",
-      },
-      {
-        name: "Ministry of Ashghal",
-        logo: ashghaalLogo,
-        projects: 3,
-        value: "800K QR",
-      },
-      { name: "Ministry of Health", projects: 1, value: "154K QR" },
-    ],
+    order: 1,
   },
-  {
-    category: "Major Events & Corporations",
+  corporate: {
+    displayName: "Major Events & Corporations",
     icon: Award,
     color: "from-amber-500/20 to-orange-500/20",
-    clients: [
-      {
-        name: "FIFA World Cup Qatar 2022",
-        logo: fifaLogo,
-        projects: 1,
-        value: "736K QR",
-      },
-      { name: "DHL Qatar", logo: dhlLogo, projects: 1, value: "600K QR" },
-      { name: "Al Meera", logo: meeraLogo, projects: 1, value: "780K QR" },
-    ],
+    order: 2,
   },
-  {
-    category: "Industrial & Manufacturing",
+  industrial: {
+    displayName: "Industrial & Manufacturing",
     icon: Factory,
     color: "from-purple-500/20 to-pink-500/20",
-    clients: [
-      { name: "IMALCO", logo: imalcoLogo, projects: 1, value: "160K QR" },
-      { name: "Galva Steel Factory", projects: 1, value: "530K QR" },
-      { name: "Al Arabia Steel", projects: 1, value: "420K QR" },
-      { name: "National Foam Factory", projects: 1, value: "252K QR" },
-      { name: "Technical Bolts Factory", projects: 1, value: "260K QR" },
-      { name: "Al-Mana Precision Industries", projects: 1, value: "750K QR" },
-    ],
+    order: 3,
   },
-  {
-    category: "Educational Institutions",
-    icon: GraduationCap,
-    color: "from-green-500/20 to-emerald-500/20",
-    clients: [
-      { name: "ETQAIN International School", projects: 1, value: "434K QR" },
-      { name: "AI NOKHBA International School", projects: 1, value: "184K QR" },
-      { name: "Vancouver Offshore Schools", projects: 1, value: "434K QR" },
-    ],
-  },
-  {
-    category: "Real Estate & Development",
+  real_estate: {
+    displayName: "Real Estate & Development",
     icon: Home,
     color: "from-rose-500/20 to-red-500/20",
-    clients: [
-      { name: "Ariane Real Estate", logo: arianeLogo, projects: 1 },
-      { name: "FBA Real Estate", logo: fbaLogo, projects: 1, value: "483K QR" },
-      { name: "Hampton International", projects: 2, value: "536K QR" },
-      { name: "Brik Stone", projects: 1, value: "406K QR" },
-    ],
+    order: 4,
   },
-  {
-    category: "Commercial & Retail",
+  retail: {
+    displayName: "Commercial & Retail",
     icon: ShoppingCart,
     color: "from-yellow-500/20 to-amber-500/20",
-    clients: [
-      { name: "Cosmo Trade", projects: 4, value: "2.7M QR" },
-      { name: "Tafaual Pharmacy", projects: 1, value: "700K QR" },
-      { name: "QNIE", logo: qnieLogo, projects: 1 },
-      { name: "Arab Qatari Dairy Production", projects: 1, value: "1.5M QR" },
-    ],
+    order: 5,
   },
-  {
-    category: "Logistics & Warehousing",
-    icon: Warehouse,
-    color: "from-indigo-500/20 to-blue-500/20",
-    clients: [
-      { name: "Prime Power", projects: 1, value: "483K QR" },
-      { name: "Save Storage W.L.L", projects: 1, value: "241K QR" },
-      { name: "Lefco", projects: 1, value: "240K QR" },
-      { name: "Qatar National Import Export", projects: 1, value: "850K QR" },
-    ],
-  },
-  {
-    category: "Royal & Private Clients",
+  other: {
+    displayName: "Other Clients",
     icon: Landmark,
     color: "from-violet-500/20 to-purple-500/20",
-    clients: [
-      {
-        name: "Sheikh Khaled Bin Hammad Al Thani",
-        projects: 1,
-        value: "235K QR",
-      },
-      {
-        name: "Sheika Hamad Fahed Ali Abdullah Al Thani",
-        projects: 1,
-        value: "872K QR",
-      },
-      {
-        name: "Sheikh Hamad Bin Abdullah Al Thani",
-        projects: 1,
-        value: "135K QR",
-      },
-      { name: "Sheikh Abdulla Jasim Al-Thani", projects: 1, value: "179K QR" },
-    ],
+    order: 6,
   },
-];
+};
+
+// Interface for grouped client categories (used by ClientCategoriesSection)
+interface ClientCategory {
+  category: string;
+  categoryKey: CategoryKey;
+  icon: typeof Building2;
+  color: string;
+  clients: Array<{
+    id: number;
+    name: string;
+    logo: string | null;
+    projects: number;
+    value: string | null;
+  }>;
+}
+
+// Helper function to get client logo (DB logo or fallback to imported logo)
+const getClientLogo = (client: Client): string | null => {
+  if (client.logo) return client.logo;
+  return logoImportMap[client.name] || null;
+};
 
 const getGradientColors = (colorClass: string): string => {
   const colorMap: Record<string, string> = {
@@ -657,6 +598,81 @@ function StatsBanner() {
 
 function ClientCategoriesSection() {
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [clientCategories, setClientCategories] = useState<ClientCategory[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch clients and group by category
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await clientsApi.getAll({ active: "true" });
+        if (response.data && response.data.length > 0) {
+          // Group clients by category
+          const grouped = response.data.reduce((acc, client) => {
+            const categoryKey = (client.category || "other") as CategoryKey;
+            if (!acc[categoryKey]) {
+              acc[categoryKey] = [];
+            }
+            acc[categoryKey].push({
+              id: client.id,
+              name: client.name,
+              logo: getClientLogo(client),
+              projects: client.projects_count || 0,
+              value: client.total_value,
+            });
+            return acc;
+          }, {} as Record<CategoryKey, ClientCategory["clients"]>);
+
+          // Convert to array format and sort by order
+          const categoriesArray: ClientCategory[] = Object.entries(grouped)
+            .map(([key, clients]) => {
+              const categoryKey = key as CategoryKey;
+              const config = categoryConfigMap[categoryKey] || categoryConfigMap.other;
+              return {
+                category: config.displayName,
+                categoryKey: categoryKey,
+                icon: config.icon,
+                color: config.color,
+                clients: clients.sort((a, b) => b.projects - a.projects), // Sort by projects count
+              };
+            })
+            .sort((a, b) => {
+              const orderA = categoryConfigMap[a.categoryKey]?.order || 99;
+              const orderB = categoryConfigMap[b.categoryKey]?.order || 99;
+              return orderA - orderB;
+            });
+
+          setClientCategories(categoriesArray);
+        }
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchClients();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="py-32 md:py-48 relative overflow-hidden">
+        <div className="container mx-auto px-6 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </section>
+    );
+  }
+
+  if (clientCategories.length === 0) {
+    return (
+      <section className="py-32 md:py-48 relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-muted-foreground">No clients available at the moment.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-32 md:py-48 relative overflow-hidden">
@@ -850,11 +866,10 @@ function TestimonialsSection() {
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`h-5 w-5 ${
-            i < rating
+          className={`h-5 w-5 ${i < rating
               ? "fill-yellow-500 text-yellow-500"
               : "text-muted-foreground/30"
-          }`}
+            }`}
         />
       ))}
     </div>
@@ -1257,11 +1272,10 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
                 className="p-1 hover:scale-110 transition-transform"
               >
                 <Star
-                  className={`h-6 w-6 ${
-                    star <= formData.rating
+                  className={`h-6 w-6 ${star <= formData.rating
                       ? "fill-yellow-500 text-yellow-500"
                       : "text-muted-foreground/30"
-                  }`}
+                    }`}
                 />
               </button>
             ))}
