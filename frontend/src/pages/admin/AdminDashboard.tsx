@@ -65,13 +65,13 @@ export default function AdminDashboard() {
 
   // Process data for charts
   const categoryChartData = useMemo(() => {
-    if (!stats?.projects.byCategory) return [];
+    if (!stats?.projects?.byCategory || !Array.isArray(stats.projects.byCategory)) return [];
     return stats.projects.byCategory.map((cat, index) => ({
       name:
-        cat.category.length > 15
+        cat.category?.length > 15
           ? cat.category.substring(0, 15) + "..."
-          : cat.category,
-      fullName: cat.category,
+          : cat.category || 'Unknown',
+      fullName: cat.category || 'Unknown',
       value: cat.count,
       fill: COLORS[index % COLORS.length],
     }));
