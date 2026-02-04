@@ -1,0 +1,98 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Environment variables - CRITICAL FOR PRODUCTION
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+combined.log
+error.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# PM2
+.pm2
+.pm2/*
+pm2.log
+ecosystem.config.js
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+
+# Cache
+.cache
+.eslintcache
+.node_repl_history
+
+# Build output
+dist
+build
+
+# Uploads (if storing user uploads locally - should use cloud storage in production)
+uploads/*
+!uploads/.gitkeep
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*~
+
+# OS files
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.temp
+.temp
+
+# Lock files
+# yarn.lock
+# pnpm-lock.yaml
+
+# SSL certificates (if storing locally)
+*.pem
+*.key
+*.cert
+*.crt
+ssl/
+
+# Backup files
+*.bak
+*.backup
+*.old

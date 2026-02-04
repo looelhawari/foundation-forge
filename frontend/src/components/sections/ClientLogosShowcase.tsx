@@ -120,7 +120,7 @@ export function ClientLogosShowcase() {
                 <div className="flex justify-center gap-8 sm:gap-12 flex-wrap">
                     {[
                         { number: "45+", label: "Major Clients" },
-                        { number: "57+", label: "Projects Delivered" },
+                        { number: "90+", label: "Projects Delivered" },
                         { number: "100%", label: "Satisfaction Rate" }
                     ].map((stat, index) => (
                         <motion.div

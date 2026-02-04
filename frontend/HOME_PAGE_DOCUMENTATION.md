@@ -73,7 +73,7 @@ The hero section uses a scroll-triggered multi-scene animation with 4 distinct s
 
 #### Scene 2: Highway Projects (Scroll: 15-60%)
 - **Content**: Project statistics
-- **Text**: "57+ MAJOR PROJECTS DELIVERED"
+- **Text**: "90+ MAJOR PROJECTS DELIVERED"
 - **Image**: FIFA 2022 road work project (Real project image)
 - **Effects**: Slide up from bottom, scale animation, rotate 15deg
 
@@ -184,7 +184,7 @@ Highlight competitive advantages and unique selling points.
 - **Character Animation**: Title text animates letter by letter
 
 ### Key Points
-1. **Proven Track Record** - 57+ projects completed
+1. **Proven Track Record** - 90+ projects completed
 2. **Expert Team** - Highly qualified personnel
 3. **Quality Assurance** - Rigorous quality control
 4. **Latest Technology** - Cutting-edge equipment

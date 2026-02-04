@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageLoader } from "@/components/layout/PageLoader";
 import { FileText, Download, ExternalLink, Shield, Award, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -49,55 +50,31 @@ const certificates = [
     }
 ];
 
-// Loading Screen Component
-function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-    const [progress, setProgress] = useState(0);
-
-    useEffect(() => {
-        const progressTimer = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(progressTimer);
-                    setTimeout(onComplete, 150);
-                    return 100;
-                }
-                return prev + 4;
-            });
-        }, 25);
-
-        return () => clearInterval(progressTimer);
-    }, [onComplete]);
-
-    return (
-        <motion.div
-            className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-        >
-            <div className="flex flex-col items-center">
-                <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mb-4"
-                />
-                <p className="text-primary text-sm">{Math.floor(progress)}%</p>
-            </div>
-        </motion.div>
-    );
-}
-
 const Certificates = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedCert, setSelectedCert] = useState<typeof certificates[0] | null>(null);
 
+    // Check if page content is ready
+    useEffect(() => {
+        if (document.readyState === 'complete') {
+            setIsLoading(false);
+        } else {
+            const handleLoad = () => setIsLoading(false);
+            window.addEventListener('load', handleLoad);
+            return () => window.removeEventListener('load', handleLoad);
+        }
+    }, []);
+
     return (
         <div className="min-h-screen bg-background">
-            {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+            <AnimatePresence mode="wait">
+                {isLoading && <PageLoader title="CERTIFICATES" subtitle="Legal Documents" />}
+            </AnimatePresence>
 
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isLoading ? 0 : 1 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
             >
                 <Header />
 
@@ -167,14 +144,7 @@ const Certificates = () => {
                                             <ExternalLink className="w-4 h-4" />
                                             View Document
                                         </a>
-                                        <a
-                                            href={cert.file}
-                                            download
-                                            className="inline-flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg text-sm font-medium text-foreground hover:bg-muted transition-colors"
-                                        >
-                                            <Download className="w-4 h-4" />
-                                            Download
-                                        </a>
+
                                     </div>
                                 </motion.div>
                             ))}
@@ -204,7 +174,7 @@ const Certificates = () => {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
                             {[
                                 { label: "Years in Business", value: "10+" },
-                                { label: "Projects Completed", value: "500+" },
+                                { label: "Projects Completed", value: "100+" },
                                 { label: "Active Certifications", value: "4" },
                                 { label: "Compliance Rate", value: "100%" }
                             ].map((stat, index) => (

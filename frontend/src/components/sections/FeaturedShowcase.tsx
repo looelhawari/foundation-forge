@@ -25,7 +25,6 @@ const topProjects = [
         client: "Ministry of Education",
         area: "22,000 m²",
         status: "Completed",
-        gradient: ["#fbbf24", "#f59e0b"],
         image: busParking2
     },
     {
@@ -34,7 +33,6 @@ const topProjects = [
         client: "Ministry of Education",
         area: "16,000 m²",
         status: "Completed",
-        gradient: ["#f59e0b", "#f97316"],
         image: busParking1
     },
     {
@@ -43,7 +41,6 @@ const topProjects = [
         client: "Ministry of Education",
         area: "11,400 m²",
         status: "Completed",
-        gradient: ["#f97316", "#ea580c"],
         image: warehouseImg
     },
     {
@@ -52,7 +49,6 @@ const topProjects = [
         client: "FIFA Qatar 2022",
         area: "45,000 m²",
         status: "Delivered",
-        gradient: ["#ea580c", "#f59e0b"],
         image: fwcq2Project
     },
     {
@@ -61,7 +57,6 @@ const topProjects = [
         client: "",
         area: "6,800 m²",
         status: "Completed",
-        gradient: ["#9ca3af", "#6b7280"],
         image: farmsImg
     }
 ];
@@ -84,7 +79,7 @@ const topClients = [
         projectImage: fwcq2ClientImg
     },
     {
-        name: "Ministry of Waqif",
+        name: "Ministry of Endowments and Islamic Affairs",
         projects: "Heritage Sites",
         highlight: "Cultural Heritage",
         color: "#ea580c",
@@ -141,32 +136,11 @@ const MinimalProjectCard = ({ project, index }: any) => {
                     <motion.div
                         className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"
                         animate={{
-                            opacity: isHovered ? 0.3 : 1
+                            opacity: isHovered ? 0 : 1
                         }}
                         transition={{ duration: 0.5 }}
                     />
                 </div>
-
-                {/* Gradient overlay */}
-                <motion.div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                        background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`
-                    }}
-                    animate={{
-                        opacity: isHovered ? 0.4 : 0.2
-                    }}
-                />
-
-                {/* Scan line effect */}
-                <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ y: "-100%" }}
-                    animate={isHovered ? { y: "100%" } : { y: "-100%" }}
-                    transition={{ duration: 1.5, ease: "linear" }}
-                >
-                    <div className="h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent blur-xl" />
-                </motion.div>
 
                 {/* Content - hides on hover to show image */}
                 <motion.div
@@ -180,29 +154,19 @@ const MinimalProjectCard = ({ project, index }: any) => {
                     {/* Number indicator */}
                     <div className="flex items-start justify-between">
                         <motion.div
-                            className="text-[120px] font-bold leading-none"
-                            style={{
-                                background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`,
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                opacity: 0.3
-                            }}
+                            className="text-[120px] font-bold leading-none text-primary/30"
                         >
                             {project.id}
                         </motion.div>
 
                         {/* Badge */}
                         <motion.div
-                            className="px-4 py-2 rounded-full text-xs font-bold backdrop-blur-md"
-                            style={{
-                                background: `linear-gradient(135deg, ${project.gradient[0]}20, ${project.gradient[1]}20)`,
-                                border: `1px solid ${project.gradient[0]}40`
-                            }}
+                            className="px-4 py-2 rounded-full text-xs font-bold backdrop-blur-md bg-primary/20 border border-primary/40"
                             initial={{ x: 20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: index * 0.1 + 0.3 }}
                         >
-                            <span style={{ color: project.gradient[0] }}>TOP {project.id}</span>
+                            <span className="text-primary">TOP {project.id}</span>
                         </motion.div>
                     </div>
 
@@ -217,7 +181,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                             <h3 className="text-3xl font-bold text-white mb-2">
                                 {project.title}
                             </h3>
-                            <p className="text-lg" style={{ color: project.gradient[0] }}>
+                            <p className="text-lg text-primary">
                                 {project.client}
                             </p>
                         </motion.div>
@@ -232,7 +196,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                             style={{ transformOrigin: "left" }}
                         >
                             <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                                 <span>{project.area}</span>
                             </div>
                             <div className="h-4 w-px bg-gray-700" />
@@ -244,43 +208,11 @@ const MinimalProjectCard = ({ project, index }: any) => {
                     </div>
                 </motion.div>
 
-                {/* Hover overlay with title only */}
-                <motion.div
-                    className="absolute inset-0 flex flex-col items-center justify-center p-8"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                        opacity: isHovered ? 1 : 0
-                    }}
-                    transition={{ duration: 0.4, delay: 0.1 }}
-                >
-                    <motion.div
-                        className="text-center"
-                        animate={{
-                            y: isHovered ? 0 : 20,
-                            scale: isHovered ? 1 : 0.9
-                        }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                    >
-                        <h3 className="text-4xl font-bold text-white mb-3 drop-shadow-2xl">
-                            {project.title}
-                        </h3>
-                        <motion.div
-                            className="px-6 py-3 rounded-full text-sm font-bold backdrop-blur-md inline-block"
-                            style={{
-                                background: `linear-gradient(135deg, ${project.gradient[0]}40, ${project.gradient[1]}40)`,
-                                border: `1px solid ${project.gradient[0]}60`
-                            }}
-                        >
-                            <span className="text-white">View Details</span>
-                        </motion.div>
-                    </motion.div>
-                </motion.div>
-
                 {/* Corner accent */}
                 <svg className="absolute top-0 right-0 w-32 h-32 opacity-20" xmlns="http://www.w3.org/2000/svg">
                     <motion.path
                         d="M 128 0 L 128 128 L 0 128"
-                        stroke={project.gradient[0]}
+                        stroke="hsl(var(--primary))"
                         strokeWidth="2"
                         fill="none"
                         initial={{ pathLength: 0 }}

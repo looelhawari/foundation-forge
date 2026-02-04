@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageLoader } from "@/components/layout/PageLoader";
 import {
   MapPin,
   Phone,
@@ -16,110 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactApi } from "@/lib/api";
-import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
-
-// Loading Screen Component
-function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 300);
-          return 100;
-        }
-        return prev + 3.5;
-      });
-    }, 30);
-    return () => clearInterval(timer);
-  }, [onComplete]);
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Ripple effect */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full border-2 border-primary/20"
-            initial={{ width: 0, height: 0, opacity: 0 }}
-            animate={{
-              width: 200 + i * 100,
-              height: 200 + i * 100,
-              opacity: [0, 0.5, 0],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Central content */}
-      <div className="relative z-10 flex flex-col items-center">
-        <motion.div
-          initial={{ scale: 0, rotate: -90 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 20 }}
-          className="relative mb-8"
-        >
-          <motion.div
-            className="absolute inset-0 blur-2xl"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <img src={companyLogo} alt="Logo" className="w-32 h-32" />
-          </motion.div>
-          <img
-            src={companyLogo}
-            alt="CPC Logo"
-            className="w-32 h-32 relative z-10"
-          />
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="font-display text-4xl md:text-5xl tracking-[0.3em] text-gradient mb-4"
-        >
-          CONTACT US
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-muted-foreground text-sm tracking-wider mb-8"
-        >
-          Let's Build Together
-        </motion.p>
-
-        <div className="w-64">
-          <div className="h-1 bg-muted-foreground/10 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-primary to-accent"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <motion.div className="mt-2 text-center text-sm text-primary font-medium">
-            {Math.floor(progress)}%
-          </motion.div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 const Contact = () => {
   const { toast } = useToast();
@@ -133,6 +30,17 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+
+  // Check if page content is ready
+  useEffect(() => {
+    if (document.readyState === 'complete') {
+      setIsLoading(false);
+    } else {
+      const handleLoad = () => setIsLoading(false);
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,13 +92,13 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+        {isLoading && <PageLoader title="CONTACT US" subtitle="Let's Build Together" />}
       </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         <Header />
         <main>
@@ -271,7 +179,7 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="bg-secondary border-border focus:border-primary"
-                          placeholder="+966 XX XXX XXXX"
+                          placeholder="+974 XX XXX XXXX"
                         />
                       </div>
                       <div>

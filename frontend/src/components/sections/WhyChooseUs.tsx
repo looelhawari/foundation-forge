@@ -13,53 +13,50 @@ const advantages = [
         number: "01",
         title: "Proven Track Record",
         description: "Over 57 successfully completed projects with government ministries, international events, and private sector leaders",
-        color: "#fbbf24",
         image: whyChoose1
     },
     {
         number: "02",
         title: "Expert Team",
         description: "Highly qualified personnel with specialized expertise in road construction, earthworks, and infrastructure development",
-        color: "#f59e0b",
         image: whyChoose2
     },
     {
         number: "03",
         title: "Quality Assurance",
         description: "Rigorous quality control measures ensuring excellence in workmanship and adherence to international standards",
-        color: "#f97316",
         image: whyChoose3
     },
     {
         number: "04",
         title: "Latest Technology",
         description: "Utilizing cutting-edge equipment and modern construction techniques for efficient project delivery",
-        color: "#ea580c",
         image: whyChoose4
     },
     {
         number: "05",
         title: "Timely Completion",
         description: "Strong project management ensuring on-time delivery without compromising quality or safety standards",
-        color: "#9ca3af",
         image: whyChoose5
     },
     {
         number: "06",
         title: "Client Satisfaction",
         description: "Building lasting relationships through exceptional performance and exceeding client expectations",
-        color: "#6b7280",
         image: whyChoose6
     }
 ];
 
+// Unified brand color
+const BRAND_COLOR = "#f59e0b"; // Amber-500 matching website identity
+
 // Hexagon shape component
-const Hexagon = ({ color, index }: { color: string; index: number }) => {
+const Hexagon = ({ index }: { index: number }) => {
     return (
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <motion.path
                 d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z"
-                stroke={color}
+                stroke={BRAND_COLOR}
                 strokeWidth="2"
                 fill="none"
                 initial={{ pathLength: 0, opacity: 0 }}
@@ -103,7 +100,7 @@ export function WhyChooseUs() {
                                 left: `${10 + i * 35}%`
                             }}
                         >
-                            <Hexagon color="#fbbf24" index={i} />
+                            <Hexagon index={i} />
                         </div>
                     ))}
                 </div>
@@ -187,7 +184,7 @@ export function WhyChooseUs() {
                                 <div className="p-8">
                                     {/* Hexagon background */}
                                     <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
-                                        <Hexagon color={advantage.color} index={index} />
+                                        <Hexagon index={index} />
                                     </div>
 
                                     {/* Animated number with orbital rotation */}
@@ -204,7 +201,7 @@ export function WhyChooseUs() {
                                     >
                                         <motion.div
                                             className="absolute inset-0 rounded-full border-2 opacity-30"
-                                            style={{ borderColor: advantage.color }}
+                                            style={{ borderColor: BRAND_COLOR }}
                                             animate={{
                                                 scale: [1, 1.2, 1],
                                                 opacity: [0.3, 0.6, 0.3]
@@ -217,7 +214,7 @@ export function WhyChooseUs() {
                                         />
                                         <motion.div
                                             className="absolute inset-0 flex items-center justify-center text-3xl font-bold"
-                                            style={{ color: advantage.color }}
+                                            style={{ color: BRAND_COLOR }}
                                             animate={{
                                                 rotate: -360
                                             }}
@@ -260,7 +257,7 @@ export function WhyChooseUs() {
                                     <motion.div
                                         className="h-px mb-4"
                                         style={{
-                                            background: `linear-gradient(90deg, ${advantage.color}, transparent)`
+                                            background: `linear-gradient(90deg, ${BRAND_COLOR}, transparent)`
                                         }}
                                         initial={{ scaleX: 0 }}
                                         whileInView={{ scaleX: 1 }}
@@ -283,7 +280,7 @@ export function WhyChooseUs() {
                                     <motion.div
                                         className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl -z-10"
                                         style={{
-                                            background: `linear-gradient(135deg, ${advantage.color}, transparent)`
+                                            background: `linear-gradient(135deg, ${BRAND_COLOR}, transparent)`
                                         }}
                                         transition={{ duration: 0.5 }}
                                     />
@@ -294,7 +291,7 @@ export function WhyChooseUs() {
                                             <motion.div
                                                 key={dot}
                                                 className="w-2 h-2 rounded-full"
-                                                style={{ backgroundColor: advantage.color }}
+                                                style={{ backgroundColor: BRAND_COLOR }}
                                                 animate={{
                                                     scale: [1, 1.5, 1],
                                                     opacity: [0.3, 1, 0.3]

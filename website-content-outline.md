@@ -41,7 +41,7 @@ Home
 
 **Hero Section**
 - Headline: "Building Qatar's Infrastructure Since 2017"
-- Subheadline: "26M+ QR in Completed Projects | 57+ Successful Deliveries"
+- Subheadline: "26M+ QR in Completed Projects | 90+ Successful Deliveries"
 - CTA Buttons: "View Our Projects" / "Get Quote"
 - Background: Cinematic video/image of asphalt paving or road construction
 
@@ -67,7 +67,7 @@ Each with icon, 2-line description, "Learn More" link
   - DHL Warehouse Logistics
 
 **By The Numbers (Stats Section)**
-- 57+ Projects Completed
+- 90+ Projects Completed
 - 26M+ QR Total Project Value
 - 8 Years of Excellence
 - 100% On-Time Delivery

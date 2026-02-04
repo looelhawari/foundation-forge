@@ -65,10 +65,10 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="flex items-center justify-center min-h-[60vh] px-6">
           <div className="text-center">
-            <h1 className="font-display text-4xl mb-4">Project Not Found</h1>
-            <p className="text-muted-foreground mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl mb-4">Project Not Found</h1>
+            <p className="text-muted-foreground mb-6 text-sm sm:text-base">
               {error || "The project you're looking for doesn't exist."}
             </p>
             <Button variant="hero" asChild>
@@ -90,19 +90,21 @@ const ProjectDetail = () => {
       <Header />
       <main>
         {/* Hero Image */}
-        <section className="pt-20 relative h-[60vh] min-h-[500px]">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: posterImage
-                ? `url(${posterImage})`
-                : `url(${companyLogo})`,
-              backgroundSize: posterImage ? "cover" : "contain",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
-          </div>
+        <section className={`pt-20 relative ${posterImage ? 'h-[60vh] min-h-[500px]' : 'h-auto'}`}>
+          {posterImage ? (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${posterImage})`,
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+            </div>
+          ) : (
+            <div className="bg-gradient-dark py-20">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-background to-background" />
+            </div>
+          )}
           <div className="absolute bottom-0 left-0 right-0 container mx-auto px-6 pb-12 z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -116,10 +118,10 @@ const ProjectDetail = () => {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Projects
               </Link>
-              <span className="block px-3 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full w-fit mb-4">
+              <span className="block px-3 py-1 bg-primary text-primary-foreground text-xs sm:text-sm font-medium rounded-full w-fit mb-4">
                 {project.category}
               </span>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+              <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide">
                 {project.title}
               </h1>
             </motion.div>
@@ -146,9 +148,9 @@ const ProjectDetail = () => {
                   </p>
 
                   {/* Gallery */}
-                  <div className="grid md:grid-cols-2 gap-4 mb-12">
-                    {project.images && project.images.length > 0 ? (
-                      project.images.map((image, index) => (
+                  {project.images && project.images.length > 0 ? (
+                    <div className="grid md:grid-cols-2 gap-4 mb-12">
+                      {project.images.map((image, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, scale: 0.95 }}
@@ -171,17 +173,15 @@ const ProjectDetail = () => {
                             }}
                           />
                         </motion.div>
-                      ))
-                    ) : (
-                      <div className="col-span-2 aspect-video rounded-lg overflow-hidden bg-muted/50 flex items-center justify-center">
-                        <img
-                          src={companyLogo}
-                          alt="CPC Logo"
-                          className="w-48 h-48 object-contain opacity-50"
-                        />
-                      </div>
-                    )}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mb-8 p-8 bg-amber-500/5 border border-amber-500/20 rounded-lg">
+                      <p className="text-sm text-muted-foreground text-center">
+                        This is a legacy project from our archives. Image documentation is not available.
+                      </p>
+                    </div>
+                  )}
                 </motion.div>
               </div>
 

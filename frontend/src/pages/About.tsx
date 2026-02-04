@@ -4,11 +4,11 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
 import { CompanyIntro } from "@/components/sections/CompanyIntro";
+import { PageLoader } from "@/components/layout/PageLoader";
 import { ScrollProgress, AnimatedCounter, MorphingBlob, ImageReveal, TiltCard } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 import heroImage from "@/assets/hero-construction.jpg";
-import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
 // Import client logos
 import moelogo from "@/assets/MOE-removebg-preview.png";
@@ -58,109 +58,6 @@ const milestones = [
   { year: "2024", title: "57 Projects Strong", description: "Achieved 57 completed projects with 26M+ QR total value" },
 ];
 
-// Loading Screen Component
-function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 300);
-          return 100;
-        }
-        return prev + 3.5;
-      });
-    }, 30);
-    return () => clearInterval(timer);
-  }, [onComplete]);
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Animated grid */}
-      <div className="absolute inset-0 opacity-10">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-px bg-primary"
-            style={{
-              top: `${(i + 1) * 5}%`,
-              left: 0,
-              right: 0,
-            }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
-          />
-        ))}
-      </div>
-
-      {/* Central content */}
-      <div className="relative z-10 flex flex-col items-center">
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 20 }}
-          className="relative mb-8"
-        >
-          <motion.div
-            className="absolute inset-0 blur-2xl"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <img src={companyLogo} alt="Logo" className="w-32 h-32" />
-          </motion.div>
-          <img src={companyLogo} alt="CPC Logo" className="w-32 h-32 relative z-10" />
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="font-display text-4xl md:text-5xl tracking-[0.3em] text-gradient mb-4"
-        >
-          OUR STORY
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-muted-foreground text-sm tracking-wider mb-8"
-        >
-          Since 2017
-        </motion.p>
-
-        <div className="w-64">
-          <div className="h-1 bg-muted-foreground/10 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-primary to-accent"
-              style={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-          <motion.div
-            className="mt-2 text-center text-sm text-primary font-medium"
-            key={Math.floor(progress)}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {Math.floor(progress)}%
-          </motion.div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 const About = () => {
   const [isLoading, setIsLoading] = useState(true);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -173,16 +70,27 @@ const About = () => {
   const heroOpacity = useTransform(heroScroll, [0, 0.5], [1, 0]);
   const textY = useTransform(heroScroll, [0, 1], [0, 200]);
 
+  // Check if page content is ready
+  useEffect(() => {
+    if (document.readyState === 'complete') {
+      setIsLoading(false);
+    } else {
+      const handleLoad = () => setIsLoading(false);
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+        {isLoading && <PageLoader title="OUR STORY" subtitle="Since 2017" />}
       </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         <ScrollProgress />
         <Header />

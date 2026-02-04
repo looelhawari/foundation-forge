@@ -104,7 +104,7 @@ export const CinematicHero = memo(() => {
                 HIGHWAYS & INFRASTRUCTURE
               </span>
               <h2 className="font-display text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] tracking-[0.02em]">
-                57+ MAJOR PROJECTS<br />
+                90+ MAJOR PROJECTS<br />
                 <span className="text-gradient">DELIVERED</span>
               </h2>
               <p className="mt-8 text-xl text-muted-foreground max-w-2xl">

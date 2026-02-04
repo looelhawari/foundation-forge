@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
+import { PageLoader } from "@/components/layout/PageLoader";
 import {
   ScrollProgress,
   MorphingBlob,
@@ -61,7 +62,7 @@ import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 // Map for legacy logo imports (fallback when DB logo is null)
 const logoImportMap: Record<string, string> = {
   "Ministry of Education": moelogo,
-  "Ministry of Waqif": waqifLogo,
+  "Ministry of Awqaf ": waqifLogo,
   "Qatar Museums": museumLogo,
   "Ministry of Ashghal": ashghaalLogo,
   "FIFA World Cup Qatar 2022": fifaLogo,
@@ -167,262 +168,30 @@ const getGradientColors = (colorClass: string): string => {
   );
 };
 
-// ============================================
-// LOADING SCREEN - Epic Intro Animation
-// ============================================
-function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 500);
-          return 100;
-        }
-        return prev + 2;
-      });
-    }, 40);
-    return () => clearInterval(timer);
-  }, [onComplete]);
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
-      exit={{ opacity: 0, scale: 1.1 }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {/* Animated background particles */}
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-primary/30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, -200],
-              x: [0, Math.random() * 50 - 25],
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Orbiting rings */}
-      <div className="absolute">
-        {[200, 280, 360].map((size, i) => (
-          <motion.div
-            key={size}
-            className="absolute rounded-full border border-primary/20"
-            style={{
-              width: size,
-              height: size,
-              left: -size / 2,
-              top: -size / 2,
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-              duration: 8 + i * 4,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            <motion.div
-              className="absolute w-3 h-3 rounded-full bg-primary"
-              style={{ top: -6, left: "50%", marginLeft: -6 }}
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(var(--primary-rgb), 0.5)",
-                  "0 0 40px rgba(var(--primary-rgb), 0.8)",
-                  "0 0 20px rgba(var(--primary-rgb), 0.5)",
-                ],
-              }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Central glow effect */}
-      <motion.div
-        className="absolute w-64 h-64 rounded-full bg-primary/20 blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Logo container */}
-      <div className="relative z-10 flex flex-col items-center">
-        {/* Logo with reveal animation */}
-        <motion.div
-          className="relative mb-8"
-          initial={{ scale: 0, rotateY: -180 }}
-          animate={{ scale: 1, rotateY: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-            delay: 0.2,
-          }}
-        >
-          {/* Logo glow */}
-          <motion.div
-            className="absolute inset-0 blur-2xl"
-            animate={{
-              opacity: [0.5, 1, 0.5],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <img
-              src={companyLogo}
-              alt="Loading"
-              className="w-32 h-32 object-contain opacity-50"
-            />
-          </motion.div>
-
-          {/* Main logo */}
-          <motion.img
-            src={companyLogo}
-            alt="CPC Logo"
-            className="w-32 h-32 object-contain relative z-10"
-            animate={{
-              filter: [
-                "drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.5))",
-                "drop-shadow(0 0 40px rgba(var(--primary-rgb), 0.8))",
-                "drop-shadow(0 0 20px rgba(var(--primary-rgb), 0.5))",
-              ],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </motion.div>
-
-        {/* Company name reveal */}
-        <motion.div
-          className="overflow-hidden mb-8"
-          initial={{ width: 0 }}
-          animate={{ width: "auto" }}
-          transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <motion.h1
-            className="font-display text-3xl md:text-4xl tracking-[0.3em] text-gradient whitespace-nowrap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            CLIENTS PORTFOLIO
-          </motion.h1>
-        </motion.div>
-
-        {/* Progress bar */}
-        <div className="w-64 h-1 bg-muted-foreground/20 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full"
-            style={{ width: `${progress}%` }}
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-
-        {/* Loading text */}
-        <motion.div
-          className="mt-4 flex items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <span className="text-muted-foreground text-sm tracking-widest">
-            LOADING
-          </span>
-          <motion.span
-            className="text-primary font-medium"
-            key={progress}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            {progress}%
-          </motion.span>
-        </motion.div>
-
-        {/* Animated dots */}
-        <div className="flex gap-1 mt-2">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-2 h-2 rounded-full bg-primary"
-              animate={{
-                y: [0, -8, 0],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: i * 0.15,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Corner decorations */}
-      {[
-        { top: 0, left: 0, rotate: 0 },
-        { top: 0, right: 0, rotate: 90 },
-        { bottom: 0, right: 0, rotate: 180 },
-        { bottom: 0, left: 0, rotate: 270 },
-      ].map((pos, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-32 h-32"
-          style={pos}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1 * i, type: "spring" }}
-        >
-          <motion.div
-            className="w-full h-0.5 bg-gradient-to-r from-primary to-transparent"
-            animate={{ scaleX: [0, 1] }}
-            transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-          />
-          <motion.div
-            className="h-full w-0.5 bg-gradient-to-b from-primary to-transparent"
-            animate={{ scaleY: [0, 1] }}
-            transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-          />
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-}
-
 export default function Clients() {
   const [isLoading, setIsLoading] = useState(true);
+
+  // Check if page content is ready
+  useEffect(() => {
+    if (document.readyState === 'complete') {
+      setIsLoading(false);
+    } else {
+      const handleLoad = () => setIsLoading(false);
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+        {isLoading && <PageLoader title="CLIENTS" subtitle="Our Valued Partners" />}
       </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.3 }}
       >
         <ScrollProgress />
         <MinimalHeader />
@@ -483,7 +252,7 @@ function HeroSection() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: 0.4,
               }}
-              className="font-display text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
+              className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
               BUILDING
             </motion.h1>
@@ -497,7 +266,7 @@ function HeroSection() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: 0.5,
               }}
-              className="font-display text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
+              className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
             >
               QATAR'S FUTURE
             </motion.h1>
@@ -763,7 +532,7 @@ function ClientCategoriesSection() {
                     style={gradientStyle}
                   >
                     {client.logo ? (
-                      <div className="h-20 mb-6 flex items-center justify-center">
+                      <div className="h-20 mb-6 flex items-center justify-center bg-white rounded-lg p-3">
                         <img
                           src={client.logo}
                           alt={client.name}
@@ -1353,7 +1122,7 @@ function WhyChooseSection() {
     },
     {
       title: "Proven Track Record",
-      description: "57+ completed projects  26M+ QR total value  Since 2017",
+      description: "90+ completed projects  26M+ QR total value  Since 2017",
       icon: CheckCircle2,
     },
     {

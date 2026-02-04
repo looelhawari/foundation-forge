@@ -4,119 +4,13 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactCTA } from "@/components/sections/ContactCTA";
+import { PageLoader } from "@/components/layout/PageLoader";
 import { MapPin, ArrowLeft, Loader2, FolderOpen, Search, Clock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 import { useProjects, useCategories } from "@/hooks/useProjects";
-
-// Loading Screen Component
-function LoadingScreen({ onComplete }: { onComplete: () => void }) {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 300);
-          return 100;
-        }
-        return prev + 3.5;
-      });
-    }, 30);
-    return () => clearInterval(timer);
-  }, [onComplete]);
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-[9999] bg-background flex items-center justify-center overflow-hidden"
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Animated grid */}
-      <div className="absolute inset-0 opacity-10">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-px bg-primary"
-            style={{
-              top: `${(i + 1) * 5}%`,
-              left: 0,
-              right: 0,
-            }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
-          />
-        ))}
-      </div>
-
-      {/* Central content */}
-      <div className="relative z-10 flex flex-col items-center">
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 20 }}
-          className="relative mb-8"
-        >
-          <motion.div
-            className="absolute inset-0 blur-2xl"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <img src={companyLogo} alt="Logo" className="w-32 h-32" />
-          </motion.div>
-          <img
-            src={companyLogo}
-            alt="CPC Logo"
-            className="w-32 h-32 relative z-10"
-          />
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="font-display text-4xl md:text-5xl tracking-[0.3em] text-gradient mb-4"
-        >
-          PROJECTS
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-muted-foreground text-sm tracking-wider mb-8"
-        >
-          Excellence in Every Build
-        </motion.p>
-
-        <div className="w-64">
-          <div className="h-1 bg-muted-foreground/10 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-primary to-accent"
-              style={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-          <motion.div
-            className="mt-2 text-center text-sm text-primary font-medium"
-            key={Math.floor(progress)}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {Math.floor(progress)}%
-          </motion.div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 
 // Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
 const categoryData: Record<string, { icon: string; description: string }> = {
@@ -137,7 +31,6 @@ const categoryData: Record<string, { icon: string; description: string }> = {
 };
 
 const Projects = () => {
-  const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedProjectType, setSelectedProjectType] = useState<"new" | "old" | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -160,6 +53,9 @@ const Projects = () => {
 
   // Fetch categories from API
   const { categories, isLoading: isCategoriesLoading } = useCategories();
+
+  // Show loader only while initial data is loading
+  const showLoader = isLoading && projects.length === 0;
 
   // Get selected category object for display
   const selectedCategoryObj = useMemo(() => {
@@ -258,15 +154,15 @@ const Projects = () => {
   return (
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
-        {showLoadingScreen && (
-          <LoadingScreen onComplete={() => setShowLoadingScreen(false)} />
+        {showLoader && (
+          <PageLoader title="PROJECTS" subtitle="Excellence in Every Build" />
         )}
       </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: showLoadingScreen ? 0 : 1 }}
-        transition={{ duration: 0.5 }}
+        animate={{ opacity: showLoader ? 0 : 1 }}
+        transition={{ duration: 0.3 }}
       >
         <Header />
         <main>
@@ -661,59 +557,63 @@ const Projects = () => {
                 <section className="pb-24">
                   <div className="container mx-auto px-6">
                     {isLoading ? (
-                      <ProjectSkeleton />
+                      <div className="space-y-4 max-w-4xl mx-auto">
+                        {[...Array(6)].map((_, i) => (
+                          <Skeleton key={i} className="h-24 w-full rounded-lg" />
+                        ))}
+                      </div>
                     ) : filteredProjects.length > 0 ? (
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      <div className="max-w-4xl mx-auto space-y-4">
                         {filteredProjects.map((project, index) => (
                           <motion.div
                             key={project.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.05 }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: index * 0.05 }}
                           >
                             <Link
                               to={`/projects/${project.slug || project.id}`}
-                              className="group block bg-gradient-card border border-border rounded-lg overflow-hidden hover:border-amber-500 transition-all duration-300"
+                              className="group block bg-gradient-card border border-border rounded-lg p-6 hover:border-amber-500 transition-all duration-300 hover:shadow-lg"
                             >
-                              <div className="aspect-video overflow-hidden bg-muted/50 relative">
-                                <img
-                                  src={
-                                    getPosterImage(project.images) ||
-                                    companyLogo
-                                  }
-                                  alt={project.title}
-                                  className={`w-full h-full ${getPosterImage(project.images)
-                                    ? "object-cover group-hover:scale-110"
-                                    : "object-contain p-12 opacity-50"
-                                    } transition-transform duration-500`}
-                                  loading="lazy"
-                                  onError={(e) => {
-                                    e.currentTarget.src = companyLogo;
-                                    e.currentTarget.className =
-                                      "w-full h-full object-contain p-12 opacity-50";
-                                  }}
-                                />
-                              </div>
-                              <div className="p-6">
-                                <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-amber-500 transition-colors line-clamp-2">
-                                  {project.title}
-                                </h3>
-                                <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-                                  {project.description ||
-                                    "Road construction project"}
-                                </p>
-                                <div className="flex items-center justify-between">
-                                  {project.location && (
-                                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                      <MapPin className="w-3 h-3" />
-                                      {project.location}
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-3 mb-2">
+                                    <div className="p-2 bg-amber-500/10 rounded-lg">
+                                      <Clock className="w-4 h-4 text-amber-500" />
                                     </div>
+                                    <h3 className="font-display text-lg md:text-xl tracking-wide group-hover:text-amber-500 transition-colors">
+                                      {project.title}
+                                    </h3>
+                                  </div>
+
+                                  {project.description && (
+                                    <p className="text-sm text-muted-foreground mb-3 ml-11 line-clamp-2">
+                                      {project.description}
+                                    </p>
                                   )}
-                                  {project.year && (
-                                    <span className="text-xs text-amber-500">
-                                      {project.year}
-                                    </span>
-                                  )}
+
+                                  <div className="flex flex-wrap items-center gap-4 ml-11">
+                                    {project.location && (
+                                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                        <MapPin className="w-3 h-3" />
+                                        {project.location}
+                                      </div>
+                                    )}
+                                    {project.client && (
+                                      <div className="text-xs text-muted-foreground">
+                                        Client: <span className="text-foreground">{project.client}</span>
+                                      </div>
+                                    )}
+                                    {project.year && (
+                                      <span className="text-xs font-medium text-amber-500 px-2 py-1 bg-amber-500/10 rounded">
+                                        {project.year}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+
+                                <div className="text-muted-foreground group-hover:text-amber-500 transition-colors">
+                                  <ArrowLeft className="w-5 h-5 rotate-180" />
                                 </div>
                               </div>
                             </Link>
