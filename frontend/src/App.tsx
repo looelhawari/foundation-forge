@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "./components/ScrollToTop";
 import ConsentBanner from "./components/ConsentBanner";
 import { AuthProvider } from "./hooks/useAuth";
@@ -55,126 +56,128 @@ const LoadingFallback = () => (
 
 const App = () => (
   <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                {/* Public Routes */}
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="/clients" element={<Clients />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/certificates" element={<Certificates />} />
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                  {/* Public Routes */}
+                  <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/projects/:id" element={<ProjectDetail />} />
+                  <Route path="/clients" element={<Clients />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/certificates" element={<Certificates />} />
 
-                {/* Admin Routes */}
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <AdminDashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/projects"
-                  element={
-                    <ProtectedRoute>
-                      <AdminProjects />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/projects/new"
-                  element={
-                    <ProtectedRoute>
-                      <ProjectForm />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/projects/:id"
-                  element={
-                    <ProtectedRoute>
-                      <AdminProjectView />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/projects/:id/edit"
-                  element={
-                    <ProtectedRoute>
-                      <ProjectForm />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/messages"
-                  element={
-                    <ProtectedRoute>
-                      <AdminMessages />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/messages/:id"
-                  element={
-                    <ProtectedRoute>
-                      <AdminMessageView />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/clients"
-                  element={
-                    <ProtectedRoute>
-                      <AdminClients />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/testimonials"
-                  element={
-                    <ProtectedRoute>
-                      <AdminTestimonials />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/settings"
-                  element={
-                    <ProtectedRoute>
-                      <AdminSettings />
-                    </ProtectedRoute>
-                  }
-                />
+                  {/* Admin Routes */}
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route
+                    path="/admin"
+                    element={
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/projects"
+                    element={
+                      <ProtectedRoute>
+                        <AdminProjects />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/projects/new"
+                    element={
+                      <ProtectedRoute>
+                        <ProjectForm />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/projects/:id"
+                    element={
+                      <ProtectedRoute>
+                        <AdminProjectView />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/projects/:id/edit"
+                    element={
+                      <ProtectedRoute>
+                        <ProjectForm />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/messages"
+                    element={
+                      <ProtectedRoute>
+                        <AdminMessages />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/messages/:id"
+                    element={
+                      <ProtectedRoute>
+                        <AdminMessageView />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/clients"
+                    element={
+                      <ProtectedRoute>
+                        <AdminClients />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/testimonials"
+                    element={
+                      <ProtectedRoute>
+                        <AdminTestimonials />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/settings"
+                    element={
+                      <ProtectedRoute>
+                        <AdminSettings />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                {/* Catch all */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-            <ConsentBanner />
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+                  {/* Catch all */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+              <ConsentBanner />
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </ErrorBoundary>
 );
 

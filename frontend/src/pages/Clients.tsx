@@ -58,6 +58,8 @@ import fbaLogo from "@/assets/FBA real estate.png";
 import imalcoLogo from "@/assets/imalco.png";
 import qnieLogo from "@/assets/qnie.png";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+import SEOHead from "@/components/SEOHead";
+import { PAGE_SEO, generateBreadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 // Map for legacy logo imports (fallback when DB logo is null)
 const logoImportMap: Record<string, string> = {
@@ -75,7 +77,13 @@ const logoImportMap: Record<string, string> = {
 };
 
 // Category configuration for display
-type CategoryKey = "government" | "corporate" | "industrial" | "real_estate" | "retail" | "other";
+type CategoryKey =
+  | "government"
+  | "corporate"
+  | "industrial"
+  | "real_estate"
+  | "retail"
+  | "other";
 
 interface CategoryConfig {
   displayName: string;
@@ -173,19 +181,31 @@ export default function Clients() {
 
   // Check if page content is ready
   useEffect(() => {
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setIsLoading(false);
     } else {
       const handleLoad = () => setIsLoading(false);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={PAGE_SEO.clients}
+        path="/clients"
+        structuredData={[
+          generateBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Clients", url: `${SITE_URL}/clients` },
+          ]),
+        ]}
+      />
       <AnimatePresence mode="wait">
-        {isLoading && <PageLoader title="CLIENTS" subtitle="Our Valued Partners" />}
+        {isLoading && (
+          <PageLoader title="CLIENTS" subtitle="Our Valued Partners" />
+        )}
       </AnimatePresence>
 
       <motion.div
@@ -365,7 +385,9 @@ function StatsBanner() {
 
 function ClientCategoriesSection() {
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const [clientCategories, setClientCategories] = useState<ClientCategory[]>([]);
+  const [clientCategories, setClientCategories] = useState<ClientCategory[]>(
+    [],
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch clients and group by category
@@ -375,26 +397,30 @@ function ClientCategoriesSection() {
         const response = await clientsApi.getAll({ active: "true" });
         if (response.data && response.data.length > 0) {
           // Group clients by category
-          const grouped = response.data.reduce((acc, client) => {
-            const categoryKey = (client.category || "other") as CategoryKey;
-            if (!acc[categoryKey]) {
-              acc[categoryKey] = [];
-            }
-            acc[categoryKey].push({
-              id: client.id,
-              name: client.name,
-              logo: getClientLogo(client),
-              projects: client.projects_count || 0,
-              value: client.total_value,
-            });
-            return acc;
-          }, {} as Record<CategoryKey, ClientCategory["clients"]>);
+          const grouped = response.data.reduce(
+            (acc, client) => {
+              const categoryKey = (client.category || "other") as CategoryKey;
+              if (!acc[categoryKey]) {
+                acc[categoryKey] = [];
+              }
+              acc[categoryKey].push({
+                id: client.id,
+                name: client.name,
+                logo: getClientLogo(client),
+                projects: client.projects_count || 0,
+                value: client.total_value,
+              });
+              return acc;
+            },
+            {} as Record<CategoryKey, ClientCategory["clients"]>,
+          );
 
           // Convert to array format and sort by order
           const categoriesArray: ClientCategory[] = Object.entries(grouped)
             .map(([key, clients]) => {
               const categoryKey = key as CategoryKey;
-              const config = categoryConfigMap[categoryKey] || categoryConfigMap.other;
+              const config =
+                categoryConfigMap[categoryKey] || categoryConfigMap.other;
               return {
                 category: config.displayName,
                 categoryKey: categoryKey,
@@ -435,7 +461,9 @@ function ClientCategoriesSection() {
     return (
       <section className="py-32 md:py-48 relative overflow-hidden">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">No clients available at the moment.</p>
+          <p className="text-muted-foreground">
+            No clients available at the moment.
+          </p>
         </div>
       </section>
     );
@@ -633,10 +661,11 @@ function TestimonialsSection() {
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`h-5 w-5 ${i < rating
-            ? "fill-yellow-500 text-yellow-500"
-            : "text-muted-foreground/30"
-            }`}
+          className={`h-5 w-5 ${
+            i < rating
+              ? "fill-yellow-500 text-yellow-500"
+              : "text-muted-foreground/30"
+          }`}
         />
       ))}
     </div>
@@ -734,18 +763,20 @@ function TestimonialsSection() {
                       <div className="bg-gradient-card border border-border rounded-2xl p-8 md:p-12 h-full flex flex-col">
                         {/* Rating */}
                         <div className="flex gap-1 mb-8">
-                          {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
-                            <motion.svg
-                              key={i}
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.1 }}
-                              className="w-5 h-5 text-primary fill-primary"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </motion.svg>
-                          ))}
+                          {Array.from({ length: testimonial.rating || 5 }).map(
+                            (_, i) => (
+                              <motion.svg
+                                key={i}
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="w-5 h-5 text-primary fill-primary"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </motion.svg>
+                            ),
+                          )}
                         </div>
 
                         {/* Quote */}
@@ -765,9 +796,13 @@ function TestimonialsSection() {
                             </div>
                           )}
                           <div>
-                            <div className="font-display text-xl tracking-wide">{testimonial.client_name}</div>
+                            <div className="font-display text-xl tracking-wide">
+                              {testimonial.client_name}
+                            </div>
                             <div className="text-sm text-muted-foreground">
-                              {testimonial.position}{testimonial.company_name && ` • ${testimonial.company_name}`}
+                              {testimonial.position}
+                              {testimonial.company_name &&
+                                ` • ${testimonial.company_name}`}
                             </div>
                           </div>
                         </div>
@@ -785,17 +820,22 @@ function TestimonialsSection() {
                   onClick={() => setActiveIndex(index)}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
-                  className={`relative w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
-                    ? "bg-primary"
-                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                    }`}
+                  className={`relative w-3 h-3 rounded-full transition-all duration-500 ${
+                    index === activeIndex
+                      ? "bg-primary"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
                 >
                   {index === activeIndex && (
                     <motion.div
                       layoutId="activeTestimonialClient"
                       className="absolute inset-0 rounded-full bg-primary"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
                 </motion.button>
@@ -1045,10 +1085,11 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
                 className="p-1 hover:scale-110 transition-transform"
               >
                 <Star
-                  className={`h-6 w-6 ${star <= formData.rating
-                    ? "fill-yellow-500 text-yellow-500"
-                    : "text-muted-foreground/30"
-                    }`}
+                  className={`h-6 w-6 ${
+                    star <= formData.rating
+                      ? "fill-yellow-500 text-yellow-500"
+                      : "text-muted-foreground/30"
+                  }`}
                 />
               </button>
             ))}

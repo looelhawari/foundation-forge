@@ -17,6 +17,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactApi } from "@/lib/api";
+import SEOHead from "@/components/SEOHead";
+import {
+  PAGE_SEO,
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  SITE_URL,
+} from "@/lib/seo";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -33,12 +40,12 @@ const Contact = () => {
 
   // Check if page content is ready
   useEffect(() => {
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setIsLoading(false);
     } else {
       const handleLoad = () => setIsLoading(false);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
 
@@ -91,8 +98,21 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={PAGE_SEO.contact}
+        path="/contact"
+        structuredData={[
+          generateLocalBusinessSchema(),
+          generateBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Contact", url: `${SITE_URL}/contact` },
+          ]),
+        ]}
+      />
       <AnimatePresence mode="wait">
-        {isLoading && <PageLoader title="CONTACT US" subtitle="Let's Build Together" />}
+        {isLoading && (
+          <PageLoader title="CONTACT US" subtitle="Let's Build Together" />
+        )}
       </AnimatePresence>
 
       <motion.div

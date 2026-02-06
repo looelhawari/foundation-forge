@@ -1,14 +1,40 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
 import { CompanyIntro } from "@/components/sections/CompanyIntro";
 import { PageLoader } from "@/components/layout/PageLoader";
-import { ScrollProgress, AnimatedCounter, MorphingBlob, ImageReveal, TiltCard } from "@/components/animations/MotionGraphics";
-import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
+import {
+  ScrollProgress,
+  AnimatedCounter,
+  MorphingBlob,
+  ImageReveal,
+  TiltCard,
+} from "@/components/animations/MotionGraphics";
+import {
+  Award,
+  Users,
+  Building,
+  Target,
+  Shield,
+  Lightbulb,
+  Star,
+} from "lucide-react";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 import heroImage from "@/assets/hero-construction.jpg";
+import SEOHead from "@/components/SEOHead";
+import {
+  PAGE_SEO,
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+  SITE_URL,
+} from "@/lib/seo";
 
 // Import client logos
 import moelogo from "@/assets/MOE-removebg-preview.png";
@@ -36,26 +62,52 @@ const values = [
   {
     icon: Target,
     title: "PRECISION",
-    description: "Every project is executed with meticulous attention to detail and engineering accuracy.",
+    description:
+      "Every project is executed with meticulous attention to detail and engineering accuracy.",
   },
   {
     icon: Shield,
     title: "QUALITY",
-    description: "We never compromise on materials or workmanship, ensuring lasting infrastructure.",
+    description:
+      "We never compromise on materials or workmanship, ensuring lasting infrastructure.",
   },
   {
     icon: Lightbulb,
     title: "INNOVATION",
-    description: "Embracing modern technologies and methods to deliver superior results.",
+    description:
+      "Embracing modern technologies and methods to deliver superior results.",
   },
 ];
 
 const milestones = [
-  { year: "2017", title: "Company Founded", description: "CPC Qatar established under Chairman Mohammed Ahmed Mubarak Al-Nasr" },
-  { year: "2019", title: "Educational Excellence", description: "Major contracts with Ministry of Education for school infrastructure" },
-  { year: "2021", title: "Cultural Heritage", description: "Qatar Museums projects - preserving cultural landmarks" },
-  { year: "2022", title: "FIFA World Cup", description: "Delivered parking infrastructure for FIFA World Cup Qatar 2022" },
-  { year: "2024", title: "57 Projects Strong", description: "Achieved 57 completed projects with 26M+ QR total value" },
+  {
+    year: "2017",
+    title: "Company Founded",
+    description:
+      "CPC Qatar established under Chairman Mohammed Ahmed Mubarak Al-Nasr",
+  },
+  {
+    year: "2019",
+    title: "Educational Excellence",
+    description:
+      "Major contracts with Ministry of Education for school infrastructure",
+  },
+  {
+    year: "2021",
+    title: "Cultural Heritage",
+    description: "Qatar Museums projects - preserving cultural landmarks",
+  },
+  {
+    year: "2022",
+    title: "FIFA World Cup",
+    description:
+      "Delivered parking infrastructure for FIFA World Cup Qatar 2022",
+  },
+  {
+    year: "2024",
+    title: "57 Projects Strong",
+    description: "Achieved 57 completed projects with 26M+ QR total value",
+  },
 ];
 
 const About = () => {
@@ -72,17 +124,28 @@ const About = () => {
 
   // Check if page content is ready
   useEffect(() => {
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setIsLoading(false);
     } else {
       const handleLoad = () => setIsLoading(false);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={PAGE_SEO.about}
+        path="/about"
+        structuredData={[
+          generateFAQSchema(),
+          generateBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "About", url: `${SITE_URL}/about` },
+          ]),
+        ]}
+      />
       <AnimatePresence mode="wait">
         {isLoading && <PageLoader title="OUR STORY" subtitle="Since 2017" />}
       </AnimatePresence>
@@ -101,7 +164,10 @@ const About = () => {
           {/* Cinematic Hero */}
           <section ref={heroRef} className="relative h-[150vh]">
             <div className="sticky top-0 h-screen overflow-hidden">
-              <motion.div style={{ scale: heroScale }} className="absolute inset-0">
+              <motion.div
+                style={{ scale: heroScale }}
+                className="absolute inset-0"
+              >
                 <img
                   src={heroImage}
                   alt="Construction site"
@@ -150,7 +216,11 @@ const About = () => {
                   <motion.h1
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+                    transition={{
+                      duration: 1.2,
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: 0.4,
+                    }}
                     className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
                   >
                     BUILDING
@@ -160,7 +230,11 @@ const About = () => {
                   <motion.h1
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+                    transition={{
+                      duration: 1.2,
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: 0.5,
+                    }}
                     className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
                   >
                     LEGACY
@@ -170,7 +244,11 @@ const About = () => {
                   <motion.h1
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                    transition={{
+                      duration: 1.2,
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: 0.6,
+                    }}
                     className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
                   >
                     SINCE 2017
@@ -215,7 +293,10 @@ const StorySection = () => {
   const rotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
 
   return (
-    <section ref={ref} className="relative py-16 sm:py-24 md:py-32 lg:py-48 overflow-hidden">
+    <section
+      ref={ref}
+      className="relative py-16 sm:py-24 md:py-32 lg:py-48 overflow-hidden"
+    >
       <MorphingBlob className="w-[500px] h-[500px] -top-48 -right-48" />
 
       <div className="container mx-auto px-4 sm:px-6">
@@ -247,7 +328,11 @@ const StorySection = () => {
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: 0.1,
+                }}
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em] text-gradient"
               >
                 MIGHTY
@@ -262,16 +347,45 @@ const StorySection = () => {
               className="space-y-4 md:space-y-6 text-muted-foreground text-base md:text-lg leading-relaxed"
             >
               <p className="text-lg sm:text-xl font-medium text-foreground">
-                <span className="text-gradient">CPC Qatar</span> (Cosmo Projects & Construction and Trading Co.) is a premier construction company specializing in civil engineering, road construction, and infrastructure development across the State of Qatar.
+                <span className="text-gradient">CPC Qatar</span> (Cosmo Projects
+                & Construction and Trading Co.) is a premier construction
+                company specializing in civil engineering, road construction,
+                and infrastructure development across the State of Qatar.
               </p>
               <p>
-                Founded in 2017 by <span className="text-primary font-medium">Chairman Mohammed Ahmed Mubarak Al-Nasr</span> and <span className="text-primary font-medium">Founder Hisham Abdelfattah Radwan Mohamed</span>, our company was established with a clear vision: to deliver world-class infrastructure projects that serve Qatar's rapidly growing educational, cultural, and commercial sectors.
+                Founded in 2017 by{" "}
+                <span className="text-primary font-medium">
+                  Chairman Mohammed Ahmed Mubarak Al-Nasr
+                </span>{" "}
+                and{" "}
+                <span className="text-primary font-medium">
+                  Founder Hisham Abdelfattah Radwan Mohamed
+                </span>
+                , our company was established with a clear vision: to deliver
+                world-class infrastructure projects that serve Qatar's rapidly
+                growing educational, cultural, and commercial sectors.
               </p>
               <p>
-                With <span className="text-primary font-semibold">Commercial Registration No. 108122</span>, CPC Qatar operates from our headquarters at Mirqab Mall, Doha, bringing together a team of highly qualified engineers and construction specialists who share our commitment to excellence.
+                With{" "}
+                <span className="text-primary font-semibold">
+                  Commercial Registration No. 108122
+                </span>
+                , CPC Qatar operates from our headquarters at Mirqab Mall, Doha,
+                bringing together a team of highly qualified engineers and
+                construction specialists who share our commitment to excellence.
               </p>
               <p>
-                Today, we stand proud with <span className="text-gradient font-bold">57 completed projects</span> valued at over <span className="text-gradient font-bold">26 Million QR</span>, serving prestigious clients including the Ministry of Education, Qatar Museums, FIFA World Cup Qatar 2022, DHL, Al Meera, and many more. Our expertise spans educational facilities, cultural heritage sites, parking infrastructure, roads and streets, earthworks, and asphalt paving.
+                Today, we stand proud with{" "}
+                <span className="text-gradient font-bold">
+                  57 completed projects
+                </span>{" "}
+                valued at over{" "}
+                <span className="text-gradient font-bold">26 Million QR</span>,
+                serving prestigious clients including the Ministry of Education,
+                Qatar Museums, FIFA World Cup Qatar 2022, DHL, Al Meera, and
+                many more. Our expertise spans educational facilities, cultural
+                heritage sites, parking infrastructure, roads and streets,
+                earthworks, and asphalt paving.
               </p>
             </motion.div>
           </motion.div>
@@ -284,11 +398,15 @@ const StorySection = () => {
                 scale: 1.05,
                 rotateY: 10,
                 rotateX: -5,
-                transition: { duration: 0.5, ease: "easeOut" }
+                transition: { duration: 0.5, ease: "easeOut" },
               }}
               style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
             >
-              <ImageReveal src={engineerImage} alt="Chairman Mohammed Ahmed Mubarak Al-Nasr" className="w-full h-full" />
+              <ImageReveal
+                src={engineerImage}
+                alt="Chairman Mohammed Ahmed Mubarak Al-Nasr"
+                className="w-full h-full"
+              />
               {/* Hover overlay effect */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-orange-500/20"
@@ -307,10 +425,16 @@ const StorySection = () => {
               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
               className="absolute -bottom-8 -left-8 bg-gradient-card border border-primary/50 rounded-lg p-6 shadow-card cursor-pointer backdrop-blur-sm"
             >
-              <div className="font-display text-2xl text-primary mb-1">M.A.M Al-Nasr</div>
-              <div className="text-xs text-muted-foreground mb-3">Chairman & Co-Founder</div>
+              <div className="font-display text-2xl text-primary mb-1">
+                M.A.M Al-Nasr
+              </div>
+              <div className="text-xs text-muted-foreground mb-3">
+                Chairman & Co-Founder
+              </div>
               <div className="h-px bg-border my-2"></div>
-              <div className="font-display text-2xl text-primary mb-1">H.A.R Mohamed</div>
+              <div className="font-display text-2xl text-primary mb-1">
+                H.A.R Mohamed
+              </div>
               <div className="text-xs text-muted-foreground">Co-Founder</div>
             </motion.div>
           </motion.div>
@@ -356,24 +480,57 @@ const WhatIsCPCSection = () => {
             viewport={{ once: true }}
             className="bg-gradient-card border border-primary/20 rounded-2xl p-6 sm:p-8 md:p-12"
           >
-            <h3 className="font-display text-2xl sm:text-3xl mb-4 md:mb-6 text-gradient">Complete Construction Solutions</h3>
+            <h3 className="font-display text-2xl sm:text-3xl mb-4 md:mb-6 text-gradient">
+              Complete Construction Solutions
+            </h3>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-4 md:mb-6">
-              <span className="text-primary font-bold">Cosmo Projects & Construction and Trading Co. (CPC Qatar)</span> is a leading construction company registered under <span className="text-primary">CR No. 108122</span>, dedicated to delivering exceptional civil engineering and infrastructure projects throughout the State of Qatar.
+              <span className="text-primary font-bold">
+                Cosmo Projects & Construction and Trading Co. (CPC Qatar)
+              </span>{" "}
+              is a leading construction company registered under{" "}
+              <span className="text-primary">CR No. 108122</span>, dedicated to
+              delivering exceptional civil engineering and infrastructure
+              projects throughout the State of Qatar.
             </p>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              Headquartered at <span className="text-foreground">Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D - Office No. 307-308, Doha, Qatar</span>, we serve as a trusted partner for government ministries, cultural institutions, private enterprises, and international organizations.
+              Headquartered at{" "}
+              <span className="text-foreground">
+                Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block
+                D - Office No. 307-308, Doha, Qatar
+              </span>
+              , we serve as a trusted partner for government ministries,
+              cultural institutions, private enterprises, and international
+              organizations.
             </p>
           </motion.div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { title: "Earthworks", desc: "Site preparation, excavation, grading, and compaction for solid foundations" },
-              { title: "Road Construction", desc: "Sub-grade, sub-base preparation, and complete asphalt paving solutions" },
-              { title: "Asphalt Works", desc: "Hot mix asphalt, cold mix, surface treatment, and maintenance" },
-              { title: "Traffic Solutions", desc: "Thermoplastic road marking, traffic signs, and safety installations" },
-              { title: "Interlock & Kerbstone", desc: "Precision paver installation, kerbstone laying, and pattern design" },
-              { title: "Steel Works", desc: "Rebar installation, steel fabrication, and structural reinforcement" },
+              {
+                title: "Earthworks",
+                desc: "Site preparation, excavation, grading, and compaction for solid foundations",
+              },
+              {
+                title: "Road Construction",
+                desc: "Sub-grade, sub-base preparation, and complete asphalt paving solutions",
+              },
+              {
+                title: "Asphalt Works",
+                desc: "Hot mix asphalt, cold mix, surface treatment, and maintenance",
+              },
+              {
+                title: "Traffic Solutions",
+                desc: "Thermoplastic road marking, traffic signs, and safety installations",
+              },
+              {
+                title: "Interlock & Kerbstone",
+                desc: "Precision paver installation, kerbstone laying, and pattern design",
+              },
+              {
+                title: "Steel Works",
+                desc: "Rebar installation, steel fabrication, and structural reinforcement",
+              },
             ].map((service, index) => (
               <motion.div
                 key={index}
@@ -387,7 +544,9 @@ const WhatIsCPCSection = () => {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <div className="w-6 h-6 rounded-full bg-gradient-gold"></div>
                 </div>
-                <h4 className="font-display text-xl mb-2 group-hover:text-primary transition-colors">{service.title}</h4>
+                <h4 className="font-display text-xl mb-2 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h4>
                 <p className="text-sm text-muted-foreground">{service.desc}</p>
               </motion.div>
             ))}
@@ -401,16 +560,28 @@ const WhatIsCPCSection = () => {
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6"
           >
             <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
-              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">57</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Projects Completed</div>
+              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
+                57
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">
+                Projects Completed
+              </div>
             </div>
             <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
-              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">26M+ QR</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Total Project Value</div>
+              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
+                26M+ QR
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">
+                Total Project Value
+              </div>
             </div>
             <div className="bg-gradient-to-br from-amber-400/10 to-orange-600/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
-              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">45+</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Satisfied Clients</div>
+              <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
+                45+
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">
+                Satisfied Clients
+              </div>
             </div>
           </motion.div>
 
@@ -421,7 +592,9 @@ const WhatIsCPCSection = () => {
             viewport={{ once: true }}
             className="bg-gradient-card border border-border rounded-2xl p-6 sm:p-8 md:p-12"
           >
-            <h3 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">Trusted by Leading Organizations</h3>
+            <h3 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">
+              Trusted by Leading Organizations
+            </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
               {majorClients.map((client, index) => (
                 <motion.div
@@ -438,7 +611,9 @@ const WhatIsCPCSection = () => {
                     alt={client.name}
                     className="h-12 sm:h-16 w-auto object-contain mb-2"
                   />
-                  <div className="text-xs text-gray-600 font-medium text-center">{client.name}</div>
+                  <div className="text-xs text-gray-600 font-medium text-center">
+                    {client.name}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -449,7 +624,13 @@ const WhatIsCPCSection = () => {
   );
 };
 
-const ValuesSection = ({ values }: { values: typeof import("lucide-react") extends { Target: infer T } ? { icon: T; title: string; description: string }[] : never }) => {
+const ValuesSection = ({
+  values,
+}: {
+  values: typeof import("lucide-react") extends { Target: infer T }
+    ? { icon: T; title: string; description: string }[]
+    : never;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -459,7 +640,10 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={ref} className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-secondary overflow-hidden">
+    <section
+      ref={ref}
+      className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-secondary overflow-hidden"
+    >
       <MorphingBlob className="w-[400px] h-[400px] bottom-0 -left-48" />
 
       {/* Floating geometric shapes */}
@@ -557,14 +741,20 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
                     <motion.div
                       className="absolute inset-0 border-2 border-primary/30 rounded-full"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
                     />
                   </motion.div>
 
                   <h3 className="font-display text-xl sm:text-2xl tracking-[0.1em] mb-3 sm:mb-4 group-hover:text-primary transition-colors relative z-10">
                     {value.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed relative z-10">{value.description}</p>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed relative z-10">
+                    {value.description}
+                  </p>
                 </motion.div>
               </TiltCard>
             </motion.div>
@@ -575,7 +765,11 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
   );
 };
 
-const TimelineSection = ({ milestones }: { milestones: { year: string; title: string; description: string }[] }) => {
+const TimelineSection = ({
+  milestones,
+}: {
+  milestones: { year: string; title: string; description: string }[];
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -585,12 +779,22 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={ref} className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+    <section
+      ref={ref}
+      className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden"
+    >
       {/* Animated circuit board pattern */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="circuit-about" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <pattern
+              id="circuit-about"
+              x="0"
+              y="0"
+              width="100"
+              height="100"
+              patternUnits="userSpaceOnUse"
+            >
               <motion.path
                 d="M10 50 L30 50 L30 30 L50 30 L50 70 L70 70 L70 50 L90 50"
                 stroke="#fbbf24"
@@ -598,7 +802,11 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
               />
               <circle cx="30" cy="50" r="3" fill="#f97316" />
               <circle cx="50" cy="70" r="3" fill="#ea580c" />
@@ -628,7 +836,10 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             viewport={{ once: true }}
           >
-            KEY <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">MILESTONES</span>
+            KEY{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+              MILESTONES
+            </span>
           </motion.h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -644,7 +855,8 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
             viewport={{ once: true }}
             className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
           >
-            From our founding in 2017 to becoming a trusted name in Qatar's construction industry
+            From our founding in 2017 to becoming a trusted name in Qatar's
+            construction industry
           </motion.p>
         </motion.div>
 
@@ -671,12 +883,14 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                   duration: 0.8,
                   delay: index * 0.2,
                   type: "spring",
-                  stiffness: 80
+                  stiffness: 80,
                 }}
                 viewport={{ once: true, margin: "-100px" }}
                 className="relative mb-16 md:mb-24 last:mb-0"
               >
-                <div className={`flex items-center gap-4 md:gap-12 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                <div
+                  className={`flex items-center gap-4 md:gap-12 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
+                >
                   {/* Content card */}
                   <motion.div
                     className="w-full md:w-5/12 ml-16 md:ml-0"
@@ -697,13 +911,13 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                           boxShadow: [
                             "0 0 0 0 rgba(251, 191, 36, 0.7)",
                             "0 0 0 20px rgba(251, 191, 36, 0)",
-                            "0 0 0 0 rgba(251, 191, 36, 0)"
-                          ]
+                            "0 0 0 0 rgba(251, 191, 36, 0)",
+                          ],
                         }}
                         transition={{
                           duration: 2,
                           repeat: Infinity,
-                          delay: index * 0.3
+                          delay: index * 0.3,
                         }}
                       >
                         {milestone.year}
@@ -740,7 +954,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                         duration: 0.6,
                         delay: index * 0.2,
                         type: "spring",
-                        stiffness: 200
+                        stiffness: 200,
                       }}
                       viewport={{ once: true }}
                     >
@@ -751,7 +965,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                         transition={{
                           duration: 10,
                           repeat: Infinity,
-                          ease: "linear"
+                          ease: "linear",
                         }}
                       />
 
@@ -760,12 +974,12 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                         className="absolute inset-2 rounded-full bg-gradient-to-br from-amber-400 to-orange-500"
                         animate={{
                           scale: [1, 1.2, 1],
-                          opacity: [1, 0.8, 1]
+                          opacity: [1, 0.8, 1],
                         }}
                         transition={{
                           duration: 2,
                           repeat: Infinity,
-                          delay: index * 0.3
+                          delay: index * 0.3,
                         }}
                       />
 
@@ -774,12 +988,12 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                         <motion.div
                           className="w-4 h-4 rounded-full bg-white"
                           animate={{
-                            scale: [1, 1.5, 1]
+                            scale: [1, 1.5, 1],
                           }}
                           transition={{
                             duration: 1.5,
                             repeat: Infinity,
-                            delay: index * 0.2
+                            delay: index * 0.2,
                           }}
                         />
                       </div>
@@ -818,7 +1032,10 @@ const StatsSection = () => {
     <section ref={ref} className="relative py-32 bg-secondary overflow-hidden">
       <MorphingBlob className="w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
-      <motion.div style={{ scale }} className="container mx-auto px-6 relative z-10">
+      <motion.div
+        style={{ scale }}
+        className="container mx-auto px-6 relative z-10"
+      >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (
             <motion.div

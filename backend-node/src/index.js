@@ -28,7 +28,7 @@ app.use(
   }),
 );
 
-// CORS configuration - Allow all localhost ports in development
+// CORS configuration - Allow all localhost ports in development and production domains
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps, curl, Postman)
@@ -42,6 +42,14 @@ const corsOptions = {
     ) {
       return callback(null, true);
     }
+    // Allow production domains
+    if (
+      origin === "https://www.cpc-qa.com" ||
+      origin === "https://cpc-qa.com" ||
+      origin.endsWith(".cpc-qa.com")
+    ) {
+      return callback(null, true);
+    }
     // Check against configured allowed origins
     const allowedOrigins = Array.isArray(config.cors.frontendUrl)
       ? config.cors.frontendUrl
@@ -49,13 +57,26 @@ const corsOptions = {
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
+    // Log rejected origins for debugging
+    console.log(`CORS blocked origin: ${origin}`);
     callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Accept",
+    "Origin",
+  ],
+  exposedHeaders: ["Content-Range", "X-Content-Range"],
+  maxAge: 86400, // 24 hours - cache preflight requests
 };
 app.use(cors(corsOptions));
+
+// Handle preflight requests explicitly
+app.options("*", cors(corsOptions));
 
 // Body parsing middleware
 app.use(express.json({ limit: "10mb" }));

@@ -18,6 +18,14 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProjects";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+import SEOHead from "@/components/SEOHead";
+import {
+  PAGE_SEO,
+  generateProjectSchema,
+  generateBreadcrumbSchema,
+  SITE_URL,
+  DEFAULT_OG_IMAGE,
+} from "@/lib/seo";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -67,7 +75,9 @@ const ProjectDetail = () => {
         <Header />
         <div className="flex items-center justify-center min-h-[60vh] px-6">
           <div className="text-center">
-            <h1 className="font-display text-3xl sm:text-4xl mb-4">Project Not Found</h1>
+            <h1 className="font-display text-3xl sm:text-4xl mb-4">
+              Project Not Found
+            </h1>
             <p className="text-muted-foreground mb-6 text-sm sm:text-base">
               {error || "The project you're looking for doesn't exist."}
             </p>
@@ -85,12 +95,50 @@ const ProjectDetail = () => {
   const posterImage =
     project.images && project.images.length > 0 ? project.images[0] : null;
 
+  // Dynamic SEO for this project
+  const projectSEO = {
+    ...PAGE_SEO.projectDetail,
+    title: `${project.title} | ${project.category || "Project"} | CPC Qatar`,
+    description: project.description
+      ? `${project.description.substring(0, 155)}...`
+      : `View details of ${project.title} - a ${project.category || "construction"} project by CPC Qatar in ${project.location || "Qatar"}.`,
+    ogTitle: `${project.title} | CPC Qatar Project`,
+    ogDescription: project.description
+      ? project.description.substring(0, 200)
+      : `${project.title} - ${project.category || "Construction"} project by CPC Qatar.`,
+    ogImage: posterImage || DEFAULT_OG_IMAGE,
+    keywords: `${project.title}, ${project.category || "construction"}, CPC Qatar, ${project.location || "Qatar"}, ${project.client || "construction project"}`,
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={projectSEO}
+        path={`/projects/${id}`}
+        structuredData={[
+          generateProjectSchema({
+            title: project.title,
+            description: project.description,
+            images: project.images,
+            location: project.location,
+            client: project.client,
+            category: project.category,
+            year: project.year,
+            slug: id,
+          }),
+          generateBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Projects", url: `${SITE_URL}/projects` },
+            { name: project.title, url: `${SITE_URL}/projects/${id}` },
+          ]),
+        ]}
+      />
       <Header />
       <main>
         {/* Hero Image */}
-        <section className={`pt-20 relative ${posterImage ? 'h-[60vh] min-h-[500px]' : 'h-auto'}`}>
+        <section
+          className={`pt-20 relative ${posterImage ? "h-[60vh] min-h-[500px]" : "h-auto"}`}
+        >
           {posterImage ? (
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -178,7 +226,8 @@ const ProjectDetail = () => {
                   ) : (
                     <div className="mb-8 p-8 bg-amber-500/5 border border-amber-500/20 rounded-lg">
                       <p className="text-sm text-muted-foreground text-center">
-                        This is a legacy project from our archives. Image documentation is not available.
+                        This is a legacy project from our archives. Image
+                        documentation is not available.
                       </p>
                     </div>
                   )}

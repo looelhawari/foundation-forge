@@ -35,10 +35,14 @@ module.exports = {
 
   // CORS
   cors: {
-    frontendUrl: process.env.FRONTEND_URL || [
-      "http://localhost:8080",
-      "http://localhost:8081",
-      "http://localhost:5173",
-    ],
+    frontendUrl: process.env.FRONTEND_URL
+      ? process.env.FRONTEND_URL.split(",")
+      : [
+          "http://localhost:8080",
+          "http://localhost:8081",
+          "http://localhost:5173",
+          "https://www.cpc-qa.com",
+          "https://cpc-qa.com",
+        ],
   },
 };

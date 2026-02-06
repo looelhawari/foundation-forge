@@ -7,6 +7,14 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingContactButtons } from "@/components/layout/FloatingContactButtons";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { CinematicHero } from "@/components/sections/CinematicHero";
+import SEOHead from "@/components/SEOHead";
+import {
+  PAGE_SEO,
+  generateLocalBusinessSchema,
+  generateWebSiteSchema,
+  generateBreadcrumbSchema,
+  SITE_URL,
+} from "@/lib/seo";
 
 import { ServicesImageGrid } from "@/components/sections/ServicesImageGrid";
 import { ServicesMarquee } from "@/components/sections/ServicesMarquee";
@@ -34,12 +42,15 @@ const Index = () => {
     setIsMobile(window.innerWidth < 768);
 
     // Add AOS initialization if needed
-    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowX = "hidden";
 
     // Mobile performance optimizations
     if (window.innerWidth < 768) {
       // Reduce animation complexity on mobile
-      document.documentElement.style.setProperty('--animation-duration', '0.3s');
+      document.documentElement.style.setProperty(
+        "--animation-duration",
+        "0.3s",
+      );
     }
 
     // Page is ready when DOM content is loaded
@@ -47,20 +58,29 @@ const Index = () => {
     const handleLoad = () => setIsLoading(false);
 
     // Check if document is already loaded
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       setIsLoading(false);
     } else {
-      window.addEventListener('load', handleLoad);
+      window.addEventListener("load", handleLoad);
     }
 
     return () => {
-      document.body.style.overflowX = 'auto';
-      window.removeEventListener('load', handleLoad);
+      document.body.style.overflowX = "auto";
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={PAGE_SEO.home}
+        path="/"
+        structuredData={[
+          generateLocalBusinessSchema(),
+          generateWebSiteSchema(),
+          generateBreadcrumbSchema([{ name: "Home", url: SITE_URL }]),
+        ]}
+      />
       <AnimatePresence mode="wait">
         {isLoading && (
           <PageLoader title="CPC QATAR" subtitle="Building Qatar's Future" />
@@ -116,4 +136,3 @@ const Index = () => {
 };
 
 export default Index;
-

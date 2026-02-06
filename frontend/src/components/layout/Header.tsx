@@ -32,28 +32,38 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
-        : "bg-transparent"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
+          : "bg-transparent"
+      }`}
+      role="banner"
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={cpcLogo} alt="CPC Logo" className="h-24 w-auto object-contain" />
+            <img
+              src={cpcLogo}
+              alt="CPC Logo"
+              className="h-24 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav
+            className="hidden lg:flex items-center gap-8"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${location.pathname === link.path
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-                  }`}
+                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  location.pathname === link.path
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.name}
                 {location.pathname === link.path && (
@@ -92,7 +102,10 @@ export const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-background/98 backdrop-blur-md border-b border-border"
           >
-            <nav className="container mx-auto px-6 py-6 flex flex-col gap-4">
+            <nav
+              className="container mx-auto px-6 py-6 flex flex-col gap-4"
+              aria-label="Mobile navigation"
+            >
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.path}
@@ -102,10 +115,11 @@ export const Header = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`block py-2 text-lg font-medium ${location.pathname === link.path
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                      }`}
+                    className={`block py-2 text-lg font-medium ${
+                      location.pathname === link.path
+                        ? "text-primary"
+                        : "text-muted-foreground"
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -116,7 +130,12 @@ export const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
               >
-                <Button variant="hero" size="lg" className="w-full mt-4" asChild>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="w-full mt-4"
+                  asChild
+                >
                   <Link to="/contact">Get a Quote</Link>
                 </Button>
               </motion.div>

@@ -5,12 +5,22 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { PageLoader } from "@/components/layout/PageLoader";
-import { MapPin, ArrowLeft, Loader2, FolderOpen, Search, Clock, Sparkles } from "lucide-react";
+import {
+  MapPin,
+  ArrowLeft,
+  Loader2,
+  FolderOpen,
+  Search,
+  Clock,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProjects, useCategories } from "@/hooks/useProjects";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+import SEOHead from "@/components/SEOHead";
+import { PAGE_SEO, generateBreadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 // Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
 const categoryData: Record<string, { icon: string; description: string }> = {
@@ -32,7 +42,9 @@ const categoryData: Record<string, { icon: string; description: string }> = {
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedProjectType, setSelectedProjectType] = useState<"new" | "old" | null>(null);
+  const [selectedProjectType, setSelectedProjectType] = useState<
+    "new" | "old" | null
+  >(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -42,7 +54,12 @@ const Projects = () => {
     limit: selectedCategory || selectedProjectType === "old" ? 50 : 100,
     category: selectedCategory || undefined,
     search: searchQuery || undefined,
-    isLegacy: selectedProjectType === "old" ? true : selectedProjectType === "new" ? false : undefined,
+    isLegacy:
+      selectedProjectType === "old"
+        ? true
+        : selectedProjectType === "new"
+          ? false
+          : undefined,
   });
 
   // Fetch legacy projects count
@@ -153,6 +170,16 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        seo={PAGE_SEO.projects}
+        path="/projects"
+        structuredData={[
+          generateBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Projects", url: `${SITE_URL}/projects` },
+          ]),
+        ]}
+      />
       <AnimatePresence mode="wait">
         {showLoader && (
           <PageLoader title="PROJECTS" subtitle="Excellence in Every Build" />
@@ -302,10 +329,11 @@ const Projects = () => {
                                         companyLogo
                                       }
                                       alt={project.title}
-                                      className={`w-full h-full ${getPosterImage(project.images)
-                                        ? "object-cover group-hover:scale-110"
-                                        : "object-contain p-12 opacity-50"
-                                        } transition-transform duration-500`}
+                                      className={`w-full h-full ${
+                                        getPosterImage(project.images)
+                                          ? "object-cover group-hover:scale-110"
+                                          : "object-contain p-12 opacity-50"
+                                      } transition-transform duration-500`}
                                       loading="lazy"
                                       onError={(e) => {
                                         e.currentTarget.src = companyLogo;
@@ -367,7 +395,9 @@ const Projects = () => {
                               New Projects
                             </h3>
                             <p className="text-muted-foreground mb-6">
-                              Explore our latest construction projects organized by category. Modern infrastructure and innovative designs.
+                              Explore our latest construction projects organized
+                              by category. Modern infrastructure and innovative
+                              designs.
                             </p>
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-primary font-medium">
@@ -399,7 +429,9 @@ const Projects = () => {
                               Old Projects
                             </h3>
                             <p className="text-muted-foreground mb-6">
-                              Browse our historical portfolio of completed projects. A testament to our years of experience and expertise.
+                              Browse our historical portfolio of completed
+                              projects. A testament to our years of experience
+                              and expertise.
                             </p>
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-amber-500 font-medium">
@@ -559,7 +591,10 @@ const Projects = () => {
                     {isLoading ? (
                       <div className="space-y-4 max-w-4xl mx-auto">
                         {[...Array(6)].map((_, i) => (
-                          <Skeleton key={i} className="h-24 w-full rounded-lg" />
+                          <Skeleton
+                            key={i}
+                            className="h-24 w-full rounded-lg"
+                          />
                         ))}
                       </div>
                     ) : filteredProjects.length > 0 ? (
@@ -601,7 +636,10 @@ const Projects = () => {
                                     )}
                                     {project.client && (
                                       <div className="text-xs text-muted-foreground">
-                                        Client: <span className="text-foreground">{project.client}</span>
+                                        Client:{" "}
+                                        <span className="text-foreground">
+                                          {project.client}
+                                        </span>
                                       </div>
                                     )}
                                     {project.year && (
@@ -701,7 +739,8 @@ const Projects = () => {
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />
                             ) : (
-                              `${filteredProjects.length} Project${filteredProjects.length !== 1 ? "s" : ""
+                              `${filteredProjects.length} Project${
+                                filteredProjects.length !== 1 ? "s" : ""
                               }`
                             )}
                           </p>
@@ -736,10 +775,11 @@ const Projects = () => {
                                     companyLogo
                                   }
                                   alt={project.title}
-                                  className={`w-full h-full ${getPosterImage(project.images)
-                                    ? "object-cover group-hover:scale-110"
-                                    : "object-contain p-12 opacity-50"
-                                    } transition-transform duration-500`}
+                                  className={`w-full h-full ${
+                                    getPosterImage(project.images)
+                                      ? "object-cover group-hover:scale-110"
+                                      : "object-contain p-12 opacity-50"
+                                  } transition-transform duration-500`}
                                   loading="lazy"
                                   onError={(e) => {
                                     e.currentTarget.src = companyLogo;
