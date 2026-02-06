@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Homepage -->
   <url>
-    <loc>https://cpcqatar.com/</loc>
+    <loc>https://cpc-qa.com/</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- About Page -->
   <url>
-    <loc>https://cpcqatar.com/about</loc>
+    <loc>https://cpc-qa.com/about</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -19,7 +19,7 @@
 
   <!-- Projects Page -->
   <url>
-    <loc>https://cpcqatar.com/projects</loc>
+    <loc>https://cpc-qa.com/projects</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -27,7 +27,7 @@
 
   <!-- Clients Page -->
   <url>
-    <loc>https://cpcqatar.com/clients</loc>
+    <loc>https://cpc-qa.com/clients</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -35,7 +35,7 @@
 
   <!-- Contact Page -->
   <url>
-    <loc>https://cpcqatar.com/contact</loc>
+    <loc>https://cpc-qa.com/contact</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -43,7 +43,7 @@
 
   <!-- Certificates Page -->
   <url>
-    <loc>https://cpcqatar.com/certificates</loc>
+    <loc>https://cpc-qa.com/certificates</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -51,7 +51,7 @@
 
   <!-- Terms of Use -->
   <url>
-    <loc>https://cpcqatar.com/terms</loc>
+    <loc>https://cpc-qa.com/terms</loc>
     <lastmod>2025-12-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -59,7 +59,7 @@
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://cpcqatar.com/privacy</loc>
+    <loc>https://cpc-qa.com/privacy</loc>
     <lastmod>2025-12-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

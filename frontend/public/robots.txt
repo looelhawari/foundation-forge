@@ -1,5 +1,5 @@
 # CPC Qatar - Cosmo Projects & Construction
-# https://cpcqatar.com
+# https://cpc-qa.com
 
 # Allow all search engine crawlers
 User-agent: Googlebot
@@ -27,4 +27,4 @@ Disallow: /admin
 Disallow: /admin/
 
 # Sitemap
-Sitemap: https://cpcqatar.com/sitemap.xml
+Sitemap: https://cpc-qa.com/sitemap.xml

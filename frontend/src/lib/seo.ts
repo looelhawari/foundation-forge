@@ -7,7 +7,7 @@
 // Site-wide constants
 // ---------------------------------------------------------------------------
 export const SITE_NAME = "CPC Qatar - Cosmo Projects & Construction";
-export const SITE_URL = "https://cpcqatar.com"; // Update with your actual domain
+export const SITE_URL = "https://cpc-qa.com"; // Update with your actual domain
 export const SITE_LOGO = `${SITE_URL}/cpc-logo.png`;
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 export const COMPANY_NAME = "Cosmo Projects & Construction and Trading";
