@@ -2,9 +2,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import processBg from "@/assets/real-process-bg.jpg";
 import process1 from "@/assets/process-1.jpg";
-import process2 from "@/assets/process-2.jpg";
-import process3 from "@/assets/process-3.jpg";
-import process4 from "@/assets/process-4.jpg";
+import process2 from "@/assets/planning.jpg";
+import process3 from "@/assets/image.png";
+import process4 from "@/assets/mobilization.avif";
 import process5 from "@/assets/process-5.jpg";
 import process6 from "@/assets/process-6.jpg";
 

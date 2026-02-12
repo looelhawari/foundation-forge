@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import whyChooseBg from "@/assets/real-why-choose-bg.jpg";
 import whyChoose1 from "@/assets/why-choose-1.jpg";
-import whyChoose2 from "@/assets/why-choose-2.jpg";
+import whyChoose2 from "@/assets/services/expert team.webp";
 import whyChoose3 from "@/assets/why-choose-3.jpg";
-import whyChoose4 from "@/assets/why-choose-4.jpg";
+import whyChoose4 from "@/assets/techno.jpg";
 import whyChoose5 from "@/assets/why-choose-5.jpg";
 import whyChoose6 from "@/assets/why-choose-6.jpg";
 

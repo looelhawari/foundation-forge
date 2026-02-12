@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import earthworks from "@/assets/services/earthworks.jpeg";
-import subgrade from "@/assets/services/subgrade.jpeg";
+import earthworks from "@/assets/services/earth work.jpg";
+import subgrade from "@/assets/services/subgrade and subbase.jpg";
 import asphalt from "@/assets/services/asphalt.jpeg";
-import traffic from "@/assets/services/traffic.jpeg";
-import interlock from "@/assets/services/interlock.jpeg";
-import steel from "@/assets/services/steel.jpeg";
+import traffic from "@/assets/services/road-markings-masters.jpeg";
+import interlock from "@/assets/services/interllock.jpeg";
+import steel from "@/assets/services/repair.webp";
 
 const services = [
   {
