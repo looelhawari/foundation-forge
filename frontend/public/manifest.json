@@ -1,0 +1,24 @@
+{
+  "name": "CPC Qatar — Cosmo Projects & Construction",
+  "short_name": "CPC Qatar",
+  "description": "Leading road construction, asphalt paving & infrastructure company in Qatar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#1a1a2e",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/src/assets/cpc_logo-removebg-preview.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/src/assets/cpc_logo-removebg-preview.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "construction"]
+}
