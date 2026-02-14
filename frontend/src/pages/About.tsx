@@ -241,12 +241,12 @@ const StorySection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, type: "spring" }}
               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-              className="absolute -bottom-8 -left-8 bg-gradient-card border border-primary/50 rounded-lg p-6 shadow-card cursor-pointer"
+              className="absolute -bottom-4 -left-4 sm:-bottom-8 sm:-left-8 bg-gradient-card border border-primary/50 rounded-lg p-4 sm:p-6 shadow-card cursor-pointer"
             >
-              <div className="font-display text-2xl text-primary mb-1">M.A.M Al-Nasr</div>
+              <div className="font-display text-xl sm:text-2xl text-primary mb-1">M.A.M Al-Nasr</div>
               <div className="text-xs text-muted-foreground mb-3">Chairman & Co-Founder</div>
               <div className="h-px bg-border my-2"></div>
-              <div className="font-display text-2xl text-primary mb-1">H.A.R Mohamed</div>
+              <div className="font-display text-xl sm:text-2xl text-primary mb-1">H.A.R Mohamed</div>
               <div className="text-xs text-muted-foreground">Co-Founder</div>
             </motion.div>
           </motion.div>
@@ -486,16 +486,16 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={ref} className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+    <section ref={ref} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
             Our Journey
@@ -544,8 +544,8 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: isEven ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.8,
                   delay: index * 0.2,
@@ -630,9 +630,9 @@ const StatsSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative py-32 bg-secondary overflow-hidden">
+    <section ref={ref} className="relative py-16 sm:py-24 md:py-32 bg-secondary overflow-hidden">
 
-      <motion.div style={{ scale }} className="container mx-auto px-6 relative z-10">
+      <motion.div style={{ scale }} className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -673,7 +673,7 @@ const StatsSection = () => {
                 <stat.icon className="w-8 h-8 text-primary transition-transform duration-300 group-hover:scale-110" />
               </div>
 
-              <div className="font-display text-5xl md:text-6xl text-foreground mb-2">
+              <div className="font-display text-4xl sm:text-5xl md:text-6xl text-foreground mb-2">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
 

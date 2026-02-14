@@ -63,7 +63,7 @@ export function ProcessTimeline() {
     const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     return (
-        <section ref={containerRef} className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+        <section ref={containerRef} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0">
                 <img
@@ -128,8 +128,8 @@ export function ProcessTimeline() {
                         return (
                             <motion.div
                                 key={process.step}
-                                initial={{ opacity: 0, x: isEven ? -100 : 100 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 transition={{
                                     duration: 0.8,
                                     delay: index * 0.2,

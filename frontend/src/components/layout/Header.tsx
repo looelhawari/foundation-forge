@@ -41,7 +41,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={cpcLogo} alt="CPC Logo" className="h-24 w-auto object-contain" />
+            <img src={cpcLogo} alt="CPC Logo" className="h-14 sm:h-16 md:h-20 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -76,7 +76,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-foreground"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -102,7 +102,7 @@ export const Header = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`block py-2 text-lg font-medium ${location.pathname === link.path
+                    className={`block py-3 text-lg font-medium ${location.pathname === link.path
                       ? "text-primary"
                       : "text-muted-foreground"
                       }`}

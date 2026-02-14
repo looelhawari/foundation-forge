@@ -108,7 +108,7 @@ export const ImmersiveTestimonials = () => {
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
             What They Say
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
             CLIENT <span className="text-gradient">TESTIMONIALS</span>
           </h2>
         </motion.div>
@@ -124,7 +124,7 @@ export const ImmersiveTestimonials = () => {
               <p className="text-muted-foreground">No testimonials available</p>
             </div>
           ) : (
-            <div className="relative min-h-[400px]">
+            <div className="relative min-h-[300px] sm:min-h-[400px]">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.id}
@@ -139,7 +139,7 @@ export const ImmersiveTestimonials = () => {
                   className={`absolute inset-0 ${index === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
                 >
                   <TiltCard className="h-full">
-                    <div className="bg-gradient-card border border-border rounded-2xl p-8 md:p-12 h-full flex flex-col">
+                    <div className="bg-gradient-card border border-border rounded-2xl p-5 sm:p-8 md:p-12 h-full flex flex-col">
                       {/* Rating */}
                       <div className="flex gap-1 mb-8">
                         {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
@@ -189,22 +189,23 @@ export const ImmersiveTestimonials = () => {
           {!isLoading && testimonials.length > 0 && (
             <>
               {/* Navigation */}
-              <div className="flex justify-center gap-4 mt-12">
+              <div className="flex justify-center gap-2 sm:gap-4 mt-12">
                 {testimonials.map((_, index) => (
                   <motion.button
                     key={index}
                     onClick={() => setActiveIndex(index)}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`relative w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
+                    className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500`}
+                  >
+                    <span className={`w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
                       ? "bg-primary"
                       : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                      }`}
-                  >
+                      }`} />
                     {index === activeIndex && (
                       <motion.div
                         layoutId="activeTestimonial"
-                        className="absolute inset-0 rounded-full bg-primary"
+                        className="absolute inset-0 rounded-full bg-primary/20"
                         initial={false}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       />
@@ -221,7 +222,7 @@ export const ImmersiveTestimonials = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-32"
+          className="mt-16 md:mt-32"
         >
           {/* Light background strip for better logo visibility */}
           <div className="relative overflow-hidden py-8 bg-gradient-to-r from-transparent via-white/10 to-transparent">

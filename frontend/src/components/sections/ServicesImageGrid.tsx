@@ -66,7 +66,7 @@ const BentoCard = ({
       transition={{ delay: index * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative overflow-hidden rounded-2xl cursor-pointer group ${isLarge ? "min-h-[420px] md:min-h-[500px]" : "min-h-[340px] md:min-h-[400px]"
+      className={`relative overflow-hidden rounded-2xl cursor-pointer group ${isLarge ? "min-h-[300px] sm:min-h-[380px] md:min-h-[420px] lg:min-h-[500px]" : "min-h-[260px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[400px]"
         }`}
     >
       {/* Image */}

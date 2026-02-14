@@ -134,7 +134,7 @@ export const CinematicHero = memo(() => {
               </h1>
 
               {/* Stats row */}
-              <motion.div className="mt-14 flex gap-10 md:gap-16"
+              <motion.div className="mt-10 sm:mt-14 flex flex-wrap gap-6 sm:gap-10 md:gap-16"
                 initial={{ opacity: 0, y: 30 }} animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 1.5, ease }}>
                 {[
@@ -149,7 +149,7 @@ export const CinematicHero = memo(() => {
                     <div className="font-display text-3xl md:text-5xl text-primary tabular-nums">
                       {ready && <AnimNum to={d.n} suffix={d.s} />}
                     </div>
-                    <div className="text-[10px] md:text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.l}</div>
+                    <div className="text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.l}</div>
                   </motion.div>
                 ))}
               </motion.div>

@@ -93,7 +93,7 @@ export function CompanyIntro() {
     const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
     return (
-        <section ref={sectionRef} className="relative py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+        <section ref={sectionRef} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
             {/* Static grid background */}
             <div className="absolute inset-0 opacity-5">
                 <div
@@ -108,9 +108,9 @@ export function CompanyIntro() {
                 />
             </div>
 
-            <motion.div className="container mx-auto px-6 relative z-10" style={{ opacity }}>
+            <motion.div className="container mx-auto px-4 sm:px-6 relative z-10" style={{ opacity }}>
                 {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-12 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +192,7 @@ export function CompanyIntro() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: item.delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                             viewport={{ once: true }}
-                            className="relative p-8 rounded-3xl bg-gray-800/40 border border-white/10 hover:border-amber-500/30 transition-colors duration-300 group"
+                            className="relative p-5 sm:p-6 md:p-8 rounded-3xl bg-gray-800/40 border border-white/10 hover:border-amber-500/30 transition-colors duration-300 group"
                         >
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 mb-4">
@@ -215,7 +215,7 @@ export function CompanyIntro() {
                     viewport={{ once: true }}
                     className="text-center"
                 >
-                    <h3 className="text-4xl font-bold text-white mb-4">
+                    <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                         Project Responsibilities
                     </h3>
 
@@ -224,7 +224,7 @@ export function CompanyIntro() {
                         whileInView={{ scaleX: 1 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="h-1 w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-12"
+                        className="h-1 w-48 sm:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8 md:mb-12"
                     />
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -238,7 +238,7 @@ export function CompanyIntro() {
                                     duration: 0.5
                                 }}
                                 viewport={{ once: true }}
-                                className="p-6 rounded-2xl bg-gray-800/30 border border-white/10 hover:border-amber-500/30 transition-colors duration-300 cursor-pointer"
+                                className="p-4 sm:p-6 rounded-2xl bg-gray-800/30 border border-white/10 hover:border-amber-500/30 transition-colors duration-300 cursor-pointer"
                             >
                                 <p className="text-white font-medium text-center">
                                     {feature}

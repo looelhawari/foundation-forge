@@ -52,12 +52,30 @@ export const FloatingContactButtons = () => {
     ];
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2"
-        >
+        <>
+            {/* Mobile floating action button */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.5, duration: 0.4 }}
+                className="fixed bottom-6 right-6 z-40 lg:hidden"
+            >
+                <Link
+                    to="/contact"
+                    aria-label="Contact us"
+                    className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-shadow"
+                >
+                    <MessageSquare size={22} strokeWidth={2} />
+                </Link>
+            </motion.div>
+
+            {/* Desktop sidebar buttons */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2"
+            >
             {contactButtons.map((button, index) => {
                 const Icon = button.icon;
                 const isHovered = hoveredIndex === index;
@@ -148,6 +166,7 @@ export const FloatingContactButtons = () => {
                     </motion.div>
                 );
             })}
-        </motion.div>
+            </motion.div>
+        </>
     );
 };

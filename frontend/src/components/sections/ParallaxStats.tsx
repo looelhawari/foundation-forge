@@ -27,7 +27,7 @@ export const ParallaxStats = memo(() => {
   const y2 = useTransform(scrollYProgress, [0, 1], enableParallax ? [30, -30] : [0, 0]);
 
   return (
-    <section ref={containerRef} className="relative py-32 md:py-48 overflow-hidden bg-secondary">
+    <section ref={containerRef} className="relative py-16 sm:py-24 md:py-32 lg:py-48 overflow-hidden bg-secondary">
       {/* Floating geometric shapes - simplified */}
       {enableParallax && (
         <>

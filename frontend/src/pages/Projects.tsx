@@ -185,7 +185,7 @@ const Projects = () => {
                       transition={{ duration: 0.8 }}
                       className="max-w-4xl mx-auto text-center"
                     >
-                      <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
+                      <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
                         OUR <span className="text-gradient">PROJECTS</span>
                       </h1>
                       <p className="text-xl text-muted-foreground mb-8">
@@ -215,8 +215,8 @@ const Projects = () => {
                       transition={{ duration: 0.8, delay: 0.2 }}
                       className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
                     >
-                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                        <div className="font-display text-4xl text-gradient mb-2">
+                      <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
+                        <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
                           {isLoading ? (
                             <Skeleton className="h-10 w-16 mx-auto" />
                           ) : (
@@ -227,8 +227,8 @@ const Projects = () => {
                           Total Projects
                         </div>
                       </div>
-                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                        <div className="font-display text-4xl text-gradient mb-2">
+                      <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
+                        <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
                           {isCategoriesLoading ? (
                             <Skeleton className="h-10 w-10 mx-auto" />
                           ) : (
@@ -239,15 +239,15 @@ const Projects = () => {
                           Categories
                         </div>
                       </div>
-                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
-                        <div className="font-display text-4xl text-gradient mb-2">
+                      <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
+                        <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">
                           100%
                         </div>
                         <div className="text-sm text-muted-foreground">
                           Success Rate
                         </div>
                       </div>
-                      <div className="bg-gradient-card border border-border rounded-lg p-6 text-center">
+                      <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
                         <div className="font-display text-4xl text-gradient mb-2">
                           15+
                         </div>
@@ -314,7 +314,7 @@ const Projects = () => {
                                       }}
                                     />
                                   </div>
-                                  <div className="p-6">
+                                  <div className="p-4 sm:p-6">
                                     <h3 className="font-display text-xl tracking-wide mb-2 group-hover:text-primary transition-colors line-clamp-2">
                                       {project.title}
                                     </h3>
@@ -354,7 +354,7 @@ const Projects = () => {
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.5, delay: 0.1 }}
                           onClick={() => setSelectedProjectType("new")}
-                          className="group bg-gradient-card border border-border rounded-xl p-10 hover:border-primary hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 text-left relative overflow-hidden"
+                          className="group bg-gradient-card border border-border rounded-xl p-6 sm:p-8 md:p-10 hover:border-primary hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 text-left relative overflow-hidden"
                         >
                           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                           <div className="relative z-10">

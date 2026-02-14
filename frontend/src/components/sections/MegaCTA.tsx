@@ -13,7 +13,7 @@ export const MegaCTA = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section ref={containerRef} className="relative py-48 md:py-64 bg-secondary overflow-hidden">
+    <section ref={containerRef} className="relative py-20 sm:py-32 md:py-48 lg:py-64 bg-secondary overflow-hidden">
       {/* Grid background */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -48,7 +48,7 @@ export const MegaCTA = () => {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-6xl md:text-7xl lg:text-[10vw] tracking-[0.05em] leading-none"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
             >
               LET'S CREATE
             </motion.h2>
@@ -59,7 +59,7 @@ export const MegaCTA = () => {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-display text-6xl md:text-7xl lg:text-[10vw] tracking-[0.05em] leading-none text-gradient"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none text-gradient"
             >
               SOMETHING
             </motion.h2>
@@ -70,7 +70,7 @@ export const MegaCTA = () => {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="font-display text-6xl md:text-7xl lg:text-[10vw] tracking-[0.05em] leading-none"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
             >
               EXTRAORDINARY
             </motion.h2>
@@ -90,7 +90,7 @@ export const MegaCTA = () => {
             className="group relative inline-flex items-center justify-center"
           >
             {/* Static ring label */}
-            <span className="absolute w-48 h-48 rounded-full border border-muted-foreground/20 flex items-center justify-center">
+            <span className="absolute w-36 h-36 sm:w-48 sm:h-48 rounded-full border border-muted-foreground/20 flex items-center justify-center">
               <span className="sr-only">Start your project</span>
             </span>
 
@@ -98,7 +98,7 @@ export const MegaCTA = () => {
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-32 h-32 rounded-full bg-gradient-gold flex items-center justify-center group-hover:shadow-gold transition-shadow"
+              className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-gold flex items-center justify-center group-hover:shadow-gold transition-shadow"
             >
               <svg
                 className="w-8 h-8 text-primary-foreground -rotate-45 group-hover:rotate-0 transition-transform duration-500"
@@ -118,7 +118,7 @@ export const MegaCTA = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
-          className="mt-24 flex flex-wrap justify-center gap-12 text-sm text-muted-foreground"
+          className="mt-16 sm:mt-20 md:mt-24 flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 text-sm text-muted-foreground"
         >
           <div>
             <span className="block text-xs tracking-widest uppercase mb-2">Email</span>

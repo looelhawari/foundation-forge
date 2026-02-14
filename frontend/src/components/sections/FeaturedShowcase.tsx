@@ -114,7 +114,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
             className="relative group"
         >
             <motion.div
-                className="relative h-[500px] rounded-3xl overflow-hidden bg-white/5 border border-white/10"
+                className="relative h-[350px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-white/5 border border-white/10"
                 animate={{
                     y: isHovered ? -20 : 0,
                     scale: isHovered ? 1.02 : 1
@@ -154,7 +154,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                     {/* Number indicator */}
                     <div className="flex items-start justify-between">
                         <motion.div
-                            className="text-[120px] font-bold leading-none text-primary/30"
+                            className="text-[60px] sm:text-[80px] md:text-[120px] font-bold leading-none text-primary/30"
                         >
                             {project.id}
                         </motion.div>
@@ -241,7 +241,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 stiffness: 60
             }}
             viewport={{ once: true }}
-            className="relative w-72 h-80"
+            className="relative w-full sm:w-72 h-80"
             style={{ transformStyle: "preserve-3d", perspective: 1500 }}
             onMouseEnter={() => setIsFlipped(true)}
             onMouseLeave={() => setIsFlipped(false)}
@@ -339,7 +339,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
 
 export function FeaturedShowcase() {
     return (
-        <section className="relative py-32 bg-black overflow-hidden">
+        <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
             {/* Subtle grid background */}
             <div className="absolute inset-0 opacity-[0.02]">
                 <div className="absolute inset-0" style={{
@@ -355,7 +355,7 @@ export function FeaturedShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                 >
                     <motion.div
                         initial={{ scaleX: 0 }}

@@ -50,7 +50,7 @@ const BRAND_COLOR = "#f59e0b";
 
 export function WhyChooseUs() {
     return (
-        <section className="relative py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
+        <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
             {/* Background Image */}
             <div className="absolute inset-0">
                 <img
@@ -69,7 +69,7 @@ export function WhyChooseUs() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
                         Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">CPC Qatar</span>
@@ -113,7 +113,7 @@ export function WhyChooseUs() {
                                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
                                 </div>
 
-                                <div className="p-8">
+                                <div className="p-5 sm:p-6 md:p-8">
                                     {/* Number */}
                                     <div
                                         className="text-4xl font-bold mb-4 opacity-60"

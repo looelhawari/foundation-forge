@@ -415,7 +415,7 @@ function ClientCategoriesSection() {
   }
 
   return (
-    <section className="py-32 md:py-48 relative overflow-hidden">
+    <section className="py-16 sm:py-24 md:py-32 lg:py-48 relative overflow-hidden">
       <MorphingBlob className="w-[500px] h-[500px] bottom-0 -left-48" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -423,7 +423,7 @@ function ClientCategoriesSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
             Diverse Portfolio
@@ -434,7 +434,7 @@ function ClientCategoriesSection() {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
               OUR <span className="text-gradient">CLIENTS</span>
             </motion.h2>
@@ -532,7 +532,7 @@ function ClientCategoriesSection() {
                         <div className="font-display text-2xl text-primary">
                           {client.projects}
                         </div>
-                        <div className="text-[10px] text-muted-foreground tracking-wider">
+                        <div className="text-xs text-muted-foreground tracking-wider">
                           PROJECTS
                         </div>
                       </div>
@@ -541,7 +541,7 @@ function ClientCategoriesSection() {
                           <div className="font-semibold text-sm">
                             {client.value}
                           </div>
-                          <div className="text-[10px] text-muted-foreground tracking-wider">
+                          <div className="text-xs text-muted-foreground tracking-wider">
                             VALUE
                           </div>
                         </div>
@@ -634,7 +634,7 @@ function TestimonialsSection() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
             What They Say
@@ -645,7 +645,7 @@ function TestimonialsSection() {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
               CLIENT <span className="text-gradient">TESTIMONIALS</span>
             </motion.h2>
@@ -684,7 +684,7 @@ function TestimonialsSection() {
           </div>
         ) : (
           <div className="max-w-5xl mx-auto">
-            <div className="relative min-h-[400px]">
+            <div className="relative min-h-[300px] sm:min-h-[400px]">
               {testimonials.map((testimonial, index) => {
                 const testimonialClassName =
                   index === activeIndex
@@ -704,7 +704,7 @@ function TestimonialsSection() {
                     className={testimonialClassName}
                   >
                     <TiltCard className="h-full">
-                      <div className="bg-gradient-card border border-border rounded-2xl p-8 md:p-12 h-full flex flex-col">
+                      <div className="bg-gradient-card border border-border rounded-2xl p-5 sm:p-8 md:p-12 h-full flex flex-col">
                         {/* Rating */}
                         <div className="flex gap-1 mb-8">
                           {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
@@ -751,22 +751,23 @@ function TestimonialsSection() {
               })}
             </div>
 
-            <div className="flex justify-center gap-4 mt-12">
+            <div className="flex justify-center gap-2 sm:gap-4 mt-12">
               {testimonials.map((_, index) => (
                 <motion.button
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
-                  className={`relative w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
+                  className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500`}
+                >
+                  <span className={`w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
                     ? "bg-primary"
                     : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                    }`}
-                >
+                    }`} />
                   {index === activeIndex && (
                     <motion.div
                       layoutId="activeTestimonialClient"
-                      className="absolute inset-0 rounded-full bg-primary"
+                      className="absolute inset-0 rounded-full bg-primary/20"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />

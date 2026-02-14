@@ -29,7 +29,7 @@ const ProjectDetail = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <main>
-          <section className="pt-20 relative h-[60vh] min-h-[500px]">
+          <section className="pt-20 relative h-[60vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
             <Skeleton className="absolute inset-0" />
             <div className="absolute bottom-0 left-0 right-0 container mx-auto px-6 pb-12 z-10">
               <Skeleton className="h-6 w-32 mb-6" />
@@ -90,7 +90,7 @@ const ProjectDetail = () => {
       <Header />
       <main>
         {/* Hero Image */}
-        <section className={`pt-20 relative ${posterImage ? 'h-[60vh] min-h-[500px]' : 'h-auto'}`}>
+        <section className={`pt-20 relative ${posterImage ? 'h-[60vh] min-h-[300px] sm:min-h-[400px] md:min-h-[500px]' : 'h-auto'}`}>
           {posterImage ? (
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -131,7 +131,7 @@ const ProjectDetail = () => {
         {/* Project Details */}
         <section className="py-16">
           <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-3 gap-12">
+            <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2">
                 <motion.div

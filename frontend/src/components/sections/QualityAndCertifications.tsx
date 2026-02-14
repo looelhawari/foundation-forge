@@ -57,7 +57,7 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
             className="relative group cursor-pointer"
         >
             {/* Badge container */}
-            <div className="relative w-56 h-56">
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56">
                 {/* Static outer ring */}
                 <div className="absolute inset-0">
                     <svg className="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +117,7 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
 
 export function QualityAndCertifications() {
     return (
-        <section className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-black overflow-hidden">
+        <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-black overflow-hidden">
             {/* Static watermark */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <div
@@ -134,7 +134,7 @@ export function QualityAndCertifications() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    className="text-center mb-12 md:mb-20"
                 >
                     <motion.h2
                         className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4"
@@ -164,7 +164,7 @@ export function QualityAndCertifications() {
                 </motion.div>
 
                 {/* Certification badges */}
-                <div className="flex flex-wrap justify-center gap-12 mb-24">
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 mb-12 md:mb-24">
                     {certifications.map((cert, index) => (
                         <CertificationBadge key={cert.title} cert={cert} index={index} />
                     ))}
@@ -178,7 +178,7 @@ export function QualityAndCertifications() {
                     viewport={{ once: true }}
                     className="max-w-4xl mx-auto"
                 >
-                    <h3 className="text-3xl font-bold text-center text-white mb-12">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-8 md:mb-12">
                         Our <span className="text-amber-400">Compliance</span>
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,10 +240,10 @@ export function QualityAndCertifications() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
                     viewport={{ once: true }}
-                    className="mt-20 text-center"
+                    className="mt-12 md:mt-20 text-center"
                 >
                     <motion.div
-                        className="inline-block bg-gradient-to-r from-amber-400/10 to-orange-500/10 border border-amber-400/30 rounded-2xl px-12 py-8"
+                        className="inline-block bg-gradient-to-r from-amber-400/10 to-orange-500/10 border border-amber-400/30 rounded-2xl px-6 sm:px-8 md:px-12 py-6 sm:py-8"
                         whileHover={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >

@@ -92,7 +92,7 @@ const Contact = () => {
               <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
                 Get In Touch
               </span>
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
                 CONTACT <span className="text-gradient">US</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl">
@@ -106,7 +106,7 @@ const Contact = () => {
         {/* Contact Content */}
         <section className="py-24">
           <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
               {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -306,7 +306,7 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
               className="mt-24"
             >
-              <div className="aspect-[21/9] rounded-lg overflow-hidden border border-border">
+              <div className="aspect-video sm:aspect-[21/9] rounded-lg overflow-hidden border border-border">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.6047!2d51.5014973!3d25.2734836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45dbcfbfe07107%3A0xaf990e0741438251!2sCosmo%20Projects%20%26%20Construction%20and%20Trading!5e0!3m2!1sen!2s!4v1735053847123!5m2!1sen!2s"
                   width="100%"
