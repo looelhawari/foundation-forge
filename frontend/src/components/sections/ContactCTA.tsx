@@ -24,7 +24,7 @@ export const ContactCTA = () => {
               Start Your Project
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-              LET'S BUILD <span className="text-gradient">TOGETHER</span>
+              LET'S CONSTRUCT <span className="text-gradient">TOGETHER</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
               Ready to start your next infrastructure project? Our team of experts is here

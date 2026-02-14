@@ -2,16 +2,13 @@
   motion,
   useScroll,
   useTransform,
-  AnimatePresence,
 } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import { Header } from "@/components/layout/Header";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
-import { PageLoader } from "@/components/layout/PageLoader";
 import {
-  ScrollProgress,
   MorphingBlob,
   TiltCard,
   AnimatedCounter,
@@ -169,40 +166,16 @@ const getGradientColors = (colorClass: string): string => {
 };
 
 export default function Clients() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Check if page content is ready
-  useEffect(() => {
-    if (document.readyState === 'complete') {
-      setIsLoading(false);
-    } else {
-      const handleLoad = () => setIsLoading(false);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
-      <AnimatePresence mode="wait">
-        {isLoading && <PageLoader title="CLIENTS" subtitle="Our Valued Partners" />}
-      </AnimatePresence>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <ScrollProgress />
-        <MinimalHeader />
-        <main>
-          <ClientCategoriesSection />
-          <TestimonialsSection />
-          <WhyChooseSection />
-          <MegaCTA />
-        </main>
-        <Footer />
-      </motion.div>
+      <MinimalHeader />
+      <main>
+        <ClientCategoriesSection />
+        <TestimonialsSection />
+        <WhyChooseSection />
+        <MegaCTA />
+      </main>
+      <Footer />
     </div>
   );
 }
@@ -254,7 +227,7 @@ function HeroSection() {
               }}
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
-              BUILDING
+              CONSTRUCTING
             </motion.h1>
           </div>
           <div className="overflow-hidden">

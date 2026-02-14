@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useInView, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useSpring, useReducedMotion, useMotionValue } from "framer-motion";
 import { useRef, useEffect, useState, useMemo, memo } from "react";
 
 // Check if we're on a mobile device or low-performance mode
@@ -95,25 +95,25 @@ interface MagneticProps {
 
 export const Magnetic = ({ children, className = "" }: MagneticProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15 });
 
   const handleMouse = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
     const { width, height, left, top } = ref.current!.getBoundingClientRect();
-    const x = (clientX - (left + width / 2)) * 0.3;
-    const y = (clientY - (top + height / 2)) * 0.3;
-    setPosition({ x, y });
+    x.set((e.clientX - (left + width / 2)) * 0.3);
+    y.set((e.clientY - (top + height / 2)) * 0.3);
   };
 
-  const reset = () => setPosition({ x: 0, y: 0 });
+  const reset = () => { x.set(0); y.set(0); };
 
   return (
     <motion.div
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15 }}
+      style={{ x: springX, y: springY }}
       className={className}
     >
       {children}
@@ -231,21 +231,23 @@ interface TiltCardProps {
 
 export const TiltCard = ({ children, className = "" }: TiltCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 400, damping: 30 });
+  const springY = useSpring(rotateY, { stiffness: 400, damping: 30 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
     const { width, height, left, top } = ref.current.getBoundingClientRect();
     const x = (e.clientX - left) / width;
     const y = (e.clientY - top) / height;
-    setRotateX((y - 0.5) * -20);
-    setRotateY((x - 0.5) * 20);
+    rotateX.set((y - 0.5) * -20);
+    rotateY.set((x - 0.5) * 20);
   };
 
   const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
+    rotateX.set(0);
+    rotateY.set(0);
   };
 
   return (
@@ -254,11 +256,10 @@ export const TiltCard = ({ children, className = "" }: TiltCardProps) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
+        rotateX: springX,
+        rotateY: springY,
         transformStyle: "preserve-3d",
       }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
       className={className}
     >
       {children}

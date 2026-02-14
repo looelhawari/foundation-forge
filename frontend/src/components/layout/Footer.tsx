@@ -13,7 +13,7 @@ export const Footer = () => {
               <img src={cpcLogo} alt="CPC Logo" className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Building the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise.
+              Constructing the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise.
             </p>
           </div>
 

@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef, memo } from "react";
-import { AnimatedCounter, MorphingBlob } from "../animations/MotionGraphics";
+import { AnimatedCounter } from "../animations/MotionGraphics";
 import { stats } from "@/data/projects";
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -28,14 +28,6 @@ export const ParallaxStats = memo(() => {
 
   return (
     <section ref={containerRef} className="relative py-32 md:py-48 overflow-hidden bg-secondary">
-      {/* Animated blobs - only on desktop */}
-      {!isMobile && (
-        <>
-          <MorphingBlob className="w-96 h-96 top-1/4 -left-48" />
-          <MorphingBlob className="w-80 h-80 bottom-1/4 -right-40" />
-        </>
-      )}
-
       {/* Floating geometric shapes - simplified */}
       {enableParallax && (
         <>
@@ -80,7 +72,7 @@ export const ParallaxStats = memo(() => {
                 delay: index * 0.1,
                 ease: "easeOut",
               }}
-              className="text-center group"
+              className="text-center group hover:-translate-y-1 transition-transform duration-300"
             >
               <div className="relative mb-4">
                 <div className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground relative">

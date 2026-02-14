@@ -15,10 +15,10 @@ import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 // Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
 const categoryData: Record<string, { icon: string; description: string }> = {
   School: { icon: "🎓", description: "Educational Facilities & Schools" },
-  Mosque: { icon: "🕌", description: "Religious Buildings & Mosques" },
+  Mosque: { icon: "🕌", description: "Religious Constructions & Mosques" },
   "Commercial Building": {
     icon: "🏢",
-    description: "Commercial & Residential Buildings",
+    description: "Commercial & Residential Constructions",
   },
   "Stores and Factory": {
     icon: "🏭",
@@ -155,7 +155,7 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
         {showLoader && (
-          <PageLoader title="PROJECTS" subtitle="Excellence in Every Build" />
+          <PageLoader title="PROJECTS" subtitle="Excellence in Every Construction" />
         )}
       </AnimatePresence>
 

@@ -32,7 +32,7 @@ export const CinematicCTA = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-6xl md:text-7xl lg:text-8xl tracking-[0.05em]"
             >
-              LET'S BUILD
+              LET'S CONSTRUCT
             </motion.h2>
           </div>
           <div className="overflow-hidden mb-12">
@@ -54,7 +54,7 @@ export const CinematicCTA = () => {
             transition={{ delay: 0.3 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Ready to start your next infrastructure project? Our team of experts is here 
+            Ready to start your next infrastructure project? Our team of experts is here
             to bring your vision to life with precision and excellence.
           </motion.p>
 

@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { CircularText, Magnetic } from "../animations/MotionGraphics";
 
 export const MegaCTA = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,11 +11,10 @@ export const MegaCTA = () => {
 
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
 
   return (
     <section ref={containerRef} className="relative py-48 md:py-64 bg-secondary overflow-hidden">
-      {/* Animated grid background */}
+      {/* Grid background */}
       <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
@@ -27,16 +25,6 @@ export const MegaCTA = () => {
           }}
         />
       </div>
-
-      {/* Floating circles */}
-      <motion.div
-        style={{ rotate }}
-        className="absolute top-1/4 left-1/4 w-32 h-32 border border-primary/20 rounded-full"
-      />
-      <motion.div
-        style={{ rotate: useTransform(scrollYProgress, [0, 1], [360, 0]) }}
-        className="absolute bottom-1/4 right-1/4 w-48 h-48 border border-primary/10 rounded-full"
-      />
 
       <motion.div
         style={{ scale, opacity }}
@@ -49,7 +37,7 @@ export const MegaCTA = () => {
           viewport={{ once: true }}
           className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
         >
-          Ready to Build?
+          Ready to Construct?
         </motion.span>
 
         {/* Main headline */}
@@ -97,36 +85,31 @@ export const MegaCTA = () => {
           transition={{ delay: 0.5 }}
           className="relative inline-block"
         >
-          <Magnetic>
-            <Link
-              to="/contact"
-              className="group relative inline-flex items-center justify-center"
-            >
-              {/* Circular rotating text */}
-              <div className="absolute w-48 h-48">
-                <CircularText
-                  text="START YOUR PROJECT • START YOUR PROJECT • "
-                  className="w-full h-full text-muted-foreground"
-                />
-              </div>
+          <Link
+            to="/contact"
+            className="group relative inline-flex items-center justify-center"
+          >
+            {/* Static ring label */}
+            <span className="absolute w-48 h-48 rounded-full border border-muted-foreground/20 flex items-center justify-center">
+              <span className="sr-only">Start your project</span>
+            </span>
 
-              {/* Central button */}
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-32 h-32 rounded-full bg-gradient-gold flex items-center justify-center group-hover:shadow-gold transition-shadow"
+            {/* Central button */}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-32 h-32 rounded-full bg-gradient-gold flex items-center justify-center group-hover:shadow-gold transition-shadow"
+            >
+              <svg
+                className="w-8 h-8 text-primary-foreground -rotate-45 group-hover:rotate-0 transition-transform duration-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  className="w-8 h-8 text-primary-foreground -rotate-45 group-hover:rotate-0 transition-transform duration-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </motion.div>
-            </Link>
-          </Magnetic>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </motion.div>
+          </Link>
         </motion.div>
 
         {/* Contact info */}

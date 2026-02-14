@@ -41,46 +41,25 @@ const standards = [
     "Qatar Chamber of Commerce Member"
 ];
 
-// Badge seal component with stamp effect
 const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; index: number }) => {
     const IconComponent = cert.icon;
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0, rotate: -180 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             transition={{
-                duration: 0.8,
-                delay: index * 0.2,
-                type: "spring",
-                stiffness: 100
+                duration: 0.6,
+                delay: index * 0.15,
+                ease: [0.22, 1, 0.36, 1]
             }}
             viewport={{ once: true }}
-            whileHover={{
-                scale: 1.1,
-                rotate: [0, -5, 5, 0],
-                transition: { duration: 0.5 }
-            }}
             className="relative group cursor-pointer"
         >
-            {/* Outer glow */}
-            <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 opacity-0 group-hover:opacity-30 blur-2xl"
-                transition={{ duration: 0.3 }}
-            />
-
             {/* Badge container */}
             <div className="relative w-56 h-56">
-                {/* Rotating outer ring */}
-                <motion.div
-                    className="absolute inset-0"
-                    animate={{ rotate: 360 }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                >
+                {/* Static outer ring */}
+                <div className="absolute inset-0">
                     <svg className="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id={`badge-grad-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -97,46 +76,31 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
                             stroke={`url(#badge-grad-${index})`}
                             strokeWidth="2"
                             strokeDasharray="10 5"
+                            className="group-hover:stroke-amber-400 transition-colors duration-300"
                         />
                     </svg>
-                </motion.div>
+                </div>
 
                 {/* Badge seal shape */}
-                <motion.div
-                    className="absolute inset-4"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                >
+                <div className="absolute inset-4">
                     <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <filter id={`glow-${index}`}>
-                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
-
-                        {/* Seal shape (12-pointed star) */}
                         <motion.path
                             d="M50 5 L53 40 L65 15 L60 45 L80 25 L68 50 L95 40 L75 55 L95 60 L68 50 L80 75 L60 55 L65 85 L53 60 L50 95 L47 60 L35 85 L40 55 L20 75 L32 50 L5 60 L25 55 L5 40 L32 50 L20 25 L40 45 L35 15 L47 40 Z"
-                            fill="url(#badge-grad-${index})"
-                            filter={`url(#glow-${index})`}
-                            initial={{ pathLength: 0, opacity: 0 }}
-                            whileInView={{ pathLength: 1, opacity: 0.9 }}
-                            transition={{ duration: 2, delay: index * 0.2 }}
+                            fill={`url(#badge-grad-${index})`}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 0.9 }}
+                            transition={{ duration: 0.8, delay: index * 0.15 }}
                             viewport={{ once: true }}
                         />
                     </svg>
-                </motion.div>
+                </div>
 
                 {/* Center content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.2 + 0.5, duration: 0.6 }}
+                        transition={{ delay: index * 0.15 + 0.3, duration: 0.5 }}
                         viewport={{ once: true }}
                         className="relative z-10"
                     >
@@ -146,19 +110,6 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
                         <div className="text-xs text-gray-400 px-2">{cert.description}</div>
                     </motion.div>
                 </div>
-
-                {/* Stamp effect on hover */}
-                <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ scale: 2, opacity: 0 }}
-                    whileHover={{
-                        scale: 1,
-                        opacity: [0, 0.5, 0],
-                        transition: { duration: 0.6 }
-                    }}
-                >
-                    <div className="w-full h-full border-4 border-amber-500 rounded-full" />
-                </motion.div>
             </div>
         </motion.div>
     );
@@ -167,22 +118,13 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
 export function QualityAndCertifications() {
     return (
         <section className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-black overflow-hidden">
-            {/* Watermark pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <motion.div
-                    className="text-[20rem] font-bold text-amber-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
-                    animate={{
-                        rotate: -45,
-                        scale: [1, 1.1, 1]
-                    }}
-                    transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
+            {/* Static watermark */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                <div
+                    className="text-[20rem] font-bold text-amber-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap -rotate-45"
                 >
                     LICENSED
-                </motion.div>
+                </div>
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
@@ -256,7 +198,7 @@ export function QualityAndCertifications() {
                                     x: 10,
                                     transition: { type: "spring", stiffness: 300 }
                                 }}
-                                className="relative bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-sm border border-gray-700 rounded-xl p-6 overflow-hidden group"
+                                className="relative bg-gray-800/40 border border-gray-700 rounded-xl p-6 overflow-hidden group hover:border-amber-500/30 transition-colors duration-300"
                             >
                                 {/* Checkmark icon with draw animation */}
                                 <motion.svg

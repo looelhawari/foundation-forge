@@ -65,7 +65,6 @@ export const CinematicHero = memo(() => {
     const unsubscribe = s2Opacity.on("change", (v) => {
       if (videoRef.current) {
         if (v > 0.1) {
-          videoRef.current.playbackRate = 0.5; // Slow down to 50% speed
           videoRef.current.play().catch(() => { });
         }
       }
@@ -178,7 +177,7 @@ export const CinematicHero = memo(() => {
             className="w-full h-full object-cover"
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
           />
           {/* Subtle vignette on video */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.4) 100%)" }} />

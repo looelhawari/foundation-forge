@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { MorphingBlob, TiltCard } from "../animations/MotionGraphics";
+import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 import moelogo from "@/assets/MOE-removebg-preview.png";
@@ -86,14 +86,6 @@ export const ImmersiveTestimonials = () => {
 
   return (
     <section ref={containerRef} className="relative py-24 md:py-32 bg-background overflow-hidden">
-      {/* Background elements - only on desktop */}
-      {!isMobile && (
-        <>
-          <MorphingBlob className="w-[500px] h-[500px] -top-48 -right-48" />
-          <MorphingBlob className="w-[350px] h-[350px] bottom-0 -left-48" />
-        </>
-      )}
-
       {/* Animated quote marks - simplified */}
       {!isMobile && (
         <motion.div

@@ -1,11 +1,10 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
 import { CompanyIntro } from "@/components/sections/CompanyIntro";
-import { PageLoader } from "@/components/layout/PageLoader";
-import { ScrollProgress, AnimatedCounter, MorphingBlob, ImageReveal, TiltCard } from "@/components/animations/MotionGraphics";
+import { AnimatedCounter, ImageReveal } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 import heroImage from "@/assets/hero-construction.jpg";
@@ -59,7 +58,6 @@ const milestones = [
 ];
 
 const About = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
@@ -70,135 +68,91 @@ const About = () => {
   const heroOpacity = useTransform(heroScroll, [0, 0.5], [1, 0]);
   const textY = useTransform(heroScroll, [0, 1], [0, 200]);
 
-  // Check if page content is ready
-  useEffect(() => {
-    if (document.readyState === 'complete') {
-      setIsLoading(false);
-    } else {
-      const handleLoad = () => setIsLoading(false);
-      window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
-      <AnimatePresence mode="wait">
-        {isLoading && <PageLoader title="OUR STORY" subtitle="Since 2017" />}
-      </AnimatePresence>
+      <Header />
+      <main>
+        {/* Company Intro Section */}
+        <CompanyIntro />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <ScrollProgress />
-        <Header />
-        <main>
-          {/* Company Intro Section */}
-          <CompanyIntro />
+        {/* Cinematic Hero */}
+        <section ref={heroRef} className="relative h-[150vh]">
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <motion.div style={{ scale: heroScale }} className="absolute inset-0">
+              <img
+                src={heroImage}
+                alt="Construction site"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+            </motion.div>
 
-          {/* Cinematic Hero */}
-          <section ref={heroRef} className="relative h-[150vh]">
-            <div className="sticky top-0 h-screen overflow-hidden">
-              <motion.div style={{ scale: heroScale }} className="absolute inset-0">
-                <img
-                  src={heroImage}
-                  alt="Construction site"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-
-                {/* Floating particles */}
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-primary rounded-full"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    animate={{
-                      y: [0, -100, -200],
-                      opacity: [0, 1, 0],
-                      scale: [0, 1.5, 0],
-                    }}
-                    transition={{
-                      duration: 3 + Math.random() * 2,
-                      delay: Math.random() * 2,
-                      repeat: Infinity,
-                      repeatDelay: Math.random() * 3,
-                    }}
-                  />
-                ))}
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: heroOpacity, y: textY }}
-                className="relative z-10 h-full flex flex-col justify-center container mx-auto px-6"
+            <motion.div
+              style={{ opacity: heroOpacity, y: textY }}
+              className="relative z-10 h-full flex flex-col justify-center container mx-auto px-6"
+            >
+              <motion.span
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
               >
-                <motion.span
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 0.3 }}
-                  className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
+                Our Story
+              </motion.span>
+
+              <div className="overflow-hidden mb-4">
+                <motion.h1
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
                 >
-                  Our Story
-                </motion.span>
+                  CONSTRUCTING
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden mb-4">
+                <motion.h1
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
+                >
+                  LEGACY
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden">
+                <motion.h1
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
+                >
+                  SINCE 2017
+                </motion.h1>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-                <div className="overflow-hidden mb-4">
-                  <motion.h1
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-                    className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
-                  >
-                    BUILDING
-                  </motion.h1>
-                </div>
-                <div className="overflow-hidden mb-4">
-                  <motion.h1
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-                    className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
-                  >
-                    LEGACY
-                  </motion.h1>
-                </div>
-                <div className="overflow-hidden">
-                  <motion.h1
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-                    className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
-                  >
-                    SINCE 2017
-                  </motion.h1>
-                </div>
-              </motion.div>
-            </div>
-          </section>
+        {/* Story Section with Parallax */}
+        <StorySection />
 
-          {/* Story Section with Parallax */}
-          <StorySection />
+        {/* What is CPC Section */}
+        <WhatIsCPCSection />
 
-          {/* What is CPC Section */}
-          <WhatIsCPCSection />
+        {/* Values Section */}
+        <ValuesSection values={values} />
 
-          {/* Values Section */}
-          <ValuesSection values={values} />
+        {/* Timeline Section */}
+        <TimelineSection milestones={milestones} />
 
-          {/* Timeline Section */}
-          <TimelineSection milestones={milestones} />
+        {/* Stats Section */}
+        <StatsSection />
 
-          {/* Stats Section */}
-          <StatsSection />
-
-          <MegaCTA />
-        </main>
-        <Footer />
-      </motion.div>
+        <MegaCTA />
+      </main>
+      <Footer />
     </div>
   );
 };
@@ -216,8 +170,6 @@ const StorySection = () => {
 
   return (
     <section ref={ref} className="relative py-16 sm:py-24 md:py-32 lg:py-48 overflow-hidden">
-      <MorphingBlob className="w-[500px] h-[500px] -top-48 -right-48" />
-
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
           {/* Text */}
@@ -277,26 +229,10 @@ const StorySection = () => {
           </motion.div>
 
           {/* Image */}
-          <motion.div style={{ y: imageY, rotate }} className="relative">
-            <motion.div
-              className="aspect-[4/5] rounded-lg overflow-hidden"
-              whileHover={{
-                scale: 1.05,
-                rotateY: 10,
-                rotateX: -5,
-                transition: { duration: 0.5, ease: "easeOut" }
-              }}
-              style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
-            >
+          <motion.div style={{ y: imageY }} className="relative">
+            <div className="aspect-[4/5] rounded-lg overflow-hidden">
               <ImageReveal src={engineerImage} alt="Chairman Mohammed Ahmed Mubarak Al-Nasr" className="w-full h-full" />
-              {/* Hover overlay effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-orange-500/20"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-            </motion.div>
+            </div>
 
             {/* Floating badges for both founders */}
             <motion.div
@@ -305,7 +241,7 @@ const StorySection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5, type: "spring" }}
               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-              className="absolute -bottom-8 -left-8 bg-gradient-card border border-primary/50 rounded-lg p-6 shadow-card cursor-pointer backdrop-blur-sm"
+              className="absolute -bottom-8 -left-8 bg-gradient-card border border-primary/50 rounded-lg p-6 shadow-card cursor-pointer"
             >
               <div className="font-display text-2xl text-primary mb-1">M.A.M Al-Nasr</div>
               <div className="text-xs text-muted-foreground mb-3">Chairman & Co-Founder</div>
@@ -323,8 +259,6 @@ const StorySection = () => {
 const WhatIsCPCSection = () => {
   return (
     <section className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-gradient-to-b from-background via-secondary to-background overflow-hidden">
-      <MorphingBlob className="w-[600px] h-[600px] top-1/2 -left-48 -translate-y-1/2" />
-
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -346,6 +280,13 @@ const WhatIsCPCSection = () => {
               WHAT IS <span className="text-gradient">CPC?</span>
             </motion.h2>
           </div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
+            className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-6"
+          />
         </motion.div>
 
         <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
@@ -460,12 +401,14 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
 
   return (
     <section ref={ref} className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-secondary overflow-hidden">
-      <MorphingBlob className="w-[400px] h-[400px] bottom-0 -left-48" />
-
-      {/* Floating geometric shapes */}
+      {/* Decorative floating accents */}
       <motion.div
         style={{ y }}
-        className="absolute top-20 right-20 w-32 h-32 border border-primary/20 rotate-45 hidden md:block"
+        className="absolute top-20 right-10 w-24 h-24 border border-primary/15 rotate-45 hidden md:block will-change-transform"
+      />
+      <motion.div
+        style={{ y }}
+        className="absolute bottom-32 left-10 w-16 h-16 bg-primary/5 hidden md:block will-change-transform"
       />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -489,6 +432,13 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
               OUR <span className="text-gradient">VALUES</span>
             </motion.h2>
           </div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
+            className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-6"
+          />
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
@@ -504,69 +454,20 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <TiltCard className="h-full">
-                <motion.div
-                  className="bg-gradient-card border border-border rounded-xl p-6 sm:p-8 h-full group hover:border-primary/50 transition-all duration-500 relative overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {/* Animated background gradient on hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-transparent opacity-0 group-hover:opacity-100"
-                    transition={{ duration: 0.5 }}
-                  />
+              <motion.div
+                className="bg-gradient-card border border-border rounded-xl p-6 sm:p-8 h-full group hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
+                whileHover={{ y: -8 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300">
+                  <value.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary transition-transform duration-300 group-hover:scale-110" />
+                </div>
 
-                  {/* Particle effect on hover */}
-                  <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    {[...Array(6)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-primary rounded-full"
-                        style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                        }}
-                        animate={{
-                          y: [0, -50, -100],
-                          opacity: [0, 1, 0],
-                          scale: [0, 1, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          delay: i * 0.2,
-                          repeat: Infinity,
-                          repeatDelay: 1,
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-
-                  <motion.div
-                    whileHover={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 sm:mb-8 group-hover:bg-primary/20 relative z-10"
-                  >
-                    <value.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
-
-                    {/* Rotating ring on hover */}
-                    <motion.div
-                      className="absolute inset-0 border-2 border-primary/30 rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    />
-                  </motion.div>
-
-                  <h3 className="font-display text-xl sm:text-2xl tracking-[0.1em] mb-3 sm:mb-4 group-hover:text-primary transition-colors relative z-10">
-                    {value.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed relative z-10">{value.description}</p>
-                </motion.div>
-              </TiltCard>
+                <h3 className="font-display text-xl sm:text-2xl tracking-[0.1em] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
+                  {value.title}
+                </h3>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{value.description}</p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -586,28 +487,6 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
 
   return (
     <section ref={ref} className="relative py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
-      {/* Animated circuit board pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="circuit-about" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <motion.path
-                d="M10 50 L30 50 L30 30 L50 30 L50 70 L70 70 L70 50 L90 50"
-                stroke="#fbbf24"
-                strokeWidth="1"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-              />
-              <circle cx="30" cy="50" r="3" fill="#f97316" />
-              <circle cx="50" cy="70" r="3" fill="#ea580c" />
-              <circle cx="70" cy="50" r="3" fill="#fbbf24" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#circuit-about)" />
-        </svg>
-      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
@@ -678,36 +557,12 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
               >
                 <div className={`flex items-center gap-4 md:gap-12 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Content card */}
-                  <motion.div
-                    className="w-full md:w-5/12 ml-16 md:ml-0"
-                    whileHover={{ scale: 1.05, x: isEven ? 10 : -10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden group">
-                      {/* Glow effect on hover */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-orange-500/0 group-hover:from-amber-400/10 group-hover:to-orange-500/10"
-                        transition={{ duration: 0.3 }}
-                      />
-
-                      {/* Year badge with pulse animation */}
-                      <motion.div
-                        className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-black font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4"
-                        animate={{
-                          boxShadow: [
-                            "0 0 0 0 rgba(251, 191, 36, 0.7)",
-                            "0 0 0 20px rgba(251, 191, 36, 0)",
-                            "0 0 0 0 rgba(251, 191, 36, 0)"
-                          ]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: index * 0.3
-                        }}
-                      >
+                  <div className="w-full md:w-5/12 ml-16 md:ml-0">
+                    <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 rounded-2xl p-4 sm:p-6 md:p-8 overflow-hidden group hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-400/10 transition-all duration-300 hover:-translate-y-1">
+                      {/* Year badge */}
+                      <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-black font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4">
                         {milestone.year}
-                      </motion.div>
+                      </div>
 
                       {/* Title */}
                       <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
@@ -728,60 +583,20 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
                         {milestone.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
 
-                  {/* Center node with animated circle */}
+                  {/* Center node */}
                   <div className="hidden md:flex md:w-2/12 justify-center">
                     <motion.div
                       className="relative w-16 h-16 md:w-20 md:h-20"
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        delay: index * 0.2,
-                        type: "spring",
-                        stiffness: 200
-                      }}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.15 }}
                       viewport={{ once: true }}
                     >
-                      {/* Outer rotating ring */}
-                      <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-amber-400/30"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 10,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      />
-
-                      {/* Inner pulsing circle */}
-                      <motion.div
-                        className="absolute inset-2 rounded-full bg-gradient-to-br from-amber-400 to-orange-500"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [1, 0.8, 1]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: index * 0.3
-                        }}
-                      />
-
-                      {/* Center dot */}
+                      <div className="absolute inset-2 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-400/40" />
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          className="w-4 h-4 rounded-full bg-white"
-                          animate={{
-                            scale: [1, 1.5, 1]
-                          }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            delay: index * 0.2
-                          }}
-                        />
+                        <div className="w-4 h-4 rounded-full bg-white shadow-md shadow-white/50" />
                       </div>
                     </motion.div>
                   </div>
@@ -816,9 +631,30 @@ const StatsSection = () => {
 
   return (
     <section ref={ref} className="relative py-32 bg-secondary overflow-hidden">
-      <MorphingBlob className="w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <motion.div style={{ scale }} className="container mx-auto px-6 relative z-10">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4">
+            By The Numbers
+          </span>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.05em] mb-4">
+            OUR <span className="text-gradient">IMPACT</span>
+          </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
+            className="h-1 w-32 sm:w-48 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"
+          />
+        </motion.div>
+
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (
             <motion.div
@@ -831,70 +667,15 @@ const StatsSection = () => {
                 delay: index * 0.15,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="text-center group relative"
+              className="text-center group relative hover:-translate-y-1 transition-transform duration-300"
             >
-              {/* Glowing background on hover */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-transparent rounded-xl blur-xl opacity-0 group-hover:opacity-100"
-                transition={{ duration: 0.5 }}
-              />
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300">
+                <stat.icon className="w-8 h-8 text-primary transition-transform duration-300 group-hover:scale-110" />
+              </div>
 
-              <motion.div
-                whileHover={{
-                  scale: 1.1,
-                  rotateY: 360,
-                  rotateX: 10,
-                }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors relative"
-                style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
-              >
-                <stat.icon className="w-8 h-8 text-primary relative z-10" />
-
-                {/* Orbital ring */}
-                <motion.div
-                  className="absolute inset-0 border-2 border-primary/20 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute inset-0 border-2 border-primary/10 rounded-full"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                />
-              </motion.div>
-
-              <motion.div
-                className="font-display text-5xl md:text-6xl text-foreground mb-2 relative"
-                whileHover={{
-                  scale: 1.15,
-                  textShadow: "0 0 20px rgba(251,191,36,0.5)",
-                }}
-              >
+              <div className="font-display text-5xl md:text-6xl text-foreground mb-2">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-
-                {/* Sparkle effect on hover */}
-                {[...Array(4)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100"
-                    style={{
-                      left: `${25 + i * 20}%`,
-                      top: `${i % 2 === 0 ? 0 : 100}%`,
-                    }}
-                    animate={{
-                      scale: [0, 1, 0],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 1,
-                      delay: i * 0.2,
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  />
-                ))}
-              </motion.div>
+              </div>
 
               <div className="text-xs tracking-[0.2em] text-muted-foreground group-hover:text-primary transition-colors">
                 {stat.label}

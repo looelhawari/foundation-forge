@@ -38,7 +38,7 @@ const topProjects = [
     {
         id: 3,
         title: "Warehouse",
-        client: "Ministry of Education",
+        client: "Manateq",
         area: "11,400 m²",
         status: "Completed",
         image: warehouseImg
@@ -114,7 +114,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
             className="relative group"
         >
             <motion.div
-                className="relative h-[500px] rounded-3xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10"
+                className="relative h-[500px] rounded-3xl overflow-hidden bg-white/5 border border-white/10"
                 animate={{
                     y: isHovered ? -20 : 0,
                     scale: isHovered ? 1.02 : 1
@@ -161,7 +161,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
 
                         {/* Badge */}
                         <motion.div
-                            className="px-4 py-2 rounded-full text-xs font-bold backdrop-blur-md bg-primary/20 border border-primary/40"
+                            className="px-4 py-2 rounded-full text-xs font-bold bg-primary/20 border border-primary/40"
                             initial={{ x: 20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: index * 0.1 + 0.3 }}
@@ -270,19 +270,13 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 />
 
                 {/* Logo */}
-                <motion.div
-                    className="w-36 h-36 mb-4 relative z-10 flex items-center justify-center"
-                    animate={{
-                        scale: [1, 1.05, 1]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <div className="w-36 h-36 mb-4 relative z-10 flex items-center justify-center">
                     <img
                         src={client.logo}
                         alt={client.name}
                         className="w-full h-full object-contain drop-shadow-lg"
                     />
-                </motion.div>
+                </div>
                 <h4 className="text-lg font-bold text-gray-800 text-center relative z-10">
                     {client.name}
                 </h4>

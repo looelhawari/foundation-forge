@@ -350,9 +350,9 @@ export const projects: Project[] = [
     },
     {
         id: "commercial-building",
-        title: "Commercial Building & Souq",
+        title: "Commercial Construction & Souq",
         category: "Commercial & Retail",
-        description: "Commercial buildings and traditional souq marketplaces road works.",
+        description: "Commercial constructions and traditional souq marketplaces road works.",
         images: Array.from({ length: 64 }, (_, i) => `/projects/PROJECTS_PHOTO_ROD_WORK_FOR_COMMERCIAL_BULDING_SOUQ/${String(i + 1).padStart(3, '0')}.png`),
         year: "2020-2022",
         location: "Qatar"

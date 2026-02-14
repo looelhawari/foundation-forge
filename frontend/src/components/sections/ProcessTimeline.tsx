@@ -70,31 +70,9 @@ export function ProcessTimeline() {
                     src={processBg}
                     alt="CPC construction process"
                     className="w-full h-full object-cover opacity-10"
+                    loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-black/85 to-gray-900/90" />
-            </div>
-
-            {/* Animated circuit board pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                            <motion.path
-                                d="M10 50 L30 50 L30 30 L50 30 L50 70 L70 70 L70 50 L90 50"
-                                stroke="#fbbf24"
-                                strokeWidth="1"
-                                fill="none"
-                                initial={{ pathLength: 0 }}
-                                animate={{ pathLength: 1 }}
-                                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                            />
-                            <circle cx="30" cy="50" r="3" fill="#f97316" />
-                            <circle cx="50" cy="70" r="3" fill="#ea580c" />
-                            <circle cx="70" cy="50" r="3" fill="#fbbf24" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#circuit)" />
-                </svg>
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
@@ -163,12 +141,8 @@ export function ProcessTimeline() {
                             >
                                 <div className={`flex items-center gap-4 md:gap-12 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                                     {/* Content card */}
-                                    <motion.div
-                                        className="w-full md:w-5/12 ml-16 md:ml-0"
-                                        whileHover={{ scale: 1.05, x: isEven ? 10 : -10 }}
-                                        transition={{ type: "spring", stiffness: 300 }}
-                                    >
-                                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl overflow-hidden group">
+                                    <div className="w-full md:w-5/12 ml-16 md:ml-0">
+                                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700 rounded-2xl overflow-hidden group hover:border-amber-400/30 hover:shadow-lg hover:shadow-amber-400/10 transition-all duration-300 hover:-translate-y-1">
                                             {/* Project Image */}
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
@@ -179,31 +153,12 @@ export function ProcessTimeline() {
                                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
 
                                                 {/* Step number overlay on image */}
-                                                <motion.div
-                                                    className="absolute top-4 right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-bold text-lg sm:text-xl md:text-2xl"
-                                                    animate={{
-                                                        boxShadow: [
-                                                            "0 0 0 0 rgba(251, 191, 36, 0.7)",
-                                                            "0 0 0 20px rgba(251, 191, 36, 0)",
-                                                            "0 0 0 0 rgba(251, 191, 36, 0)"
-                                                        ]
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        delay: index * 0.3
-                                                    }}
-                                                >
+                                                <div className="absolute top-4 right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-bold text-lg sm:text-xl md:text-2xl">
                                                     {process.step}
-                                                </motion.div>
+                                                </div>
                                             </div>
 
                                             <div className="p-4 sm:p-6 md:p-8">
-                                                {/* Glow effect on hover */}
-                                                <motion.div
-                                                    className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-orange-500/0 group-hover:from-amber-400/10 group-hover:to-orange-500/10"
-                                                    transition={{ duration: 0.3 }}
-                                                />
 
                                                 {/* Title */}
                                                 <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
@@ -238,78 +193,27 @@ export function ProcessTimeline() {
                                                             }}
                                                             viewport={{ once: true }}
                                                         >
-                                                            <motion.div
-                                                                className="w-1.5 h-1.5 rounded-full bg-amber-400"
-                                                                animate={{
-                                                                    scale: [1, 1.5, 1],
-                                                                    opacity: [0.5, 1, 0.5]
-                                                                }}
-                                                                transition={{
-                                                                    duration: 2,
-                                                                    repeat: Infinity,
-                                                                    delay: taskIndex * 0.2
-                                                                }}
-                                                            />
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                                                             {task}
                                                         </motion.div>
                                                     ))}
                                                 </div>
                                             </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
 
-                                    {/* Center node with animated circle */}
+                                    {/* Center node */}
                                     <div className="hidden md:flex md:w-2/12 justify-center">
                                         <motion.div
                                             className="relative w-16 h-16 md:w-20 md:h-20"
-                                            initial={{ scale: 0, rotate: -180 }}
-                                            whileInView={{ scale: 1, rotate: 0 }}
-                                            transition={{
-                                                duration: 0.6,
-                                                delay: index * 0.2,
-                                                type: "spring",
-                                                stiffness: 200
-                                            }}
+                                            initial={{ scale: 0 }}
+                                            whileInView={{ scale: 1 }}
+                                            transition={{ duration: 0.4, delay: index * 0.15 }}
                                             viewport={{ once: true }}
                                         >
-                                            {/* Outer rotating ring */}
-                                            <motion.div
-                                                className="absolute inset-0 rounded-full border-2 border-amber-400/30"
-                                                animate={{ rotate: 360 }}
-                                                transition={{
-                                                    duration: 10,
-                                                    repeat: Infinity,
-                                                    ease: "linear"
-                                                }}
-                                            />
-
-                                            {/* Inner pulsing circle */}
-                                            <motion.div
-                                                className="absolute inset-2 rounded-full bg-gradient-to-br from-amber-400 to-orange-500"
-                                                animate={{
-                                                    scale: [1, 1.2, 1],
-                                                    opacity: [1, 0.8, 1]
-                                                }}
-                                                transition={{
-                                                    duration: 2,
-                                                    repeat: Infinity,
-                                                    delay: index * 0.3
-                                                }}
-                                            />
-
-                                            {/* Center dot */}
+                                            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-400/40" />
                                             <div className="absolute inset-0 flex items-center justify-center">
-                                                <motion.div
-                                                    className="w-4 h-4 rounded-full bg-white"
-                                                    animate={{
-                                                        scale: [1, 1.5, 1]
-                                                    }}
-                                                    transition={{
-                                                        duration: 1.5,
-                                                        repeat: Infinity,
-                                                        delay: index * 0.2
-                                                    }}
-                                                />
+                                                <div className="w-4 h-4 rounded-full bg-white shadow-md shadow-white/50" />
                                             </div>
                                         </motion.div>
                                     </div>

@@ -36,7 +36,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl tracking-wide leading-[0.9] mb-6"
           >
-            BUILDING THE{" "}
+            CONSTRUCTING THE{" "}
             <span className="text-gradient">ROADS</span>
             <br />
             OF TOMORROW
