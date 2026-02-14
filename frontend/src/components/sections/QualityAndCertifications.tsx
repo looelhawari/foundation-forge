@@ -81,20 +81,6 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
                     </svg>
                 </div>
 
-                {/* Badge seal shape */}
-                <div className="absolute inset-4">
-                    <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <motion.path
-                            d="M50 5 L53 40 L65 15 L60 45 L80 25 L68 50 L95 40 L75 55 L95 60 L68 50 L80 75 L60 55 L65 85 L53 60 L50 95 L47 60 L35 85 L40 55 L20 75 L32 50 L5 60 L25 55 L5 40 L32 50 L20 25 L40 45 L35 15 L47 40 Z"
-                            fill={`url(#badge-grad-${index})`}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 0.9 }}
-                            transition={{ duration: 0.8, delay: index * 0.15 }}
-                            viewport={{ once: true }}
-                        />
-                    </svg>
-                </div>
-
                 {/* Center content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
                     <motion.div
@@ -220,7 +206,7 @@ export function QualityAndCertifications() {
                                     />
                                 </motion.svg>
 
-                                <p className="text-white font-medium">{standard}</p>
+                                <p className="text-white font-bold text-base sm:text-lg">{standard}</p>
 
                                 {/* Shine effect */}
                                 <motion.div

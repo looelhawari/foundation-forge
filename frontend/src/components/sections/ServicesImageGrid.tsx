@@ -123,8 +123,8 @@ const BentoCard = ({
         {/* Title */}
         <motion.h3
           className={`font-bold text-white mb-2 leading-tight ${isLarge
-              ? "text-2xl sm:text-3xl md:text-4xl"
-              : "text-xl sm:text-2xl md:text-3xl"
+            ? "text-2xl sm:text-3xl md:text-4xl"
+            : "text-xl sm:text-2xl md:text-3xl"
             }`}
           animate={{ y: hovered ? -4 : 0 }}
           transition={{ duration: 0.35 }}
