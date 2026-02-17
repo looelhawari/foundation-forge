@@ -335,9 +335,7 @@ export default function AdminDashboard() {
                 ) : (
                   <>
                     <div className="text-3xl font-bold tracking-tight">
-                      {stats?.settings?.years_experience ||
-                        new Date().getFullYear() - 2017}
-                      +
+                      {stats?.settings?.years_experience || 10}+
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
                       Since 2017

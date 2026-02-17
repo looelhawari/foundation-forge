@@ -26,7 +26,7 @@ export const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm font-medium mb-8">
-              8+ Years of Excellence
+              10+ Years of Excellence
             </span>
           </motion.div>
 
@@ -78,7 +78,7 @@ export const Hero = () => {
           >
             {[
               { value: "57", label: "Projects Completed" },
-              { value: "8+", label: "Years Experience" },
+              { value: "10+", label: "Years Experience" },
               { value: "45+", label: "Satisfied Clients" },
             ].map((stat, index) => (
               <div key={index} className="text-center sm:text-left">

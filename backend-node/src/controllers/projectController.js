@@ -72,7 +72,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
   const pagination = paginate(page, limit, total);
 
   // Validate sort options
-  const allowedSortFields = ["created_at", "updated_at", "title", "year"];
+  const allowedSortFields = ["created_at", "updated_at", "title", "year", "display_order"];
   const allowedSortOrders = ["ASC", "DESC"];
   const sortField = allowedSortFields.includes(sortBy) ? sortBy : "created_at";
   const order = allowedSortOrders.includes(sortOrder.toUpperCase())
@@ -82,11 +82,11 @@ const getAllProjects = asyncHandler(async (req, res) => {
   // Get projects with pagination
   const [projects] = await pool.execute(
     `SELECT id, slug, title, description, category, location, client, 
-            main_contractor, consultant, area, value, year, status, featured, is_legacy, images, 
+            main_contractor, consultant, area, value, year, status, featured, is_legacy, display_order, images, 
             created_at, updated_at
      FROM projects 
      ${whereClause}
-     ORDER BY featured DESC, ${sortField} ${order}
+     ORDER BY CASE WHEN display_order = 0 THEN 1 ELSE 0 END, display_order ASC, featured DESC, ${sortField} ${order}
      LIMIT ? OFFSET ?`,
     [
       ...whereValues,
@@ -169,6 +169,7 @@ const createProject = asyncHandler(async (req, res) => {
     status = "completed",
     featured = false,
     isLegacy = false,
+    displayOrder = 0,
     images = [],
   } = req.body;
 
@@ -190,8 +191,8 @@ const createProject = asyncHandler(async (req, res) => {
   const [result] = await pool.execute(
     `INSERT INTO projects (
       slug, title, description, category, location, client, 
-      main_contractor, consultant, area, value, year, status, featured, is_legacy, images, created_by
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      main_contractor, consultant, area, value, year, status, featured, is_legacy, display_order, images, created_by
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       slug,
       title,
@@ -207,6 +208,7 @@ const createProject = asyncHandler(async (req, res) => {
       status,
       featured ? 1 : 0,
       isLegacy ? 1 : 0,
+      displayOrder || 0,
       JSON.stringify(images),
       req.admin.id,
     ],
@@ -255,6 +257,7 @@ const updateProject = asyncHandler(async (req, res) => {
     status,
     featured,
     isLegacy,
+    displayOrder,
     images,
   } = req.body;
 
@@ -342,6 +345,10 @@ const updateProject = asyncHandler(async (req, res) => {
       updates.push("category = ?");
       values.push(null);
     }
+  }
+  if (displayOrder !== undefined) {
+    updates.push("display_order = ?");
+    values.push(displayOrder);
   }
   if (images !== undefined) {
     updates.push("images = ?");

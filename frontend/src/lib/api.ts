@@ -100,6 +100,7 @@ export interface Project {
   status: "active" | "completed" | "in_progress" | "archived";
   featured: boolean;
   is_legacy: boolean;
+  display_order: number;
   images: string[];
   created_at: string;
   updated_at: string;
@@ -121,6 +122,7 @@ export interface ProjectFormData {
   status?: string;
   featured?: boolean;
   isLegacy?: boolean;
+  displayOrder?: number;
   images?: string[];
 }
 

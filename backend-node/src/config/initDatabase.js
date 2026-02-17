@@ -59,6 +59,7 @@ const initDatabase = async () => {
         status ENUM('active', 'completed', 'in_progress', 'archived') DEFAULT 'completed',
         featured BOOLEAN DEFAULT FALSE,
         is_legacy BOOLEAN DEFAULT FALSE,
+        display_order INT DEFAULT 0,
         images JSON,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -79,6 +80,16 @@ const initDatabase = async () => {
         ALTER TABLE projects ADD COLUMN is_legacy BOOLEAN DEFAULT FALSE AFTER featured
       `);
       console.log("✅ Added is_legacy column to projects table");
+    } catch (err) {
+      // Column already exists, ignore
+    }
+
+    // Add display_order column if it doesn't exist (for existing databases)
+    try {
+      await connection.execute(`
+        ALTER TABLE projects ADD COLUMN display_order INT DEFAULT 0 AFTER is_legacy
+      `);
+      console.log("✅ Added display_order column to projects table");
     } catch (err) {
       // Column already exists, ignore
     }
@@ -224,7 +235,7 @@ const initDatabase = async () => {
         type: "string",
       },
       { key: "projects_completed", value: "57", type: "number" },
-      { key: "years_experience", value: "8", type: "number" },
+      { key: "years_experience", value: "10", type: "number" },
       { key: "satisfied_clients", value: "45", type: "number" },
     ];
 

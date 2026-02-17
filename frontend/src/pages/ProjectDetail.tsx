@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactCTA } from "@/components/sections/ContactCTA";
@@ -13,6 +14,10 @@ import {
   Wrench,
   Users,
   Loader2,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  ZoomIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -22,6 +27,41 @@ import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
 const ProjectDetail = () => {
   const { id } = useParams();
   const { project, isLoading, error } = useProject(id);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null || !project?.images) return;
+
+      if (e.key === "Escape") {
+        setLightboxIndex(null);
+      } else if (e.key === "ArrowLeft") {
+        setLightboxIndex((prev) =>
+          prev === null || prev === 0 ? project.images.length - 1 : prev - 1
+        );
+      } else if (e.key === "ArrowRight") {
+        setLightboxIndex((prev) =>
+          prev === null || prev === project.images.length - 1 ? 0 : prev + 1
+        );
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxIndex, project?.images]);
+
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxIndex]);
 
   // Loading state
   if (isLoading) {
@@ -159,12 +199,13 @@ const ProjectDetail = () => {
                             duration: 0.6,
                             delay: 0.3 + index * 0.1,
                           }}
-                          className="aspect-video rounded-lg overflow-hidden bg-muted/50"
+                          className="aspect-video rounded-lg overflow-hidden bg-muted/50 cursor-pointer group relative"
+                          onClick={() => setLightboxIndex(index)}
                         >
                           <img
                             src={image}
                             alt={`${project.title} - Image ${index + 1}`}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             loading="lazy"
                             onError={(e) => {
                               e.currentTarget.src = companyLogo;
@@ -172,6 +213,9 @@ const ProjectDetail = () => {
                                 "w-full h-full object-contain p-12";
                             }}
                           />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                            <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          </div>
                         </motion.div>
                       ))}
                     </div>
@@ -302,6 +346,99 @@ const ProjectDetail = () => {
         <ContactCTA />
       </main>
       <Footer />
+
+      {/* Image Lightbox */}
+      {lightboxIndex !== null && project?.images && (
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+          onClick={() => setLightboxIndex(null)}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setLightboxIndex(null)}
+            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+            aria-label="Close lightbox"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Image Counter */}
+          <div className="absolute top-4 left-4 z-10 px-4 py-2 rounded-full bg-black/50 text-white text-sm font-medium">
+            {lightboxIndex + 1} / {project.images.length}
+          </div>
+
+          {/* Previous Button */}
+          {project.images.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((prev) =>
+                  prev === null || prev === 0
+                    ? project.images.length - 1
+                    : prev - 1
+                );
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+          )}
+
+          {/* Next Button */}
+          {project.images.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((prev) =>
+                  prev === null || prev === project.images.length - 1
+                    ? 0
+                    : prev + 1
+                );
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+          )}
+
+          {/* Image */}
+          <motion.div
+            key={lightboxIndex}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="relative max-w-7xl max-h-[90vh] w-full px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={project.images[lightboxIndex]}
+              alt={`${project.title} - Image ${lightboxIndex + 1}`}
+              className="w-full h-full object-contain mx-auto"
+              onError={(e) => {
+                e.currentTarget.src = companyLogo;
+              }}
+            />
+            {/* Image Caption */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <p className="text-white text-center text-sm md:text-base">
+                {project.title} - Click to view full size on{" "}
+                <a
+                  href={project.images[lightboxIndex]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-primary"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  new tab
+                </a>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };

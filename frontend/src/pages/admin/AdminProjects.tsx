@@ -241,6 +241,7 @@ export default function AdminProjects() {
                   <TableRow>
                     <TableHead className="w-[300px]">Project</TableHead>
                     <TableHead>Category</TableHead>
+                    <TableHead>Order</TableHead>
                     <TableHead>Location</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
@@ -263,6 +264,9 @@ export default function AdminProjects() {
                           <Skeleton className="h-4 w-20" />
                         </TableCell>
                         <TableCell>
+                          <Skeleton className="h-4 w-8" />
+                        </TableCell>
+                        <TableCell>
                           <Skeleton className="h-4 w-24" />
                         </TableCell>
                         <TableCell>
@@ -275,7 +279,7 @@ export default function AdminProjects() {
                     ))
                   ) : projects.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={5} className="text-center py-12">
+                      <TableCell colSpan={6} className="text-center py-12">
                         <p className="text-muted-foreground">
                           No projects found
                         </p>
@@ -333,6 +337,9 @@ export default function AdminProjects() {
                           ) : (
                             <Badge variant="outline">{project.category || "Uncategorized"}</Badge>
                           )}
+                        </TableCell>
+                        <TableCell className="text-sm font-mono">
+                          {project.display_order || "—"}
                         </TableCell>
                         <TableCell className="text-sm">
                           {project.location || "—"}

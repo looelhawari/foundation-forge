@@ -126,6 +126,10 @@ const projectValidation = {
       .optional()
       .isBoolean()
       .withMessage("Featured must be a boolean"),
+    body("displayOrder")
+      .optional()
+      .isInt({ min: 0 })
+      .withMessage("Display order must be a non-negative integer"),
     body("images").optional().isArray().withMessage("Images must be an array"),
     handleValidation,
   ],
@@ -161,6 +165,10 @@ const projectValidation = {
       .optional()
       .isBoolean()
       .withMessage("Featured must be a boolean"),
+    body("displayOrder")
+      .optional()
+      .isInt({ min: 0 })
+      .withMessage("Display order must be a non-negative integer"),
     handleValidation,
   ],
 

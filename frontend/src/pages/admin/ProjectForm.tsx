@@ -80,6 +80,7 @@ export default function ProjectForm() {
     status: "completed",
     featured: false,
     isLegacy: false,
+    displayOrder: 0,
     images: [],
   });
 
@@ -105,6 +106,7 @@ export default function ProjectForm() {
         status: project.status || "completed",
         featured: project.featured || false,
         isLegacy: project.is_legacy || false,
+        displayOrder: project.display_order || 0,
         images: project.images || [],
       });
 
@@ -129,7 +131,7 @@ export default function ProjectForm() {
 
   const handleChange = (
     field: keyof ProjectFormData,
-    value: string | boolean | string[],
+    value: string | boolean | number | string[],
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -426,6 +428,21 @@ export default function ProjectForm() {
                   onChange={(e) => handleChange("year", e.target.value)}
                   placeholder="e.g., 2023 or 2022-2023"
                 />
+              </div>
+
+              <div>
+                <Label htmlFor="displayOrder">Display Order</Label>
+                <Input
+                  id="displayOrder"
+                  type="number"
+                  min={0}
+                  value={formData.displayOrder ?? 0}
+                  onChange={(e) => handleChange("displayOrder", parseInt(e.target.value) || 0)}
+                  placeholder="0"
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Lower numbers appear first on the projects page. Projects with the same order are sorted by date.
+                </p>
               </div>
 
               <div className="flex items-center gap-3 sm:col-span-2">

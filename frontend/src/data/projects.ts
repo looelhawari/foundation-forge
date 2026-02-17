@@ -451,7 +451,7 @@ export const projectCategories = [
 export const stats = {
     projectsCompleted: 57,
     totalImages: 409,
-    yearsExperience: new Date().getFullYear() - 2017, // Calculate years since establishment (2017)
+    yearsExperience: 10, // Years since establishment (2017)
     satisfiedClients: 45,
     companyName: "Cosmo Projects & Construction",
     companyFullName: "COSMO PROJECTS & CONSTRUCTION AND TRADING CO.",

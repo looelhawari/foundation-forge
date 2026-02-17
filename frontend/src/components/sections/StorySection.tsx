@@ -81,7 +81,7 @@ export const StorySection = () => {
             >
               {[
                 { value: "57", label: "Completed" },
-                { value: "8+", label: "Years" },
+                { value: "10+", label: "Years" },
                 { value: "100%", label: "Satisfaction" },
               ].map((stat, index) => (
                 <div key={index}>
@@ -112,7 +112,7 @@ export const StorySection = () => {
               transition={{ delay: 0.5 }}
               className="absolute -bottom-8 -left-8 bg-gradient-card border border-border rounded-lg p-6 shadow-card"
             >
-              <div className="font-display text-4xl text-primary">8+</div>
+              <div className="font-display text-4xl text-primary">10+</div>
               <div className="text-sm text-muted-foreground">Years of<br />Excellence</div>
             </motion.div>
           </motion.div>

@@ -24,7 +24,7 @@ const featuredClients = [
 
 const stats = [
   { icon: Building, value: 57, suffix: "+", label: "Projects Completed" },
-  { icon: Clock, value: 8, suffix: "+", label: "Years of Experience" },
+  { icon: Clock, value: 10, suffix: "+", label: "Years of Experience" },
   { icon: Users, value: 45, suffix: "+", label: "Satisfied Clients" },
   { icon: Award, value: 100, suffix: "%", label: "Quality Guaranteed" },
 ];
@@ -92,7 +92,7 @@ export const AboutPreview = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="absolute -bottom-8 -right-8 md:right-8 bg-gradient-card border border-border rounded-lg p-6 shadow-card"
             >
-              <div className="font-display text-5xl text-primary mb-1">8+</div>
+              <div className="font-display text-5xl text-primary mb-1">10+</div>
               <div className="text-sm text-muted-foreground">Years of<br />Excellence</div>
             </motion.div>
           </motion.div>

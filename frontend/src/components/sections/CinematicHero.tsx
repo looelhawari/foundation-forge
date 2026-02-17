@@ -47,8 +47,13 @@ export const CinematicHero = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => { requestAnimationFrame(() => setReady(true)); }, []);
+  useEffect(() => {
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
+    requestAnimationFrame(() => setReady(true));
+  }, []);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
@@ -62,19 +67,18 @@ export const CinematicHero = memo(() => {
 
   // Play video when scene 2 becomes visible
   useEffect(() => {
+    if (isMobile) return; // mobile uses autoPlay attribute instead
     const unsubscribe = s2Opacity.on("change", (v) => {
-      if (videoRef.current) {
-        if (v > 0.1) {
-          videoRef.current.play().catch(() => { });
-        }
+      if (videoRef.current && v > 0.1) {
+        videoRef.current.play().catch(() => { });
       }
     });
     return unsubscribe;
-  }, [s2Opacity]);
+  }, [s2Opacity, isMobile]);
 
   return (
-    <section ref={ref} className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen overflow-hidden bg-black">
+    <section ref={ref} className={`relative ${isMobile ? 'h-[250vh]' : 'h-[300vh]'}`}>
+      <div className="sticky top-0 h-screen overflow-hidden bg-black" style={{ willChange: 'transform' }}>
 
         {/* ─── OPENING CURTAIN ─── */}
         {ready && (
@@ -90,13 +94,13 @@ export const CinematicHero = memo(() => {
 
         {/* ═══════════ SCENE 1: HERO IMAGE ═══════════ */}
         <motion.div style={{ opacity: s1Opacity }} className="absolute inset-0 z-10">
-          <motion.div className="absolute inset-0" style={{ scale: s1Scale }}>
+          <motion.div className="absolute inset-0" style={{ scale: isMobile ? undefined : s1Scale, willChange: 'transform' }}>
             <motion.img
               src={heroImage}
               alt="CPC highway construction"
               className="w-full h-full object-cover"
               loading="eager"
-              initial={{ scale: 1.2 }}
+              initial={{ scale: isMobile ? 1 : 1.2 }}
               animate={{ scale: 1 }}
               transition={{ duration: 2.5, ease }}
             />
@@ -104,7 +108,7 @@ export const CinematicHero = memo(() => {
             <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.55) 100%)" }} />
           </motion.div>
 
-          <motion.div className="relative z-10 h-full flex items-center" style={{ y: s1TextY }}>
+          <motion.div className="relative z-10 h-full flex items-center" style={{ y: isMobile ? 0 : s1TextY }}>
             <div className="container mx-auto px-6 lg:px-16">
               {/* Gold accent line */}
               <motion.div className="w-16 h-[2px] bg-primary mb-8 origin-left"
@@ -139,7 +143,7 @@ export const CinematicHero = memo(() => {
                 transition={{ duration: 0.8, delay: 1.5, ease }}>
                 {[
                   { n: 90, s: "+", l: "Projects Delivered" },
-                  { n: 8, s: "+", l: "Years of Excellence" },
+                  { n: 10, s: "+", l: "Years of Excellence" },
                   { n: 57, s: "+", l: "Major Clients" },
                 ].map((d, i) => (
                   <motion.div key={d.l}
@@ -177,7 +181,9 @@ export const CinematicHero = memo(() => {
             className="w-full h-full object-cover"
             muted
             playsInline
-            preload="metadata"
+            preload={isMobile ? "auto" : "metadata"}
+            autoPlay={isMobile}
+            loop={isMobile}
           />
           {/* Subtle vignette on video */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.4) 100%)" }} />

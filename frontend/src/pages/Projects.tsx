@@ -249,7 +249,7 @@ const Projects = () => {
                       </div>
                       <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
                         <div className="font-display text-4xl text-gradient mb-2">
-                          15+
+                          10+
                         </div>
                         <div className="text-sm text-muted-foreground">
                           Years Experience
