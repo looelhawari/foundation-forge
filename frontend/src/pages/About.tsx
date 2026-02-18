@@ -6,6 +6,7 @@ import { MegaCTA } from "@/components/sections/MegaCTA";
 import { CompanyIntro } from "@/components/sections/CompanyIntro";
 import { AnimatedCounter, ImageReveal } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 import heroImage from "@/assets/hero-construction.jpg";
 
@@ -70,6 +71,13 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="About CPC Qatar | Road Construction & Civil Engineering Since 2017 | Doha"
+        description="Learn about CPC Qatar (Cosmo Projects & Construction) — Founded in 2017 in Doha, Qatar. 90+ road & infrastructure projects delivered. Government-approved contractor CR 108122. Serving Ministry of Education, FIFA World Cup 2022 & more."
+        canonical="/about"
+        arDescription="تعرف على شركة كوزمو للمشاريع والإنشاءات — تأسست عام 2017 في الدوحة، قطر. أكثر من 90 مشروعاً في بناء الطرق والبنية التحتية"
+        keywords="CPC Qatar about, Cosmo Projects Construction history, civil engineering contractor Doha, construction company Qatar since 2017, شركة كوزمو للمشاريع والإنشاءات"
+      />
       <Header />
       <main>
         {/* Company Intro Section */}

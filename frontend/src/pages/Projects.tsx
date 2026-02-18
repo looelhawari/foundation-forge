@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProjects, useCategories } from "@/hooks/useProjects";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+import SEOHead from "@/components/SEOHead";
 
 // Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
 const categoryData: Record<string, { icon: string; description: string }> = {
@@ -165,6 +166,13 @@ const Projects = () => {
         transition={{ duration: 0.3 }}
       >
         <Header />
+        <SEOHead
+          title="Our Projects | Road & Infrastructure Portfolio | CPC Qatar Doha"
+          description="Explore 90+ completed road construction & infrastructure projects by CPC Qatar. School facilities, FIFA World Cup 2022, cultural heritage sites & commercial developments across Doha & Qatar."
+          canonical="/projects"
+          arDescription="استكشف مشاريع شركة كوزمو للمشاريع والإنشاءات — أكثر من 90 مشروع طرق وبنية تحتية في قطر"
+          keywords="CPC Qatar projects, road construction portfolio Qatar, infrastructure projects Doha, مشاريع بناء طرق قطر, مشاريع بنية تحتية الدوحة"
+        />
         <main>
           <AnimatePresence mode="wait">
             {!selectedCategory && !selectedProjectType ? (

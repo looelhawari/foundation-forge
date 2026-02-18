@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingContactButtons } from "@/components/layout/FloatingContactButtons";
 import { CinematicHero } from "@/components/sections/CinematicHero";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import SEOHead from "@/components/SEOHead";
 
 // Lazy-load below-fold sections for faster initial load
 const ServicesImageGrid = lazy(() => import("@/components/sections/ServicesImageGrid").then(m => ({ default: m.ServicesImageGrid })));
@@ -42,6 +43,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="CPC Qatar | Road Construction & Infrastructure Company in Doha, Qatar"
+        description="CPC Qatar (Cosmo Projects & Construction) — Leading road construction & infrastructure company in Doha. Asphalt paving, road marking, earthworks, interlock & subbase works. 90+ projects delivered since 2017."
+        canonical="/"
+        arDescription="كوزمو للمشاريع والإنشاءات — شركة رائدة في بناء الطرق والبنية التحتية في الدوحة، قطر"
+        keywords="CPC Qatar, road construction Qatar, infrastructure company Doha, asphalt paving Qatar, civil contractor Qatar, شركة مقاولات قطر, بناء طرق قطر, بنية تحتية قطر"
+      />
       <Header />
       <FloatingContactButtons />
       <main>

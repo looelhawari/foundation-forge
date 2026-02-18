@@ -43,6 +43,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import heroImage from "@/assets/hero-construction.jpg";
+import SEOHead from "@/components/SEOHead";
 import moelogo from "@/assets/MOE-removebg-preview.png";
 import fifaLogo from "@/assets/FIFA-removebg-preview.png";
 import museumLogo from "@/assets/museum-removebg-preview.png";
@@ -168,6 +169,13 @@ const getGradientColors = (colorClass: string): string => {
 export default function Clients() {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Our Clients | Government & Private Sector Partners | CPC Qatar"
+        description="CPC Qatar proudly serves Ministry of Education, FIFA World Cup 2022, Qatar Museums, DHL & 45+ major clients. Government-approved road construction & infrastructure contractor in Doha."
+        canonical="/clients"
+        arDescription="عملاء شركة كوزمو للمشاريع والإنشاءات — وزارات حكومية وشركات خاصة في قطر"
+        keywords="CPC Qatar clients, government contractor Qatar, construction clients Doha, Ministry of Education contractor, عملاء شركة مقاولات قطر"
+      />
       <MinimalHeader />
       <main>
         <ClientCategoriesSection />

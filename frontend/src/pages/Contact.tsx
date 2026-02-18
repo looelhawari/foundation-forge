@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactApi } from "@/lib/api";
+import SEOHead from "@/components/SEOHead";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -78,6 +79,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Contact CPC Qatar | Get a Free Quote | Road Construction Doha"
+        description="Contact CPC Qatar for road construction & infrastructure projects. Office: Mirqab Mall, Doha. Phone: +974 4432-2743. Email: Info@ctgroups.net. Free consultation & quote."
+        canonical="/contact"
+        arDescription="تواصل مع شركة كوزمو للمشاريع والإنشاءات للحصول على عرض أسعار مجاني لمشاريع الطرق والبنية التحتية في قطر"
+        keywords="contact CPC Qatar, road construction quote Doha, contractor contact Qatar, اتصل بنا شركة مقاولات قطر"
+      />
       <Header />
       <main>
         {/* Hero Section */}

@@ -2,10 +2,17 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollText, Shield, FileText, Scale, AlertCircle } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 
 const Terms = () => {
     return (
         <div className="min-h-screen bg-background">
+            <SEOHead
+                title="Terms of Use | CPC Qatar"
+                description="Terms and conditions for using the CPC Qatar website. Cosmo Projects & Construction and Trading W.L.L."
+                canonical="/terms"
+                noindex={true}
+            />
             <Header />
             <main>
                 {/* Hero Section */}

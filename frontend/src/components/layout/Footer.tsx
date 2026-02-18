@@ -46,7 +46,7 @@ export const Footer = () => {
           <div>
             <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h4>
             <ul className="space-y-3">
-              {["Highway Construction", "Street Development", "Infrastructure", "Road Maintenance", "Bridge Construction"].map((item) => (
+              {["Earthworks & Grading", "Asphalt Paving", "Road Marking & Traffic Signs", "Interlock & Kerbstone", "Sub-Grade & Sub-Base", "Steel Works"].map((item) => (
                 <li key={item}>
                   <span className="text-muted-foreground text-sm">{item}</span>
                 </li>

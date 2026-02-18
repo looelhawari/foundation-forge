@@ -2,10 +2,17 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Shield, Lock, Eye, Database, UserCheck, FileText, AlertTriangle, CheckCircle } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 
 const Privacy = () => {
     return (
         <div className="min-h-screen bg-background">
+            <SEOHead
+                title="Privacy Policy | CPC Qatar"
+                description="Privacy policy for CPC Qatar (Cosmo Projects & Construction). How we collect, use, and protect your personal information."
+                canonical="/privacy"
+                noindex={true}
+            />
             <Header />
             <main>
                 {/* Hero Section */}

@@ -8,8 +8,8 @@ const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 const statsData = [
   { value: stats.projectsCompleted, suffix: "+", label: "PROJECTS COMPLETED" },
   { value: stats.yearsExperience, suffix: "+", label: "YEARS EXPERIENCE" },
-  { value: 45, suffix: "+", label: "TRUSTED CLIENTS" },
-  { value: stats.satisfiedClients, suffix: "%", label: "CLIENT SATISFACTION" },
+  { value: stats.satisfiedClients, suffix: "+", label: "TRUSTED CLIENTS" },
+  { value: 100, suffix: "%", label: "CLIENT SATISFACTION" },
 ];
 
 export const ParallaxStats = memo(() => {

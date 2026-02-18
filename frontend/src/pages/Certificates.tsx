@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FileText, Download, ExternalLink, Shield, Award, CheckCircle } from "lucide-react";
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
 
 // Import certificate PDFs
 import commercialRegistration from "@/cert/Commercial Registration Dec 2029.pdf";
@@ -54,6 +55,13 @@ const Certificates = () => {
 
     return (
         <div className="min-h-screen bg-background">
+            <SEOHead
+                title="Certificates & Legal Documents | Licensed Contractor CR 108122 | CPC Qatar"
+                description="View CPC Qatar's official certificates — Commercial Registration CR 108122, Tax Card, Establishment Card & Commercial License. Fully licensed, government-approved contractor in Doha, Qatar."
+                canonical="/certificates"
+                arDescription="شهادات شركة كوزمو للمشاريع والإنشاءات — السجل التجاري والتراخيص الرسمية في قطر"
+                keywords="CPC Qatar certificates, licensed contractor Qatar CR 108122, government approved construction Qatar, شهادات شركة مقاولات قطر"
+            />
             <Header />
 
             {/* Hero Section */}

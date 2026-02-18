@@ -449,7 +449,7 @@ export const projectCategories = [
 ];
 
 export const stats = {
-    projectsCompleted: 57,
+    projectsCompleted: 90,
     totalImages: 409,
     yearsExperience: 10, // Years since establishment (2017)
     satisfiedClients: 45,

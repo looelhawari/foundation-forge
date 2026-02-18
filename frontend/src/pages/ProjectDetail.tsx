@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProjects";
 import companyLogo from "@/assets/cpc_logo-removebg-preview.png";
+import SEOHead from "@/components/SEOHead";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -127,6 +128,13 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={`${project.title} | ${project.category?.name || 'Project'} in ${project.location || 'Qatar'} | CPC Qatar`}
+        description={`${(project.description || `${project.title} — Road construction & infrastructure project by CPC Qatar`).slice(0, 155)}. CPC Qatar infrastructure project in ${project.location || 'Doha, Qatar'}.`}
+        canonical={`/projects/${id}`}
+        ogImage={project.images?.[0] || undefined}
+        keywords={`${project.title}, ${project.category?.name || ''} project Qatar, CPC Qatar project, ${project.location || 'Doha'} construction`}
+      />
       <Header />
       <main>
         {/* Hero Image */}
