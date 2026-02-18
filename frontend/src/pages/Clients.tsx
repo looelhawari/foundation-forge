@@ -2,8 +2,9 @@
   motion,
   useScroll,
   useTransform,
+  AnimatePresence,
 } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
