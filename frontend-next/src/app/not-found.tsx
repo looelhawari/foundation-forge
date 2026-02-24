@@ -1,7 +1,12 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+    title: "Page Not Found",
+    description: "The page you are looking for does not exist. Return to CPC Qatar homepage.",
+    robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
     return (

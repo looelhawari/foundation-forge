@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: {
         default:
             "CPC Qatar | Road Construction & Infrastructure Company in Doha, Qatar",
-        template: "%s",
+        template: "%s | CPC Qatar",
     },
     description:
         "CPC Qatar (Cosmo Projects & Construction) — Leading road construction & infrastructure company in Doha, Qatar. Asphalt paving, road marking, earthworks, interlock & subbase works. 90+ projects delivered since 2017. | كوزمو للمشاريع والإنشاءات — شركة رائدة في بناء الطرق والبنية التحتية في قطر.",
@@ -132,7 +132,7 @@ const organizationSchema = {
         { "@type": "City", name: "Al Khor" },
         { "@type": "City", name: "Lusail" },
     ],
-    sameAs: [],
+    // sameAs: ["https://www.linkedin.com/company/cpc-qatar"],
     contactPoint: [
         {
             "@type": "ContactPoint",
