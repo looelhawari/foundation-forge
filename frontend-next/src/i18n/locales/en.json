@@ -1,0 +1,338 @@
+{
+    "common": {
+        "loading": "Loading",
+        "getQuote": "Get a Quote",
+        "learnMore": "Learn More",
+        "contactUs": "Contact Us",
+        "readMore": "Read More",
+        "viewAll": "View All",
+        "submit": "Submit",
+        "send": "Send Message",
+        "close": "Close"
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "clients": "Clients",
+        "contact": "Contact",
+        "privacy": "Privacy Policy",
+        "terms": "Terms & Conditions"
+    },
+    "home": {
+        "companyName": "COSMO PROJECTS & CONSTRUCTION",
+        "tagline": "Constructing Qatar's Future, One Road at a Time",
+        "hero": {
+            "title": "CONSTRUCTING QATAR'S",
+            "subtitle": "INFRASTRUCTURE",
+            "description": "Premier road construction and civil engineering excellence since 2017",
+            "cta": "Explore Our Projects"
+        },
+        "stats": {
+            "projects": "Projects Completed",
+            "experience": "Years Experience",
+            "clients": "Happy Clients",
+            "workforce": "Skilled Workforce"
+        },
+        "services": {
+            "title": "OUR SERVICES",
+            "subtitle": "Engineering Excellence Across All Sectors"
+        },
+        "whyChoose": {
+            "title": "WHY CHOOSE US",
+            "subtitle": "Excellence in Every Project",
+            "quality": {
+                "title": "Unmatched Quality",
+                "description": "Premium materials and expert craftsmanship in every project"
+            },
+            "experience": {
+                "title": "Proven Track Record",
+                "description": "90+ successful projects delivered across Qatar"
+            },
+            "innovation": {
+                "title": "Modern Technology",
+                "description": "State-of-the-art equipment and innovative construction methods"
+            },
+            "safety": {
+                "title": "Safety First",
+                "description": "Rigorous safety protocols and certified standards"
+            }
+        },
+        "process": {
+            "title": "OUR PROCESS",
+            "subtitle": "From Vision to Reality",
+            "planning": {
+                "title": "Planning & Design",
+                "description": "Comprehensive project analysis and strategic planning"
+            },
+            "execution": {
+                "title": "Execution",
+                "description": "Precision construction with continuous quality monitoring"
+            },
+            "delivery": {
+                "title": "Delivery",
+                "description": "On-time completion with full quality assurance"
+            }
+        },
+        "clients": {
+            "title": "Trusted By",
+            "highlight": "Industry Leaders",
+            "subtitle": "Partnering with Qatar's most prestigious organizations"
+        },
+        "equipment": {
+            "subtitle": "OUR CAPABILITIES",
+            "title": "Equipment &",
+            "highlight": "Resources",
+            "description": "State-of-the-art machinery and tools for every construction need"
+        },
+        "servicesGrid": {
+            "title": "WHAT WE DO",
+            "subtitle": "Our Services",
+            "description": "Comprehensive construction solutions tailored to your project needs"
+        },
+        "certifications": {
+            "watermark": "CERTIFIED",
+            "title": "Quality &",
+            "highlight": "Certifications",
+            "description": "Committed to excellence through internationally recognized standards and certifications",
+            "standardsTitle": "Our",
+            "standardsHighlight": "Standards"
+        },
+        "testimonials": {
+            "title": "CLIENT",
+            "highlight": "TESTIMONIALS",
+            "subtitle": "What They Say"
+        },
+        "cta": {
+            "title": "Ready to Start Your Project?",
+            "subtitle": "Let's construct something extraordinary together",
+            "button": "Get Started Today"
+        }
+    },
+    "about": {
+        "title": "OUR STORY",
+        "subtitle": "Since 2017",
+        "hero": {
+            "title": "ABOUT US",
+            "subtitle": "Construction Excellence Since 2017"
+        },
+        "intro": {
+            "title": "WHO WE ARE",
+            "description": "COSMO PROJECTS & CONSTRUCTION is a leading civil engineering and road construction company in Qatar, established under the vision of Chairman Mohammed Ahmed Mubarak Al-Nasr. Since 2017, we have been transforming Qatar's infrastructure landscape with precision, quality, and innovation."
+        },
+        "values": {
+            "title": "OUR VALUES",
+            "precision": {
+                "title": "PRECISION",
+                "description": "Every project is executed with meticulous attention to detail and engineering accuracy."
+            },
+            "quality": {
+                "title": "QUALITY",
+                "description": "We never compromise on materials or workmanship, ensuring lasting infrastructure."
+            },
+            "innovation": {
+                "title": "INNOVATION",
+                "description": "Embracing modern technologies and methods to deliver superior results."
+            }
+        },
+        "milestones": {
+            "title": "OUR JOURNEY",
+            "2017": {
+                "title": "Company Founded",
+                "description": "CPC Qatar established under Chairman Mohammed Ahmed Mubarak Al-Nasr"
+            },
+            "2019": {
+                "title": "Educational Excellence",
+                "description": "Major contracts with Ministry of Education for school infrastructure"
+            },
+            "2021": {
+                "title": "Cultural Heritage",
+                "description": "Qatar Museums projects - preserving cultural landmarks"
+            },
+            "2022": {
+                "title": "FIFA World Cup",
+                "description": "Delivered parking infrastructure for FIFA World Cup Qatar 2022"
+            },
+            "2024": {
+                "title": "57 Projects Strong",
+                "description": "Achieved 57 completed projects with 26M+ QR total value"
+            }
+        },
+        "leadership": {
+            "title": "LEADERSHIP",
+            "chairman": {
+                "title": "Chairman & Founder",
+                "name": "Mohammed Ahmed Mubarak Al-Nasr",
+                "description": "Visionary leader driving Qatar's infrastructure development"
+            }
+        }
+    },
+    "projects": {
+        "title": "OUR PROJECTS",
+        "subtitle": "Excellence in Execution",
+        "hero": {
+            "title": "PROJECTS",
+            "subtitle": "Showcasing Our Excellence"
+        },
+        "categories": {
+            "all": "All Projects",
+            "roads": "Road Works",
+            "education": "Educational",
+            "cultural": "Cultural",
+            "commercial": "Commercial",
+            "parking": "Parking"
+        },
+        "details": {
+            "client": "Client",
+            "location": "Location",
+            "duration": "Duration",
+            "value": "Project Value",
+            "status": "Status",
+            "completed": "Completed"
+        }
+    },
+    "clients": {
+        "title": "OUR CLIENTS",
+        "subtitle": "Trusted by Qatar's Leading Organizations",
+        "hero": {
+            "title": "CLIENTS",
+            "subtitle": "Constructing Trust, Delivering Excellence"
+        },
+        "description": "We are proud to serve Qatar's most prestigious organizations, delivering infrastructure solutions that stand the test of time.",
+        "featured": {
+            "government": "Government Entities",
+            "private": "Private Sector",
+            "cultural": "Cultural Institutions"
+        }
+    },
+    "contact": {
+        "title": "CONTACT US",
+        "subtitle": "Let's Construct Together",
+        "hero": {
+            "title": "CONTACT US",
+            "subtitle": "Get In Touch",
+            "description": "Ready to start your next project? Reach out to our team of experts for a consultation and free quote."
+        },
+        "form": {
+            "title": "SEND US A MESSAGE",
+            "name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "company": "Company",
+            "message": "Your Message",
+            "namePlaceholder": "Your full name",
+            "emailPlaceholder": "your@email.com",
+            "phonePlaceholder": "+974 XXXX XXXX",
+            "companyPlaceholder": "Your company name",
+            "messagePlaceholder": "Tell us about your project...",
+            "required": "Required field",
+            "submit": "Send Message",
+            "success": "Message Sent!",
+            "successDescription": "Thank you for contacting us. We'll get back to you within 24 hours."
+        },
+        "info": {
+            "title": "CONTACT INFORMATION",
+            "address": {
+                "title": "Address",
+                "value": "Doha, Qatar"
+            },
+            "phone": {
+                "title": "Phone",
+                "value": "+974 XXXX XXXX"
+            },
+            "email": {
+                "title": "Email",
+                "value": "info@cpcqatar.com"
+            },
+            "hours": {
+                "title": "Business Hours",
+                "value": "Sunday - Thursday: 7:00 AM - 5:00 PM"
+            }
+        }
+    },
+    "privacy": {
+        "title": "PRIVACY POLICY",
+        "subtitle": "Your Privacy Matters",
+        "lastUpdated": "Last Updated",
+        "sections": {
+            "introduction": {
+                "title": "Introduction",
+                "content": "At COSMO PROJECTS & CONSTRUCTION, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data."
+            },
+            "information": {
+                "title": "Information We Collect",
+                "content": "We collect information that you provide directly to us, including name, email, phone number, company details, and project requirements."
+            },
+            "usage": {
+                "title": "How We Use Your Information",
+                "content": "We use your information to respond to inquiries, provide quotes, communicate about projects, and improve our services."
+            },
+            "security": {
+                "title": "Data Security",
+                "content": "We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, or misuse."
+            },
+            "rights": {
+                "title": "Your Rights",
+                "content": "You have the right to access, update, or delete your personal information. Contact us to exercise these rights."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content": "If you have questions about this Privacy Policy, please contact us at info@cpcqatar.com"
+            }
+        }
+    },
+    "terms": {
+        "title": "TERMS & CONDITIONS",
+        "subtitle": "Terms of Service",
+        "lastUpdated": "Last Updated",
+        "sections": {
+            "acceptance": {
+                "title": "Acceptance of Terms",
+                "content": "By accessing and using this website, you accept and agree to be bound by these Terms and Conditions."
+            },
+            "services": {
+                "title": "Services Description",
+                "content": "COSMO PROJECTS & CONSTRUCTION provides civil engineering and road construction services in Qatar."
+            },
+            "intellectual": {
+                "title": "Intellectual Property",
+                "content": "All content on this website, including text, graphics, logos, and images, is the property of COSMO PROJECTS & CONSTRUCTION."
+            },
+            "limitation": {
+                "title": "Limitation of Liability",
+                "content": "We shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services."
+            },
+            "changes": {
+                "title": "Changes to Terms",
+                "content": "We reserve the right to modify these terms at any time. Continued use of the website constitutes acceptance of modified terms."
+            }
+        }
+    },
+    "footer": {
+        "about": {
+            "title": "About CPC",
+            "description": "Leading civil engineering and road construction company in Qatar since 2017."
+        },
+        "quickLinks": {
+            "title": "Quick Links",
+            "home": "Home",
+            "about": "About Us",
+            "projects": "Projects",
+            "clients": "Clients",
+            "contact": "Contact"
+        },
+        "legal": {
+            "title": "Legal",
+            "privacy": "Privacy Policy",
+            "terms": "Terms & Conditions"
+        },
+        "contact": {
+            "title": "Contact Info",
+            "address": "Doha, Qatar",
+            "phone": "+974 XXXX XXXX",
+            "email": "info@cpcqatar.com"
+        },
+        "copyright": "© 2024 COSMO PROJECTS & CONSTRUCTION. All rights reserved.",
+        "builtBy": "Built with excellence in Qatar"
+    }
+}
