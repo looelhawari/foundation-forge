@@ -110,17 +110,16 @@ function useNavigate() {
 // ─────────────────────────────────────────────────────────
 function useLocation() {
     const pathname = usePathname();
-    const searchParams = useNextSearchParams();
 
     return React.useMemo(
         () => ({
             pathname,
-            search: searchParams.toString() ? `?${searchParams.toString()}` : "",
+            search: typeof window !== "undefined" ? window.location.search : "",
             hash: typeof window !== "undefined" ? window.location.hash : "",
             state: null as any, // Next.js doesn't support location state
             key: "default",
         }),
-        [pathname, searchParams]
+        [pathname]
     );
 }
 

@@ -3,11 +3,6 @@ const nextConfig = {
     // Enable React strict mode
     reactStrictMode: true,
 
-    // Disable Suspense requirement for useSearchParams (needed for router-compat layer)
-    experimental: {
-        missingSuspenseWithCSRBailout: false,
-    },
-
     // Configure image domains for external images (Cloudinary, etc.)
     images: {
         remotePatterns: [

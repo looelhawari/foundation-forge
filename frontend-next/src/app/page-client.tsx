@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
 import { FileText } from "lucide-react";
@@ -11,18 +12,18 @@ import { CinematicHero } from "@/components/sections/CinematicHero";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import SEOHead from "@/components/SEOHead";
 
-// Lazy-load below-fold sections for faster initial load
-const ServicesImageGrid = lazy(() => import("@/components/sections/ServicesImageGrid").then(m => ({ default: m.ServicesImageGrid })));
-const ServicesMarquee = lazy(() => import("@/components/sections/ServicesMarquee").then(m => ({ default: m.ServicesMarquee })));
-const FullscreenVideo = lazy(() => import("@/components/sections/FullscreenVideo").then(m => ({ default: m.FullscreenVideo })));
-const ClientLogosShowcase = lazy(() => import("@/components/sections/ClientLogosShowcase").then(m => ({ default: m.ClientLogosShowcase })));
-const WhyChooseUs = lazy(() => import("@/components/sections/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
-const ProcessTimeline = lazy(() => import("@/components/sections/ProcessTimeline").then(m => ({ default: m.ProcessTimeline })));
-const QualityAndCertifications = lazy(() => import("@/components/sections/QualityAndCertifications").then(m => ({ default: m.QualityAndCertifications })));
-const FeaturedShowcase = lazy(() => import("@/components/sections/FeaturedShowcase").then(m => ({ default: m.FeaturedShowcase })));
-const ParallaxStats = lazy(() => import("@/components/sections/ParallaxStats").then(m => ({ default: m.ParallaxStats })));
-const ImmersiveTestimonials = lazy(() => import("@/components/sections/ImmersiveTestimonials").then(m => ({ default: m.ImmersiveTestimonials })));
-const MegaCTA = lazy(() => import("@/components/sections/MegaCTA").then(m => ({ default: m.MegaCTA })));
+// Dynamic imports — SSR-capable, code-split for performance
+const ServicesImageGrid = dynamic(() => import("@/components/sections/ServicesImageGrid").then(m => ({ default: m.ServicesImageGrid })));
+const ServicesMarquee = dynamic(() => import("@/components/sections/ServicesMarquee").then(m => ({ default: m.ServicesMarquee })));
+const FullscreenVideo = dynamic(() => import("@/components/sections/FullscreenVideo").then(m => ({ default: m.FullscreenVideo })));
+const ClientLogosShowcase = dynamic(() => import("@/components/sections/ClientLogosShowcase").then(m => ({ default: m.ClientLogosShowcase })));
+const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
+const ProcessTimeline = dynamic(() => import("@/components/sections/ProcessTimeline").then(m => ({ default: m.ProcessTimeline })));
+const QualityAndCertifications = dynamic(() => import("@/components/sections/QualityAndCertifications").then(m => ({ default: m.QualityAndCertifications })));
+const FeaturedShowcase = dynamic(() => import("@/components/sections/FeaturedShowcase").then(m => ({ default: m.FeaturedShowcase })));
+const ParallaxStats = dynamic(() => import("@/components/sections/ParallaxStats").then(m => ({ default: m.ParallaxStats })));
+const ImmersiveTestimonials = dynamic(() => import("@/components/sections/ImmersiveTestimonials").then(m => ({ default: m.ImmersiveTestimonials })));
+const MegaCTA = dynamic(() => import("@/components/sections/MegaCTA").then(m => ({ default: m.MegaCTA })));
 
 const Index = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -57,19 +58,17 @@ const Index = () => {
             <main>
                 <CinematicHero />
 
-                <Suspense fallback={null}>
-                    <ServicesMarquee />
-                    <ServicesImageGrid />
-                    <FullscreenVideo />
-                    <ClientLogosShowcase />
-                    <WhyChooseUs />
-                    <ProcessTimeline />
-                    <QualityAndCertifications />
-                    <FeaturedShowcase />
-                    <ParallaxStats />
-                    <ImmersiveTestimonials />
-                    <MegaCTA />
-                </Suspense>
+                <ServicesMarquee />
+                <ServicesImageGrid />
+                <FullscreenVideo />
+                <ClientLogosShowcase />
+                <WhyChooseUs />
+                <ProcessTimeline />
+                <QualityAndCertifications />
+                <FeaturedShowcase />
+                <ParallaxStats />
+                <ImmersiveTestimonials />
+                <MegaCTA />
             </main>
 
             {/* Floating Legal Documents Button */}

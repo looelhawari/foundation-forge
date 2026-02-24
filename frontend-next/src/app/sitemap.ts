@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
     const now = new Date().toISOString();
 
@@ -56,9 +58,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    // TODO: Fetch dynamic project pages from API for full sitemap
-    // const projects = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`).then(r => r.json());
-    // const projectPages = projects.map(p => ({ url: `${siteUrl}/projects/${p.id}`, ... }));
+    // Dynamic project pages — fetched from API
+    let projectPages: MetadataRoute.Sitemap = [];
+    try {
+        const res = await fetch(`${API_URL}/projects?limit=1000&status=active`, {
+            next: { revalidate: 3600 },
+        });
+        if (res.ok) {
+            const json = await res.json();
+            const projects = json.data?.projects || json.projects || [];
+            projectPages = projects.map((p: any) => ({
+                url: `${siteUrl}/projects/${p.slug || p.id}`,
+                lastModified: p.updated_at || now,
+                changeFrequency: "monthly" as const,
+                priority: 0.7,
+            }));
+        }
+    } catch {
+        // API unavailable at build time — skip dynamic pages
+    }
 
-    return staticPages;
+    return [...staticPages, ...projectPages];
 }
