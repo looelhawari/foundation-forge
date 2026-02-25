@@ -7,21 +7,32 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 // Pre-render all known project pages at build time for instant Googlebot crawl
 export async function generateStaticParams() {
     try {
-        const res = await fetch(`${API_URL}/projects?limit=1000&status=active`, {
-            next: { revalidate: 3600 },
-        });
-        if (res.ok) {
+        let allProjects: any[] = [];
+        let page = 1;
+        let hasMore = true;
+
+        while (hasMore) {
+            const res = await fetch(`${API_URL}/projects?limit=100&page=${page}`, {
+                next: { revalidate: 3600 },
+            });
+            if (!res.ok) break;
             const json = await res.json();
             const projects = json.data?.projects || json.projects || [];
-            return projects.map((p: any) => ({ id: String(p.slug || p.id) }));
+            allProjects = allProjects.concat(projects);
+            const pagination = json.data?.pagination;
+            hasMore = pagination?.hasNextPage === true;
+            page++;
+        }
+
+        if (allProjects.length > 0) {
+            return allProjects.map((p: any) => ({ id: String(p.slug || p.id) }));
         }
     } catch {
-        // Fallback: use local project IDs
+        // API unavailable at build time
     }
 
-    // Fallback: import local project data for build-time generation
-    const { projects } = await import("@/data/projects");
-    return projects.map((p) => ({ id: p.id }));
+    // Fallback only if API returned nothing
+    return [];
 }
 
 async function getProject(id: string) {

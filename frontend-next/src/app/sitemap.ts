@@ -58,39 +58,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // Dynamic project pages — fetched from API with local fallback
+    // Dynamic project pages — fetched from API with pagination
     let projectPages: MetadataRoute.Sitemap = [];
     try {
-        const res = await fetch(`${API_URL}/projects?limit=1000&status=active`, {
-            next: { revalidate: 3600 },
-        });
-        if (res.ok) {
+        let allProjects: any[] = [];
+        let page = 1;
+        let hasMore = true;
+
+        while (hasMore) {
+            const res = await fetch(`${API_URL}/projects?limit=100&page=${page}`, {
+                next: { revalidate: 3600 },
+            });
+            if (!res.ok) break;
             const json = await res.json();
             const projects = json.data?.projects || json.projects || [];
-            projectPages = projects.map((p: any) => ({
-                url: `${siteUrl}/projects/${p.slug || p.id}`,
-                lastModified: p.updated_at || now,
-                changeFrequency: "monthly" as const,
-                priority: 0.7,
-            }));
+            allProjects = allProjects.concat(projects);
+            const pagination = json.data?.pagination;
+            hasMore = pagination?.hasNextPage === true;
+            page++;
         }
-    } catch {
-        // API unavailable — fall back to local project data
-    }
 
-    // Fallback: if API returned no projects, use local data so sitemap always includes them
-    if (projectPages.length === 0) {
-        try {
-            const { projects } = await import("@/data/projects");
-            projectPages = projects.map((p) => ({
-                url: `${siteUrl}/projects/${p.id}`,
-                lastModified: now,
-                changeFrequency: "monthly" as const,
-                priority: 0.7,
-            }));
-        } catch {
-            // Local data also unavailable — skip
-        }
+        projectPages = allProjects.map((p: any) => ({
+            url: `${siteUrl}/projects/${p.slug || p.id}`,
+            lastModified: p.updated_at || now,
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+        }));
+    } catch {
+        // API unavailable — sitemap will only contain static pages
     }
 
     return [...staticPages, ...projectPages];
