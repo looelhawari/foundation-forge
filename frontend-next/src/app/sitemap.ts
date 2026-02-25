@@ -58,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // Dynamic project pages — fetched from API
+    // Dynamic project pages — fetched from API with local fallback
     let projectPages: MetadataRoute.Sitemap = [];
     try {
         const res = await fetch(`${API_URL}/projects?limit=1000&status=active`, {
@@ -75,7 +75,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             }));
         }
     } catch {
-        // API unavailable at build time — skip dynamic pages
+        // API unavailable — fall back to local project data
+    }
+
+    // Fallback: if API returned no projects, use local data so sitemap always includes them
+    if (projectPages.length === 0) {
+        try {
+            const { projects } = await import("@/data/projects");
+            projectPages = projects.map((p) => ({
+                url: `${siteUrl}/projects/${p.id}`,
+                lastModified: now,
+                changeFrequency: "monthly" as const,
+                priority: 0.7,
+            }));
+        } catch {
+            // Local data also unavailable — skip
+        }
     }
 
     return [...staticPages, ...projectPages];

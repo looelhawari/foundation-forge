@@ -99,9 +99,10 @@ export const CinematicHero = memo(() => {
           <motion.div className="absolute inset-0" style={{ scale: isMobile ? undefined : s1Scale, willChange: 'transform' }}>
             <motion.img
               src={heroImage}
-              alt="CPC highway construction"
+              alt="CPC Qatar highway construction project - asphalt paving and road infrastructure in Doha"
               className="w-full h-full object-cover"
               loading="eager"
+              fetchPriority="high"
               initial={{ scale: isMobile ? 1 : 1.2 }}
               animate={{ scale: 1 }}
               transition={{ duration: 2.5, ease }}

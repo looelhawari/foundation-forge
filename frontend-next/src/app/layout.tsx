@@ -341,6 +341,14 @@ export default function RootLayout({
                     rel="stylesheet"
                 />
 
+                {/* Preload LCP hero image for faster first paint */}
+                <link
+                    rel="preload"
+                    href="/assets/hero-construction.jpg"
+                    as="image"
+                    fetchPriority="high"
+                />
+
                 {/* Structured Data — Organization */}
                 <script
                     type="application/ld+json"

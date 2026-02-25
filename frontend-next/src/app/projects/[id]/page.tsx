@@ -4,6 +4,26 @@ import ProjectDetailPage from "./page-client";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 
+// Pre-render all known project pages at build time for instant Googlebot crawl
+export async function generateStaticParams() {
+    try {
+        const res = await fetch(`${API_URL}/projects?limit=1000&status=active`, {
+            next: { revalidate: 3600 },
+        });
+        if (res.ok) {
+            const json = await res.json();
+            const projects = json.data?.projects || json.projects || [];
+            return projects.map((p: any) => ({ id: String(p.slug || p.id) }));
+        }
+    } catch {
+        // Fallback: use local project IDs
+    }
+
+    // Fallback: import local project data for build-time generation
+    const { projects } = await import("@/data/projects");
+    return projects.map((p) => ({ id: p.id }));
+}
+
 async function getProject(id: string) {
     try {
         const res = await fetch(`${API_URL}/projects/${id}`, {
@@ -91,33 +111,33 @@ export default async function Page({
     // Build ConstructionProject JSON-LD if we have data
     const jsonLd = project
         ? {
-              "@context": "https://schema.org",
-              "@type": "ConstructionProject" as const,
-              name: project.title,
-              description: project.description || undefined,
-              url: `${SITE_URL}/projects/${params.id}`,
-              image: project.images?.[0] || undefined,
-              location: project.location
-                  ? {
-                        "@type": "Place" as const,
-                        name: project.location,
-                        address: {
-                            "@type": "PostalAddress" as const,
-                            addressLocality: project.location,
-                            addressCountry: "QA",
-                        },
-                    }
-                  : undefined,
-              contractor: {
-                  "@type": "Organization" as const,
-                  name: "CPC Qatar — Cosmo Projects & Construction",
-                  url: SITE_URL,
-              },
-              client: project.client
-                  ? { "@type": "Organization" as const, name: project.client }
-                  : undefined,
-              dateCreated: project.year || undefined,
-          }
+            "@context": "https://schema.org",
+            "@type": "ConstructionProject" as const,
+            name: project.title,
+            description: project.description || undefined,
+            url: `${SITE_URL}/projects/${params.id}`,
+            image: project.images?.[0] || undefined,
+            location: project.location
+                ? {
+                    "@type": "Place" as const,
+                    name: project.location,
+                    address: {
+                        "@type": "PostalAddress" as const,
+                        addressLocality: project.location,
+                        addressCountry: "QA",
+                    },
+                }
+                : undefined,
+            contractor: {
+                "@type": "Organization" as const,
+                name: "CPC Qatar — Cosmo Projects & Construction",
+                url: SITE_URL,
+            },
+            client: project.client
+                ? { "@type": "Organization" as const, name: project.client }
+                : undefined,
+            dateCreated: project.year || undefined,
+        }
         : null;
 
     return (

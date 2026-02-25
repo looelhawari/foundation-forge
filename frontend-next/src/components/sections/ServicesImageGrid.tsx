@@ -221,7 +221,7 @@ export const ServicesImageGrid = () => {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full border border-amber-400/30 bg-amber-400/5 mb-6"
           >
-            <img src={cpcLogo} alt="CPC" className="w-9 h-9 md:w-10 md:h-10 object-contain" />
+            <img src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" className="w-9 h-9 md:w-10 md:h-10 object-contain" />
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">

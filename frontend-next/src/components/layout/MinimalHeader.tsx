@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "@/lib/router-compat";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
 
 const navLinks = [
@@ -43,7 +44,7 @@ export const MinimalHeader = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
-              <img src={cpcLogo} alt="CPC Logo" className="h-24 w-auto object-contain" />
+              <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={192} height={96} className="h-24 w-auto object-contain" priority />
             </Link>
 
             {/* Desktop Navigation - Minimal */}

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import ClientsPage from "./page-client";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
+
 export const metadata: Metadata = {
     title: "Clients & Testimonials | Trusted by Leading Qatar Organizations",
     description:
@@ -25,6 +27,35 @@ export const metadata: Metadata = {
     },
 };
 
+const clientsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "CPC Qatar Clients & Testimonials",
+    description:
+        "Trusted clients and testimonials for CPC Qatar — serving Ministry of Education, Ashghal, FIFA 2022 contractors, and leading organizations across Qatar.",
+    url: `${SITE_URL}/clients`,
+    isPartOf: { "@type": "WebSite", name: "CPC Qatar", url: SITE_URL },
+    mainEntity: {
+        "@type": "ItemList",
+        name: "CPC Qatar Client Organizations",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, item: { "@type": "Organization", name: "Ministry of Education — Qatar" } },
+            { "@type": "ListItem", position: 2, item: { "@type": "Organization", name: "Ashghal — Public Works Authority" } },
+            { "@type": "ListItem", position: 3, item: { "@type": "Organization", name: "FIFA World Cup Qatar 2022" } },
+            { "@type": "ListItem", position: 4, item: { "@type": "Organization", name: "Imalco Qatar" } },
+            { "@type": "ListItem", position: 5, item: { "@type": "Organization", name: "Techno Qatar" } },
+        ],
+    },
+};
+
 export default function Page() {
-    return <ClientsPage />;
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(clientsJsonLd) }}
+            />
+            <ClientsPage />
+        </>
+    );
 }

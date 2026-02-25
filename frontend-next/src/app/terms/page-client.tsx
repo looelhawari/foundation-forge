@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollText, Shield, FileText, Scale, AlertCircle } from "lucide-react";
+import { Link } from "@/lib/router-compat";
 import SEOHead from "@/components/SEOHead";
 
 const Terms = () => {
@@ -209,7 +210,7 @@ const Terms = () => {
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
                                         <p>
                                             When you contact us through the website, we only collect the information you provide (name, email, message).
-                                            Please read our <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a> to learn how we handle your information.
+                                            Please read our <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link> to learn how we handle your information.
                                         </p>
                                     </div>
                                 </div>

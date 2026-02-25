@@ -91,7 +91,7 @@ const About = () => {
             <motion.div style={{ scale: heroScale }} className="absolute inset-0">
               <img
                 src={heroImage}
-                alt="Construction site"
+                alt="CPC Qatar road construction crew working on infrastructure project in Doha, Qatar"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

@@ -74,9 +74,9 @@ export const CinematicCTA = () => {
               </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <a href="tel:+966123456789">
+              <a href="tel:+97444322743">
                 <Phone className="w-5 h-5" />
-                +966 12 345 6789
+                +974 4432 2743
               </a>
             </Button>
           </motion.div>

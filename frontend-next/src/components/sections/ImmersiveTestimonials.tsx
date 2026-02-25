@@ -169,7 +169,7 @@ export const ImmersiveTestimonials = () => {
                           <div className="w-16 h-16 flex items-center justify-center">
                             <img
                               src={testimonial.company_logo}
-                              alt={testimonial.company_name || ''}
+                              alt={testimonial.company_name || 'Client company logo'}
                               className="w-full h-full object-contain"
                             />
                           </div>

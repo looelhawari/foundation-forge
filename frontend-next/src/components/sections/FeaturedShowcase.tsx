@@ -277,6 +277,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
                         src={client.logo}
                         alt={client.name}
                         className="w-full h-full object-contain drop-shadow-lg"
+                        loading="lazy"
                     />
                 </div>
                 <h4 className="text-lg font-bold text-gray-800 text-center relative z-10">
@@ -308,6 +309,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
                     src={client.projectImage}
                     alt={`${client.name} project`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 

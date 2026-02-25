@@ -2,6 +2,7 @@
 
 import { Link } from "@/lib/router-compat";
 import { Phone, Mail, MapPin, FileText } from "lucide-react";
+import Image from "next/image";
 const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
 
 export const Footer = () => {
@@ -12,7 +13,7 @@ export const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div>
-              <img src={cpcLogo} alt="CPC Logo" className="h-28 w-auto object-contain" />
+              <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={224} height={112} className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Constructing the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise.
@@ -103,7 +104,9 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground text-sm">
-                  Mirqab Mall, Area 39<br />P.O. Box 15776, Doha, Qatar
+                  Mirqab Mall, Area No. 39, Street No. 840,<br />
+                  Building No. 53, Block D, Office No. 307-308<br />
+                  P.O. Box 15776, Doha, Qatar
                 </span>
               </li>
               <li className="flex items-center gap-3">

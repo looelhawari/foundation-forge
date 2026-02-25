@@ -2,6 +2,7 @@
 
 import { Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
+import Image from "next/image";
 const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
 
 export const MinimalFooter = () => {
@@ -16,7 +17,7 @@ export const MinimalFooter = () => {
             viewport={{ once: true }}
           >
             <Link to="/" className="flex items-center gap-3">
-              <img src={cpcLogo} alt="CPC Logo" className="h-28 w-auto object-contain" />
+              <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={224} height={112} className="h-28 w-auto object-contain" />
             </Link>
             <div className="mt-4 text-sm text-muted-foreground">
               <p>P.O. Box: 15776, Doha, Qatar</p>
