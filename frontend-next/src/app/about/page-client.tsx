@@ -87,6 +87,8 @@ const About = () => {
 
         {/* Cinematic Hero */}
         <section ref={heroRef} className="relative h-[150vh]">
+          {/* SEO-only H1 — visible to Google, hidden visually */}
+          <h1 className="sr-only">About CPC Qatar | Road Construction &amp; Civil Engineering Company Since 2017 — Doha, Qatar</h1>
           <div className="sticky top-0 h-screen overflow-hidden">
             <motion.div style={{ scale: heroScale }} className="absolute inset-0">
               <img
@@ -111,36 +113,38 @@ const About = () => {
                 Our Story
               </motion.span>
 
-              <div className="overflow-hidden mb-4">
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
-                >
-                  CONSTRUCTING
-                </motion.h1>
-              </div>
-              <div className="overflow-hidden mb-4">
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
-                >
-                  LEGACY
-                </motion.h1>
-              </div>
-              <div className="overflow-hidden">
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
-                  className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]"
-                >
-                  SINCE 2017
-                </motion.h1>
-              </div>
+              <h2 aria-label="Constructing Legacy Since 2017 — CPC Qatar" className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]">
+                <span className="block overflow-hidden mb-4">
+                  <motion.span
+                    className="block"
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+                  >
+                    CONSTRUCTING
+                  </motion.span>
+                </span>
+                <span className="block overflow-hidden mb-4">
+                  <motion.span
+                    className="block text-gradient"
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
+                  >
+                    LEGACY
+                  </motion.span>
+                </span>
+                <span className="block overflow-hidden">
+                  <motion.span
+                    className="block"
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+                  >
+                    SINCE 2017
+                  </motion.span>
+                </span>
+              </h2>
             </motion.div>
           </div>
         </section>
@@ -194,7 +198,7 @@ const StorySection = () => {
             </motion.span>
 
             <div className="overflow-hidden mb-4">
-              <motion.h2
+              <motion.p
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
@@ -202,10 +206,10 @@ const StorySection = () => {
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
               >
                 SMALL BUT
-              </motion.h2>
+              </motion.p>
             </div>
             <div className="overflow-hidden mb-8 md:mb-12">
-              <motion.h2
+              <motion.p
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
@@ -213,7 +217,7 @@ const StorySection = () => {
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em] text-gradient"
               >
                 MIGHTY
-              </motion.h2>
+              </motion.p>
             </div>
 
             <motion.div
@@ -319,28 +323,29 @@ const WhatIsCPCSection = () => {
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { title: "Earthworks", desc: "Site preparation, excavation, grading, and compaction for solid foundations" },
-              { title: "Road Construction", desc: "Sub-grade, sub-base preparation, and complete asphalt paving solutions" },
-              { title: "Asphalt Works", desc: "Hot mix asphalt, cold mix, surface treatment, and maintenance" },
-              { title: "Traffic Solutions", desc: "Thermoplastic road marking, traffic signs, and safety installations" },
-              { title: "Interlock & Kerbstone", desc: "Precision paver installation, kerbstone laying, and pattern design" },
-              { title: "Steel Works", desc: "Rebar installation, steel fabrication, and structural reinforcement" },
+              { title: "Earthworks", desc: "Site preparation, excavation, grading, and compaction for solid foundations", href: "/services/earthworks" },
+              { title: "Road Construction", desc: "Sub-grade, sub-base preparation, and complete asphalt paving solutions", href: "/services/subgrade-subbase" },
+              { title: "Asphalt Works", desc: "Hot mix asphalt, cold mix, surface treatment, and maintenance", href: "/services/asphalt-works" },
+              { title: "Traffic Solutions", desc: "Thermoplastic road marking, traffic signs, and safety installations", href: "/services/road-marking" },
+              { title: "Interlock & Kerbstone", desc: "Precision paver installation, kerbstone laying, and pattern design", href: "/services/interlock-kerbstone" },
+              { title: "Infrastructure Development", desc: "Drainage, utilities, and complete civil infrastructure services", href: "/services/infrastructure-development" },
             ].map((service, index) => (
-              <motion.div
+              <motion.a
                 key={index}
+                href={service.href}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-gradient-card border border-border rounded-xl p-6 hover:border-primary/50 transition-all cursor-pointer group"
+                className="bg-gradient-card border border-border rounded-xl p-6 hover:border-primary/50 transition-all cursor-pointer group block"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <div className="w-6 h-6 rounded-full bg-gradient-gold"></div>
                 </div>
                 <h4 className="font-display text-xl mb-2 group-hover:text-primary transition-colors">{service.title}</h4>
                 <p className="text-sm text-muted-foreground">{service.desc}</p>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 

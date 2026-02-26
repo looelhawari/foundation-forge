@@ -33,17 +33,31 @@ const features = [
     "Project Cost Control"
 ];
 
-// Counter animation component
+// Counter animation component — SSR shows final value, then animates from 0 on client
 const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
-    const [count, setCount] = useState(0);
-    const [isInView, setIsInView] = useState(false);
+    const [count, setCount] = useState(target);
     const ref = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    setIsInView(true);
+                    observer.disconnect();
+                    // Reset to 0 then animate up
+                    setCount(0);
+                    const duration = 2000;
+                    const steps = 60;
+                    const increment = target / steps;
+                    let current = 0;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            setCount(target);
+                            clearInterval(timer);
+                        } else {
+                            setCount(Math.floor(current));
+                        }
+                    }, duration / steps);
                 }
             },
             { threshold: 0.5 }
@@ -54,28 +68,7 @@ const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: strin
         }
 
         return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        if (!isInView) return;
-
-        const duration = 2000;
-        const steps = 60;
-        const increment = target / steps;
-        let current = 0;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                setCount(target);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(current));
-            }
-        }, duration / steps);
-
-        return () => clearInterval(timer);
-    }, [isInView, target]);
+    }, [target]);
 
     return (
         <span ref={ref}>

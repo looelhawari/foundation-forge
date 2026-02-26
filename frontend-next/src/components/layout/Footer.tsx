@@ -49,9 +49,21 @@ export const Footer = () => {
           <div>
             <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h4>
             <ul className="space-y-3">
-              {["Earthworks & Grading", "Asphalt Paving", "Road Marking & Traffic Signs", "Interlock & Kerbstone", "Sub-Grade & Sub-Base", "Steel Works"].map((item) => (
-                <li key={item}>
-                  <span className="text-muted-foreground text-sm">{item}</span>
+              {[
+                { name: "Earthworks & Grading", href: "/services/earthworks" },
+                { name: "Asphalt Paving", href: "/services/asphalt-works" },
+                { name: "Road Marking & Traffic Signs", href: "/services/road-marking" },
+                { name: "Interlock & Kerbstone", href: "/services/interlock-kerbstone" },
+                { name: "Sub-Grade & Sub-Base", href: "/services/subgrade-subbase" },
+                { name: "Infrastructure Development", href: "/services/infrastructure-development" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.href}
+                    className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>

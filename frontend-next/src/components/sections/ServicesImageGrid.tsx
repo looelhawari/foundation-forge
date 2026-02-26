@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { Link } from "@/lib/router-compat";
 const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
 const earthworks = "/assets/services/earth work.jpg";
 const subgrade = "/assets/services/subgrade and subbase.jpg";
@@ -16,6 +17,8 @@ const services = [
     description: "Comprehensive earthmoving, excavation, and land preparation services for all construction needs.",
     features: ["Site Clearing", "Excavation", "Grading", "Compaction"],
     image: earthworks,
+    alt: "Earthworks and excavation services by CPC Qatar — site grading and land preparation in Doha, Qatar",
+    href: "/services/earthworks",
   },
   {
     title: "Sub-Grade & Sub-Base",
@@ -23,6 +26,8 @@ const services = [
     description: "Professional sub-grade and sub-base preparation ensuring solid foundation for all road projects.",
     features: ["Layer Preparation", "Material Testing", "Compaction Control", "Quality Assurance"],
     image: subgrade,
+    alt: "Subgrade and subbase road foundation construction by CPC Qatar in Doha, Qatar",
+    href: "/services/subgrade-subbase",
   },
   {
     title: "Asphalt Works",
@@ -30,6 +35,8 @@ const services = [
     description: "Expert asphalt paving and road surfacing using latest technology and quality materials.",
     features: ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Maintenance"],
     image: asphalt,
+    alt: "Asphalt paving and road surfacing project by CPC Qatar — hot mix asphalt in Doha, Qatar",
+    href: "/services/asphalt-works",
   },
   {
     title: "Traffic Signs & Road Marking",
@@ -37,6 +44,8 @@ const services = [
     description: "Complete traffic management solutions including signage installation and road marking services.",
     features: ["Thermoplastic Marking", "Sign Installation", "Safety Measures", "Line Marking"],
     image: traffic,
+    alt: "Road marking and traffic sign installation by CPC Qatar — thermoplastic marking in Doha, Qatar",
+    href: "/services/road-marking",
   },
   {
     title: "Interlock & Kerbstone",
@@ -44,6 +53,8 @@ const services = [
     description: "Precision installation of interlocking pavers and kerbstones for aesthetic and functional excellence.",
     features: ["Paver Installation", "Kerbstone Laying", "Pattern Design", "Finishing Works"],
     image: interlock,
+    alt: "Interlock paving and kerbstone installation by CPC Qatar in Doha, Qatar",
+    href: "/services/interlock-kerbstone",
   },
 ];
 
@@ -79,7 +90,7 @@ const BentoCard = ({
       >
         <img
           src={service.image}
-          alt={service.title}
+          alt={service.alt}
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -134,19 +145,20 @@ const BentoCard = ({
           {service.title}
         </motion.h3>
 
-        {/* Description — slides in on hover */}
+        {/* Description — always in DOM for crawlers, visually animated */}
         <motion.p
           className="text-white/80 text-sm md:text-base leading-relaxed mb-4 max-w-md"
-          animate={{ y: hovered ? 0 : 15, opacity: hovered ? 1 : 0, height: hovered ? "auto" : 0 }}
+          animate={{ y: hovered ? 0 : 15, opacity: hovered ? 1 : 0.001 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
+          style={{ height: "auto", overflow: "hidden" }}
         >
           {service.description}
         </motion.p>
 
-        {/* Feature tags — stagger in */}
+        {/* Feature tags — always in DOM for crawlers */}
         <motion.div
           className="flex flex-wrap gap-2"
-          animate={{ y: hovered ? 0 : 20, opacity: hovered ? 1 : 0 }}
+          animate={{ y: hovered ? 0 : 20, opacity: hovered ? 1 : 0.001 }}
           transition={{ duration: 0.4, delay: 0.08, ease: "easeOut" }}
         >
           {service.features.map((f, i) => (
@@ -155,7 +167,7 @@ const BentoCard = ({
               className="text-[11px] sm:text-xs text-white/90 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{
-                opacity: hovered ? 1 : 0,
+                opacity: hovered ? 1 : 0.001,
                 scale: hovered ? 1 : 0.85,
               }}
               transition={{ delay: 0.1 + i * 0.04, duration: 0.25 }}
@@ -177,7 +189,10 @@ const BentoCard = ({
         }}
         transition={{ duration: 0.4 }}
       />
-    </motion.div>
+      {/* Link overlay for crawlers + accessibility */}
+      <Link to={service.href} className="absolute inset-0 z-30" aria-label={`${service.title} — View details`}>
+        <span className="sr-only">{service.description}</span>
+      </Link>    </motion.div>
   );
 };
 

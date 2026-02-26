@@ -70,7 +70,7 @@ export function ProcessTimeline() {
             <div className="absolute inset-0">
                 <img
                     src={processBg}
-                    alt="CPC construction process"
+                    alt="CPC Qatar construction methodology — road building and infrastructure development process"
                     className="w-full h-full object-cover opacity-10"
                     loading="lazy"
                 />
@@ -149,7 +149,7 @@ export function ProcessTimeline() {
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
                                                     src={process.image}
-                                                    alt={process.title}
+                                                    alt={`Step ${process.step}: ${process.title} — ${process.description}`}
                                                     className="w-full h-full object-cover"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />

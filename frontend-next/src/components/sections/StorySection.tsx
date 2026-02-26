@@ -32,28 +32,30 @@ export const StorySection = () => {
               The Story
             </motion.span>
 
-            <div className="overflow-hidden mb-4">
-              <motion.h2
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em]"
-              >
-                SMALL BUT
-              </motion.h2>
-            </div>
-            <div className="overflow-hidden mb-6 md:mb-8">
-              <motion.h2
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] text-gradient"
-              >
-                MIGHTY
-              </motion.h2>
-            </div>
+            <h2 aria-label="Small But Mighty — CPC Qatar Story" className="mb-6 md:mb-8">
+              <span className="block overflow-hidden mb-4">
+                <motion.span
+                  className="block font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em]"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  SMALL BUT
+                </motion.span>
+              </span>
+              <span className="block overflow-hidden">
+                <motion.span
+                  className="block font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] text-gradient"
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                >
+                  MIGHTY
+                </motion.span>
+              </span>
+            </h2>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -102,7 +104,7 @@ export const StorySection = () => {
               <motion.img
                 style={{ scale: imageScale }}
                 src={engineerImage}
-                alt="Lead Engineer"
+                alt="CPC Qatar lead civil engineer overseeing road construction and infrastructure projects in Doha, Qatar"
                 className="w-full h-full object-cover"
               />
             </div>

@@ -31,7 +31,7 @@ export const FullscreenVideo = () => {
         >
           <img
             src={heroImage}
-            alt="Construction site"
+            alt="CPC Qatar road construction and infrastructure project site in Doha, Qatar"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-background/60" />
@@ -50,39 +50,41 @@ export const FullscreenVideo = () => {
             Engineering Excellence
           </motion.span>
 
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl md:text-7xl lg:text-[10vw] tracking-[0.1em] leading-none"
-            >
-              WHERE
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-display text-5xl md:text-7xl lg:text-[10vw] tracking-[0.1em] leading-none text-gradient"
-            >
-              VISION
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: "100%" }}
-              whileInView={{ y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="font-display text-5xl md:text-7xl lg:text-[10vw] tracking-[0.1em] leading-none"
-            >
-              MEETS ROAD
-            </motion.h2>
-          </div>
+          <h2 className="font-display text-5xl md:text-7xl lg:text-[10vw] tracking-[0.1em] leading-none" aria-label="Where Vision Meets Road — CPC Qatar Engineering Excellence">
+            <div className="overflow-hidden">
+              <motion.span
+                initial={{ y: "100%", display: "block" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="block"
+              >
+                WHERE
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                initial={{ y: "100%", display: "block" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                className="block text-gradient"
+              >
+                VISION
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                initial={{ y: "100%", display: "block" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="block"
+              >
+                MEETS ROAD
+              </motion.span>
+            </div>
+          </h2>
         </motion.div>
       </div>
     </section>

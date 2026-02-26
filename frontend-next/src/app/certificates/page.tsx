@@ -4,7 +4,7 @@ import CertificatesPage from "./page-client";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 
 export const metadata: Metadata = {
-    title: "Certificates & Accreditations | Quality Standards",
+    title: "Certificates & Accreditations | CPC Qatar Quality Standards",
     description:
         "View CPC Qatar official certificates, accreditations and quality standards. Government-approved contractor CR 108122 with ISO-compliant road construction practices.",
     alternates: { canonical: "/certificates" },

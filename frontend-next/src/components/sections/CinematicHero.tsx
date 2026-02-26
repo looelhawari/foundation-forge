@@ -125,9 +125,9 @@ export const CinematicHero = memo(() => {
                 SINCE 2017 — DOHA, QATAR
               </motion.p>
 
-              {/* Headline */}
+              {/* Headline — always renders text for SSR/Googlebot; animates after hydration */}
               <h1 className="font-display text-[clamp(2.5rem,10vw,7rem)] leading-[0.88] tracking-tight">
-                {ready && (
+                {ready ? (
                   <>
                     <SplitReveal text="CONSTRUCTING THE" delay={0.5} />
                     <br />
@@ -137,7 +137,14 @@ export const CinematicHero = memo(() => {
                     {" "}
                     <SplitReveal text="OF TOMORROW" delay={0.85} />
                   </>
+                ) : (
+                  <>
+                    CONSTRUCTING THE{" "}
+                    <span className="text-gradient">ROADS</span>{" "}
+                    OF TOMORROW
+                  </>
                 )}
+                <span className="sr-only"> — CPC Qatar, Road Construction &amp; Infrastructure Company in Doha, Qatar. Asphalt Paving, Earthworks &amp; Civil Engineering since 2017.</span>
               </h1>
 
               {/* Stats row */}
@@ -154,11 +161,25 @@ export const CinematicHero = memo(() => {
                     animate={ready ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7, delay: 1.7 + i * 0.1, ease }}>
                     <div className="font-display text-3xl md:text-5xl text-primary tabular-nums">
-                      {ready && <AnimNum to={d.n} suffix={d.s} />}
+                      {ready ? <AnimNum to={d.n} suffix={d.s} /> : <span>{d.n}{d.s}</span>}
                     </div>
                     <div className="text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.l}</div>
                   </motion.div>
                 ))}
+              </motion.div>
+
+              {/* CTA Links */}
+              <motion.div className="mt-8 flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={ready ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 2.0, ease }}>
+                <a href="/services" className="inline-flex items-center gap-2 text-primary border border-primary/30 rounded-full px-6 py-3 text-sm tracking-wider uppercase hover:bg-primary/10 transition-colors">
+                  Explore Our Services
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+                <a href="/projects" className="inline-flex items-center gap-2 text-white/60 border border-white/10 rounded-full px-6 py-3 text-sm tracking-wider uppercase hover:text-white hover:border-white/30 transition-colors">
+                  View Projects
+                </a>
               </motion.div>
             </div>
           </motion.div>

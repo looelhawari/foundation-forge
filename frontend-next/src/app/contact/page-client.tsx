@@ -104,6 +104,7 @@ const Contact = () => {
               </span>
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
                 CONTACT <span className="text-gradient">US</span>
+                <span className="sr-only"> — CPC Qatar | Free Quote for Road Construction &amp; Infrastructure Projects in Doha, Qatar</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl">
                 Ready to start your next project? Reach out to our team of

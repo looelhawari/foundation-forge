@@ -197,6 +197,7 @@ const Projects = () => {
                     >
                       <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
                         OUR <span className="text-gradient">PROJECTS</span>
+                        <span className="sr-only"> — Road Construction &amp; Infrastructure Portfolio in Qatar</span>
                       </h1>
                       <p className="text-xl text-muted-foreground mb-8">
                         Explore our portfolio of excellence
@@ -461,9 +462,9 @@ const Projects = () => {
                           <Sparkles className="w-8 h-8 text-primary" />
                         </div>
                         <div>
-                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
                             New <span className="text-gradient">Projects</span>
-                          </h1>
+                          </h2>
                           <p className="text-muted-foreground mt-2">
                             Select a category to explore
                           </p>
@@ -548,9 +549,9 @@ const Projects = () => {
                           <Clock className="w-8 h-8 text-amber-500" />
                         </div>
                         <div>
-                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
                             Old <span className="text-amber-500">Projects</span>
-                          </h1>
+                          </h2>
                           <p className="text-muted-foreground mt-2">
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />
@@ -704,9 +705,9 @@ const Projects = () => {
                             ?.icon || "📁"}
                         </span>
                         <div>
-                          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
+                          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
                             {selectedCategoryObj?.name || selectedCategory}
-                          </h1>
+                          </h2>
                           <p className="text-muted-foreground mt-2">
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />

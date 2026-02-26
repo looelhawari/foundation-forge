@@ -127,7 +127,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                 <div className="absolute inset-0">
                     <motion.img
                         src={project.image}
-                        alt={project.title}
+                        alt={`CPC Qatar project: ${project.title} — ${project.area} for ${project.client || 'private client'}, ${project.status}`}
                         className="w-full h-full object-cover"
                         animate={{
                             scale: isHovered ? 1.15 : 1

@@ -227,8 +227,11 @@ function HeroSection() {
             Trusted Partnerships
           </motion.span>
 
+          {/* SEO H1 — screen-reader + Googlebot visible, hidden visually */}
+          <h1 className="sr-only">Our Clients &amp; Partners | Trusted by Qatar's Leading Organizations — CPC Qatar</h1>
+
           <div className="overflow-hidden mb-4">
-            <motion.h1
+            <motion.h2
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{
@@ -239,10 +242,10 @@ function HeroSection() {
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
               CONSTRUCTING
-            </motion.h1>
+            </motion.h2>
           </div>
           <div className="overflow-hidden">
-            <motion.h1
+            <motion.h2
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{
@@ -253,7 +256,7 @@ function HeroSection() {
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
             >
               QATAR'S FUTURE
-            </motion.h1>
+            </motion.h2>
           </div>
 
           <motion.p

@@ -251,10 +251,11 @@ const breadcrumbSchema = {
     itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: "https://cpc-qa.com/" },
         { "@type": "ListItem", position: 2, name: "About", item: "https://cpc-qa.com/about" },
-        { "@type": "ListItem", position: 3, name: "Projects", item: "https://cpc-qa.com/projects" },
-        { "@type": "ListItem", position: 4, name: "Clients", item: "https://cpc-qa.com/clients" },
-        { "@type": "ListItem", position: 5, name: "Contact", item: "https://cpc-qa.com/contact" },
-        { "@type": "ListItem", position: 6, name: "Certificates", item: "https://cpc-qa.com/certificates" },
+        { "@type": "ListItem", position: 3, name: "Services", item: "https://cpc-qa.com/services" },
+        { "@type": "ListItem", position: 4, name: "Projects", item: "https://cpc-qa.com/projects" },
+        { "@type": "ListItem", position: 5, name: "Clients", item: "https://cpc-qa.com/clients" },
+        { "@type": "ListItem", position: 6, name: "Contact", item: "https://cpc-qa.com/contact" },
+        { "@type": "ListItem", position: 7, name: "Certificates", item: "https://cpc-qa.com/certificates" },
     ],
 };
 

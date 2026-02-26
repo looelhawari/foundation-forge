@@ -39,6 +39,48 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
+            url: `${siteUrl}/services`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.9,
+        },
+        {
+            url: `${siteUrl}/services/asphalt-works`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
+            url: `${siteUrl}/services/road-marking`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
+            url: `${siteUrl}/services/earthworks`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
+            url: `${siteUrl}/services/interlock-kerbstone`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
+            url: `${siteUrl}/services/subgrade-subbase`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
+            url: `${siteUrl}/services/infrastructure-development`,
+            lastModified: now,
+            changeFrequency: "monthly",
+            priority: 0.85,
+        },
+        {
             url: `${siteUrl}/certificates`,
             lastModified: now,
             changeFrequency: "monthly",

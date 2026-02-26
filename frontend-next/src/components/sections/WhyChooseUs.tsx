@@ -57,7 +57,7 @@ export function WhyChooseUs() {
             <div className="absolute inset-0">
                 <img
                     src={whyChooseBg}
-                    alt="CPC construction project"
+                    alt="CPC Qatar road construction team delivering infrastructure excellence in Doha, Qatar"
                     className="w-full h-full object-cover opacity-10"
                     loading="lazy"
                 />
@@ -108,7 +108,7 @@ export function WhyChooseUs() {
                                 <div className="relative h-48 overflow-hidden">
                                     <img
                                         src={advantage.image}
-                                        alt={advantage.title}
+                                        alt={`CPC Qatar — ${advantage.title}: ${advantage.description}`}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         loading="lazy"
                                     />

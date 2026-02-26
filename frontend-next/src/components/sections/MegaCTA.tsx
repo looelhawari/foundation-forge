@@ -43,41 +43,41 @@ export const MegaCTA = () => {
         </motion.span>
 
         {/* Main headline */}
-        <div className="mb-12">
-          <div className="overflow-hidden">
-            <motion.h2
+        <h2 aria-label="Let's Create Something Extraordinary — Contact CPC Qatar" className="mb-12">
+          <span className="block overflow-hidden">
+            <motion.span
+              className="block font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
             >
-              LET'S CREATE
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h2
+              LET&apos;S CREATE
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span
+              className="block font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none text-gradient"
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none text-gradient"
             >
               SOMETHING
-            </motion.h2>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h2
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span
+              className="block font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10vw] tracking-[0.05em] leading-none"
             >
               EXTRAORDINARY
-            </motion.h2>
-          </div>
-        </div>
+            </motion.span>
+          </span>
+        </h2>
 
         {/* CTA Button with magnetic effect */}
         <motion.div
