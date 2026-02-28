@@ -10,6 +10,7 @@ const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
   { name: "Projects", path: "/projects" },
   { name: "Clients", path: "/clients" },
   { name: "Contact", path: "/contact" },
