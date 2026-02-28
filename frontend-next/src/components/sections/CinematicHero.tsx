@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, memo, useState, useEffect } from "react";
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
+const heroImageMobile = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto,w_828/v1772312015/cpc-website/hero-construction.jpg";
 const flyoverVideo = "https://res.cloudinary.com/dhxlvvzih/video/upload/q_auto/v1772312001/cpc-website/cpc.mp4";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -110,17 +111,19 @@ export const CinematicHero = memo(() => {
         {/* ═══════════ SCENE 1: HERO IMAGE ═══════════ */}
         <motion.div style={{ opacity: s1Opacity }} className="absolute inset-0 z-10">
           <motion.div className="absolute inset-0" style={{ scale: isMobile ? undefined : s1Scale, willChange: 'transform' }}>
-            <motion.img
+            {/* LCP element — plain <img> with srcSet for fast mobile discovery;
+                desktop gets motion scale-in animation via parent transform */}
+            <img
               src={heroImage}
+              srcSet={`${heroImageMobile} 828w, ${heroImage} 1920w`}
+              sizes="100vw"
               alt="CPC Qatar highway construction project - asphalt paving and road infrastructure in Doha"
               className="w-full h-full object-cover"
               width={1920}
               height={1080}
               loading="eager"
               fetchPriority="high"
-              initial={{ scale: isMobile ? 1 : 1.2 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 2.5, ease }}
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black" />
             <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.55) 100%)" }} />

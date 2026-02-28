@@ -6,17 +6,17 @@ import { Link } from "@/lib/router-compat";
 import { FileText } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CinematicHero } from "@/components/sections/CinematicHero";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import SEOHead from "@/components/SEOHead";
 
 // Dynamic imports — code-split heavy components to reduce TBT
-const CinematicHero = dynamic(() => import("@/components/sections/CinematicHero").then(m => ({ default: m.CinematicHero })), { ssr: true });
 const FloatingContactButtons = dynamic(() => import("@/components/layout/FloatingContactButtons").then(m => ({ default: m.FloatingContactButtons })), { ssr: false });
 
 // Dynamic imports — SSR-capable, code-split for performance
 const ServicesImageGrid = dynamic(() => import("@/components/sections/ServicesImageGrid").then(m => ({ default: m.ServicesImageGrid })));
 const ServicesMarquee = dynamic(() => import("@/components/sections/ServicesMarquee").then(m => ({ default: m.ServicesMarquee })));
-const FullscreenVideo = dynamic(() => import("@/components/sections/FullscreenVideo").then(m => ({ default: m.FullscreenVideo })));
+const FullscreenVideo = dynamic(() => import("@/components/sections/FullscreenVideo").then(m => ({ default: m.FullscreenVideo })), { ssr: false });
 const ClientLogosShowcase = dynamic(() => import("@/components/sections/ClientLogosShowcase").then(m => ({ default: m.ClientLogosShowcase })));
 const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs").then(m => ({ default: m.WhyChooseUs })));
 const ProcessTimeline = dynamic(() => import("@/components/sections/ProcessTimeline").then(m => ({ default: m.ProcessTimeline })));
@@ -27,7 +27,8 @@ const ImmersiveTestimonials = dynamic(() => import("@/components/sections/Immers
 const MegaCTA = dynamic(() => import("@/components/sections/MegaCTA").then(m => ({ default: m.MegaCTA })));
 
 const Index = () => {
-    const [isMobile, setIsMobile] = useState(false);
+    // Default true = mobile-first SSR — prevents CLS from removing sections on mobile hydration
+    const [isMobile, setIsMobile] = useState(true);
 
     // Initialize smooth scroll
     useSmoothScroll();

@@ -153,10 +153,7 @@
     color: hsl(var(--muted-foreground));
   }
 
-  /* Optimize images for performance */
-  img {
-    content-visibility: auto;
-  }
+  /* Note: content-visibility: auto on img removed — causes CLS (images start 0px then snap to full size) */
 
   /* Optimize animations */
   @media (prefers-reduced-motion: reduce) {
@@ -267,20 +264,10 @@
 
 /* Performance optimizations */
 @media (max-width: 768px) {
-  * {
-    /* Disable expensive effects on mobile */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    perspective: 1000;
-  }
-
-  /* Reduce animation complexity on mobile */
+  /* Reduce transition duration on mobile for snappier interactions */
   *,
   *::before,
   *::after {
-    animation-duration: 0.3s !important;
-    animation-delay: 0s !important;
     transition-duration: 0.2s !important;
   }
 
@@ -325,9 +312,17 @@
 
 /* Legal Docs floating button entrance — replaces framer-motion to reduce TBT */
 @keyframes slide-in-right {
-  0% { opacity: 0; transform: translateX(100px); }
-  100% { opacity: 1; transform: translateX(0); }
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
 .animate-slide-in-right {
   animation: slide-in-right 0.5s ease-out 2s both;
 }

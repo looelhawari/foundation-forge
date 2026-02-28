@@ -370,11 +370,12 @@ export default function RootLayout({
                 <link rel="dns-prefetch" href="https://www.google-analytics.com" />
                 <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-                {/* Preload LCP hero image for faster first paint */}
+                {/* Preload LCP hero image — responsive for mobile/desktop */}
                 <link
                     rel="preload"
-                    href="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg"
                     as="image"
+                    imageSrcSet="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto,w_828/v1772312015/cpc-website/hero-construction.jpg 828w, https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg 1920w"
+                    imageSizes="100vw"
                     fetchPriority="high"
                 />
 
