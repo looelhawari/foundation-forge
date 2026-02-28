@@ -67,20 +67,23 @@ export const CinematicHero = memo(() => {
   // Scene 2 (video): fades in 0.12 → 0.2, stays until end
   const s2Opacity = useTransform(scrollYProgress, [0.12, 0.2], [0, 1]);
 
-  // Play video when scene 2 becomes visible (lazy load on scroll)
+  // Pre-load video once user starts scrolling so it's ready when scene 2 appears
   useEffect(() => {
-    const unsubscribe = s2Opacity.on("change", (v) => {
-      if (videoRef.current && v > 0.1) {
-        // Start loading and playing only when scene 2 scrolls into view
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      if (videoRef.current && v > 0.04) {
+        // Begin buffering as soon as scroll starts
         if (videoRef.current.preload === "none") {
           videoRef.current.preload = "auto";
           videoRef.current.load();
         }
+      }
+      // Play (or resume) when scene 2 is visible
+      if (videoRef.current && v > 0.12) {
         videoRef.current.play().catch(() => { });
       }
     });
     return unsubscribe;
-  }, [s2Opacity]);
+  }, [scrollYProgress]);
 
   return (
     <section ref={ref} className={`relative ${isMobile ? 'h-[250vh]' : 'h-[300vh]'}`}>
