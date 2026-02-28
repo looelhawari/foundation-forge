@@ -6,14 +6,17 @@
  * This is the equivalent of the old App.tsx provider shell.
  */
 
+import dynamic from "next/dynamic";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/hooks/useAuth";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import ScrollToTop from "@/components/ScrollToTop";
-import ConsentBanner from "@/components/ConsentBanner";
 import ErrorBoundary from "@/components/ErrorBoundary";
+
+// Lazy-load ConsentBanner — not needed until after page renders
+const ConsentBanner = dynamic(() => import("@/components/ConsentBanner"), { ssr: false });
 
 const queryClient = new QueryClient({
     defaultOptions: {

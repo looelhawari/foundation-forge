@@ -6,7 +6,7 @@ const nextConfig = {
     // Disable legacy browser polyfills (saves ~11KB of unnecessary JS)
     // Targets modern browsers only (Chrome 64+, Firefox 67+, Safari 12+, Edge 79+)
     experimental: {
-        optimizePackageImports: ['framer-motion', 'lucide-react'],
+        optimizePackageImports: ['framer-motion', 'lucide-react', '@tanstack/react-query'],
     },
 
     // Configure image domains for external images (Cloudinary, etc.)

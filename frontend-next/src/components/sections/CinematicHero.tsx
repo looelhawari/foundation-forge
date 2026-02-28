@@ -50,10 +50,14 @@ export const CinematicHero = memo(() => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
-    const mobile = window.innerWidth < 768;
+    const w = window.innerWidth;
+    const mobile = w < 768;
     setIsMobile(mobile);
+    // Only show video on desktop (≥1024px) — saves ~2-3 MB on mobile/tablet
+    setShowVideo(w >= 1024);
     requestAnimationFrame(() => setReady(true));
   }, []);
 
@@ -68,7 +72,9 @@ export const CinematicHero = memo(() => {
   const s2Opacity = useTransform(scrollYProgress, [0.12, 0.2], [0, 1]);
 
   // Pre-load video once user starts scrolling so it's ready when scene 2 appears
+  // Skip entirely on mobile/tablet to save bandwidth and reduce TBT
   useEffect(() => {
+    if (!showVideo) return;
     const unsubscribe = scrollYProgress.on("change", (v) => {
       if (videoRef.current && v > 0.04) {
         // Begin buffering as soon as scroll starts
@@ -83,10 +89,10 @@ export const CinematicHero = memo(() => {
       }
     });
     return unsubscribe;
-  }, [scrollYProgress]);
+  }, [scrollYProgress, showVideo]);
 
   return (
-    <section ref={ref} className={`relative ${isMobile ? 'h-[250vh]' : 'h-[300vh]'}`}>
+    <section ref={ref} className={`relative ${!showVideo ? 'h-[120vh]' : 'h-[300vh]'}`}>
       <div className="sticky top-0 h-screen overflow-hidden bg-black" style={{ willChange: 'transform' }}>
 
         {/* ─── OPENING CURTAIN ─── */}
@@ -136,7 +142,7 @@ export const CinematicHero = memo(() => {
 
               {/* Headline — always renders text for SSR/Googlebot; animates after hydration */}
               <h1 className="font-display text-[clamp(2.5rem,10vw,7rem)] leading-[0.88] tracking-tight">
-                {ready ? (
+                {ready && !isMobile ? (
                   <>
                     <SplitReveal text="CONSTRUCTING THE" delay={0.5} />
                     <br />
@@ -170,7 +176,7 @@ export const CinematicHero = memo(() => {
                     animate={ready ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7, delay: 1.7 + i * 0.1, ease }}>
                     <div className="font-display text-3xl md:text-5xl text-primary tabular-nums">
-                      {ready ? <AnimNum to={d.n} suffix={d.s} /> : <span>{d.n}{d.s}</span>}
+                      {ready && !isMobile ? <AnimNum to={d.n} suffix={d.s} /> : <span>{d.n}{d.s}</span>}
                     </div>
                     <div className="text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.l}</div>
                   </motion.div>
@@ -206,21 +212,23 @@ export const CinematicHero = memo(() => {
           </motion.div>
         </motion.div>
 
-        {/* ═══════════ SCENE 2: FLYOVER VIDEO (lazy-loaded for performance) ═══════════ */}
-        <motion.div style={{ opacity: s2Opacity }} className="absolute inset-0 z-[5]">
-          <video
-            ref={videoRef}
-            src={flyoverVideo}
-            className="w-full h-full object-cover"
-            muted
-            playsInline
-            preload="none"
-            loop
-          />
-          {/* Subtle vignette on video */}
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.4) 100%)" }} />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-        </motion.div>
+        {/* ═══════════ SCENE 2: FLYOVER VIDEO (desktop only — skipped on mobile/tablet) ═══════════ */}
+        {showVideo && (
+          <motion.div style={{ opacity: s2Opacity }} className="absolute inset-0 z-[5]">
+            <video
+              ref={videoRef}
+              src={flyoverVideo}
+              className="w-full h-full object-cover"
+              muted
+              playsInline
+              preload="none"
+              loop
+            />
+            {/* Subtle vignette on video */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.4) 100%)" }} />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+          </motion.div>
+        )}
 
         {/* ── Subtle top/bottom bars ── */}
         <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/30 to-transparent z-30 pointer-events-none" />

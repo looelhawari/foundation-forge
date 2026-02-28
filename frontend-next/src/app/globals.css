@@ -323,6 +323,15 @@
   }
 }
 
+/* Legal Docs floating button entrance — replaces framer-motion to reduce TBT */
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(100px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out 2s both;
+}
+
 /* Smooth scroll - disabled on mobile for performance */
 @media (min-width: 769px) {
   html {

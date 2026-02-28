@@ -20,13 +20,12 @@ export const FullscreenVideo = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, isMobile ? 1.1 : 1.5]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, isMobile ? -30 : -100]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.5], [0, isMobile ? 20 : 50]);
 
   return (
     <section ref={containerRef} className={`relative ${isMobile ? 'h-[120vh]' : 'h-[150vh]'}`}>
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div
-          style={{ scale, borderRadius, willChange: 'transform' }}
+          style={{ scale, willChange: 'transform' }}
           className="absolute inset-0"
         >
           <img

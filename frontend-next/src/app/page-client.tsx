@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
 import { FileText } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingContactButtons } from "@/components/layout/FloatingContactButtons";
-import { CinematicHero } from "@/components/sections/CinematicHero";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import SEOHead from "@/components/SEOHead";
+
+// Dynamic imports — code-split heavy components to reduce TBT
+const CinematicHero = dynamic(() => import("@/components/sections/CinematicHero").then(m => ({ default: m.CinematicHero })), { ssr: true });
+const FloatingContactButtons = dynamic(() => import("@/components/layout/FloatingContactButtons").then(m => ({ default: m.FloatingContactButtons })), { ssr: false });
 
 // Dynamic imports — SSR-capable, code-split for performance
 const ServicesImageGrid = dynamic(() => import("@/components/sections/ServicesImageGrid").then(m => ({ default: m.ServicesImageGrid })));
@@ -60,7 +61,8 @@ const Index = () => {
 
                 <ServicesMarquee />
                 <ServicesImageGrid />
-                <FullscreenVideo />
+                {/* FullscreenVideo uses heavy parallax — skip on mobile/tablet */}
+                {!isMobile && <FullscreenVideo />}
                 <ClientLogosShowcase />
                 <WhyChooseUs />
                 <ProcessTimeline />
@@ -71,13 +73,8 @@ const Index = () => {
                 <MegaCTA />
             </main>
 
-            {/* Floating Legal Documents Button */}
-            <motion.div
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 2, duration: 0.5 }}
-                className="fixed bottom-6 right-6 z-50"
-            >
+            {/* Floating Legal Documents Button — CSS animation instead of framer-motion */}
+            <div className="fixed bottom-6 right-6 z-50 animate-slide-in-right">
                 <Link
                     to="/certificates"
                     className="group flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
@@ -88,7 +85,7 @@ const Index = () => {
                         Legal Docs
                     </span>
                 </Link>
-            </motion.div>
+            </div>
 
             <Footer />
         </div>

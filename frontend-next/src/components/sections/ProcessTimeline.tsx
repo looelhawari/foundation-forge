@@ -62,7 +62,7 @@ export function ProcessTimeline() {
         offset: ["start center", "end center"]
     });
 
-    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
     return (
         <section ref={containerRef} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
@@ -120,8 +120,8 @@ export function ProcessTimeline() {
                     {/* Animated center line */}
                     <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gray-800 md:-translate-x-1/2">
                         <motion.div
-                            className="w-full bg-gradient-to-b from-amber-400 via-orange-500 to-amber-400"
-                            style={{ height: lineHeight }}
+                            className="w-full h-full origin-top bg-gradient-to-b from-amber-400 via-orange-500 to-amber-400"
+                            style={{ scaleY: lineScaleY, willChange: 'transform' }}
                         />
                     </div>
 

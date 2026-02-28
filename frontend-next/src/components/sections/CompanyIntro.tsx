@@ -119,11 +119,11 @@ export function CompanyIntro() {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, width: 0 }}
-                        whileInView={{ opacity: 1, width: "200px" }}
+                        initial={{ opacity: 0, scaleX: 0 }}
+                        whileInView={{ opacity: 1, scaleX: 1 }}
                         transition={{ delay: 0.3, duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
+                        className="h-1 w-[200px] origin-center bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
 
                     <motion.p
