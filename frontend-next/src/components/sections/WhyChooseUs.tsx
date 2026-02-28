@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-const whyChooseBg = "/assets/real-why-choose-bg.jpg";
-const whyChoose1 = "/assets/why-choose-1.jpg";
-const whyChoose2 = "/assets/services/expert team.webp";
-const whyChoose3 = "/assets/why-choose-3.jpg";
-const whyChoose4 = "/assets/techno.jpg";
-const whyChoose5 = "/assets/why-choose-5.jpg";
-const whyChoose6 = "/assets/why-choose-6.jpg";
+const whyChooseBg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312048/cpc-website/real-why-choose-bg.jpg";
+const whyChoose1 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312072/cpc-website/why-choose-1.jpg";
+const whyChoose2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312053/cpc-website/services/expert_team.jpg";
+const whyChoose3 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312074/cpc-website/why-choose-3.jpg";
+const whyChoose4 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312067/cpc-website/techno.jpg";
+const whyChoose5 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312077/cpc-website/why-choose-5.jpg";
+const whyChoose6 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312079/cpc-website/why-choose-6.jpg";
 
 const advantages = [
     {
@@ -59,6 +59,8 @@ export function WhyChooseUs() {
                     src={whyChooseBg}
                     alt="CPC Qatar road construction team delivering infrastructure excellence in Doha, Qatar"
                     className="w-full h-full object-cover opacity-10"
+                    width={1920}
+                    height={1080}
                     loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-gray-900/80 to-gray-900/90" />
@@ -83,7 +85,7 @@ export function WhyChooseUs() {
                         viewport={{ once: true }}
                         className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
-                    <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
                         Six compelling reasons that set us apart in Qatar's construction industry
                     </p>
                 </motion.div>
@@ -110,6 +112,8 @@ export function WhyChooseUs() {
                                         src={advantage.image}
                                         alt={`CPC Qatar — ${advantage.title}: ${advantage.description}`}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        width={600}
+                                        height={400}
                                         loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
@@ -129,16 +133,17 @@ export function WhyChooseUs() {
                                         {advantage.title}
                                     </h3>
 
-                                    {/* Divider */}
+                                    {/* Divider — uses transform for composited animation */}
                                     <div
-                                        className="h-px mb-4 w-16 group-hover:w-full transition-all duration-500"
+                                        className="h-px mb-4 w-full origin-left transition-transform duration-500"
                                         style={{
-                                            background: `linear-gradient(90deg, ${BRAND_COLOR}, transparent)`
+                                            background: `linear-gradient(90deg, ${BRAND_COLOR}, transparent)`,
+                                            transform: 'scaleX(0.25)',
                                         }}
                                     />
 
                                     {/* Description */}
-                                    <p className="text-gray-400 leading-relaxed">
+                                    <p className="text-gray-300 leading-relaxed">
                                         {advantage.description}
                                     </p>
                                 </div>

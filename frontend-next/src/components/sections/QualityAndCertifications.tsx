@@ -145,7 +145,7 @@ export function QualityAndCertifications() {
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
+                        className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4"
                     >
                         Fully licensed and registered company with all required government approvals and permits
                     </motion.p>

@@ -3,7 +3,7 @@
 import { Link } from "@/lib/router-compat";
 import { Phone, Mail, MapPin, FileText } from "lucide-react";
 import Image from "next/image";
-const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
+const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 export const Footer = () => {
   return (
@@ -22,7 +22,7 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h4>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h2>
             <ul className="space-y-3">
               {["Home", "About", "Projects", "Clients", "Contact"].map((item) => (
                 <li key={item}>
@@ -47,7 +47,7 @@ export const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h4>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h2>
             <ul className="space-y-3">
               {[
                 { name: "Earthworks & Grading", href: "/services/earthworks" },
@@ -71,7 +71,7 @@ export const Footer = () => {
 
           {/* Legal Documents */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h4>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h2>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -111,7 +111,7 @@ export const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h4>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />

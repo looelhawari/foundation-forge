@@ -2,16 +2,16 @@
 
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 import { useRef } from "react";
-const moelogo = "/assets/MOE-removebg-preview.png";
-const fifaLogo = "/assets/FIFA-removebg-preview.png";
-const museumLogo = "/assets/museum-removebg-preview.png";
-const dhlLogo = "/assets/DHL-removebg-preview.png";
-const meeraLogo = "/assets/meera-removebg-preview.png";
-const arianeLogo = "/assets/Ariane real state.png";
-const ashghaalLogo = "/assets/ashghaal.png";
-const fbaLogo = "/assets/FBA real estate.png";
-const imalcoLogo = "/assets/imalco.png";
-const qnieLogo = "/assets/qnie.png";
+const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
+const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
+const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
+const dhlLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312005/cpc-website/DHL-removebg-preview.png";
+const meeraLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312018/cpc-website/meera-removebg-preview.png";
+const arianeLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311985/cpc-website/Ariane_real_state.png";
+const ashghaalLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311986/cpc-website/ashghaal.png";
+const fbaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312009/cpc-website/FBA_real_estate.png";
+const imalcoLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312017/cpc-website/imalco.jpg";
+const qnieLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312041/cpc-website/qnie.jpg";
 
 const clients = [
     { name: "Ministry of Education", logo: moelogo },
@@ -81,7 +81,7 @@ export function ClientLogosShowcase() {
                         viewport={{ once: true }}
                         className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
-                    <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
                         Partnering with Qatar's most prestigious organizations
                     </p>
                 </motion.div>
@@ -96,7 +96,8 @@ export function ClientLogosShowcase() {
                     className="flex gap-12 sm:gap-16 md:gap-20 absolute"
                     style={{ x }}
                 >
-                    {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+                    {/* Render only 2x (minimum for seamless infinite scroll) instead of 4x */}
+                    {[...clients, ...clients].map((client, index) => (
                         <div
                             key={index}
                             className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex items-center justify-center p-4 rounded-xl"
@@ -104,7 +105,10 @@ export function ClientLogosShowcase() {
                             <img
                                 src={client.logo}
                                 alt={client.name}
+                                width={120}
+                                height={60}
                                 className="w-full h-full object-contain drop-shadow-md"
+                                loading="lazy"
                             />
                         </div>
                     ))}

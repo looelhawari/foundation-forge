@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         description:
             "Drainage, utilities, stormwater, and civil infrastructure. Government-approved infrastructure contractor in Doha, Qatar.",
         url: "/services/infrastructure-development",
-        images: [{ url: "/assets/services/earth work.jpg", width: 1200, height: 630, alt: "Infrastructure development in Qatar by CPC" }],
+        images: [{ url: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg", width: 1200, height: 630, alt: "Infrastructure development in Qatar by CPC" }],
     },
 };
 
@@ -72,7 +72,7 @@ export default function InfrastructureDevelopmentPage() {
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
                             <img
-                                src="/assets/services/earth work.jpg"
+                                src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg"
                                 alt="Infrastructure development project in Qatar by CPC Qatar"
                                 className="w-full h-full object-cover opacity-20"
                             />

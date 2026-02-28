@@ -5,16 +5,16 @@ import { useRef, useState, useEffect } from "react";
 import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
 import { Loader2 } from "lucide-react";
-const moelogo = "/assets/MOE-removebg-preview.png";
-const fifaLogo = "/assets/FIFA-removebg-preview.png";
-const museumLogo = "/assets/museum-removebg-preview.png";
-const dhlLogo = "/assets/DHL-removebg-preview.png";
-const meeraLogo = "/assets/meera-removebg-preview.png";
-const arianeLogo = "/assets/Ariane real state.png";
-const ashghaalLogo = "/assets/ashghaal.png";
-const fbaLogo = "/assets/FBA real estate.png";
-const imalcoLogo = "/assets/imalco.png";
-const qnieLogo = "/assets/qnie.png";
+const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
+const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
+const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
+const dhlLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312005/cpc-website/DHL-removebg-preview.png";
+const meeraLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312018/cpc-website/meera-removebg-preview.png";
+const arianeLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311985/cpc-website/Ariane_real_state.png";
+const ashghaalLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311986/cpc-website/ashghaal.png";
+const fbaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312009/cpc-website/FBA_real_estate.png";
+const imalcoLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312017/cpc-website/imalco.jpg";
+const qnieLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312041/cpc-website/qnie.jpg";
 
 const clients = [
   { name: "MINISTRY OF EDUCATION", logo: moelogo },
@@ -171,6 +171,9 @@ export const ImmersiveTestimonials = () => {
                               src={testimonial.company_logo}
                               alt={testimonial.company_name || 'Client company logo'}
                               className="w-full h-full object-contain"
+                              width={64}
+                              height={64}
+                              loading="lazy"
                             />
                           </div>
                         )}
@@ -198,6 +201,7 @@ export const ImmersiveTestimonials = () => {
                     onClick={() => setActiveIndex(index)}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
+                    aria-label={`View testimonial ${index + 1} of ${testimonials.length}`}
                     className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500`}
                   >
                     <span className={`w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
@@ -235,7 +239,8 @@ export const ImmersiveTestimonials = () => {
                 width: 'max-content'
               }}
             >
-              {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+              {/* Render only 2x for seamless infinite scroll (reduces DOM size) */}
+              {[...clients, ...clients].map((client, index) => (
                 <div
                   key={index}
                   className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg hover:scale-105 transition-transform"
@@ -243,7 +248,10 @@ export const ImmersiveTestimonials = () => {
                   <img
                     src={client.logo}
                     alt={client.name}
+                    width={100}
+                    height={64}
                     className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
+                    loading="lazy"
                   />
                 </div>
               ))}

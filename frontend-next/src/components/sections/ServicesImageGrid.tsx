@@ -3,12 +3,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "@/lib/router-compat";
-const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
-const earthworks = "/assets/services/earth work.jpg";
-const subgrade = "/assets/services/subgrade and subbase.jpg";
-const asphalt = "/assets/services/asphalt.jpeg";
-const traffic = "/assets/services/road-markings-masters.jpeg";
-const interlock = "/assets/services/interllock.jpeg";
+const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
+const earthworks = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg";
+const subgrade = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg";
+const asphalt = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312049/cpc-website/services/asphalt.jpg";
+const traffic = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg";
+const interlock = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg";
 
 const services = [
   {
@@ -92,6 +92,8 @@ const BentoCard = ({
           src={service.image}
           alt={service.alt}
           className="w-full h-full object-cover"
+          width={800}
+          height={600}
           loading="lazy"
         />
         <motion.div
@@ -112,11 +114,11 @@ const BentoCard = ({
         </motion.span>
       </div>
 
-      {/* Top-left accent line */}
+      {/* Top-left accent line — uses transform instead of width for composited animation */}
       <motion.div
-        className="absolute top-0 left-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 z-10"
-        initial={{ width: 0 }}
-        animate={{ width: hovered ? "100%" : "40%" }}
+        className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-amber-400 to-orange-500 z-10 origin-left"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: hovered ? 1 : 0.4 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       />
 
@@ -236,7 +238,7 @@ export const ServicesImageGrid = () => {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full border border-amber-400/30 bg-amber-400/5 mb-6"
           >
-            <img src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" className="w-9 h-9 md:w-10 md:h-10 object-contain" />
+            <img src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" className="w-9 h-9 md:w-10 md:h-10 object-contain" width={40} height={40} />
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
@@ -254,7 +256,7 @@ export const ServicesImageGrid = () => {
             className="h-1 w-24 sm:w-36 md:w-48 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-6"
           />
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
             Comprehensive construction solutions — from groundwork to final finish
           </p>
         </motion.div>

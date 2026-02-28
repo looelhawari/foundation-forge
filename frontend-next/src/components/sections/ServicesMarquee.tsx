@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-const heroImage = "/assets/hero-construction.jpg";
+const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 
 export const ServicesMarquee = () => {
   const services = [

@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
 import { ArrowRight, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const projectHighway = "/assets/project-highway.jpg";
-const projectStreet = "/assets/project-street.jpg";
-const projectInfrastructure = "/assets/project-infrastructure.jpg";
+const projectHighway = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312036/cpc-website/project-highway.jpg";
+const projectStreet = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312040/cpc-website/project-street.jpg";
+const projectInfrastructure = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312037/cpc-website/project-infrastructure.jpg";
 
 const projects = [
   {

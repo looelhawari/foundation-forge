@@ -2,13 +2,13 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-const processBg = "/assets/real-process-bg.jpg";
-const process1 = "/assets/process-1.jpg";
-const process2 = "/assets/planning.jpg";
-const process3 = "/assets/image.png";
-const process4 = "/assets/mobilization.avif";
-const process5 = "/assets/process-5.jpg";
-const process6 = "/assets/process-6.jpg";
+const processBg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312042/cpc-website/real-process-bg.jpg";
+const process1 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312029/cpc-website/process-1.jpg";
+const process2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312027/cpc-website/planning.jpg";
+const process3 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312016/cpc-website/image.jpg";
+const process4 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312020/cpc-website/mobilization.jpg";
+const process5 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312034/cpc-website/process-5.jpg";
+const process6 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312035/cpc-website/process-6.jpg";
 
 const processSteps = [
     {
@@ -72,6 +72,8 @@ export function ProcessTimeline() {
                     src={processBg}
                     alt="CPC Qatar construction methodology — road building and infrastructure development process"
                     className="w-full h-full object-cover opacity-10"
+                    width={1920}
+                    height={1080}
                     loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-black/85 to-gray-900/90" />
@@ -107,7 +109,7 @@ export function ProcessTimeline() {
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
+                        className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4"
                     >
                         From consultation to completion - Our proven 6-step methodology
                     </motion.p>
@@ -151,6 +153,9 @@ export function ProcessTimeline() {
                                                     src={process.image}
                                                     alt={`Step ${process.step}: ${process.title} — ${process.description}`}
                                                     className="w-full h-full object-cover"
+                                                    width={600}
+                                                    height={400}
+                                                    loading="lazy"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent" />
 
@@ -177,7 +182,7 @@ export function ProcessTimeline() {
                                                 />
 
                                                 {/* Description */}
-                                                <p className="text-sm sm:text-base text-gray-400 mb-3 md:mb-4">
+                                                <p className="text-sm sm:text-base text-gray-300 mb-3 md:mb-4">
                                                     {process.description}
                                                 </p>
 

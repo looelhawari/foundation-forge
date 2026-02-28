@@ -2,8 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, memo, useState, useEffect } from "react";
-const heroImage = "/assets/hero-construction.jpg";
-const flyoverVideo = "/assets/cpc.mp4";
+const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
+const flyoverVideo = "https://res.cloudinary.com/dhxlvvzih/video/upload/q_auto/v1772312001/cpc-website/cpc.mp4";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -67,16 +67,20 @@ export const CinematicHero = memo(() => {
   // Scene 2 (video): fades in 0.12 → 0.2, stays until end
   const s2Opacity = useTransform(scrollYProgress, [0.12, 0.2], [0, 1]);
 
-  // Play video when scene 2 becomes visible
+  // Play video when scene 2 becomes visible (lazy load on scroll)
   useEffect(() => {
-    if (isMobile) return; // mobile uses autoPlay attribute instead
     const unsubscribe = s2Opacity.on("change", (v) => {
       if (videoRef.current && v > 0.1) {
+        // Start loading and playing only when scene 2 scrolls into view
+        if (videoRef.current.preload === "none") {
+          videoRef.current.preload = "auto";
+          videoRef.current.load();
+        }
         videoRef.current.play().catch(() => { });
       }
     });
     return unsubscribe;
-  }, [s2Opacity, isMobile]);
+  }, [s2Opacity]);
 
   return (
     <section ref={ref} className={`relative ${isMobile ? 'h-[250vh]' : 'h-[300vh]'}`}>
@@ -101,6 +105,8 @@ export const CinematicHero = memo(() => {
               src={heroImage}
               alt="CPC Qatar highway construction project - asphalt paving and road infrastructure in Doha"
               className="w-full h-full object-cover"
+              width={1920}
+              height={1080}
               loading="eager"
               fetchPriority="high"
               initial={{ scale: isMobile ? 1 : 1.2 }}
@@ -197,7 +203,7 @@ export const CinematicHero = memo(() => {
           </motion.div>
         </motion.div>
 
-        {/* ═══════════ SCENE 2: FLYOVER VIDEO ═══════════ */}
+        {/* ═══════════ SCENE 2: FLYOVER VIDEO (lazy-loaded for performance) ═══════════ */}
         <motion.div style={{ opacity: s2Opacity }} className="absolute inset-0 z-[5]">
           <video
             ref={videoRef}
@@ -205,9 +211,8 @@ export const CinematicHero = memo(() => {
             className="w-full h-full object-cover"
             muted
             playsInline
-            preload={isMobile ? "auto" : "metadata"}
-            autoPlay={isMobile}
-            loop={isMobile}
+            preload="none"
+            loop
           />
           {/* Subtle vignette on video */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.4) 100%)" }} />

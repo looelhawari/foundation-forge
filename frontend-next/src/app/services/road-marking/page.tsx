@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         description:
             "Thermoplastic & cold paint road marking, traffic signs, lane striping and safety solutions. Government-approved contractor in Qatar.",
         url: "/services/road-marking",
-        images: [{ url: "/assets/services/road-markings-masters.jpeg", width: 1200, height: 630, alt: "Road marking in Qatar by CPC" }],
+        images: [{ url: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg", width: 1200, height: 630, alt: "Road marking in Qatar by CPC" }],
     },
 };
 
@@ -72,7 +72,7 @@ export default function RoadMarkingPage() {
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
                             <img
-                                src="/assets/services/road-markings-masters.jpeg"
+                                src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg"
                                 alt="Road marking project in Doha, Qatar by CPC Qatar"
                                 className="w-full h-full object-cover opacity-20"
                             />

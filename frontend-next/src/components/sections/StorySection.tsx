@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-const engineerImage = "/assets/engineer-portrait.jpg";
+const engineerImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312006/cpc-website/engineer-portrait.jpg";
 
 export const StorySection = () => {
   const containerRef = useRef<HTMLDivElement>(null);

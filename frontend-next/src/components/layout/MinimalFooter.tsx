@@ -3,7 +3,7 @@
 import { Link } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import Image from "next/image";
-const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
+const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 export const MinimalFooter = () => {
   return (

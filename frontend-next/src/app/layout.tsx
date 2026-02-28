@@ -1,6 +1,26 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Bebas_Neue } from "next/font/google";
 import ClientProviders from "@/components/ClientProviders";
 import "./globals.css";
+
+// ═══════════════════════════════════════════════════════
+// OPTIMIZED FONTS — next/font eliminates render-blocking requests
+// ═══════════════════════════════════════════════════════
+const inter = Inter({
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["300", "400", "500", "600", "700"],
+    variable: "--font-inter",
+    preload: true,
+});
+
+const bebasNeue = Bebas_Neue({
+    subsets: ["latin"],
+    display: "swap",
+    weight: "400",
+    variable: "--font-bebas-neue",
+    preload: true,
+});
 
 // ═══════════════════════════════════════════════════════
 // ROOT METADATA — Server-side SEO (replaces index.html <head>)
@@ -147,7 +167,7 @@ const organizationSchema = {
 
 const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "GeneralContractor",
+    "@type": ["GeneralContractor", "ConstructionCompany"],
     name: "CPC Qatar — Cosmo Projects & Construction",
     alternateName: "كوزمو للمشاريع والإنشاءات",
     image: "https://cpc-qa.com/logo.png",
@@ -315,37 +335,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" dir="ltr" suppressHydrationWarning>
+        <html lang="en" dir="ltr" suppressHydrationWarning className={`${inter.variable} ${bebasNeue.variable}`}>
             <head>
-                {/* Performance — Preconnect & DNS Prefetch */}
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                {/* Performance — Preconnect & DNS Prefetch (fonts handled by next/font) */}
                 <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
-                <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-                <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
                 <link rel="dns-prefetch" href="https://res.cloudinary.com" />
                 <link rel="dns-prefetch" href="https://www.google-analytics.com" />
                 <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-                {/* Preload critical fonts */}
-                <link
-                    rel="preload"
-                    href="https://fonts.gstatic.com/s/bebasneu/v14/JTUSjIg69CK48gW7PXoo9WdhyyTh89ZNpQ.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-
-                {/* Google Fonts */}
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap"
-                    rel="stylesheet"
-                />
-
                 {/* Preload LCP hero image for faster first paint */}
                 <link
                     rel="preload"
-                    href="/assets/hero-construction.jpg"
+                    href="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg"
                     as="image"
                     fetchPriority="high"
                 />

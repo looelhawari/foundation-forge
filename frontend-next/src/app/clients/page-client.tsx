@@ -45,20 +45,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-const heroImage = "/assets/hero-construction.jpg";
+const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 import SEOHead from "@/components/SEOHead";
-const moelogo = "/assets/MOE-removebg-preview.png";
-const fifaLogo = "/assets/FIFA-removebg-preview.png";
-const museumLogo = "/assets/museum-removebg-preview.png";
-const dhlLogo = "/assets/DHL-removebg-preview.png";
-const meeraLogo = "/assets/meera-removebg-preview.png";
-const waqifLogo = "/assets/waqif-removebg-preview.png";
-const arianeLogo = "/assets/Ariane real state.png";
-const ashghaalLogo = "/assets/ashghaal.png";
-const fbaLogo = "/assets/FBA real estate.png";
-const imalcoLogo = "/assets/imalco.png";
-const qnieLogo = "/assets/qnie.png";
-const companyLogo = "/assets/cpc_logo-removebg-preview.png";
+const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
+const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
+const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
+const dhlLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312005/cpc-website/DHL-removebg-preview.png";
+const meeraLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312018/cpc-website/meera-removebg-preview.png";
+const waqifLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312069/cpc-website/waqif-removebg-preview.png";
+const arianeLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311985/cpc-website/Ariane_real_state.png";
+const ashghaalLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311986/cpc-website/ashghaal.png";
+const fbaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312009/cpc-website/FBA_real_estate.png";
+const imalcoLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312017/cpc-website/imalco.jpg";
+const qnieLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312041/cpc-website/qnie.jpg";
+const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 // Map for legacy logo imports (fallback when DB logo is null)
 const logoImportMap: Record<string, string> = {

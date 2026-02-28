@@ -46,7 +46,7 @@ const services = [
         slug: "asphalt-works",
         description:
             "Professional asphalt pavement construction for highways, streets, and commercial areas across Qatar. Hot mix asphalt, cold mix, surface treatment, and road resurfacing.",
-        image: "/assets/services/asphalt.jpeg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312049/cpc-website/services/asphalt.jpg",
         features: ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Road Resurfacing", "Patching & Repairs"],
     },
     {
@@ -54,7 +54,7 @@ const services = [
         slug: "road-marking",
         description:
             "Thermoplastic and cold paint road marking, traffic signs installation, lane striping, and road safety solutions throughout Qatar.",
-        image: "/assets/services/road-markings-masters.jpeg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg",
         features: ["Thermoplastic Marking", "Cold Paint Marking", "Traffic Signs", "Lane Striping", "Safety Barriers"],
     },
     {
@@ -62,7 +62,7 @@ const services = [
         slug: "earthworks",
         description:
             "Complete site preparation including excavation, grading, filling, compaction, and land leveling for construction projects in Doha and across Qatar.",
-        image: "/assets/services/earth work.jpg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
         features: ["Excavation", "Site Clearing", "Grading & Leveling", "Fill & Compaction", "Cut & Fill Operations"],
     },
     {
@@ -70,7 +70,7 @@ const services = [
         slug: "interlock-kerbstone",
         description:
             "Precision installation of interlocking block pavers, kerbstones, walkways, driveways, and decorative paving for commercial and public spaces in Qatar.",
-        image: "/assets/services/interllock.jpeg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg",
         features: ["Interlock Paving", "Kerbstone Installation", "Walkway Construction", "Pattern Design", "Finishing Works"],
     },
     {
@@ -78,7 +78,7 @@ const services = [
         slug: "subgrade-subbase",
         description:
             "Foundation layer construction including subgrade preparation, subbase installation, base course works, and material testing for road projects in Qatar.",
-        image: "/assets/services/subgrade and subbase.jpg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg",
         features: ["Subgrade Preparation", "Subbase Installation", "Base Course", "Material Testing", "Compaction Control"],
     },
     {
@@ -86,7 +86,7 @@ const services = [
         slug: "infrastructure-development",
         description:
             "Complete civil infrastructure services including drainage systems, utilities installation, stormwater management, and public works across Qatar.",
-        image: "/assets/services/earth work.jpg",
+        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
         features: ["Drainage Systems", "Utilities Installation", "Stormwater Management", "Curb Construction", "Public Works"],
     },
 ];

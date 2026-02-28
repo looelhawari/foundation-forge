@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-const companyLogo = "/assets/cpc_logo-removebg-preview.png";
+const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 interface PageLoaderProps {
     title?: string;

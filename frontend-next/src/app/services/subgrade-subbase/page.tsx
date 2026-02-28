@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         description:
             "Subgrade preparation, subbase installation, base course construction with material testing and compaction control in Qatar.",
         url: "/services/subgrade-subbase",
-        images: [{ url: "/assets/services/subgrade and subbase.jpg", width: 1200, height: 630, alt: "Subgrade and subbase works in Qatar by CPC" }],
+        images: [{ url: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg", width: 1200, height: 630, alt: "Subgrade and subbase works in Qatar by CPC" }],
     },
 };
 
@@ -72,7 +72,7 @@ export default function SubgradeSubbasePage() {
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
                             <img
-                                src="/assets/services/subgrade and subbase.jpg"
+                                src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg"
                                 alt="Subgrade and subbase construction for road projects in Qatar by CPC Qatar"
                                 className="w-full h-full object-cover opacity-20"
                             />

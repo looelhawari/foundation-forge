@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProjects, useCategories } from "@/hooks/useProjects";
-const companyLogo = "/assets/cpc_logo-removebg-preview.png";
+const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 import SEOHead from "@/components/SEOHead";
 
 // Category data with icons and descriptions - MATCHES DATABASE CATEGORIES

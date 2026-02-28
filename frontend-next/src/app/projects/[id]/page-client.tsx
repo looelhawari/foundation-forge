@@ -26,7 +26,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProjects";
 import SEOHead from "@/components/SEOHead";
 
-const companyLogo = "/assets/cpc_logo-removebg-preview.png";
+const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 const ProjectDetail = () => {
     const { id } = useParams();

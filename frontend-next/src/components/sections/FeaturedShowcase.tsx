@@ -4,21 +4,21 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
 
 // Import project images
-const busParking2 = "/assets/bus parking stage 2 .png";
-const busParking1 = "/assets/bus parking stage 1 .png";
-const warehouseImg = "/assets/Ware house (instead of main parrking area).png";
-const fwcq2Project = "/assets/FWCQ2(in project section).png";
-const farmsImg = "/assets/farms instaed of el meera branch .png";
+const busParking2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311992/cpc-website/bus_parking_stage_2_.jpg";
+const busParking1 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311989/cpc-website/bus_parking_stage_1_.jpg";
+const warehouseImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312071/cpc-website/Ware_house_%28instead_of_main_parrking_area%29.jpg";
+const fwcq2Project = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312013/cpc-website/FWCQ2%28in_project_section%29.jpg";
+const farmsImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312008/cpc-website/farms_instaed_of_el_meera_branch_.jpg";
 
 // Import client logos
-const moeLogo = "/assets/MOE-removebg-preview.png";
-const fifaLogo = "/assets/FIFA-removebg-preview.png";
-const waqifLogo = "/assets/waqif-removebg-preview.png";
+const moeLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
+const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
+const waqifLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312069/cpc-website/waqif-removebg-preview.png";
 
 // Import client project images (for hover)
-const moeProjectImg = "/assets/MOE.png";
-const fwcq2ClientImg = "/assets/FWCQ2(in client section).png";
-const mosquesImg = "/assets/mosques.png";
+const moeProjectImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312023/cpc-website/MOE.jpg";
+const fwcq2ClientImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312012/cpc-website/FWCQ2%28in_client_section%29.jpg";
+const mosquesImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312024/cpc-website/mosques.jpg";
 
 const topProjects = [
     {
@@ -129,6 +129,9 @@ const MinimalProjectCard = ({ project, index }: any) => {
                         src={project.image}
                         alt={`CPC Qatar project: ${project.title} — ${project.area} for ${project.client || 'private client'}, ${project.status}`}
                         className="w-full h-full object-cover"
+                        width={800}
+                        height={600}
+                        loading="lazy"
                         animate={{
                             scale: isHovered ? 1.15 : 1
                         }}
@@ -277,12 +280,14 @@ const OrigamiClientCard = ({ client, index }: any) => {
                         src={client.logo}
                         alt={client.name}
                         className="w-full h-full object-contain drop-shadow-lg"
+                        width={144}
+                        height={144}
                         loading="lazy"
                     />
                 </div>
-                <h4 className="text-lg font-bold text-gray-800 text-center relative z-10">
+                <h3 className="text-lg font-bold text-gray-800 text-center relative z-10">
                     {client.name}
-                </h4>
+                </h3>
                 <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
                     <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
                     Hover to see project
@@ -309,6 +314,8 @@ const OrigamiClientCard = ({ client, index }: any) => {
                     src={client.projectImage}
                     alt={`${client.name} project`}
                     className="w-full h-full object-cover"
+                    width={600}
+                    height={400}
                     loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
@@ -375,7 +382,7 @@ export function FeaturedShowcase() {
                             Excellence
                         </span>
                     </h2>
-                    <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
                         Our most prestigious projects and valued partnerships
                     </p>
                 </motion.div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const heroImage = "/assets/hero-construction.jpg";
+const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 
 export const Hero = () => {
   return (

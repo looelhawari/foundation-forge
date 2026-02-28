@@ -5,7 +5,7 @@ import { Link, useLocation } from "@/lib/router-compat";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-const cpcLogo = "/assets/cpc_logo-removebg-preview.png";
+const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
 const navLinks = [
   { name: "Home", path: "/" },

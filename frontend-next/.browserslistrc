@@ -1,0 +1,8 @@
+# Target modern browsers only — eliminates legacy polyfills (~11KB savings)
+# Drops Array.prototype.at, flat, flatMap, Object.fromEntries polyfills
+chrome >= 64
+firefox >= 67
+safari >= 12
+edge >= 79
+not ie 11
+not op_mini all

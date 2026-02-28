@@ -81,6 +81,7 @@ const Index = () => {
                 <Link
                     to="/certificates"
                     className="group flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                    aria-label="View company certificates and legal documents"
                 >
                     <FileText className="w-5 h-5" />
                     <span className="text-sm font-medium hidden sm:inline-block group-hover:inline-block transition-all">

@@ -5,15 +5,15 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "@/lib/router-compat";
 import { ArrowRight, Award, Users, Building, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-const engineerImage = "/assets/engineer-portrait.jpg";
+const engineerImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312006/cpc-website/engineer-portrait.jpg";
 
 // Import client logos
-const moelogo = "/assets/MOE-removebg-preview.png";
-const fifaLogo = "/assets/FIFA-removebg-preview.png";
-const museumLogo = "/assets/museum-removebg-preview.png";
-const waqifLogo = "/assets/waqif-removebg-preview.png";
-const dhlLogo = "/assets/DHL-removebg-preview.png";
-const meeraLogo = "/assets/meera-removebg-preview.png";
+const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
+const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
+const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
+const waqifLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312069/cpc-website/waqif-removebg-preview.png";
+const dhlLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312005/cpc-website/DHL-removebg-preview.png";
+const meeraLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312018/cpc-website/meera-removebg-preview.png";
 
 const featuredClients = [
   { name: "Ministry of Education", logo: moelogo },

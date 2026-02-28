@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-const heroImage = "/assets/hero-construction.jpg";
+const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 
 export const FullscreenVideo = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,6 +33,9 @@ export const FullscreenVideo = () => {
             src={heroImage}
             alt="CPC Qatar road construction and infrastructure project site in Doha, Qatar"
             className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-background/60" />
         </motion.div>

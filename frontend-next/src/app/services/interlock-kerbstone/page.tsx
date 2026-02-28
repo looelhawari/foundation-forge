@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         description:
             "Interlock paving, kerbstone installation, walkways, and decorative block paving. Professional contractor in Doha, Qatar.",
         url: "/services/interlock-kerbstone",
-        images: [{ url: "/assets/services/interllock.jpeg", width: 1200, height: 630, alt: "Interlock paving in Qatar by CPC" }],
+        images: [{ url: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg", width: 1200, height: 630, alt: "Interlock paving in Qatar by CPC" }],
     },
 };
 
@@ -72,7 +72,7 @@ export default function InterlockKerbstonePage() {
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
                             <img
-                                src="/assets/services/interllock.jpeg"
+                                src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg"
                                 alt="Interlock paving and kerbstone installation in Qatar by CPC Qatar"
                                 className="w-full h-full object-cover opacity-20"
                             />

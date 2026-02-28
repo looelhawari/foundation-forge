@@ -90,6 +90,7 @@ export const MegaCTA = () => {
           <Link
             to="/contact"
             className="group relative inline-flex items-center justify-center"
+            aria-label="Start your project — Contact CPC Qatar"
           >
             {/* Static ring label */}
             <span className="absolute w-36 h-36 sm:w-48 sm:h-48 rounded-full border border-muted-foreground/20 flex items-center justify-center">
