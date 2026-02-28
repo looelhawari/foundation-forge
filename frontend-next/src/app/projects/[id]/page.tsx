@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import ProjectDetailPage from "./page-client";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
@@ -119,46 +120,46 @@ export default async function Page({
 }) {
     const project = await getProject(params.id);
 
+    if (!project) {
+        notFound();
+    }
+
     // Build ConstructionProject JSON-LD if we have data
-    const jsonLd = project
-        ? {
-            "@context": "https://schema.org",
-            "@type": "ConstructionProject" as const,
-            name: project.title,
-            description: project.description || undefined,
-            url: `${SITE_URL}/projects/${params.id}`,
-            image: project.images?.[0] || undefined,
-            location: project.location
-                ? {
-                    "@type": "Place" as const,
-                    name: project.location,
-                    address: {
-                        "@type": "PostalAddress" as const,
-                        addressLocality: project.location,
-                        addressCountry: "QA",
-                    },
-                }
-                : undefined,
-            contractor: {
-                "@type": "Organization" as const,
-                name: "CPC Qatar — Cosmo Projects & Construction",
-                url: SITE_URL,
-            },
-            client: project.client
-                ? { "@type": "Organization" as const, name: project.client }
-                : undefined,
-            dateCreated: project.year || undefined,
-        }
-        : null;
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ConstructionProject" as const,
+        name: project.title,
+        description: project.description || undefined,
+        url: `${SITE_URL}/projects/${params.id}`,
+        image: project.images?.[0] || undefined,
+        location: project.location
+            ? {
+                "@type": "Place" as const,
+                name: project.location,
+                address: {
+                    "@type": "PostalAddress" as const,
+                    addressLocality: project.location,
+                    addressCountry: "QA",
+                },
+            }
+            : undefined,
+        contractor: {
+            "@type": "Organization" as const,
+            name: "CPC Qatar — Cosmo Projects & Construction",
+            url: SITE_URL,
+        },
+        client: project.client
+            ? { "@type": "Organization" as const, name: project.client }
+            : undefined,
+        dateCreated: project.year || undefined,
+    };
 
     return (
         <>
-            {jsonLd && (
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-                />
-            )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <ProjectDetailPage />
         </>
     );

@@ -9,6 +9,7 @@
     "theme_color": "#1a1a2e",
     "lang": "en",
     "dir": "ltr",
+    "orientation": "portrait-primary",
     "icons": [
         {
             "src": "/favicon.ico?v=4",

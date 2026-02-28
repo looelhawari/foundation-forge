@@ -21,7 +21,7 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <nav aria-label="Quick links">
             <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h2>
             <ul className="space-y-3">
               {["Home", "About", "Projects", "Clients", "Contact"].map((item) => (
@@ -43,10 +43,10 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Services */}
-          <div>
+          <nav aria-label="Services">
             <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h2>
             <ul className="space-y-3">
               {[
@@ -67,10 +67,10 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Legal Documents */}
-          <div>
+          <nav aria-label="Legal documents">
             <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h2>
             <ul className="space-y-3">
               <li>
@@ -107,7 +107,7 @@ export const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Contact Info */}
           <div>
@@ -158,7 +158,7 @@ export const Footer = () => {
             <a
               href="https://eliteera.web.app/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="text-muted-foreground/70 hover:text-primary transition-colors text-xs flex items-center gap-2 group"
             >
               <span>Designed by</span>

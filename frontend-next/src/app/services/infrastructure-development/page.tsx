@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -8,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 export const metadata: Metadata = {
     title: "Infrastructure Development & Civil Works in Qatar | CPC Qatar",
     description:
-        "Complete infrastructure development services in Doha, Qatar — drainage systems, stormwater management, utility duct installation, and public civil works. Government-approved infrastructure contractor.",
+        "Drainage systems, stormwater management, utility duct installation and civil works in Doha, Qatar. Government-approved infrastructure contractor.",
     alternates: { canonical: "/services/infrastructure-development" },
     keywords: [
         "infrastructure development Qatar",
@@ -71,10 +72,13 @@ export default function InfrastructureDevelopmentPage() {
                     {/* Hero */}
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
-                            <img
+                            <Image
                                 src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg"
                                 alt="Infrastructure development project in Qatar by CPC Qatar"
-                                className="w-full h-full object-cover opacity-20"
+                                fill
+                                sizes="100vw"
+                                className="object-cover opacity-20"
+                                priority
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background" />
                         </div>

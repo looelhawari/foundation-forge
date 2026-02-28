@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         template: "%s | CPC Qatar",
     },
     description:
-        "CPC Qatar (Cosmo Projects & Construction) — Leading road construction & infrastructure company in Doha, Qatar. Asphalt paving, road marking, earthworks, interlock & subbase works. 90+ projects delivered since 2017. | كوزمو للمشاريع والإنشاءات — شركة رائدة في بناء الطرق والبنية التحتية في قطر.",
+        "CPC Qatar — Road construction & infrastructure company in Doha, Qatar. Asphalt paving, road marking, earthworks, interlock. 90+ projects delivered since 2017.",
     keywords: [
         "CPC Qatar",
         "Cosmo Projects Construction",
@@ -93,10 +93,6 @@ export const metadata: Metadata = {
     },
     alternates: {
         canonical: "https://cpc-qa.com/",
-        languages: {
-            en: "https://cpc-qa.com/",
-            ar: "https://cpc-qa.com/?lang=ar",
-        },
     },
     icons: {
         icon: [
@@ -114,11 +110,19 @@ export const metadata: Metadata = {
         ICBM: "25.2734836, 51.5014973",
         language: "English, Arabic",
         "content-language": "en, ar",
+        // iOS PWA — required for mobile-first indexing
+        "mobile-web-app-capable": "yes",
+        "apple-mobile-web-app-capable": "yes",
+        "apple-mobile-web-app-status-bar-style": "black-translucent",
+        "apple-mobile-web-app-title": "CPC Qatar",
     },
 };
 
 export const viewport: Viewport = {
     themeColor: "#1a1a2e",
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
 };
 
 // ═══════════════════════════════════════════════════════
@@ -127,6 +131,7 @@ export const viewport: Viewport = {
 const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://cpc-qa.com/#organization",
     name: "Cosmo Projects & Construction and Trading W.L.L.",
     alternateName: ["CPC Qatar", "CPC", "كوزمو للمشاريع والإنشاءات والتجارة"],
     url: "https://cpc-qa.com",
@@ -152,7 +157,29 @@ const organizationSchema = {
         { "@type": "City", name: "Al Khor" },
         { "@type": "City", name: "Lusail" },
     ],
-    // sameAs: ["https://www.linkedin.com/company/cpc-qatar"],
+    // Entity disambiguation — ties CPC Qatar to authoritative reference nodes
+    sameAs: [
+        "https://www.linkedin.com/company/cpc-qatar",
+        "https://cpc-qa.com",
+    ],
+    // Government-issued credentials — high trust signal
+    hasCredential: [
+        {
+            "@type": "EducationalOccupationalCredential",
+            name: "Commercial Registration CR 108122",
+            url: "https://cpc-qa.com/certificates",
+            credentialCategory: "Government Contractor Registration",
+            recognizedBy: { "@type": "GovernmentOrganization", name: "Ministry of Commerce and Industry — Qatar", url: "https://www.moci.gov.qa" },
+        },
+    ],
+    // Industry knowledge areas — reinforces topical authority
+    knowsAbout: [
+        "Road Construction", "Asphalt Pavement Construction", "Infrastructure Development",
+        "Earthworks and Site Grading", "Thermoplastic Road Marking", "Traffic Management Infrastructure",
+        "Interlock Block Paving", "Kerbstone Installation", "Subgrade and Subbase Works",
+        "Civil Engineering Qatar", "Highway Construction", "Stormwater Drainage Systems",
+        "Utility Duct Installation", "Qatar Construction Industry",
+    ],
     contactPoint: [
         {
             "@type": "ContactPoint",
@@ -288,7 +315,7 @@ const faqSchema = {
             name: "What construction services does CPC Qatar offer?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "CPC Qatar (Cosmo Projects & Construction) offers a full range of construction services including asphalt pavement construction, road marking and traffic signs, earthworks and grading, interlock block paving, subgrade and subbase works, steel fabrication, site preparation, and complete infrastructure development across Qatar.",
+                text: "CPC Qatar offers asphalt pavement construction, road marking and traffic signs, earthworks and grading, interlock block paving, subgrade and subbase works, and complete infrastructure development across Qatar.",
             },
         },
         {
@@ -389,7 +416,7 @@ export default function RootLayout({
                     </p>
                 </noscript>
 
-                <ClientProviders>{children}</ClientProviders>
+                <ClientProviders><main id="main-content">{children}</main></ClientProviders>
             </body>
         </html>
     );

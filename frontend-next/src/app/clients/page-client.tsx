@@ -75,6 +75,21 @@ const logoImportMap: Record<string, string> = {
   QNIE: qnieLogo,
 };
 
+// Verified official website URLs for known clients
+// These power the outbound HTML links on client cards — crawlable authority signals
+const clientUrlMap: Record<string, string> = {
+  "Ministry of Education": "https://edu.gov.qa",
+  "Ministry of Ashghal": "https://www.ashghal.gov.qa",
+  "Ashghal": "https://www.ashghal.gov.qa",
+  "Ministry of Awqaf ": "https://awqaf.gov.qa",
+  "Ministry of Awqaf": "https://awqaf.gov.qa",
+  "Qatar Museums": "https://www.qm.org.qa",
+  "FIFA World Cup Qatar 2022": "https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup/qatar2022",
+  "DHL Qatar": "https://www.dhl.com/qa-en/home.html",
+  "Al Meera": "https://www.almeera.com.qa",
+  IMALCO: "https://www.imalco.com",
+};
+
 // Category configuration for display
 type CategoryKey = "government" | "corporate" | "industrial" | "real_estate" | "retail" | "other";
 
@@ -500,6 +515,59 @@ function ClientCategoriesSection() {
               background:
                 "linear-gradient(to bottom right, " + gradientColors + ")",
             };
+            const clientUrl = clientUrlMap[client.name];
+
+            const cardContent = (
+              <motion.div
+                whileHover={{ y: -10 }}
+                className="backdrop-blur-sm border border-border rounded-2xl p-6 h-full group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl"
+                style={gradientStyle}
+              >
+                {client.logo ? (
+                  <div className="h-20 mb-6 flex items-center justify-center bg-white rounded-lg p-3">
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="max-h-full w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                    />
+                  </div>
+                ) : (
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-colors"
+                  >
+                    <span className="font-display text-2xl text-primary">
+                      {client.name.charAt(0)}
+                    </span>
+                  </motion.div>
+                )}
+
+                <h3 className="font-display text-lg tracking-wide mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  {client.name}
+                </h3>
+
+                <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <div>
+                    <div className="font-display text-2xl text-primary">
+                      {client.projects}
+                    </div>
+                    <div className="text-xs text-muted-foreground tracking-wider">
+                      PROJECTS
+                    </div>
+                  </div>
+                  {client.value && (
+                    <div className="text-right">
+                      <div className="font-semibold text-sm">
+                        {client.value}
+                      </div>
+                      <div className="text-xs text-muted-foreground tracking-wider">
+                        VALUE
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
 
             return (
               <motion.div
@@ -513,55 +581,11 @@ function ClientCategoriesSection() {
                 }}
               >
                 <TiltCard className="h-full">
-                  <motion.div
-                    whileHover={{ y: -10 }}
-                    className="backdrop-blur-sm border border-border rounded-2xl p-6 h-full group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl"
-                    style={gradientStyle}
-                  >
-                    {client.logo ? (
-                      <div className="h-20 mb-6 flex items-center justify-center bg-white rounded-lg p-3">
-                        <img
-                          src={client.logo}
-                          alt={client.name}
-                          className="max-h-full w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                        />
-                      </div>
-                    ) : (
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/30 transition-colors"
-                      >
-                        <span className="font-display text-2xl text-primary">
-                          {client.name.charAt(0)}
-                        </span>
-                      </motion.div>
-                    )}
-
-                    <h3 className="font-display text-lg tracking-wide mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                      {client.name}
-                    </h3>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                      <div>
-                        <div className="font-display text-2xl text-primary">
-                          {client.projects}
-                        </div>
-                        <div className="text-xs text-muted-foreground tracking-wider">
-                          PROJECTS
-                        </div>
-                      </div>
-                      {client.value && (
-                        <div className="text-right">
-                          <div className="font-semibold text-sm">
-                            {client.value}
-                          </div>
-                          <div className="text-xs text-muted-foreground tracking-wider">
-                            VALUE
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
+                  {clientUrl ? (
+                    <a href={clientUrl} target="_blank" rel="noopener" aria-label={`Visit ${client.name} official website`} className="block h-full">
+                      {cardContent}
+                    </a>
+                  ) : cardContent}
                 </TiltCard>
               </motion.div>
             );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -8,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 export const metadata: Metadata = {
     title: "Subgrade & Subbase Works for Roads in Qatar | CPC Qatar",
     description:
-        "Professional subgrade preparation, subbase installation, and base course construction in Doha, Qatar. CPC Qatar builds strong road foundations with material testing, compaction control, and QCS compliance.",
+        "Subgrade preparation, subbase installation & base course construction in Doha, Qatar. Material testing, compaction control and QCS compliance.",
     alternates: { canonical: "/services/subgrade-subbase" },
     keywords: [
         "subgrade works Qatar",
@@ -71,10 +72,13 @@ export default function SubgradeSubbasePage() {
                     {/* Hero */}
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
-                            <img
+                            <Image
                                 src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg"
                                 alt="Subgrade and subbase construction for road projects in Qatar by CPC Qatar"
-                                className="w-full h-full object-cover opacity-20"
+                                fill
+                                sizes="100vw"
+                                className="object-cover opacity-20"
+                                priority
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background" />
                         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -8,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 export const metadata: Metadata = {
     title: "Asphalt Works & Road Paving Services in Qatar | CPC Qatar",
     description:
-        "Professional asphalt paving, road resurfacing, and hot mix asphalt services in Doha, Qatar. CPC Qatar delivers durable road pavements, parking lots, and highway surfacing — government-approved contractor.",
+        "Asphalt paving, road resurfacing & hot mix asphalt in Doha, Qatar. Durable pavements for highways, parking lots & roads. Government-approved.",
     alternates: { canonical: "/services/asphalt-works" },
     keywords: [
         "asphalt paving Qatar",
@@ -71,10 +72,13 @@ export default function AsphaltWorksPage() {
                     {/* Hero */}
                     <section className="relative pt-32 pb-16">
                         <div className="absolute inset-0 z-0">
-                            <img
+                            <Image
                                 src="https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312049/cpc-website/services/asphalt.jpg"
                                 alt="Asphalt paving project in Doha, Qatar by CPC Qatar"
-                                className="w-full h-full object-cover opacity-20"
+                                fill
+                                sizes="100vw"
+                                className="object-cover opacity-20"
+                                priority
                             />
                             <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background" />
                         </div>

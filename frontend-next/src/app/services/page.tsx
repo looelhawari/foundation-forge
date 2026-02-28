@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
@@ -8,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 export const metadata: Metadata = {
     title: "Our Services | Road Construction, Asphalt Paving & Infrastructure in Qatar",
     description:
-        "CPC Qatar offers comprehensive road construction services in Doha, Qatar: asphalt paving, road marking, earthworks, interlock & kerbstone, subgrade & subbase, and infrastructure development. Government-approved contractor.",
+        "Asphalt paving, road marking, earthworks, interlock & infrastructure by CPC Qatar in Doha. Government-approved contractor serving Qatar since 2017.",
     alternates: { canonical: "/services" },
     keywords: [
         "road construction services Qatar",
@@ -159,11 +160,13 @@ export default function ServicesPage() {
                                         href={`/services/${service.slug}`}
                                         className="group block bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
                                     >
-                                        <div className="aspect-[16/10] overflow-hidden">
-                                            <img
+                                        <div className="aspect-[16/10] overflow-hidden relative">
+                                            <Image
                                                 src={service.image}
                                                 alt={`${service.title} — CPC Qatar road construction service in Doha, Qatar`}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
                                                 loading="lazy"
                                             />
                                         </div>
