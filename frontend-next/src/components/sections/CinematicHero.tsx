@@ -50,7 +50,7 @@ export const CinematicHero = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
   const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {

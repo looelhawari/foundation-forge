@@ -53,8 +53,8 @@ const BRAND_COLOR = "#f59e0b";
 export function WhyChooseUs() {
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0">
+            {/* Background Image — hidden on mobile to save bandwidth */}
+            <div className="absolute inset-0 hidden md:block">
                 <img
                     src={whyChooseBg}
                     alt="CPC Qatar road construction team delivering infrastructure excellence in Doha, Qatar"

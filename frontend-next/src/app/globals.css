@@ -264,16 +264,12 @@
 
 /* Performance optimizations */
 @media (max-width: 768px) {
+
   /* Reduce transition duration on mobile for snappier interactions */
   *,
   *::before,
   *::after {
     transition-duration: 0.2s !important;
-  }
-
-  /* Disable parallax and complex transforms on mobile */
-  .will-change-transform {
-    will-change: auto !important;
   }
 
   /* Simplify blur effects on mobile */
@@ -306,7 +302,15 @@
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
+  }
+}
+
+/* Respect reduced motion preference for marquees */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  [style*="animation: marquee"] {
+    animation-play-state: paused !important;
   }
 }
 

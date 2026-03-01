@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+
 const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
 const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
 const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
@@ -26,30 +26,27 @@ const clients = [
     { name: "QNIE", logo: qnieLogo },
 ];
 
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-// Infinite scroll with magnetic effect
+// Pure CSS infinite scroll — zero main-thread cost
 export function ClientLogosShowcase() {
-    const baseVelocity = -1.5; // Slightly slower for smoother animation
-    const baseX = useMotionValue(0);
-    const x = useTransform(baseX, (v) => `${v}%`);
-
-    const directionFactor = useRef(1);
-
-    useAnimationFrame((t, delta) => {
-        // Throttle animation updates for better performance
-        let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-
-        if (baseX.get() <= -50) {
-            baseX.set(0);
-        }
-
-        baseX.set(baseX.get() + moveBy);
-    });
+    const logoItems = clients.map((client, index) => (
+        <div
+            key={index}
+            className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex items-center justify-center p-4 rounded-xl"
+        >
+            <img
+                src={client.logo}
+                alt={client.name}
+                width={120}
+                height={60}
+                className="w-full h-full object-contain drop-shadow-md"
+                loading="lazy"
+            />
+        </div>
+    ));
 
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
-            {/* Static grid background - removed animation for performance */}
+            {/* Static grid background */}
             <div className="absolute inset-0 opacity-5">
                 <div
                     className="h-full w-full"
@@ -87,39 +84,32 @@ export function ClientLogosShowcase() {
                 </motion.div>
             </div>
 
-            {/* Infinite scrolling logos */}
+            {/* Infinite scrolling logos — CSS animation */}
             <div className="relative h-32 sm:h-40 md:h-48 flex items-center">
                 {/* Light background strip for logo visibility */}
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-28 sm:h-36 md:h-44 bg-gradient-to-r from-transparent via-gray-100/90 to-transparent" />
 
-                <motion.div
-                    className="flex gap-12 sm:gap-16 md:gap-20 absolute"
-                    style={{ x }}
-                >
-                    {/* Render only 2x (minimum for seamless infinite scroll) instead of 4x */}
-                    {[...clients, ...clients].map((client, index) => (
-                        <div
-                            key={index}
-                            className="flex-shrink-0 w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex items-center justify-center p-4 rounded-xl"
-                        >
-                            <img
-                                src={client.logo}
-                                alt={client.name}
-                                width={120}
-                                height={60}
-                                className="w-full h-full object-contain drop-shadow-md"
-                                loading="lazy"
-                            />
-                        </div>
-                    ))}
-                </motion.div>
+                <div className="flex absolute overflow-hidden w-full">
+                    <div
+                        className="flex gap-12 sm:gap-16 md:gap-20 shrink-0 will-change-transform"
+                        style={{ animation: 'marquee 35s linear infinite' }}
+                    >
+                        {logoItems}
+                    </div>
+                    <div
+                        className="flex gap-12 sm:gap-16 md:gap-20 shrink-0 will-change-transform"
+                        style={{ animation: 'marquee 35s linear infinite' }}
+                    >
+                        {logoItems}
+                    </div>
+                </div>
             </div>
 
-            {/* Trust badges */}
+            {/* Trust badges — opacity-only initial to prevent CLS */}
             <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
                 viewport={{ once: true }}
                 className="container mx-auto px-4 sm:px-6 mt-12 md:mt-16"
             >
@@ -128,19 +118,14 @@ export function ClientLogosShowcase() {
                         { number: "45+", label: "Major Clients" },
                         { number: "90+", label: "Projects Delivered" },
                         { number: "100%", label: "Satisfaction Rate" }
-                    ].map((stat, index) => (
-                        <motion.div
+                    ].map((stat) => (
+                        <div
                             key={stat.label}
                             className="text-center"
-                            initial={{ scale: 0, rotate: -180 }}
-                            whileInView={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: 0.7 + index * 0.1, type: "spring", stiffness: 200 }}
-                            viewport={{ once: true }}
-                            whileHover={{ scale: 1.1, rotate: 5 }}
                         >
                             <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-2">{stat.number}</div>
                             <div className="text-sm sm:text-base text-gray-400">{stat.label}</div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </motion.div>

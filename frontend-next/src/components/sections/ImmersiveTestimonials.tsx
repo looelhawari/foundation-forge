@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useAnimationFrame, useMotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
@@ -34,8 +34,11 @@ export const ImmersiveTestimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   // Fetch approved testimonials from database
   useEffect(() => {
@@ -62,29 +65,14 @@ export const ImmersiveTestimonials = () => {
   // Simplified parallax - only on desktop
   const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [50, -50]);
 
-  // Marquee animation using motion values
-  const marqueeX = useMotionValue(0);
-  const marqueeTransform = useTransform(marqueeX, (v) => `${v}%`);
-
-  useAnimationFrame((_, delta) => {
-    // Move left continuously - slow and smooth
-    const moveBy = -0.015 * (delta / 16.67); // Slow speed normalized for frame time
-    let newX = marqueeX.get() + moveBy;
-
-    // Reset when moved 50% (since we duplicate the array)
-    if (newX <= -50) {
-      newX = 0;
-    }
-
-    marqueeX.set(newX);
-  });
-
+  // Auto-advance testimonials with correct dependency
   useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   return (
     <section ref={containerRef} className="relative py-24 md:py-32 bg-background overflow-hidden">
@@ -223,41 +211,54 @@ export const ImmersiveTestimonials = () => {
           )}
         </div>
 
-        {/* Client logos marquee */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 md:mt-32"
-        >
+        {/* Client logos marquee — CSS animation */}
+        <div className="mt-16 md:mt-32">
           {/* Light background strip for better logo visibility */}
           <div className="relative overflow-hidden py-8 bg-gradient-to-r from-transparent via-white/10 to-transparent">
-            <motion.div
-              className="flex items-center"
-              style={{
-                x: marqueeTransform,
-                width: 'max-content'
-              }}
-            >
-              {/* Render only 2x for seamless infinite scroll (reduces DOM size) */}
-              {[...clients, ...clients].map((client, index) => (
-                <div
-                  key={index}
-                  className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg hover:scale-105 transition-transform"
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    width={100}
-                    height={64}
-                    className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </motion.div>
+            <div className="flex">
+              <div
+                className="flex items-center shrink-0 will-change-transform"
+                style={{ animation: 'marquee 50s linear infinite' }}
+              >
+                {clients.map((client, index) => (
+                  <div
+                    key={index}
+                    className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      width={100}
+                      height={64}
+                      className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div
+                className="flex items-center shrink-0 will-change-transform"
+                style={{ animation: 'marquee 50s linear infinite' }}
+              >
+                {clients.map((client, index) => (
+                  <div
+                    key={index}
+                    className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg"
+                  >
+                    <img
+                      src={client.logo}
+                      alt={client.name}
+                      width={100}
+                      height={64}
+                      className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section >
   );

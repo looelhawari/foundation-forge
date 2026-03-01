@@ -1,11 +1,9 @@
 "use client";
 
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef, memo } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import { AnimatedCounter } from "../animations/MotionGraphics";
 import { stats } from "@/data/projects";
-
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
 const statsData = [
   { value: stats.projectsCompleted, suffix: "+", label: "PROJECTS COMPLETED" },
@@ -17,6 +15,11 @@ const statsData = [
 export const ParallaxStats = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

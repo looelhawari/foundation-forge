@@ -1,8 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
-
 export const ServicesMarquee = () => {
   const services = [
     "HIGHWAY CONSTRUCTION",
@@ -12,74 +9,46 @@ export const ServicesMarquee = () => {
     "ROAD MAINTENANCE",
   ];
 
+  const serviceItems = [...services, ...services].map((service, index) => (
+    <span
+      key={index}
+      className="font-display text-4xl md:text-6xl lg:text-8xl tracking-[0.1em] text-foreground/10 whitespace-nowrap"
+    >
+      {service}
+    </span>
+  ));
+
   return (
     <section className="relative py-24 overflow-hidden bg-secondary">
-      {/* Marquee Container */}
+      {/* Marquee Container — pure CSS, zero main-thread cost */}
       <div className="relative flex overflow-hidden">
-        <motion.div
-          animate={{ x: [0, -1920] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 20,
-              ease: "linear",
-            },
-          }}
-          className="flex shrink-0 gap-16"
+        <div
+          className="flex shrink-0 gap-16 will-change-transform"
+          style={{ animation: 'marquee 20s linear infinite' }}
         >
-          {[...services, ...services].map((service, index) => (
-            <span
-              key={index}
-              className="font-display text-4xl md:text-6xl lg:text-8xl tracking-[0.1em] text-foreground/10 whitespace-nowrap"
-            >
-              {service}
-            </span>
-          ))}
-        </motion.div>
-        <motion.div
-          animate={{ x: [0, -1920] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 20,
-              ease: "linear",
-            },
-          }}
-          className="flex shrink-0 gap-16"
+          {serviceItems}
+        </div>
+        <div
+          className="flex shrink-0 gap-16 will-change-transform"
+          style={{ animation: 'marquee 20s linear infinite' }}
         >
-          {[...services, ...services].map((service, index) => (
-            <span
-              key={index}
-              className="font-display text-4xl md:text-6xl lg:text-8xl tracking-[0.1em] text-foreground/10 whitespace-nowrap"
-            >
-              {service}
-            </span>
-          ))}
-        </motion.div>
+          {serviceItems}
+        </div>
       </div>
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <span
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4"
           >
             What We Do
-          </motion.span>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          </span>
+          <p
             className="font-display text-3xl md:text-4xl tracking-[0.2em]"
           >
             OUR <span className="text-gradient">EXPERTISE</span>
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>

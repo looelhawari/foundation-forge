@@ -3,8 +3,8 @@
 import { motion, useScroll, useTransform, useInView, useSpring, useReducedMotion, useMotionValue } from "framer-motion";
 import { useRef, useEffect, useState, useMemo, memo } from "react";
 
-// Check if we're on a mobile device or low-performance mode
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+// SSR-safe mobile check — defaults to true (mobile-first) when window is unavailable
+const isMobile = typeof window === 'undefined' || window.innerWidth < 768;
 const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Floating particles effect - optimized with fewer particles
