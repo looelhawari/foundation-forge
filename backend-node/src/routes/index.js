@@ -8,6 +8,7 @@ const dashboardRoutes = require("./dashboardRoutes");
 const uploadRoutes = require("./uploadRoutes");
 const clientRoutes = require("./clientRoutes");
 const testimonialRoutes = require("./testimonialRoutes");
+const settingsRoutes = require("./settingsRoutes");
 
 // Mount routes
 router.use("/auth", authRoutes);
@@ -17,6 +18,12 @@ router.use("/dashboard", dashboardRoutes);
 router.use("/upload", uploadRoutes);
 router.use("/clients", clientRoutes);
 router.use("/testimonials", testimonialRoutes);
+
+// Public settings (GET /api/settings)
+router.use("/settings", settingsRoutes);
+
+// Admin settings update (PUT /api/admin/settings)
+router.use("/admin/settings", settingsRoutes);
 
 // Health check
 router.get("/health", (req, res) => {

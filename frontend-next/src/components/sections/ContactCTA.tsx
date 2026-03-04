@@ -4,8 +4,14 @@ import { motion } from "framer-motion";
 import { Link } from "@/lib/router-compat";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
+/** Strip non-digit characters except leading + for tel: links */
+const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const ContactCTA = () => {
+  const { settings } = useSiteSettings();
+
   return (
     <section className="py-32 bg-gradient-dark relative overflow-hidden">
       {/* Decorative Elements */}
@@ -26,7 +32,7 @@ export const ContactCTA = () => {
               Start Your Project
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-              LET'S CONSTRUCT <span className="text-gradient">TOGETHER</span>
+              LET&apos;S CONSTRUCT <span className="text-gradient">TOGETHER</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
               Ready to start your next infrastructure project? Our team of experts is here
@@ -48,7 +54,7 @@ export const ContactCTA = () => {
               </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <a href="tel:+97444322743">
+              <a href={toTelHref(settings.contact_phone)}>
                 <Phone className="w-5 h-5" />
                 Call Us Now
               </a>
@@ -63,18 +69,18 @@ export const ContactCTA = () => {
             className="flex flex-col sm:flex-row justify-center items-center gap-8 text-muted-foreground"
           >
             <a
-              href="tel:+97444322743"
+              href={toTelHref(settings.contact_phone)}
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Phone className="w-5 h-5" />
-              <span>+974 4432-2743</span>
+              <span>{settings.contact_phone}</span>
             </a>
             <a
-              href="mailto:Info@ctgroups.net"
+              href={`mailto:${settings.contact_email}`}
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Mail className="w-5 h-5" />
-              <span>Info@ctgroups.net</span>
+              <span>{settings.contact_email}</span>
             </a>
           </motion.div>
         </div>

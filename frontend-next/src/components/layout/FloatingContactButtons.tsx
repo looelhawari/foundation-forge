@@ -4,25 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router-compat";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
-// Company contact data - centralized for easy updates
-const CONTACT_INFO = {
-    phone: {
-        display: "+974 4432-2743",
-        href: "tel:+97444322743"
-    },
-    email: {
-        display: "Info@ctgroups.net",
-        href: "mailto:Info@ctgroups.net"
-    },
-    address: {
-        display: "Mirqab Mall, Doha, Qatar",
-        href: "https://www.google.com/maps/place/Cosmo+Projects+%26+Construction+and+Trading/@25.2734836,51.5014973,17z"
-    }
-};
+/** Strip non-digit characters except leading + for tel: links */
+const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const FloatingContactButtons = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const { settings } = useSiteSettings();
 
     const contactButtons = [
         {
@@ -34,21 +23,21 @@ export const FloatingContactButtons = () => {
         },
         {
             icon: Mail,
-            label: CONTACT_INFO.email.display,
-            href: CONTACT_INFO.email.href,
+            label: settings.contact_email,
+            href: `mailto:${settings.contact_email}`,
             ariaLabel: "Send us an email"
         },
         {
             icon: MapPin,
-            label: CONTACT_INFO.address.display,
-            href: CONTACT_INFO.address.href,
+            label: settings.public_location,
+            href: `https://www.google.com/maps/place/Cosmo+Projects+%26+Construction+and+Trading/@25.2734836,51.5014973,17z`,
             external: true,
             ariaLabel: "View our location on Google Maps"
         },
         {
             icon: Phone,
-            label: CONTACT_INFO.phone.display,
-            href: CONTACT_INFO.phone.href,
+            label: settings.contact_phone,
+            href: toTelHref(settings.contact_phone),
             ariaLabel: "Call us"
         }
     ];

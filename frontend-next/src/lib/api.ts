@@ -36,6 +36,29 @@ async function fetchApi<T>(
   return data;
 }
 
+// Public fetch (no auth token, simpler — used for public endpoints)
+async function fetchPublicApi<T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> {
+  const config: RequestInit = {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+  };
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "An error occurred");
+  }
+
+  return data;
+}
+
 // API Response Types
 export interface ApiResponse<T> {
   success: boolean;
@@ -64,6 +87,29 @@ export interface ContactListResponse {
 
 export interface SettingsResponse {
   settings: Array<{ key: string; value: string }>;
+}
+
+// Site Settings (singleton)
+export interface SiteSettings {
+  site_name: string;
+  public_location: string;
+  head_office_address: string;
+  contact_email: string;
+  contact_phone: string;
+  contact_phone_2: string;
+  contact_telephone: string;
+  contact_fax: string;
+  po_box: string;
+  google_maps_url: string;
+  facebook_url: string;
+  show_facebook: boolean;
+  instagram_url: string;
+  show_instagram: boolean;
+  linkedin_url: string;
+  show_linkedin: boolean;
+  twitter_url: string;
+  show_twitter: boolean;
+  updated_at: string;
 }
 
 // Admin Types
@@ -656,6 +702,21 @@ export const testimonialsApi = {
     >("/testimonials/stats"),
 };
 
+// ═══════════════════════════════════════════════════════
+// Public Site Settings API (no auth required)
+// ═══════════════════════════════════════════════════════
+export const siteSettingsApi = {
+  /** GET /api/settings — public, cached */
+  get: () => fetchPublicApi<ApiResponse<SiteSettings>>("/settings"),
+
+  /** PUT /api/admin/settings — admin only */
+  update: (data: Partial<SiteSettings>) =>
+    fetchApi<ApiResponse<SiteSettings>>("/admin/settings", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+};
+
 export default {
   auth: authApi,
   projects: projectsApi,
@@ -664,4 +725,5 @@ export default {
   upload: uploadApi,
   clients: clientsApi,
   testimonials: testimonialsApi,
+  siteSettings: siteSettingsApi,
 };

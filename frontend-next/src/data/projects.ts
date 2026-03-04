@@ -457,9 +457,4 @@ export const stats = {
     companyFullName: "COSMO PROJECTS & CONSTRUCTION AND TRADING CO.",
     chairman: "Mohammed Ahmed Mubarak Al-Nasr",
     crNumber: "108122",
-    phone: "+974 4432-2743",
-    email: "Info@ctgroups.net",
-    address: "Mirqab Mall, Area No. 39, Street No.840, Building No.53, Block D - Office No. 307-308",
-    poBox: "15776",
-    location: "Doha, Qatar"
 };

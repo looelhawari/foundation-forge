@@ -18,10 +18,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactApi } from "@/lib/api";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import SEOHead from "@/components/SEOHead";
+
+/** Strip non-digit characters except leading + for tel: links */
+const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 const Contact = () => {
   const { toast } = useToast();
+  const { settings } = useSiteSettings();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -83,7 +88,7 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Contact CPC Qatar | Get a Free Quote | Road Construction Doha"
-        description="Contact CPC Qatar for road construction & infrastructure projects. Office: Mirqab Mall, Doha. Phone: +974 4432-2743. Email: Info@ctgroups.net. Free consultation & quote."
+        description={`Contact CPC Qatar for road construction & infrastructure projects. Office: ${settings.head_office_address}. Phone: ${settings.contact_phone}. Email: ${settings.contact_email}. Free consultation & quote.`}
         canonical="/contact"
         arDescription="تواصل مع شركة كوزمو للمشاريع والإنشاءات للحصول على عرض أسعار مجاني لمشاريع الطرق والبنية التحتية في قطر"
         keywords="contact CPC Qatar, road construction quote Doha, contractor contact Qatar, اتصل بنا شركة مقاولات قطر"
@@ -252,11 +257,13 @@ const Contact = () => {
                         Head Office
                       </h4>
                       <p className="text-muted-foreground text-sm">
-                        Mirqab Mall, Area No. 39, Street No.840
-                        <br />
-                        Building No.53, Block D – Office No. 307-308
-                        <br />
-                        P.O. Box: 15776, Doha, Qatar
+                        {settings.head_office_address}
+                        {settings.po_box && (
+                          <>
+                            <br />
+                            P.O. Box: {settings.po_box}, {settings.public_location}
+                          </>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -271,18 +278,44 @@ const Contact = () => {
                       </h4>
                       <p className="text-muted-foreground text-sm">
                         <a
-                          href="tel:+97444322743"
+                          href={toTelHref(settings.contact_phone)}
                           className="hover:text-primary transition-colors"
                         >
-                          +974 4432-2743
+                          {settings.contact_phone}
                         </a>
-                        <br />
-                        <a
-                          href="tel:+97440291295"
-                          className="hover:text-primary transition-colors"
-                        >
-                          +974 4029-1295 (Fax)
-                        </a>
+                        {settings.contact_phone_2 && (
+                          <>
+                            <br />
+                            <a
+                              href={toTelHref(settings.contact_phone_2)}
+                              className="hover:text-primary transition-colors"
+                            >
+                              {settings.contact_phone_2}
+                            </a>
+                          </>
+                        )}
+                        {settings.contact_telephone && (
+                          <>
+                            <br />
+                            <a
+                              href={toTelHref(settings.contact_telephone)}
+                              className="hover:text-primary transition-colors"
+                            >
+                              {settings.contact_telephone} (Tel)
+                            </a>
+                          </>
+                        )}
+                        {settings.contact_fax && (
+                          <>
+                            <br />
+                            <a
+                              href={toTelHref(settings.contact_fax)}
+                              className="hover:text-primary transition-colors"
+                            >
+                              {settings.contact_fax} (Fax)
+                            </a>
+                          </>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -297,10 +330,10 @@ const Contact = () => {
                       </h4>
                       <p className="text-muted-foreground text-sm">
                         <a
-                          href="mailto:Info@ctgroups.net"
+                          href={`mailto:${settings.contact_email}`}
                           className="hover:text-primary transition-colors"
                         >
-                          Info@ctgroups.net
+                          {settings.contact_email}
                         </a>
                       </p>
                     </div>
@@ -318,16 +351,22 @@ const Contact = () => {
               className="mt-24"
             >
               <div className="aspect-video sm:aspect-[21/9] rounded-lg overflow-hidden border border-border">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.6047!2d51.5014973!3d25.2734836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45dbcfbfe07107%3A0xaf990e0741438251!2sCosmo%20Projects%20%26%20Construction%20and%20Trading!5e0!3m2!1sen!2s!4v1735053847123!5m2!1sen!2s"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="COSMO PROJECTS & CONSTRUCTION Location - Doha, Qatar"
-                />
+                {settings.google_maps_url ? (
+                  <iframe
+                    src={settings.google_maps_url}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`${settings.site_name} Location - ${settings.public_location}`}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-secondary text-muted-foreground">
+                    Map location not configured
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>

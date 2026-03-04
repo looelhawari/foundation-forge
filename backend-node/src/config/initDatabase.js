@@ -159,7 +159,7 @@ const initDatabase = async () => {
     `);
     console.log("✅ Activity logs table created/verified");
 
-    // Create settings table
+    // Create settings table (legacy key-value, kept for backward compat)
     await connection.execute(`
       CREATE TABLE IF NOT EXISTS settings (
         id INT PRIMARY KEY AUTO_INCREMENT,
@@ -172,6 +172,137 @@ const initDatabase = async () => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
     console.log("✅ Settings table created/verified");
+
+    // ─── Site Settings (singleton table) ─────────────────────────
+    await connection.execute(`
+      CREATE TABLE IF NOT EXISTS site_settings (
+        id INT PRIMARY KEY DEFAULT 1,
+        site_name VARCHAR(255) NOT NULL DEFAULT 'Cosmo Projects & Construction',
+        public_location VARCHAR(500) NOT NULL DEFAULT 'Doha, Qatar',
+        head_office_address TEXT NOT NULL,
+        contact_email VARCHAR(255) NOT NULL DEFAULT 'Info@ctgroups.net',
+        contact_phone VARCHAR(50) NOT NULL DEFAULT '+974 4432-2743',
+        contact_phone_2 VARCHAR(50) DEFAULT NULL,
+        contact_telephone VARCHAR(50) DEFAULT NULL,
+        contact_fax VARCHAR(50) DEFAULT NULL,
+        po_box VARCHAR(50) DEFAULT NULL,
+        google_maps_url TEXT DEFAULT NULL,
+        facebook_url VARCHAR(500) DEFAULT '',
+        show_facebook TINYINT(1) NOT NULL DEFAULT 0,
+        instagram_url VARCHAR(500) DEFAULT '',
+        show_instagram TINYINT(1) NOT NULL DEFAULT 0,
+        linkedin_url VARCHAR(500) DEFAULT '',
+        show_linkedin TINYINT(1) NOT NULL DEFAULT 1,
+        twitter_url VARCHAR(500) DEFAULT '',
+        show_twitter TINYINT(1) NOT NULL DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        CONSTRAINT chk_singleton CHECK (id = 1)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    console.log("✅ Site settings table created/verified");
+
+    // ── Add contact_phone_2 and contact_telephone columns if missing (migration) ──
+    const phoneColumns = [
+      { col: "contact_phone_2", after: "contact_phone", type: "VARCHAR(50) DEFAULT NULL" },
+      { col: "contact_telephone", after: "contact_phone_2", type: "VARCHAR(50) DEFAULT NULL" },
+    ];
+    for (const { col, after, type } of phoneColumns) {
+      try {
+        const [cols] = await connection.execute(
+          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'site_settings' AND COLUMN_NAME = ?`,
+          [col]
+        );
+        if (cols.length === 0) {
+          await connection.execute(
+            `ALTER TABLE site_settings ADD COLUMN ${col} ${type} AFTER ${after}`
+          );
+          console.log(`✅ Added column ${col} to site_settings`);
+        }
+      } catch (err) {
+        console.log(`ℹ️  Column ${col} migration skipped:`, err.message);
+      }
+    }
+
+    // Seed the singleton row with current production data (INSERT IGNORE = skip if exists)
+    await connection.execute(`
+      INSERT IGNORE INTO site_settings (
+        id, site_name, public_location, head_office_address,
+        contact_email, contact_phone, contact_phone_2, contact_telephone, contact_fax, po_box, google_maps_url,
+        facebook_url, show_facebook, instagram_url, show_instagram,
+        linkedin_url, show_linkedin, twitter_url, show_twitter
+      ) VALUES (
+        1,
+        'Cosmo Projects & Construction',
+        'Doha, Qatar',
+        'Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D, Office No. 307-308',
+        'Info@ctgroups.net',
+        '+974 4432-2743',
+        NULL,
+        NULL,
+        '+974 4029-1295',
+        '15776',
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.6047!2d51.5014973!3d25.2734836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45dbcfbfe07107%3A0xaf990e0741438251!2sCosmo%20Projects%20%26%20Construction%20and%20Trading!5e0!3m2!1sen!2s!4v1735053847123!5m2!1sen!2s',
+        '', 0,
+        '', 0,
+        'https://www.linkedin.com/company/cpc-qatar', 1,
+        '', 0
+      )
+    `);
+    console.log("✅ Site settings default row seeded");
+
+    // ── Add show_* toggle columns if they don't exist yet (migration for existing DBs) ──
+    const toggleColumns = [
+      { col: "show_facebook", after: "facebook_url" },
+      { col: "show_instagram", after: "instagram_url" },
+      { col: "show_linkedin", after: "linkedin_url" },
+      { col: "show_twitter", after: "twitter_url" },
+    ];
+    for (const { col, after } of toggleColumns) {
+      try {
+        const [cols] = await connection.execute(
+          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'site_settings' AND COLUMN_NAME = ?`,
+          [col]
+        );
+        if (cols.length === 0) {
+          const defaultVal = col === "show_linkedin" ? 1 : 0;
+          await connection.execute(
+            `ALTER TABLE site_settings ADD COLUMN ${col} TINYINT(1) NOT NULL DEFAULT ${defaultVal} AFTER ${after}`
+          );
+          console.log(`✅ Added column ${col} to site_settings`);
+        }
+      } catch (err) {
+        console.log(`ℹ️  Column ${col} migration skipped:`, err.message);
+      }
+    }
+
+    // ── Migrate any values from old settings table into site_settings ──
+    try {
+      const [oldSettings] = await connection.execute(
+        "SELECT setting_key, setting_value FROM settings WHERE setting_key IN ('company_name','company_phone','company_email','company_address','contact_email','contact_phone','contact_address','social_facebook','social_twitter','social_linkedin','social_instagram','site_name')"
+      );
+      if (oldSettings.length > 0) {
+        const map = {};
+        oldSettings.forEach((r) => { map[r.setting_key] = r.setting_value; });
+        // Only update non-empty values from the old table
+        const updates = [];
+        const vals = [];
+        if (map.site_name || map.company_name) { updates.push("site_name = ?"); vals.push(map.site_name || map.company_name); }
+        if (map.contact_email || map.company_email) { updates.push("contact_email = ?"); vals.push(map.contact_email || map.company_email); }
+        if (map.contact_phone || map.company_phone) { updates.push("contact_phone = ?"); vals.push(map.contact_phone || map.company_phone); }
+        if (map.contact_address || map.company_address) { updates.push("head_office_address = ?"); vals.push(map.contact_address || map.company_address); }
+        if (map.social_facebook) { updates.push("facebook_url = ?"); vals.push(map.social_facebook); }
+        if (map.social_twitter) { updates.push("twitter_url = ?"); vals.push(map.social_twitter); }
+        if (map.social_linkedin) { updates.push("linkedin_url = ?"); vals.push(map.social_linkedin); }
+        if (map.social_instagram) { updates.push("instagram_url = ?"); vals.push(map.social_instagram); }
+        if (updates.length > 0) {
+          await connection.execute(`UPDATE site_settings SET ${updates.join(", ")} WHERE id = 1`, vals);
+          console.log("✅ Migrated legacy settings → site_settings");
+        }
+      }
+    } catch (err) {
+      console.log("ℹ️  Legacy settings migration skipped:", err.message);
+    }
 
     // Check if admin exists
     const [existingAdmin] = await connection.execute(
@@ -191,33 +322,7 @@ const initDatabase = async () => {
       console.log("ℹ️ Admin already exists, skipping creation");
     }
 
-    // Insert default categories
-    const defaultCategories = [
-      { name: "Educational", slug: "educational", order: 1 },
-      { name: "Religious", slug: "religious", order: 2 },
-      { name: "Industrial", slug: "industrial", order: 3 },
-      { name: "Residential", slug: "residential", order: 4 },
-      { name: "Commercial & Retail", slug: "commercial-retail", order: 5 },
-      { name: "Logistics & Warehouse", slug: "logistics-warehouse", order: 6 },
-      { name: "Historical & Cultural", slug: "historical-cultural", order: 7 },
-      {
-        name: "Public Infrastructure",
-        slug: "public-infrastructure",
-        order: 8,
-      },
-    ];
 
-    for (const cat of defaultCategories) {
-      try {
-        await connection.execute(
-          "INSERT IGNORE INTO categories (name, slug, display_order) VALUES (?, ?, ?)",
-          [cat.name, cat.slug, cat.order],
-        );
-      } catch (err) {
-        // Ignore duplicate key errors
-      }
-    }
-    console.log("✅ Default categories created/verified");
 
     // Insert default settings
     const defaultSettings = [

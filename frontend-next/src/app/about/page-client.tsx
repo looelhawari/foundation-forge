@@ -8,6 +8,7 @@ import { MegaCTA } from "@/components/sections/MegaCTA";
 import { CompanyIntro } from "@/components/sections/CompanyIntro";
 import { AnimatedCounter, ImageReveal } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import SEOHead from "@/components/SEOHead";
 const engineerImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312006/cpc-website/engineer-portrait.jpg";
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
@@ -172,6 +173,7 @@ const About = () => {
 };
 
 const StorySection = () => {
+  const { settings } = useSiteSettings();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -234,7 +236,7 @@ const StorySection = () => {
                 Founded in 2017 by <span className="text-primary font-medium">Chairman Mohammed Ahmed Mubarak Al-Nasr</span> and <span className="text-primary font-medium">Founder Hisham Abdelfattah Radwan Mohamed</span>, our company was established with a clear vision: to deliver world-class infrastructure projects that serve Qatar's rapidly growing educational, cultural, and commercial sectors.
               </p>
               <p>
-                With <span className="text-primary font-semibold">Commercial Registration No. 108122</span>, CPC Qatar operates from our headquarters at Mirqab Mall, Doha, bringing together a team of highly qualified engineers and construction specialists who share our commitment to excellence.
+                With <span className="text-primary font-semibold">Commercial Registration No. 108122</span>, CPC Qatar operates from our headquarters at {settings.public_location}, bringing together a team of highly qualified engineers and construction specialists who share our commitment to excellence.
               </p>
               <p>
                 Today, we stand proud with <span className="text-gradient font-bold">57 completed projects</span> valued at over <span className="text-gradient font-bold">26 Million QR</span>, serving prestigious clients including the Ministry of Education, Qatar Museums, FIFA World Cup Qatar 2022, DHL, Al Meera, and many more. Our expertise spans educational facilities, cultural heritage sites, parking infrastructure, roads and streets, earthworks, and asphalt paving.
@@ -271,6 +273,7 @@ const StorySection = () => {
 };
 
 const WhatIsCPCSection = () => {
+  const { settings } = useSiteSettings();
   return (
     <section className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-gradient-to-b from-background via-secondary to-background overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -316,7 +319,7 @@ const WhatIsCPCSection = () => {
               <span className="text-primary font-bold">Cosmo Projects & Construction and Trading Co. (CPC Qatar)</span> is a leading construction company registered under <span className="text-primary">CR No. 108122</span>, dedicated to delivering exceptional civil engineering and infrastructure projects throughout the State of Qatar.
             </p>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              Headquartered at <span className="text-foreground">Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D - Office No. 307-308, Doha, Qatar</span>, we serve as a trusted partner for government ministries, cultural institutions, private enterprises, and international organizations.
+              Headquartered at <span className="text-foreground">{settings.head_office_address}, {settings.public_location}</span>, we serve as a trusted partner for government ministries, cultural institutions, private enterprises, and international organizations.
             </p>
           </motion.div>
 

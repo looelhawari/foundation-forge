@@ -9,6 +9,7 @@
 import dynamic from "next/dynamic";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/hooks/useAuth";
+import { SiteSettingsProvider } from "@/hooks/useSiteSettings";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -38,13 +39,15 @@ export default function ClientProviders({
         <ErrorBoundary>
             <QueryClientProvider client={queryClient}>
                 <AuthProvider>
-                    <TooltipProvider>
-                        <Toaster />
-                        <Sonner />
-                        <ScrollToTop />
-                        {children}
-                        <ConsentBanner />
-                    </TooltipProvider>
+                    <SiteSettingsProvider>
+                        <TooltipProvider>
+                            <Toaster />
+                            <Sonner />
+                            <ScrollToTop />
+                            {children}
+                            <ConsentBanner />
+                        </TooltipProvider>
+                    </SiteSettingsProvider>
                 </AuthProvider>
             </QueryClientProvider>
         </ErrorBoundary>

@@ -3,8 +3,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "@/lib/router-compat";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
+/** Strip non-digit characters except leading + for tel: links */
+const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const MegaCTA = () => {
+  const { settings } = useSiteSettings();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -125,19 +130,19 @@ export const MegaCTA = () => {
         >
           <div>
             <span className="block text-xs tracking-widest uppercase mb-2">Email</span>
-            <a href="mailto:Info@ctgroups.net" className="hover:text-primary transition-colors">
-              Info@ctgroups.net
+            <a href={`mailto:${settings.contact_email}`} className="hover:text-primary transition-colors">
+              {settings.contact_email}
             </a>
           </div>
           <div>
             <span className="block text-xs tracking-widest uppercase mb-2">Phone</span>
-            <a href="tel:+97444322743" className="hover:text-primary transition-colors">
-              +974 4432-2743
+            <a href={toTelHref(settings.contact_phone)} className="hover:text-primary transition-colors">
+              {settings.contact_phone}
             </a>
           </div>
           <div>
             <span className="block text-xs tracking-widest uppercase mb-2">Location</span>
-            <span>Doha, Qatar</span>
+            <span>{settings.public_location}</span>
           </div>
         </motion.div>
       </motion.div>

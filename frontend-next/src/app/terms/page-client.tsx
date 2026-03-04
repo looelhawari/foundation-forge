@@ -6,8 +6,10 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollText, Shield, FileText, Scale, AlertCircle } from "lucide-react";
 import { Link } from "@/lib/router-compat";
 import SEOHead from "@/components/SEOHead";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const Terms = () => {
+    const { settings } = useSiteSettings();
     return (
         <div className="min-h-screen bg-background">
             <SEOHead
@@ -95,13 +97,15 @@ const Terms = () => {
                                         </p>
                                         <p className="font-medium text-foreground">Company Details:</p>
                                         <ul className="list-disc list-inside space-y-2 ml-4">
-                                            <li>Legal Name: Cosmo Projects & Construction and Trading</li>
+                                            <li>Legal Name: {settings.site_name}</li>
                                             <li>Commercial Registration: 108122</li>
-                                            <li>Location: Mirqab Mall, Area No. 39, Street No.840, Building No.53, Block D – Office No. 307-308</li>
-                                            <li>P.O. Box: 15776, Doha, Qatar</li>
-                                            <li>Telephone: (+974) 4432-2743</li>
-                                            <li>Fax: (+974) 4029-1295</li>
-                                            <li>Email: Info@ctgroups.net</li>
+                                            <li>Location: {settings.head_office_address}</li>
+                                            <li>P.O. Box: {settings.po_box}, {settings.public_location}</li>
+                                            <li>Phone: {settings.contact_phone}</li>
+                                            {settings.contact_phone_2 && <li>Phone 2: {settings.contact_phone_2}</li>}
+                                            {settings.contact_telephone && <li>Telephone: {settings.contact_telephone}</li>}
+                                            <li>Fax: {settings.contact_fax}</li>
+                                            <li>Email: {settings.contact_email}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -262,12 +266,14 @@ const Terms = () => {
                                             If you have any questions about these Terms of Use, please contact us:
                                         </p>
                                         <div className="bg-gradient-card border border-border rounded-lg p-6 mt-4">
-                                            <p className="font-semibold text-foreground mb-3">COSMO PROJECTS & CONSTRUCTION AND TRADING</p>
+                                            <p className="font-semibold text-foreground mb-3">{settings.site_name.toUpperCase()}</p>
                                             <ul className="space-y-2 text-sm">
-                                                <li><span className="text-primary font-medium">Address:</span> Mirqab Mall, Area No. 39, Street No.840, Building No.53, Block D – Office No. 307-308, P.O. Box: 15776, Doha, Qatar</li>
-                                                <li><span className="text-primary font-medium">Telephone:</span> (+974) 4432-2743</li>
-                                                <li><span className="text-primary font-medium">Fax:</span> (+974) 4029-1295</li>
-                                                <li><span className="text-primary font-medium">Email:</span> Info@ctgroups.net</li>
+                                                <li><span className="text-primary font-medium">Address:</span> {settings.head_office_address}, P.O. Box: {settings.po_box}, {settings.public_location}</li>
+                                                <li><span className="text-primary font-medium">Phone:</span> {settings.contact_phone}</li>
+                                                {settings.contact_phone_2 && <li><span className="text-primary font-medium">Phone 2:</span> {settings.contact_phone_2}</li>}
+                                                {settings.contact_telephone && <li><span className="text-primary font-medium">Telephone:</span> {settings.contact_telephone}</li>}
+                                                <li><span className="text-primary font-medium">Fax:</span> {settings.contact_fax}</li>
+                                                <li><span className="text-primary font-medium">Email:</span> {settings.contact_email}</li>
                                                 <li><span className="text-primary font-medium">Commercial Registration:</span> 108122</li>
                                             </ul>
                                         </div>

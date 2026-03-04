@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 import ClientProviders from "@/components/ClientProviders";
+import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
 
 // ═══════════════════════════════════════════════════════
@@ -126,157 +127,10 @@ export const viewport: Viewport = {
 };
 
 // ═══════════════════════════════════════════════════════
-// STRUCTURED DATA — Organization, LocalBusiness, WebSite, etc.
+// STRUCTURED DATA — WebSite, BreadcrumbList, FAQ (static)
+// Organization & LocalBusiness schemas are rendered dynamically
+// by the <StructuredData /> client component using site_settings.
 // ═══════════════════════════════════════════════════════
-const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://cpc-qa.com/#organization",
-    name: "Cosmo Projects & Construction and Trading W.L.L.",
-    alternateName: ["CPC Qatar", "CPC", "كوزمو للمشاريع والإنشاءات والتجارة"],
-    url: "https://cpc-qa.com",
-    logo: "https://cpc-qa.com/logo.png",
-    description:
-        "Leading road construction, asphalt paving, and infrastructure development company in Doha, Qatar. Delivering excellence since 2017.",
-    foundingDate: "2017",
-    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 50, maxValue: 200 },
-    address: {
-        "@type": "PostalAddress",
-        streetAddress:
-            "Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D, Office No. 307-308",
-        addressLocality: "Doha",
-        addressRegion: "Doha",
-        addressCountry: "QA",
-        postalCode: "15776",
-    },
-    geo: { "@type": "GeoCoordinates", latitude: "25.2734836", longitude: "51.5014973" },
-    areaServed: [
-        { "@type": "Country", name: "Qatar" },
-        { "@type": "City", name: "Doha" },
-        { "@type": "City", name: "Al Wakrah" },
-        { "@type": "City", name: "Al Khor" },
-        { "@type": "City", name: "Lusail" },
-    ],
-    // Entity disambiguation — ties CPC Qatar to authoritative reference nodes
-    sameAs: [
-        "https://www.linkedin.com/company/cpc-qatar",
-        "https://cpc-qa.com",
-    ],
-    // Government-issued credentials — high trust signal
-    hasCredential: [
-        {
-            "@type": "EducationalOccupationalCredential",
-            name: "Commercial Registration CR 108122",
-            url: "https://cpc-qa.com/certificates",
-            credentialCategory: "Government Contractor Registration",
-            recognizedBy: { "@type": "GovernmentOrganization", name: "Ministry of Commerce and Industry — Qatar", url: "https://www.moci.gov.qa" },
-        },
-    ],
-    // Industry knowledge areas — reinforces topical authority
-    knowsAbout: [
-        "Road Construction", "Asphalt Pavement Construction", "Infrastructure Development",
-        "Earthworks and Site Grading", "Thermoplastic Road Marking", "Traffic Management Infrastructure",
-        "Interlock Block Paving", "Kerbstone Installation", "Subgrade and Subbase Works",
-        "Civil Engineering Qatar", "Highway Construction", "Stormwater Drainage Systems",
-        "Utility Duct Installation", "Qatar Construction Industry",
-    ],
-    contactPoint: [
-        {
-            "@type": "ContactPoint",
-            telephone: "+974-4432-2743",
-            email: "Info@ctgroups.net",
-            contactType: "customer service",
-            availableLanguage: ["English", "Arabic"],
-            areaServed: "QA",
-        },
-    ],
-};
-
-const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": ["GeneralContractor", "ConstructionCompany"],
-    name: "CPC Qatar — Cosmo Projects & Construction",
-    alternateName: "كوزمو للمشاريع والإنشاءات",
-    image: "https://cpc-qa.com/logo.png",
-    url: "https://cpc-qa.com",
-    description:
-        "Premier road construction and civil engineering company in Qatar specializing in asphalt pavements, road marking, earthworks, interlock paving, and infrastructure development.",
-    priceRange: "$$$$",
-    address: {
-        "@type": "PostalAddress",
-        streetAddress:
-            "Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D, Office No. 307-308",
-        addressLocality: "Doha",
-        addressRegion: "Doha",
-        postalCode: "15776",
-        addressCountry: "QA",
-    },
-    telephone: "+974-4432-2743",
-    email: "Info@ctgroups.net",
-    geo: { "@type": "GeoCoordinates", latitude: "25.2734836", longitude: "51.5014973" },
-    hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Construction Services",
-        itemListElement: [
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Asphalt Pavement Construction",
-                    description:
-                        "Professional asphalt paving and road surface construction for highways, streets, and commercial areas in Qatar.",
-                },
-            },
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Road Marking & Traffic Signs",
-                    description:
-                        "Thermoplastic and cold paint road marking, traffic signs, and road safety installations across Qatar.",
-                },
-            },
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Earthworks & Grading",
-                    description:
-                        "Site preparation, excavation, grading, filling, and land leveling services for construction projects.",
-                },
-            },
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Interlock & Block Paving",
-                    description:
-                        "Decorative and functional interlock block paving for walkways, driveways, and commercial spaces.",
-                },
-            },
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Subgrade & Subbase Works",
-                    description:
-                        "Foundation layer construction including subgrade preparation, subbase, and base course installation.",
-                },
-            },
-            {
-                "@type": "Offer",
-                itemOffered: {
-                    "@type": "Service",
-                    name: "Infrastructure Development",
-                    description:
-                        "Complete civil infrastructure including drainage, utilities, curbs, and stormwater management systems.",
-                },
-            },
-        ],
-    },
-    knowsLanguage: ["en", "ar"],
-    areaServed: { "@type": "Country", name: "Qatar" },
-};
 
 const websiteSchema = {
     "@context": "https://schema.org",
@@ -379,16 +233,6 @@ export default function RootLayout({
                     fetchPriority="high"
                 />
 
-                {/* Structured Data — Organization */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-                />
-                {/* Structured Data — LocalBusiness */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-                />
                 {/* Structured Data — WebSite */}
                 <script
                     type="application/ld+json"
@@ -417,7 +261,7 @@ export default function RootLayout({
                     </p>
                 </noscript>
 
-                <ClientProviders><main id="main-content">{children}</main></ClientProviders>
+                <ClientProviders><StructuredData /><main id="main-content">{children}</main></ClientProviders>
             </body>
         </html>
     );
