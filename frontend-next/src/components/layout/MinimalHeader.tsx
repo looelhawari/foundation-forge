@@ -35,6 +35,13 @@ export const MinimalHeader = () => {
 
   return (
     <>
+      {/* Skip to main content — accessibility + SEO best practice */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none"
+      >
+        Skip to main content
+      </a>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
           ? "bg-background/90 backdrop-blur-md"
@@ -45,7 +52,7 @@ export const MinimalHeader = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
-              <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={192} height={96} className="h-24 w-auto object-contain" priority />
+              <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={192} height={96} className="h-14 sm:h-16 w-auto object-contain" priority />
             </Link>
 
             {/* Desktop Navigation - Minimal */}
@@ -68,6 +75,8 @@ export const MinimalHeader = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden w-10 h-10 flex items-center justify-center"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />

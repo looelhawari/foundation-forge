@@ -57,7 +57,7 @@ const Index = () => {
             />
             <Header />
             <FloatingContactButtons />
-            <main>
+            <div>
                 <CinematicHero />
 
                 <ServicesMarquee />
@@ -72,7 +72,7 @@ const Index = () => {
                 <ParallaxStats />
                 <ImmersiveTestimonials />
                 <MegaCTA />
-            </main>
+            </div>
 
             {/* Floating Legal Documents Button — CSS animation instead of framer-motion */}
             <div className="fixed bottom-6 right-6 z-50 animate-slide-in-right">
