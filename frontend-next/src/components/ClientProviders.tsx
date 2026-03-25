@@ -15,6 +15,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { I18nextProvider } from "react-i18next";
+import { LocaleProvider } from "@/contexts/LocaleContext";
+import { i18n } from "@/lib/i18n/client";
+import { Locale, defaultLocale } from "@/lib/i18n/config";
 
 // Lazy-load ConsentBanner — not needed until after page renders
 const ConsentBanner = dynamic(() => import("@/components/ConsentBanner"), { ssr: false });
@@ -32,24 +36,30 @@ const queryClient = new QueryClient({
 
 export default function ClientProviders({
     children,
+    locale = defaultLocale,
 }: {
     children: React.ReactNode;
+    locale?: Locale;
 }) {
     return (
         <ErrorBoundary>
-            <QueryClientProvider client={queryClient}>
-                <AuthProvider>
-                    <SiteSettingsProvider>
-                        <TooltipProvider>
-                            <Toaster />
-                            <Sonner />
-                            <ScrollToTop />
-                            {children}
-                            <ConsentBanner />
-                        </TooltipProvider>
-                    </SiteSettingsProvider>
-                </AuthProvider>
-            </QueryClientProvider>
+            <I18nextProvider i18n={i18n}>
+                <LocaleProvider initialLocale={locale}>
+                    <QueryClientProvider client={queryClient}>
+                        <AuthProvider>
+                            <SiteSettingsProvider>
+                                <TooltipProvider>
+                                    <Toaster />
+                                    <Sonner />
+                                    <ScrollToTop />
+                                    {children}
+                                    <ConsentBanner />
+                                </TooltipProvider>
+                            </SiteSettingsProvider>
+                        </AuthProvider>
+                    </QueryClientProvider>
+                </LocaleProvider>
+            </I18nextProvider>
         </ErrorBoundary>
     );
 }

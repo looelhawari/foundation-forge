@@ -1,0 +1,21 @@
+{
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "phoneInvalid": "يرجى إدخال رقم هاتف صالح",
+    "minLength": "يجب أن يكون {{min}} أحرف على الأقل",
+    "maxLength": "يجب ألا يزيد عن {{max}} حرف",
+    "nameRequired": "يرجى إدخال اسمك الكامل",
+    "emailRequired": "يرجى إدخال بريدك الإلكتروني",
+    "messageRequired": "يرجى إدخال رسالتك",
+    "subjectRequired": "يرجى إدخال الموضوع"
+  },
+  "messages": {
+    "success": "تم إرسال الرسالة!",
+    "successDescription": "شكراً لتواصلك معنا. سنرد عليك خلال ٢٤ ساعة.",
+    "error": "خطأ",
+    "errorDescription": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+    "loading": "جارٍ الإرسال...",
+    "pleaseWait": "يرجى الانتظار..."
+  }
+}

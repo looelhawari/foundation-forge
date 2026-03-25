@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "tag": "Our Partners",
+    "title": {
+      "prefix": "Constructing",
+      "highlight": "Qatar's Future"
+    },
+    "description": "Trusted by Qatar's leading government ministries, international corporations, and royal families since 2017. Over 57 completed projects demonstrating excellence in infrastructure development."
+  },
+  "categories": {
+    "tag": "Diverse Portfolio",
+    "title": {
+      "prefix": "OUR",
+      "highlight": "CLIENTS"
+    },
+    "description": "From government ministries to royal families, from international corporations to local businesses — we deliver excellence across all sectors.",
+    "noClients": "No clients available at the moment."
+  },
+  "stats": [
+    { "value": 45, "suffix": "+", "label": "MAJOR CLIENTS", "description": "Government & Private" },
+    { "value": 57, "suffix": "+", "label": "COMPLETED PROJECTS", "description": "Since 2017" },
+    { "value": 26, "suffix": "M+", "label": "TOTAL VALUE (QR)", "description": "Project Portfolio" },
+    { "value": 100, "suffix": "%", "label": "SATISFACTION", "description": "Client Trust" }
+  ],
+  "testimonials": {
+    "tag": "What They Say",
+    "title": {
+      "prefix": "CLIENT",
+      "highlight": "TESTIMONIALS"
+    },
+    "noTestimonials": {
+      "title": "No Testimonials Yet",
+      "description": "Be the first to share your experience working with CPC Qatar! Your feedback helps us improve and showcases our commitment to excellence."
+    },
+    "shareExperience": {
+      "title": "Share Your Experience",
+      "description": "Have you worked with CPC Qatar? We'd love to hear about your experience! Your testimonial helps us improve and showcases our commitment to excellence."
+    },
+    "form": {
+      "yourName": "Your Name *",
+      "companyName": "Company Name",
+      "yourPosition": "Your Position",
+      "email": "Email (Optional)",
+      "companyLogo": "Company Logo (Optional)",
+      "uploadLogo": "Upload Logo",
+      "logoHint": "Max 2MB. PNG or JPG recommended.",
+      "rating": "Rating",
+      "yourTestimonial": "Your Testimonial *",
+      "testimonialPlaceholder": "Share your experience working with CPC Qatar... (minimum 20 characters)",
+      "characters": "characters",
+      "cancel": "Cancel",
+      "submit": "Submit Testimonial",
+      "uploading": "Uploading...",
+      "submitting": "Submitting...",
+      "reviewNote": "Your testimonial will be reviewed by our team before being published. Pending reviews expire after 72 hours."
+    }
+  },
+  "whyChoose": {
+    "tag": "Why Choose Us",
+    "title": {
+      "prefix": "TRUSTED",
+      "highlight": "EXCELLENCE"
+    },
+    "features": [
+      {
+        "title": "Government Approved",
+        "description": "C.R. 108122 — Licensed by Qatar authorities — Full compliance"
+      },
+      {
+        "title": "Proven Track Record",
+        "description": "90+ completed projects — 26M+ QR total value — Since 2017"
+      },
+      {
+        "title": "Quality Assurance",
+        "description": "ISO standards — Safety first — Timely completion"
+      },
+      {
+        "title": "Diverse Expertise",
+        "description": "8+ sectors — Government to private — Royal clients"
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "buttons": {
+    "getQuote": "احصل على عرض أسعار",
+    "learnMore": "اعرف المزيد",
+    "viewProjects": "عرض مشاريعنا",
+    "contactUs": "اتصل بنا",
+    "sendMessage": "إرسال رسالة",
+    "sending": "جارٍ الإرسال...",
+    "viewAllProjects": "عرض جميع المشاريع",
+    "readMore": "اقرأ المزيد",
+    "getStarted": "ابدأ الآن",
+    "callNow": "اتصل بنا الآن"
+  },
+  "accessibility": {
+    "skipToContent": "الانتقال إلى المحتوى الرئيسي",
+    "openMenu": "فتح قائمة التنقل",
+    "closeMenu": "إغلاق قائمة التنقل",
+    "mainNavigation": "التنقل الرئيسي",
+    "quickLinks": "روابط سريعة",
+    "services": "الخدمات",
+    "legalDocuments": "المستندات القانونية"
+  },
+  "labels": {
+    "poBox": "ص.ب",
+    "tel": "(هاتف)",
+    "fax": "(فاكس)",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "location": "الموقع",
+    "headOffice": "المكتب الرئيسي"
+  },
+  "actions": {
+    "goToContactPage": "الانتقال إلى صفحة الاتصال",
+    "sendEmail": "أرسل لنا بريداً إلكترونياً",
+    "viewLocation": "عرض موقعنا على خرائط جوجل",
+    "callUs": "اتصل بنا"
+  }
+}

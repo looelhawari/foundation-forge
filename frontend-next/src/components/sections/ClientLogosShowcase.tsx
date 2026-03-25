@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/i18n/client";
 
 const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
 const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
@@ -28,6 +29,10 @@ const clients = [
 
 // Pure CSS infinite scroll — zero main-thread cost
 export function ClientLogosShowcase() {
+    const { t } = useTranslation('home');
+
+    const badges = t('clientLogosShowcase.badges', { returnObjects: true }) as Array<{ number: string; label: string }>;
+
     const logoItems = clients.map((client, index) => (
         <div
             key={index}
@@ -69,7 +74,7 @@ export function ClientLogosShowcase() {
                     className="text-center"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 px-4">
-                        Trusted By <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Industry Leaders</span>
+                        {t('clientLogosShowcase.title.prefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{t('clientLogosShowcase.title.highlight')}</span>
                     </h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -79,7 +84,7 @@ export function ClientLogosShowcase() {
                         className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
-                        Partnering with Qatar's most prestigious organizations
+                        {t('clientLogosShowcase.description')}
                     </p>
                 </motion.div>
             </div>
@@ -114,11 +119,7 @@ export function ClientLogosShowcase() {
                 className="container mx-auto px-4 sm:px-6 mt-12 md:mt-16"
             >
                 <div className="flex justify-center gap-8 sm:gap-12 flex-wrap">
-                    {[
-                        { number: "45+", label: "Major Clients" },
-                        { number: "90+", label: "Projects Delivered" },
-                        { number: "100%", label: "Satisfaction Rate" }
-                    ].map((stat) => (
+                    {badges.map((stat) => (
                         <div
                             key={stat.label}
                             className="text-center"

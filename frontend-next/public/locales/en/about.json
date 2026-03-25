@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "title": "Our Story",
+    "subtitle": "CONSTRUCTING LEGACY SINCE 2017"
+  },
+  "story": {
+    "title": "The Beginning",
+    "subtitle": "SMALL BUT MIGHTY"
+  },
+  "founders": {
+    "chairman": "M.A.M Al-Nasr Chairman & Co-Founder",
+    "cofounder": "H.A.R Mohamed Co-Founder"
+  },
+  "whatIsCPC": {
+    "title": "What is CPC?",
+    "subtitle": "Company Overview",
+    "heading": "Complete Construction Solutions"
+  },
+  "values": {
+    "title": "What Drives Us",
+    "subtitle": "OUR VALUES",
+    "precision": {
+      "title": "PRECISION",
+      "description": "Every project executed with meticulous attention to detail and engineering excellence."
+    },
+    "quality": {
+      "title": "QUALITY",
+      "description": "Uncompromising standards in materials, workmanship, and project delivery."
+    },
+    "innovation": {
+      "title": "INNOVATION",
+      "description": "Leveraging cutting-edge technology and modern construction methodologies."
+    }
+  },
+  "milestones": {
+    "title": "Our Journey",
+    "subtitle": "KEY MILESTONES"
+  },
+  "impact": {
+    "title": "By The Numbers",
+    "subtitle": "OUR IMPACT"
+  }
+}

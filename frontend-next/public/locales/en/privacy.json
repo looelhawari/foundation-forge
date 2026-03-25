@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "title": {
+      "prefix": "PRIVACY",
+      "highlight": "POLICY"
+    },
+    "description": "COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information",
+    "lastUpdated": "Last Updated: December 24, 2025"
+  },
+  "sections": {
+    "aboutWebsite": {
+      "title": "1. ABOUT THIS WEBSITE",
+      "content": "This is a presentation website for COSMO PROJECTS & CONSTRUCTION AND TRADING (\"CPC Qatar\"). The website showcases our completed projects, services, and company information. We collect minimal personal information, only when you choose to contact us."
+    },
+    "whatWeCollect": {
+      "title": "2. WHAT INFORMATION WE COLLECT",
+      "intro": "We only collect information when you voluntarily submit the contact form on our website:",
+      "items": [
+        "Your name",
+        "Email address",
+        "Phone number (optional)",
+        "Company name (optional)",
+        "Your message or inquiry"
+      ],
+      "note": "We do not use cookies, tracking tools, or collect any browsing data. This is a simple presentation website to showcase our construction work."
+    },
+    "howWeUse": {
+      "title": "3. HOW WE USE YOUR INFORMATION",
+      "intro": "We use your contact information only to:",
+      "items": [
+        "Respond to your inquiry or message",
+        "Provide information about our construction services",
+        "Prepare project quotes if requested"
+      ],
+      "note": "That's it. We do not sell, share, or use your information for any other purpose. We do not send marketing emails unless you specifically request updates about our services."
+    },
+    "howWeProtect": {
+      "title": "4. HOW WE PROTECT YOUR INFORMATION",
+      "content": "Your contact information is stored securely and is only accessible to authorized personnel who need it to respond to your inquiry. We do not share your information with third parties."
+    },
+    "yourRights": {
+      "title": "5. YOUR RIGHTS",
+      "intro": "You can request to:",
+      "items": [
+        "See what information we have about you",
+        "Correct any information",
+        "Delete your information"
+      ],
+      "contactNote": "Contact us at {email} or call {phone} for any requests."
+    },
+    "healthSafety": {
+      "title": "6. HEALTH & SAFETY POLICY",
+      "intro": "CPC strives to attain and maintain the highest possible level of safety practices on all CPC projects. CPC aims to achieve this through the implementation of the following:",
+      "policies": [
+        {
+          "title": "1) OPERATIONAL SAFETY",
+          "content": "The Company and its employees are dedicated towards making sure that all operations are monitored for safety and are conducted and executed in the safest manner possible."
+        },
+        {
+          "title": "2) COMPLIANCE",
+          "content": "CPC will at all times comply with all Government Laws, Regulations and Company policies and procedures that have been established."
+        },
+        {
+          "title": "3) SAFETY MEASURES",
+          "content": "Assess potential risks and hazards and develop safety measures to counteract these problems."
+        },
+        {
+          "title": "4) RESPONSE TO EMERGENCIES",
+          "content": "Safety awareness programs, safety drills and exercises must be conducted."
+        },
+        {
+          "title": "5) COMMUNITY AWARENESS & OUTREACH",
+          "content": "Encourage open communication and understanding between CPC and the community, this includes recognizing and responding as appropriate to community concerns about safety issues."
+        }
+      ],
+      "commitment": "This policy needs the commitment and support of each employee and sub-contractors. Management and supervisors at every level are requested to demonstrate dedication to the safety policy by means of informing and creating awareness of the policy to all employees and giving them the responsibility and resources to address safety issues that may be encountered."
+    },
+    "qualityPolicy": {
+      "title": "7. QUALITY POLICY",
+      "intro": "CPC Co. is committed to supplying construction services of consistent quality that conform fully with company and statutory requirements and in meeting our client's documented and implied expectations in terms of technical, budget and time compliance.",
+      "subIntro": "Dedicated to the continual review, development and improvement of all aspects of its business, in particular:",
+      "items": [
+        "The development and improvement of the Company's construction services in line with client's needs and expectations.",
+        "The development of an efficient and effective Quality System and generally accepted best practices in the management of Construction Projects, a system which not only ensures that the construction quality is consistent, but also helps to ensure minimal wastage in all our construction phases.",
+        "The evaluation, training and development of our employees in order to meet the company's objectives.",
+        "The ongoing development of the corporate culture that incorporates constant problem solving and continuous improvement, encouraging all employees to take total pride in, and responsibility for, their work and the development of better working practices.",
+        "Establishing and reviewing quality objectives for all levels that are realistic, achievable and measurable taking into cognizance preventive action for outside influences that could prevent the achievement of the objectives."
+      ],
+      "commitment": "Management will communicate this policy to all employees and staff in such a way that it is properly understood and followed."
+    },
+    "contactUs": {
+      "title": "8. CONTACT US",
+      "intro": "Questions about this policy? Contact us:",
+      "labels": {
+        "address": "Address",
+        "phone": "Phone",
+        "phone2": "Phone 2",
+        "telephone": "Telephone",
+        "fax": "Fax",
+        "email": "Email",
+        "cr": "CR"
+      }
+    }
+  },
+  "consent": {
+    "title": "CONSENT",
+    "content": "This is a simple presentation website. We only collect what you voluntarily submit through our contact form, and we use it solely to respond to your inquiry."
+  }
+}

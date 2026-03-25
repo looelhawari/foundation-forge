@@ -1,0 +1,16 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: {{date}}"
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "lastUpdated": "Last updated: {{date}}"
+  },
+  "consent": {
+    "title": "Your Privacy Matters",
+    "message": "We use your contact information only to respond to your inquiries. By using this website, you agree to our Terms of Use and Privacy Policy.",
+    "button": "I Understand",
+    "closeButton": "Close banner"
+  }
+}

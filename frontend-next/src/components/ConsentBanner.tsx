@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Shield } from 'lucide-react';
 import { Link } from '@/lib/router-compat';
+import { useTranslation } from '@/lib/i18n/client';
 
 const ConsentBanner = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const { t } = useTranslation('legal');
 
     useEffect(() => {
         // Check if user has already accepted
@@ -53,7 +55,7 @@ const ConsentBanner = () => {
                                 <button
                                     onClick={handleClose}
                                     className="absolute top-3 right-3 p-2 rounded-lg hover:bg-primary/10 transition-colors"
-                                    aria-label="Close banner"
+                                    aria-label={t('consent.closeButton')}
                                 >
                                     <X className="w-5 h-5 text-muted-foreground" />
                                 </button>
@@ -70,17 +72,16 @@ const ConsentBanner = () => {
                                         {/* Content */}
                                         <div className="flex-1">
                                             <h3 className="font-display text-lg font-semibold mb-2">
-                                                Your Privacy Matters
+                                                {t('consent.title')}
                                             </h3>
                                             <p className="text-muted-foreground text-sm leading-relaxed">
-                                                We use your contact information only to respond to your inquiries. By using this website,
-                                                you agree to our{' '}
+                                                {t('consent.message').split('{{terms}}')[0]}
                                                 <Link to="/terms" className="text-primary hover:underline font-medium">
-                                                    Terms of Use
+                                                    {t('terms.title')}
                                                 </Link>
-                                                {' '}and{' '}
+                                                {' '}{t('and', { ns: 'common', defaultValue: 'and' })}{' '}
                                                 <Link to="/privacy" className="text-primary hover:underline font-medium">
-                                                    Privacy Policy
+                                                    {t('privacy.title')}
                                                 </Link>
                                                 .
                                             </p>
@@ -92,7 +93,7 @@ const ConsentBanner = () => {
                                                 onClick={handleAccept}
                                                 className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
                                             >
-                                                I Understand
+                                                {t('consent.button')}
                                             </button>
                                         </div>
                                     </div>

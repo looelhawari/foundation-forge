@@ -1,0 +1,61 @@
+{
+  "page": {
+    "tag": "What We Do",
+    "title": {
+      "prefix": "Our",
+      "highlight": "Services"
+    },
+    "description": "CPC Qatar delivers comprehensive road construction and civil engineering services across Qatar. From asphalt paving and road marking to earthworks and infrastructure development — we handle every phase of your road and infrastructure project with excellence."
+  },
+  "services": [
+    {
+      "title": "Asphalt Works",
+      "slug": "asphalt-works",
+      "description": "Professional asphalt pavement construction for highways, streets, and commercial areas across Qatar. Hot mix asphalt, cold mix, surface treatment, and road resurfacing.",
+      "features": ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Road Resurfacing", "Patching & Repairs"]
+    },
+    {
+      "title": "Road Marking & Traffic Signs",
+      "slug": "road-marking",
+      "description": "Thermoplastic and cold paint road marking, traffic signs installation, lane striping, and road safety solutions throughout Qatar.",
+      "features": ["Thermoplastic Marking", "Cold Paint Marking", "Traffic Signs", "Lane Striping", "Safety Barriers"]
+    },
+    {
+      "title": "Earthworks & Grading",
+      "slug": "earthworks",
+      "description": "Complete site preparation including excavation, grading, filling, compaction, and land leveling for construction projects in Doha and across Qatar.",
+      "features": ["Excavation", "Site Clearing", "Grading & Leveling", "Fill & Compaction", "Cut & Fill Operations"]
+    },
+    {
+      "title": "Interlock & Kerbstone",
+      "slug": "interlock-kerbstone",
+      "description": "Precision installation of interlocking block pavers, kerbstones, walkways, driveways, and decorative paving for commercial and public spaces in Qatar.",
+      "features": ["Interlock Paving", "Kerbstone Installation", "Walkway Construction", "Pattern Design", "Finishing Works"]
+    },
+    {
+      "title": "Subgrade & Subbase Works",
+      "slug": "subgrade-subbase",
+      "description": "Foundation layer construction including subgrade preparation, subbase installation, base course works, and material testing for road projects in Qatar.",
+      "features": ["Subgrade Preparation", "Subbase Installation", "Base Course", "Material Testing", "Compaction Control"]
+    },
+    {
+      "title": "Infrastructure Development",
+      "slug": "infrastructure-development",
+      "description": "Complete civil infrastructure services including drainage systems, utilities installation, stormwater management, and public works across Qatar.",
+      "features": ["Drainage Systems", "Utilities Installation", "Stormwater Management", "Curb Construction", "Public Works"]
+    }
+  ],
+  "seo": {
+    "title": "Why Choose CPC Qatar for Road Construction in Qatar?",
+    "paragraphs": [
+      "CPC Qatar (Cosmo Projects & Construction and Trading W.L.L.) is a government-approved road construction and infrastructure contractor based in Doha, Qatar. Since our establishment in 2017, we have delivered over 90 projects for major clients including the Ministry of Education, Ashghal (Public Works Authority), FIFA World Cup Qatar 2022 contractors, Qatar Museums, DHL, and Al Meera.",
+      "Our services cover the full spectrum of road construction — from initial earthworks and site preparation, through subgrade and subbase installation, to asphalt pavement construction, road marking and traffic sign installation, and interlock and kerbstone paving. We operate across all areas of Qatar including Doha, Al Wakrah, Al Khor, Lusail, Al Rayyan, and Al Shahaniya.",
+      "Every project is managed by experienced civil engineers using modern equipment and materials that meet Qatar Construction Standards (QCS). We are committed to timely delivery, safety compliance, and quality assurance on every project."
+    ]
+  },
+  "cta": {
+    "title": "Ready to Start Your Project?",
+    "description": "Contact our team for a free consultation and quote for your road construction or infrastructure project in Qatar.",
+    "button": "Get a Free Quote"
+  }
+}

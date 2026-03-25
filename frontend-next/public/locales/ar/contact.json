@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "title": "تواصل معنا",
+    "subtitle": "اتصل بنا",
+    "description": "هل أنت مستعد لبدء مشروعك القادم؟ تواصل مع فريق الخبراء لدينا للحصول على استشارة وعرض أسعار مجاني."
+  },
+  "form": {
+    "title": "أرسل لنا رسالة",
+    "fields": {
+      "fullName": {
+        "label": "الاسم الكامل *",
+        "placeholder": "اسمك الكامل"
+      },
+      "email": {
+        "label": "البريد الإلكتروني *",
+        "placeholder": "your@email.com"
+      },
+      "phone": {
+        "label": "الهاتف",
+        "placeholder": "+974 XX XXX XXXX"
+      },
+      "company": {
+        "label": "الشركة",
+        "placeholder": "اسم شركتك"
+      },
+      "subject": {
+        "label": "الموضوع",
+        "placeholder": "ما الموضوع؟"
+      },
+      "message": {
+        "label": "الرسالة *",
+        "placeholder": "أخبرنا عن مشروعك..."
+      }
+    },
+    "submit": "إرسال رسالة",
+    "sending": "جارٍ الإرسال..."
+  },
+  "info": {
+    "title": "معلومات الاتصال",
+    "headOffice": "المكتب الرئيسي",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "tel": "(هاتف)",
+    "fax": "(فاكس)",
+    "mapNotConfigured": "الموقع على الخريطة غير متوفر"
+  }
+}

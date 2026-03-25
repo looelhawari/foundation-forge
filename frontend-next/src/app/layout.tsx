@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Bebas_Neue } from "next/font/google";
+import { Inter, Bebas_Neue, Tajawal } from "next/font/google";
 import ClientProviders from "@/components/ClientProviders";
 import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
@@ -20,6 +20,14 @@ const bebasNeue = Bebas_Neue({
     display: "swap",
     weight: "400",
     variable: "--font-bebas-neue",
+    preload: true,
+});
+
+const tajawal = Tajawal({
+    subsets: ["arabic", "latin"],
+    display: "swap",
+    weight: ["300", "400", "500", "700"],
+    variable: "--font-tajawal",
     preload: true,
 });
 
@@ -216,7 +224,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" dir="ltr" suppressHydrationWarning className={`${inter.variable} ${bebasNeue.variable}`}>
+        <html lang="en" dir="ltr" suppressHydrationWarning className={`${inter.variable} ${bebasNeue.variable} ${tajawal.variable}`}>
             <head>
                 {/* Performance — Preconnect & DNS Prefetch (fonts handled by next/font) */}
                 <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />

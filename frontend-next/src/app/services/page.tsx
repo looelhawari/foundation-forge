@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import ServicesPageClient from "./page-client";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 
@@ -127,121 +124,7 @@ export default function ServicesPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
             />
-            <div className="min-h-screen bg-background">
-                <Header />
-                <main>
-                    {/* Hero */}
-                    <section className="pt-32 pb-16 bg-gradient-to-b from-background to-card">
-                        <div className="container mx-auto px-6 max-w-5xl text-center">
-                            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-                                What We Do
-                            </span>
-                            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
-                                Our <span className="text-gradient">Services</span>
-                                <span className="sr-only">
-                                    {" "}— Road Construction, Asphalt Paving &amp; Infrastructure Services in Doha, Qatar
-                                </span>
-                            </h1>
-                            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                                CPC Qatar delivers comprehensive road construction and civil engineering services across Qatar.
-                                From asphalt paving and road marking to earthworks and infrastructure development — we handle
-                                every phase of your road and infrastructure project with excellence.
-                            </p>
-                        </div>
-                    </section>
-
-                    {/* Services Grid */}
-                    <section className="py-16 md:py-24">
-                        <div className="container mx-auto px-6">
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {services.map((service) => (
-                                    <Link
-                                        key={service.slug}
-                                        href={`/services/${service.slug}`}
-                                        className="group block bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
-                                    >
-                                        <div className="aspect-[16/10] overflow-hidden relative">
-                                            <Image
-                                                src={service.image}
-                                                alt={`${service.title} — CPC Qatar road construction service in Doha, Qatar`}
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                        <div className="p-6">
-                                            <h2 className="font-display text-2xl tracking-wide mb-3 group-hover:text-primary transition-colors">
-                                                {service.title}
-                                            </h2>
-                                            <p className="text-muted-foreground mb-4 leading-relaxed">
-                                                {service.description}
-                                            </p>
-                                            <div className="flex flex-wrap gap-2">
-                                                {service.features.map((f) => (
-                                                    <span
-                                                        key={f}
-                                                        className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full"
-                                                    >
-                                                        {f}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* SEO Content Block */}
-                    <section className="py-16 bg-card">
-                        <div className="container mx-auto px-6 max-w-4xl">
-                            <h2 className="font-display text-3xl md:text-4xl tracking-wide mb-8 text-center">
-                                Why Choose CPC Qatar for Road Construction in Qatar?
-                            </h2>
-                            <div className="prose prose-lg prose-invert mx-auto text-muted-foreground leading-relaxed space-y-4">
-                                <p>
-                                    <strong>CPC Qatar (Cosmo Projects &amp; Construction and Trading W.L.L.)</strong> is a government-approved
-                                    road construction and infrastructure contractor based in Doha, Qatar. Since our establishment in 2017,
-                                    we have delivered over 90 projects for major clients including the Ministry of Education, Ashghal (Public Works Authority),
-                                    FIFA World Cup Qatar 2022 contractors, Qatar Museums, DHL, and Al Meera.
-                                </p>
-                                <p>
-                                    Our services cover the full spectrum of road construction — from initial <strong>earthworks and site preparation</strong>,
-                                    through <strong>subgrade and subbase installation</strong>, to <strong>asphalt pavement construction</strong>,
-                                    <strong>road marking and traffic sign installation</strong>, and <strong>interlock and kerbstone paving</strong>.
-                                    We operate across all areas of Qatar including Doha, Al Wakrah, Al Khor, Lusail, Al Rayyan, and Al Shahaniya.
-                                </p>
-                                <p>
-                                    Every project is managed by experienced civil engineers using modern equipment and materials that meet
-                                    Qatar Construction Standards (QCS). We are committed to timely delivery, safety compliance, and
-                                    quality assurance on every project.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* CTA */}
-                    <section className="py-16">
-                        <div className="container mx-auto px-6 text-center">
-                            <h2 className="font-display text-3xl md:text-4xl tracking-wide mb-6">
-                                Ready to Start Your Project?
-                            </h2>
-                            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                                Contact our team for a free consultation and quote for your road construction or infrastructure project in Qatar.
-                            </p>
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center justify-center bg-gradient-gold text-primary-foreground font-semibold h-14 rounded-md px-10 text-lg hover:shadow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
-                            >
-                                Get a Free Quote
-                            </Link>
-                        </div>
-                    </section>
-                </main>
-                <Footer />
-            </div>
+            <ServicesPageClient />
         </>
     );
 }

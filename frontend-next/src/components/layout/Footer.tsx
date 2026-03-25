@@ -4,6 +4,7 @@ import { Link } from "@/lib/router-compat";
 import { Phone, Mail, MapPin, FileText } from "lucide-react";
 import Image from "next/image";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslation } from "@/lib/i18n/client";
 
 const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
@@ -13,6 +14,7 @@ const toTelHref = (phone: string) =>
 
 export const Footer = () => {
   const { settings } = useSiteSettings();
+  const { t } = useTranslation('footer');
 
   return (
     <footer className="bg-secondary border-t border-border">
@@ -24,46 +26,45 @@ export const Footer = () => {
               <Image src={cpcLogo} alt={`${settings.site_name} logo`} width={224} height={112} className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Constructing the nation&apos;s infrastructure with excellence, precision, and over 10 years of trusted expertise.
+              {t('company.tagline')}
             </p>
           </div>
 
           {/* Quick Links */}
-          <nav aria-label="Quick links">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h2>
+          <nav aria-label={t('quickLinks.title')}>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('quickLinks.title')}</h2>
             <ul className="space-y-3">
-              {["Home", "About", "Projects", "Clients", "Contact"].map((item) => (
-                <li key={item}>
+              {[
+                { label: t('quickLinks.home'), path: '/' },
+                { label: t('quickLinks.about'), path: '/about' },
+                { label: t('quickLinks.projects'), path: '/projects' },
+                { label: t('quickLinks.clients'), path: '/clients' },
+                { label: t('quickLinks.contact'), path: '/contact' },
+                { label: t('quickLinks.termsOfUse'), path: '/terms' },
+              ].map((item) => (
+                <li key={item.path}>
                   <Link
-                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    to={item.path}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  to="/terms"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Terms of Use
-                </Link>
-              </li>
             </ul>
           </nav>
 
           {/* Services */}
-          <nav aria-label="Services">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h2>
+          <nav aria-label={t('services.title')}>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('services.title')}</h2>
             <ul className="space-y-3">
               {[
-                { name: "Earthworks & Grading", href: "/services/earthworks" },
-                { name: "Asphalt Paving", href: "/services/asphalt-works" },
-                { name: "Road Marking & Traffic Signs", href: "/services/road-marking" },
-                { name: "Interlock & Kerbstone", href: "/services/interlock-kerbstone" },
-                { name: "Sub-Grade & Sub-Base", href: "/services/subgrade-subbase" },
-                { name: "Infrastructure Development", href: "/services/infrastructure-development" },
+                { name: t('services.earthworks'), href: "/services/earthworks" },
+                { name: t('services.asphalt'), href: "/services/asphalt-works" },
+                { name: t('services.roadMarking'), href: "/services/road-marking" },
+                { name: t('services.interlock'), href: "/services/interlock-kerbstone" },
+                { name: t('services.subgrade'), href: "/services/subgrade-subbase" },
+                { name: t('services.infrastructure'), href: "/services/infrastructure-development" },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
@@ -78,8 +79,8 @@ export const Footer = () => {
           </nav>
 
           {/* Legal Documents */}
-          <nav aria-label="Legal documents">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h2>
+          <nav aria-label={t('legalDocuments.title')}>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('legalDocuments.title')}</h2>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -87,22 +88,22 @@ export const Footer = () => {
                   className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" />
-                  Company Certificates
+                  {t('legalDocuments.certificates')}
                 </Link>
               </li>
               <li>
                 <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Commercial Registration
+                  {t('legalDocuments.commercialRegistration')}
                 </Link>
               </li>
               <li>
                 <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Tax Card
+                  {t('legalDocuments.taxCard')}
                 </Link>
               </li>
               <li>
                 <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Commercial Permit
+                  {t('legalDocuments.commercialPermit')}
                 </Link>
               </li>
             </ul>
@@ -110,7 +111,7 @@ export const Footer = () => {
 
           {/* Contact Info — dynamic from site_settings */}
           <div>
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h2>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('contact.title')}</h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -119,7 +120,7 @@ export const Footer = () => {
                   {settings.po_box && (
                     <>
                       <br />
-                      P.O. Box {settings.po_box}, {settings.public_location}
+                      {t('labels.poBox', { ns: 'common', defaultValue: 'P.O. Box' })} {settings.po_box}, {settings.public_location}
                     </>
                   )}
                 </span>
@@ -187,14 +188,14 @@ export const Footer = () => {
         <div className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} {settings.site_name.toUpperCase()}. All rights reserved.
+              {t('bottom.copyright', { year: new Date().getFullYear(), siteName: settings.site_name.toUpperCase() })}
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Privacy Policy
+                {t('bottom.privacyPolicy')}
               </Link>
               <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Terms of Use
+                {t('bottom.termsOfUse')}
               </Link>
             </div>
           </div>
@@ -207,7 +208,7 @@ export const Footer = () => {
               rel="noopener noreferrer nofollow"
               className="text-muted-foreground/70 hover:text-primary transition-colors text-xs flex items-center gap-2 group"
             >
-              <span>Designed by</span>
+              <span>{t('bottom.designedBy').split('ELITEERA')[0]}</span>
               <span className="font-semibold tracking-wide group-hover:tracking-wider transition-all">
                 ELITEERA
               </span>

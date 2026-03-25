@@ -4,18 +4,22 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { useRef, useState, useEffect, memo } from "react";
 import { AnimatedCounter } from "../animations/MotionGraphics";
 import { stats } from "@/data/projects";
-
-const statsData = [
-  { value: stats.projectsCompleted, suffix: "+", label: "PROJECTS COMPLETED" },
-  { value: stats.yearsExperience, suffix: "+", label: "YEARS EXPERIENCE" },
-  { value: stats.satisfiedClients, suffix: "+", label: "TRUSTED CLIENTS" },
-  { value: 100, suffix: "%", label: "CLIENT SATISFACTION" },
-];
+import { useTranslation } from "@/lib/i18n/client";
 
 export const ParallaxStats = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
+  const { t } = useTranslation('home');
+
+  // Get labels from translations and combine with stat values
+  const statLabels = t('parallaxStats.stats', { returnObjects: true }) as Array<{ label: string; value?: number; suffix?: string }>;
+  const statsData = [
+    { value: stats.projectsCompleted, suffix: "+", label: statLabels[0]?.label || "PROJECTS COMPLETED" },
+    { value: stats.yearsExperience, suffix: "+", label: statLabels[1]?.label || "YEARS EXPERIENCE" },
+    { value: stats.satisfiedClients, suffix: "+", label: statLabels[2]?.label || "TRUSTED CLIENTS" },
+    { value: statLabels[3]?.value || 100, suffix: statLabels[3]?.suffix || "%", label: statLabels[3]?.label || "CLIENT SATISFACTION" },
+  ];
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -57,10 +61,10 @@ export const ParallaxStats = memo(() => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            By The Numbers
+            {t('parallaxStats.tag')}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] px-4">
-            OUR <span className="text-gradient">IMPACT</span>
+            {t('parallaxStats.title.prefix')} <span className="text-gradient">{t('parallaxStats.title.highlight')}</span>
           </h2>
         </motion.div>
 

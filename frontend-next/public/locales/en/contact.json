@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "title": "Get In Touch",
+    "subtitle": "CONTACT US",
+    "description": "Ready to start your next project? Reach out to our team of experts for a consultation and free quote."
+  },
+  "form": {
+    "title": "SEND US A MESSAGE",
+    "fields": {
+      "fullName": {
+        "label": "Full Name *",
+        "placeholder": "Your full name"
+      },
+      "email": {
+        "label": "Email *",
+        "placeholder": "your@email.com"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+974 XX XXX XXXX"
+      },
+      "company": {
+        "label": "Company",
+        "placeholder": "Your company name"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "What is this regarding?"
+      },
+      "message": {
+        "label": "Message *",
+        "placeholder": "Tell us about your project..."
+      }
+    },
+    "submit": "Send Message",
+    "sending": "Sending..."
+  },
+  "info": {
+    "title": "CONTACT INFORMATION",
+    "headOffice": "Head Office",
+    "phone": "Phone",
+    "email": "Email",
+    "tel": "(Tel)",
+    "fax": "(Fax)",
+    "mapNotConfigured": "Map location not configured"
+  }
+}

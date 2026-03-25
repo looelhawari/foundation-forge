@@ -1,0 +1,38 @@
+{
+  "buttons": {
+    "getQuote": "Get a Quote",
+    "learnMore": "Learn More",
+    "viewProjects": "View Our Projects",
+    "contactUs": "Contact Us",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "viewAllProjects": "View All Projects",
+    "readMore": "Read More",
+    "getStarted": "Get Started",
+    "callNow": "Call Us Now"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "mainNavigation": "Main navigation",
+    "quickLinks": "Quick links",
+    "services": "Services",
+    "legalDocuments": "Legal documents"
+  },
+  "labels": {
+    "poBox": "P.O. Box",
+    "tel": "(Tel)",
+    "fax": "(Fax)",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "headOffice": "Head Office"
+  },
+  "actions": {
+    "goToContactPage": "Go to contact page",
+    "sendEmail": "Send us an email",
+    "viewLocation": "View our location on Google Maps",
+    "callUs": "Call us"
+  }
+}

@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
+import { useTranslation } from "@/lib/i18n/client";
 
 // Import project images
 const busParking2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311992/cpc-website/bus_parking_stage_2_.jpg";
@@ -232,7 +233,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
 };
 
 // Origami Folding Client Card
-const OrigamiClientCard = ({ client, index }: any) => {
+const OrigamiClientCard = ({ client, index, hoverText }: any) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
@@ -290,7 +291,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 </h3>
                 <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
                     <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
-                    Hover to see project
+                    {hoverText}
                     <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
                 </p>
             </motion.div>
@@ -349,6 +350,8 @@ const OrigamiClientCard = ({ client, index }: any) => {
 };
 
 export function FeaturedShowcase() {
+    const { t } = useTranslation('home');
+
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
             {/* Subtle grid background */}
@@ -377,13 +380,13 @@ export function FeaturedShowcase() {
                     />
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 px-4">
-                        <span className="text-white">Featured </span>
+                        <span className="text-white">{t('featuredShowcase.title.prefix')} </span>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400">
-                            Excellence
+                            {t('featuredShowcase.title.highlight')}
                         </span>
                     </h2>
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-                        Our most prestigious projects and valued partnerships
+                        {t('featuredShowcase.description')}
                     </p>
                 </motion.div>
 
@@ -396,7 +399,7 @@ export function FeaturedShowcase() {
                         viewport={{ once: true }}
                         className="text-xl sm:text-2xl font-light text-gray-400 mb-8 md:mb-12 tracking-wider"
                     >
-                        TOP <span className="text-white font-bold">5</span> PROJECTS
+                        {t('featuredShowcase.projectsSection.label.prefix')} <span className="text-white font-bold">{t('featuredShowcase.projectsSection.label.number')}</span> {t('featuredShowcase.projectsSection.label.suffix')}
                     </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
@@ -419,12 +422,12 @@ export function FeaturedShowcase() {
                         viewport={{ once: true }}
                         className="text-xl sm:text-2xl font-light text-gray-400 mb-8 md:mb-12 tracking-wider"
                     >
-                        TOP <span className="text-white font-bold">3</span> CLIENTS
+                        {t('featuredShowcase.clientsSection.label.prefix')} <span className="text-white font-bold">{t('featuredShowcase.clientsSection.label.number')}</span> {t('featuredShowcase.clientsSection.label.suffix')}
                     </motion.div>
 
                     <div className="flex justify-center gap-6 sm:gap-8 md:gap-12 flex-wrap">
                         {topClients.map((client, index) => (
-                            <OrigamiClientCard key={client.name} client={client} index={index} />
+                            <OrigamiClientCard key={client.name} client={client} index={index} hoverText={t('featuredShowcase.clientsSection.hoverInstruction')} />
                         ))}
                     </div>
                 </div>

@@ -1,0 +1,39 @@
+{
+  "company": {
+    "tagline": "بناء البنية التحتية للدولة بتميّز ودقة وأكثر من ١٠ سنوات من الخبرة الموثوقة."
+  },
+  "quickLinks": {
+    "title": "روابط سريعة",
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "projects": "المشاريع",
+    "clients": "العملاء",
+    "contact": "اتصل بنا",
+    "termsOfUse": "شروط الاستخدام"
+  },
+  "services": {
+    "title": "الخدمات",
+    "earthworks": "أعمال الحفر والتسوية",
+    "asphalt": "رصف الأسفلت",
+    "roadMarking": "علامات الطرق واللافتات المرورية",
+    "interlock": "رصف الإنترلوك والأرصفة",
+    "subgrade": "أعمال التأسيس والقاعدة",
+    "infrastructure": "تطوير البنية التحتية"
+  },
+  "legalDocuments": {
+    "title": "المستندات القانونية",
+    "certificates": "شهادات الشركة",
+    "commercialRegistration": "السجل التجاري",
+    "taxCard": "البطاقة الضريبية",
+    "commercialPermit": "الترخيص التجاري"
+  },
+  "contact": {
+    "title": "تواصل معنا"
+  },
+  "bottom": {
+    "copyright": "© {{year}} {{siteName}}. جميع الحقوق محفوظة.",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsOfUse": "شروط الاستخدام",
+    "designedBy": "تصميم ELITEERA"
+  }
+}

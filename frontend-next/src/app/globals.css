@@ -343,3 +343,277 @@
   background: hsl(43 96% 56% / 0.3);
   color: hsl(0 0% 98%);
 }
+
+/* ============================================================================
+   RTL (Right-to-Left) Support for Arabic
+   ============================================================================ */
+
+/* Base RTL direction */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Typography adjustments for Arabic */
+[dir="rtl"] body {
+  font-family: var(--font-tajawal), var(--font-inter), sans-serif;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  font-family: var(--font-tajawal), var(--font-inter), sans-serif;
+}
+
+/* Text alignment */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Flex direction reversal */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Margin/Padding flips */
+[dir="rtl"] .ml-auto {
+  margin-left: initial;
+  margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto {
+  margin-right: initial;
+  margin-left: auto;
+}
+
+[dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+[dir="rtl"] .ml-6 { margin-left: 0; margin-right: 1.5rem; }
+[dir="rtl"] .ml-8 { margin-left: 0; margin-right: 2rem; }
+
+[dir="rtl"] .mr-1 { margin-right: 0; margin-left: 0.25rem; }
+[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+[dir="rtl"] .mr-6 { margin-right: 0; margin-left: 1.5rem; }
+[dir="rtl"] .mr-8 { margin-right: 0; margin-left: 2rem; }
+
+[dir="rtl"] .pl-1 { padding-left: 0; padding-right: 0.25rem; }
+[dir="rtl"] .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+[dir="rtl"] .pl-3 { padding-left: 0; padding-right: 0.75rem; }
+[dir="rtl"] .pl-4 { padding-left: 0; padding-right: 1rem; }
+[dir="rtl"] .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+[dir="rtl"] .pl-8 { padding-left: 0; padding-right: 2rem; }
+
+[dir="rtl"] .pr-1 { padding-right: 0; padding-left: 0.25rem; }
+[dir="rtl"] .pr-2 { padding-right: 0; padding-left: 0.5rem; }
+[dir="rtl"] .pr-3 { padding-right: 0; padding-left: 0.75rem; }
+[dir="rtl"] .pr-4 { padding-right: 0; padding-left: 1rem; }
+[dir="rtl"] .pr-6 { padding-right: 0; padding-left: 1.5rem; }
+[dir="rtl"] .pr-8 { padding-right: 0; padding-left: 2rem; }
+
+/* Border radius flips */
+[dir="rtl"] .rounded-l-lg {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+[dir="rtl"] .rounded-r-lg {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+/* Transform origin flips */
+[dir="rtl"] .origin-left {
+  transform-origin: right;
+}
+
+[dir="rtl"] .origin-right {
+  transform-origin: left;
+}
+
+/* Link underline RTL support */
+[dir="rtl"] .link-underline::after {
+  left: auto;
+  right: 0;
+  transform-origin: right;
+}
+
+/* Animation direction flips for RTL */
+[dir="rtl"] .animate-slide-in-right {
+  animation: slide-in-left 0.5s ease-out 2s both;
+}
+
+[dir="rtl"] .animate-slide-in-left {
+  animation: slide-in-right 0.5s ease-out 2s both;
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Marquee RTL - reverse direction */
+[dir="rtl"] .animate-marquee {
+  animation: marquee-rtl 30s linear infinite;
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Grid alignment in RTL */
+[dir="rtl"] .justify-items-start {
+  justify-items: end;
+}
+
+[dir="rtl"] .justify-items-end {
+  justify-items: start;
+}
+
+/* Floating elements */
+[dir="rtl"] .float-left {
+  float: right;
+}
+
+[dir="rtl"] .float-right {
+  float: left;
+}
+
+/* Icons and SVG mirroring for directional elements */
+[dir="rtl"] .icon-flip {
+  transform: scaleX(-1);
+}
+
+/* Form inputs */
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="tel"],
+[dir="rtl"] input[type="search"],
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+/* Number inputs should stay LTR */
+[dir="rtl"] input[type="number"] {
+  text-align: left;
+  direction: ltr;
+}
+
+/* Breadcrumbs separator flip */
+[dir="rtl"] .breadcrumb-separator::before {
+  content: "\\";
+}
+
+/* Specific component adjustments */
+[dir="rtl"] .container {
+  /* Container already responsive, no changes needed */
+}
+
+/* Navigation adjustments */
+[dir="rtl"] nav {
+  direction: rtl;
+}
+
+/* Card spacing in RTL */
+[dir="rtl"] .card {
+  text-align: right;
+}
+
+/* List markers */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Tooltip positioning */
+[dir="rtl"] [data-tooltip]::before {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+/* Modal and dialog positioning */
+[dir="rtl"] .modal-content {
+  text-align: right;
+}
+
+/* Table alignment */
+[dir="rtl"] table {
+  direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+/* Dropdown menus */
+[dir="rtl"] .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+/* Checkbox and radio alignment */
+[dir="rtl"] .checkbox-label,
+[dir="rtl"] .radio-label {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+/* Progress bar direction */
+[dir="rtl"] .progress-bar {
+  transform-origin: right;
+}
+
+/* Sidebar positioning (admin panel) */
+[dir="rtl"] .sidebar {
+  left: auto;
+  right: 0;
+}
+
+/* Notification positioning */
+[dir="rtl"] .notification {
+  left: auto;
+  right: 1rem;
+}
+
+/* Z-index for overlay elements stays the same */
+
+/* Badge positioning */
+[dir="rtl"] .badge-top-right {
+  top: 0;
+  right: auto;
+  left: 0;
+}
+
+/* Image captions */
+[dir="rtl"] figcaption {
+  text-align: right;
+}

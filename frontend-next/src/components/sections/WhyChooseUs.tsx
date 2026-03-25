@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/i18n/client";
+
 const whyChooseBg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312048/cpc-website/real-why-choose-bg.jpg";
 const whyChoose1 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312072/cpc-website/why-choose-1.jpg";
 const whyChoose2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312053/cpc-website/services/expert_team.jpg";
@@ -9,48 +11,21 @@ const whyChoose4 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_a
 const whyChoose5 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312077/cpc-website/why-choose-5.jpg";
 const whyChoose6 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312079/cpc-website/why-choose-6.jpg";
 
-const advantages = [
-    {
-        number: "01",
-        title: "Proven Track Record",
-        description: "Over 57 successfully completed projects with government ministries, international events, and private sector leaders",
-        image: whyChoose1
-    },
-    {
-        number: "02",
-        title: "Expert Team",
-        description: "Highly qualified personnel with specialized expertise in road construction, earthworks, and infrastructure development",
-        image: whyChoose2
-    },
-    {
-        number: "03",
-        title: "Quality Assurance",
-        description: "Rigorous quality control measures ensuring excellence in workmanship and adherence to international standards",
-        image: whyChoose3
-    },
-    {
-        number: "04",
-        title: "Latest Technology",
-        description: "Utilizing cutting-edge equipment and modern construction techniques for efficient project delivery",
-        image: whyChoose4
-    },
-    {
-        number: "05",
-        title: "Timely Completion",
-        description: "Strong project management ensuring on-time delivery without compromising quality or safety standards",
-        image: whyChoose5
-    },
-    {
-        number: "06",
-        title: "Client Satisfaction",
-        description: "Constructing lasting relationships through exceptional performance and exceeding client expectations",
-        image: whyChoose6
-    }
-];
+const advantageImages = [whyChoose1, whyChoose2, whyChoose3, whyChoose4, whyChoose5, whyChoose6];
 
 const BRAND_COLOR = "#f59e0b";
 
 export function WhyChooseUs() {
+    const { t } = useTranslation('home');
+
+    const advantagesData = t('whyChooseUs.advantages', { returnObjects: true });
+    const advantages = Array.isArray(advantagesData)
+        ? (advantagesData as Array<{number: string; title: string; description: string}>).map((adv, i) => ({
+            ...adv,
+            image: advantageImages[i]
+        }))
+        : [];
+
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
             {/* Background Image — hidden on mobile to save bandwidth */}
@@ -76,7 +51,7 @@ export function WhyChooseUs() {
                     className="text-center mb-12 md:mb-20"
                 >
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
-                        Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">CPC Qatar</span>
+                        {t('whyChooseUs.title.prefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{t('whyChooseUs.title.highlight')}</span>
                     </h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -86,7 +61,7 @@ export function WhyChooseUs() {
                         className="h-1 w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mb-8"
                     />
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-                        Six compelling reasons that set us apart in Qatar's construction industry
+                        {t('whyChooseUs.description')}
                     </p>
                 </motion.div>
 

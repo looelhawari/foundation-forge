@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
     darkMode: ["class"],
@@ -66,6 +67,7 @@ export default {
             fontFamily: {
                 display: ['var(--font-bebas-neue)', 'Bebas Neue', 'sans-serif'],
                 body: ['var(--font-inter)', 'Inter', 'sans-serif'],
+                arabic: ['var(--font-tajawal)', 'Tajawal', 'sans-serif'],
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -128,5 +130,59 @@ export default {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        // RTL Support Plugin
+        plugin(function ({ addUtilities }) {
+            addUtilities({
+                '.rtl-flip': {
+                    '[dir="rtl"] &': {
+                        transform: 'scaleX(-1)',
+                    },
+                },
+                '.ltr-only': {
+                    '[dir="rtl"] &': {
+                        display: 'none',
+                    },
+                },
+                '.rtl-only': {
+                    '[dir="ltr"] &': {
+                        display: 'none',
+                    },
+                },
+                '.start-0': {
+                    '[dir="ltr"] &': {
+                        left: '0',
+                    },
+                    '[dir="rtl"] &': {
+                        right: '0',
+                    },
+                },
+                '.end-0': {
+                    '[dir="ltr"] &': {
+                        right: '0',
+                    },
+                    '[dir="rtl"] &': {
+                        left: '0',
+                    },
+                },
+                '.ms-auto': {
+                    '[dir="ltr"] &': {
+                        marginLeft: 'auto',
+                    },
+                    '[dir="rtl"] &': {
+                        marginRight: 'auto',
+                    },
+                },
+                '.me-auto': {
+                    '[dir="ltr"] &': {
+                        marginRight: 'auto',
+                    },
+                    '[dir="rtl"] &': {
+                        marginLeft: 'auto',
+                    },
+                },
+            });
+        }),
+    ],
 } satisfies Config;

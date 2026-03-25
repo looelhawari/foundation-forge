@@ -1,13 +1,11 @@
 "use client";
 
+import { useTranslation } from "@/lib/i18n/client";
+
 export const ServicesMarquee = () => {
-  const services = [
-    "HIGHWAY CONSTRUCTION",
-    "STREET DEVELOPMENT",
-    "INFRASTRUCTURE",
-    "BRIDGE CONSTRUCTION",
-    "ROAD MAINTENANCE",
-  ];
+  const { t } = useTranslation('home');
+
+  const services = t('servicesMarquee.services', { returnObjects: true }) as string[];
 
   const serviceItems = [...services, ...services].map((service, index) => (
     <span
@@ -42,12 +40,12 @@ export const ServicesMarquee = () => {
           <span
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4"
           >
-            What We Do
+            {t('servicesMarquee.tag')}
           </span>
           <p
             className="font-display text-3xl md:text-4xl tracking-[0.2em]"
           >
-            OUR <span className="text-gradient">EXPERTISE</span>
+            {t('servicesMarquee.title.prefix')} <span className="text-gradient">{t('servicesMarquee.title.highlight')}</span>
           </p>
         </div>
       </div>

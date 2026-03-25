@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "tag": "Legal Documents",
+    "title": {
+      "prefix": "Company",
+      "highlight": "Certificates"
+    },
+    "description": "Access our official company documents and certifications. All documents are verified and up-to-date, demonstrating our commitment to transparency and compliance."
+  },
+  "certificates": [
+    {
+      "title": "Commercial Registration",
+      "description": "Official commercial registration certificate valid until December 2029",
+      "validUntil": "December 2029"
+    },
+    {
+      "title": "Computer Card",
+      "description": "Company computer card registration certificate valid until 2028",
+      "validUntil": "2028"
+    },
+    {
+      "title": "Tax Card",
+      "description": "Official tax registration card from Qatar Tax Authority",
+      "validUntil": "Active"
+    },
+    {
+      "title": "Commercial Permit",
+      "description": "Commercial permit certificate valid until October 2029",
+      "validUntil": "October 2029"
+    }
+  ],
+  "actions": {
+    "viewDocument": "View Document",
+    "validUntil": "Valid until:"
+  },
+  "trust": {
+    "title": "Committed to Transparency",
+    "description": "At CPC Qatar, we believe in complete transparency. All our business operations are fully licensed and compliant with Qatar's regulatory requirements. These documents verify our legitimacy and commitment to operating with integrity."
+  },
+  "stats": [
+    { "value": "10+", "label": "Years in Business" },
+    { "value": "100+", "label": "Projects Completed" },
+    { "value": "4", "label": "Active Certifications" },
+    { "value": "100%", "label": "Compliance Rate" }
+  ]
+}

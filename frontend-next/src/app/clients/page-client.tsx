@@ -45,6 +45,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useTranslation } from "@/lib/i18n/client";
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 import SEOHead from "@/components/SEOHead";
 const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
@@ -207,6 +208,7 @@ export default function Clients() {
 }
 
 function HeroSection() {
+  const { t } = useTranslation('clients');
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
@@ -239,7 +241,7 @@ function HeroSection() {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
           >
-            Trusted Partnerships
+            {t('hero.tag')}
           </motion.span>
 
           {/* SEO H1 — screen-reader + Googlebot visible, hidden visually */}
@@ -256,7 +258,7 @@ function HeroSection() {
               }}
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
-              CONSTRUCTING
+              {t('hero.title.prefix').toUpperCase()}
             </motion.h2>
           </div>
           <div className="overflow-hidden">
@@ -270,7 +272,7 @@ function HeroSection() {
               }}
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
             >
-              QATAR'S FUTURE
+              {t('hero.title.highlight').toUpperCase()}
             </motion.h2>
           </div>
 
@@ -280,9 +282,7 @@ function HeroSection() {
             transition={{ delay: 1 }}
             className="mt-12 text-xl text-muted-foreground max-w-2xl"
           >
-            Trusted by Qatar's leading government ministries, international
-            corporations, and royal families since 2017. Over 57 completed
-            projects demonstrating excellence in infrastructure development.
+            {t('hero.description')}
           </motion.p>
         </motion.div>
       </div>
@@ -291,6 +291,7 @@ function HeroSection() {
 }
 
 function StatsBanner() {
+  const { t } = useTranslation('clients');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -299,6 +300,14 @@ function StatsBanner() {
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+
+  const statsData = t('stats', { returnObjects: true });
+  const stats = Array.isArray(statsData) ? statsData as Array<{
+    value: number;
+    suffix: string;
+    label: string;
+    description: string;
+  }> : [];
 
   return (
     <motion.section
@@ -310,32 +319,7 @@ function StatsBanner() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {[
-            {
-              value: 45,
-              suffix: "+",
-              label: "MAJOR CLIENTS",
-              description: "Government & Private",
-            },
-            {
-              value: 57,
-              suffix: "+",
-              label: "COMPLETED PROJECTS",
-              description: "Since 2017",
-            },
-            {
-              value: 26,
-              suffix: "M+",
-              label: "TOTAL VALUE (QR)",
-              description: "Project Portfolio",
-            },
-            {
-              value: 100,
-              suffix: "%",
-              label: "SATISFACTION",
-              description: "Client Trust",
-            },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -366,6 +350,7 @@ function StatsBanner() {
 }
 
 function ClientCategoriesSection() {
+  const { t } = useTranslation('clients');
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [clientCategories, setClientCategories] = useState<ClientCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -437,7 +422,7 @@ function ClientCategoriesSection() {
     return (
       <section className="py-32 md:py-48 relative overflow-hidden">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-muted-foreground">No clients available at the moment.</p>
+          <p className="text-muted-foreground">{t('categories.noClients')}</p>
         </div>
       </section>
     );
@@ -455,7 +440,7 @@ function ClientCategoriesSection() {
           className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Diverse Portfolio
+            {t('categories.tag')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -465,7 +450,7 @@ function ClientCategoriesSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              OUR <span className="text-gradient">CLIENTS</span>
+              {t('categories.title.prefix')} <span className="text-gradient">{t('categories.title.highlight')}</span>
             </motion.h2>
           </div>
           <motion.p
@@ -475,9 +460,7 @@ function ClientCategoriesSection() {
             transition={{ delay: 0.3 }}
             className="mt-8 text-lg text-muted-foreground max-w-3xl mx-auto"
           >
-            From government ministries to royal families, from international
-            corporations to local businesseswe deliver excellence across all
-            sectors.
+            {t('categories.description')}
           </motion.p>
         </motion.div>
 
@@ -597,6 +580,7 @@ function ClientCategoriesSection() {
 }
 
 function TestimonialsSection() {
+  const { t } = useTranslation('clients');
   const [activeIndex, setActiveIndex] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -685,7 +669,7 @@ function TestimonialsSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              CLIENT <span className="text-gradient">TESTIMONIALS</span>
+              {t('testimonials.title.prefix')} <span className="text-gradient">{t('testimonials.title.highlight')}</span>
             </motion.h2>
           </div>
         </motion.div>
@@ -703,12 +687,10 @@ function TestimonialsSection() {
             >
               <div className="text-6xl mb-6">💬</div>
               <h3 className="font-display text-2xl mb-4">
-                No Testimonials Yet
+                {t('testimonials.noTestimonials.title')}
               </h3>
               <p className="text-muted-foreground mb-8">
-                Be the first to share your experience working with CPC Qatar!
-                Your feedback helps us improve and showcases our commitment to
-                excellence.
+                {t('testimonials.noTestimonials.description')}
               </p>
               <Button
                 onClick={() => setShowSubmitForm(true)}
@@ -825,12 +807,10 @@ function TestimonialsSection() {
           className="mt-24 max-w-2xl mx-auto text-center"
         >
           <h3 className="font-display text-2xl md:text-3xl mb-4">
-            Share Your Experience
+            {t('testimonials.shareExperience.title')}
           </h3>
           <p className="text-muted-foreground mb-8">
-            Have you worked with CPC Qatar? We'd love to hear about your
-            experience! Your testimonial helps us improve and showcases our
-            commitment to excellence.
+            {t('testimonials.shareExperience.description')}
           </p>
 
           <AnimatePresence mode="wait">
@@ -870,6 +850,7 @@ function TestimonialsSection() {
 }
 
 function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
+  const { t } = useTranslation('clients');
   const [formData, setFormData] = useState<TestimonialFormData>({
     client_name: "",
     company_name: "",
@@ -1126,29 +1107,13 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
 }
 
 function WhyChooseSection() {
-  const features = [
-    {
-      title: "Government Approved",
-      description:
-        "C.R. 108122  Licensed by Qatar authorities  Full compliance",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Proven Track Record",
-      description: "90+ completed projects  26M+ QR total value  Since 2017",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Quality Assurance",
-      description: "ISO standards  Safety first  Timely completion",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Diverse Expertise",
-      description: "8+ sectors  Government to private  Royal clients",
-      icon: CheckCircle2,
-    },
-  ];
+  const { t } = useTranslation('clients');
+
+  const featuresData = t('whyChoose.features', { returnObjects: true });
+  const features = Array.isArray(featuresData) ? featuresData as Array<{
+    title: string;
+    description: string;
+  }> : [];
 
   return (
     <section className="py-32 md:py-48 relative overflow-hidden">
@@ -1162,7 +1127,7 @@ function WhyChooseSection() {
           className="text-center mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Why Choose Us
+            {t('whyChoose.tag')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -1172,14 +1137,13 @@ function WhyChooseSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              TRUSTED <span className="text-gradient">EXCELLENCE</span>
+              {t('whyChoose.title.prefix')} <span className="text-gradient">{t('whyChoose.title.highlight')}</span>
             </motion.h2>
           </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {features.map((feature, index) => {
-            const Icon = feature.icon;
             return (
               <motion.div
                 key={index}
@@ -1200,7 +1164,7 @@ function WhyChooseSection() {
                       transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
                       className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center mb-6"
                     >
-                      <Icon className="w-7 h-7 text-primary" />
+                      <CheckCircle2 className="w-7 h-7 text-primary" />
                     </motion.div>
                     <h3 className="font-display text-2xl tracking-wide mb-3">
                       {feature.title}

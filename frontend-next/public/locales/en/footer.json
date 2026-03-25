@@ -1,0 +1,39 @@
+{
+  "company": {
+    "tagline": "Constructing the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise."
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "clients": "Clients",
+    "contact": "Contact",
+    "termsOfUse": "Terms of Use"
+  },
+  "services": {
+    "title": "Services",
+    "earthworks": "Earthworks & Grading",
+    "asphalt": "Asphalt Paving",
+    "roadMarking": "Road Marking & Traffic Signs",
+    "interlock": "Interlock & Kerbstone",
+    "subgrade": "Sub-Grade & Sub-Base",
+    "infrastructure": "Infrastructure Development"
+  },
+  "legalDocuments": {
+    "title": "Legal Documents",
+    "certificates": "Company Certificates",
+    "commercialRegistration": "Commercial Registration",
+    "taxCard": "Tax Card",
+    "commercialPermit": "Commercial Permit"
+  },
+  "contact": {
+    "title": "Contact Us"
+  },
+  "bottom": {
+    "copyright": "© {{year}} {{siteName}}. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "designedBy": "Designed by ELITEERA"
+  }
+}

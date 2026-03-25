@@ -1,0 +1,21 @@
+{
+  "validation": {
+    "required": "This field is required",
+    "emailInvalid": "Please enter a valid email address",
+    "phoneInvalid": "Please enter a valid phone number",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be no more than {{max}} characters",
+    "nameRequired": "Please enter your full name",
+    "emailRequired": "Please enter your email address",
+    "messageRequired": "Please enter your message",
+    "subjectRequired": "Please enter a subject"
+  },
+  "messages": {
+    "success": "Message Sent!",
+    "successDescription": "Thank you for contacting us. We'll get back to you within 24 hours.",
+    "error": "Error",
+    "errorDescription": "Failed to send message. Please try again.",
+    "loading": "Sending...",
+    "pleaseWait": "Please want..."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "logo": {
+    "alt": "CPC Qatar - Cosmo Projects & Construction logo"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "clients": "Clients",
+    "contact": "Contact"
+  },
+  "cta": {
+    "getQuote": "Get a Quote",
+    "getInTouch": "Get in Touch"
+  }
+}

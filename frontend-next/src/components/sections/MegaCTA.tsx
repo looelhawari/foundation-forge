@@ -4,11 +4,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "@/lib/router-compat";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslation } from "@/lib/i18n/client";
 
 /** Strip non-digit characters except leading + for tel: links */
 const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const MegaCTA = () => {
+  const { t } = useTranslation('home');
   const { settings } = useSiteSettings();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -44,7 +46,7 @@ export const MegaCTA = () => {
           viewport={{ once: true }}
           className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
         >
-          Ready to Construct?
+          {t('megaCTA.tag')}
         </motion.span>
 
         {/* Main headline */}
@@ -57,7 +59,7 @@ export const MegaCTA = () => {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              LET&apos;S CREATE
+              {t('megaCTA.headline.line1')}
             </motion.span>
           </span>
           <span className="block overflow-hidden">
@@ -68,7 +70,7 @@ export const MegaCTA = () => {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             >
-              SOMETHING
+              {t('megaCTA.headline.line2')}
             </motion.span>
           </span>
           <span className="block overflow-hidden">
@@ -79,7 +81,7 @@ export const MegaCTA = () => {
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             >
-              EXTRAORDINARY
+              {t('megaCTA.headline.line3')}
             </motion.span>
           </span>
         </h2>
@@ -129,19 +131,19 @@ export const MegaCTA = () => {
           className="mt-16 sm:mt-20 md:mt-24 flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 text-sm text-muted-foreground"
         >
           <div>
-            <span className="block text-xs tracking-widest uppercase mb-2">Email</span>
+            <span className="block text-xs tracking-widest uppercase mb-2">{t('megaCTA.contactLabels.email')}</span>
             <a href={`mailto:${settings.contact_email}`} className="hover:text-primary transition-colors">
               {settings.contact_email}
             </a>
           </div>
           <div>
-            <span className="block text-xs tracking-widest uppercase mb-2">Phone</span>
+            <span className="block text-xs tracking-widest uppercase mb-2">{t('megaCTA.contactLabels.phone')}</span>
             <a href={toTelHref(settings.contact_phone)} className="hover:text-primary transition-colors">
               {settings.contact_phone}
             </a>
           </div>
           <div>
-            <span className="block text-xs tracking-widest uppercase mb-2">Location</span>
+            <span className="block text-xs tracking-widest uppercase mb-2">{t('megaCTA.contactLabels.location')}</span>
             <span>{settings.public_location}</span>
           </div>
         </motion.div>

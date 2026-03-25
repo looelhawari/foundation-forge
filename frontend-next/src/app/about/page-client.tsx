@@ -408,7 +408,13 @@ const WhatIsCPCSection = () => {
   );
 };
 
-const ValuesSection = ({ values }: { values: typeof import("lucide-react") extends { Target: infer T } ? { icon: T; title: string; description: string }[] : never }) => {
+interface ValueItem {
+  icon: React.ComponentType<any>;
+  title: string;
+  description: string;
+}
+
+const ValuesSection = ({ values }: { values: ValueItem[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

@@ -1,0 +1,40 @@
+{
+  "website": {
+    "name": "CPC Qatar",
+    "alternateName": ["Cosmo Projects & Construction", "كوزمو للمشاريع والإنشاءات"],
+    "description": "Road construction & infrastructure company in Doha, Qatar. Asphalt paving, road marking, earthworks since 2017."
+  },
+  "organization": {
+    "name": "CPC Qatar",
+    "legalName": "Cosmo Projects & Construction and Trading W.L.L.",
+    "description": "Leading road construction and infrastructure development company in Qatar, specializing in asphalt paving, road marking, earthworks, and complete civil engineering solutions.",
+    "slogan": "Constructing the nation's infrastructure with excellence"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "clients": "Clients",
+    "contact": "Contact",
+    "certificates": "Certificates"
+  },
+  "faq": [
+    {
+      "question": "What construction services does CPC Qatar offer?",
+      "answer": "CPC Qatar offers asphalt pavement construction, road marking and traffic signs, earthworks and grading, interlock block paving, subgrade and subbase works, and complete infrastructure development across Qatar."
+    },
+    {
+      "question": "Where is CPC Qatar located?",
+      "answer": "CPC Qatar is headquartered in Doha, Qatar, and serves all areas including Lusail, Al Wakrah, Al Khor, Al Rayyan, and throughout the State of Qatar."
+    },
+    {
+      "question": "How many projects has CPC Qatar completed?",
+      "answer": "CPC Qatar has successfully completed over 90 construction and infrastructure projects across Qatar since its establishment in 2017, serving both government and private sector clients."
+    },
+    {
+      "question": "Does CPC Qatar handle government projects?",
+      "answer": "Yes, CPC Qatar has extensive experience working on government infrastructure projects including road construction, highway development, and public facilities across Qatar. The company holds all necessary certifications and approvals for government contracting."
+    }
+  ]
+}

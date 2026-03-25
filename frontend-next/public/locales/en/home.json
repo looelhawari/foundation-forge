@@ -1,0 +1,351 @@
+{
+  "cinematicHero": {
+    "tagline": "SINCE 2017 — DOHA, QATAR",
+    "headline": {
+      "line1": "CONSTRUCTING THE",
+      "line2": "ROADS",
+      "line3": "OF TOMORROW"
+    },
+    "seoText": "CPC Qatar, Road Construction & Infrastructure Company in Doha, Qatar. Asphalt Paving, Earthworks & Civil Engineering since 2017.",
+    "stats": [
+      {
+        "value": 90,
+        "suffix": "+",
+        "label": "Projects Delivered"
+      },
+      {
+        "value": 10,
+        "suffix": "+",
+        "label": "Years of Excellence"
+      },
+      {
+        "value": 57,
+        "suffix": "+",
+        "label": "Major Clients"
+      }
+    ],
+    "cta": {
+      "primary": "Explore Our Services",
+      "secondary": "View Projects"
+    },
+    "scroll": "Scroll"
+  },
+  "companyIntro": {
+    "title": "WHO WE ARE",
+    "subtitle": "Construction Excellence",
+    "description": "Established in 2017, we've completed over 57 projects across Doha and beyond, serving government ministries, private developers, and international clients",
+    "mission": {
+      "title": "Mission",
+      "content": "To sustain the high level of qualified personnel and construct a Professional team committed to serve our clients. Our pledge is to establish lasting relationships with our customers by exceeding their Expectations and gaining their trust, through exceptional Performance by every member of the construction team."
+    },
+    "objectives": {
+      "title": "Objectives",
+      "content": "To be one of the leading firms in the state of Qatar in the field of road Construction. CPC will do the best to offer excellent services by providing high quality of work and applying the latest available technology for the industry."
+    },
+    "overview": {
+      "title": "Overview",
+      "content": "CPC QATAR established to accept new challenges in Earthworks field especially Construction of Asphalt Pavements and Road Marking. CPC QATAR has proved its capacity to undertake projects in its related fields due to excellence in workmanship, professionalism and timely completion. Guided by able and experienced management, coupled by able and specialized staff in each of its divisions."
+    },
+    "stats": [
+      {
+        "value": 57,
+        "suffix": "+",
+        "label": "Projects"
+      },
+      {
+        "value": 8,
+        "suffix": "+",
+        "label": "Years"
+      },
+      {
+        "value": 26,
+        "suffix": "M+",
+        "label": ""
+      }
+    ],
+    "responsibilitiesTitle": "Project Responsibilities",
+    "responsibilities": [
+      "Project Planning",
+      "Construction Management",
+      "Engineering Supervision",
+      "Quality Assurance",
+      "Safety Inspection",
+      "Project Cost Control"
+    ]
+  },
+  "servicesMarquee": {
+    "tag": "What We Do",
+    "title": {
+      "prefix": "OUR",
+      "highlight": "EXPERTISE"
+    },
+    "services": [
+      "HIGHWAY CONSTRUCTION",
+      "STREET DEVELOPMENT",
+      "INFRASTRUCTURE",
+      "BRIDGE CONSTRUCTION",
+      "ROAD MAINTENANCE"
+    ]
+  },
+  "whyChooseUs": {
+    "title": {
+      "prefix": "Why Choose",
+      "highlight": "CPC Qatar"
+    },
+    "description": "Six compelling reasons that set us apart in Qatar's construction industry",
+    "advantages": [
+      {
+        "number": "01",
+        "title": "Proven Track Record",
+        "description": "Over 57 successfully completed projects with government ministries, international events, and private sector leaders"
+      },
+      {
+        "number": "02",
+        "title": "Expert Team",
+        "description": "Highly qualified personnel with specialized expertise in road construction, earthworks, and infrastructure development"
+      },
+      {
+        "number": "03",
+        "title": "Quality Assurance",
+        "description": "Rigorous quality control measures ensuring excellence in workmanship and adherence to international standards"
+      },
+      {
+        "number": "04",
+        "title": "Latest Technology",
+        "description": "Utilizing cutting-edge equipment and modern construction techniques for efficient project delivery"
+      },
+      {
+        "number": "05",
+        "title": "Timely Completion",
+        "description": "Strong project management ensuring on-time delivery without compromising quality or safety standards"
+      },
+      {
+        "number": "06",
+        "title": "Client Satisfaction",
+        "description": "Constructing lasting relationships through exceptional performance and exceeding client expectations"
+      }
+    ]
+  },
+  "processTimeline": {
+    "title": {
+      "prefix": "Our",
+      "highlight": "Process"
+    },
+    "description": "From consultation to completion - Our proven 6-step methodology",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Initial Consultation",
+        "description": "Understanding your project requirements, site conditions, and objectives through detailed discussions",
+        "tasks": [
+          "Site Assessment",
+          "Requirements Analysis",
+          "Budget Discussion",
+          "Timeline Planning"
+        ]
+      },
+      {
+        "step": "02",
+        "title": "Planning & Design",
+        "description": "Developing comprehensive project plans with technical specifications and resource allocation",
+        "tasks": [
+          "Technical Design",
+          "Material Selection",
+          "Resource Planning",
+          "Risk Assessment"
+        ]
+      },
+      {
+        "step": "03",
+        "title": "Approval & Permits",
+        "description": "Securing necessary approvals and permits from relevant authorities",
+        "tasks": [
+          "Documentation",
+          "Authority Coordination",
+          "Permit Acquisition",
+          "Compliance Check"
+        ]
+      },
+      {
+        "step": "04",
+        "title": "Mobilization",
+        "description": "Deploying equipment, materials, and skilled workforce to the project site",
+        "tasks": [
+          "Site Preparation",
+          "Equipment Deployment",
+          "Team Assignment",
+          "Safety Setup"
+        ]
+      },
+      {
+        "step": "05",
+        "title": "Execution",
+        "description": "Implementing the project plan with continuous monitoring and quality control",
+        "tasks": [
+          "Construction Work",
+          "Quality Testing",
+          "Progress Monitoring",
+          "Safety Inspection"
+        ]
+      },
+      {
+        "step": "06",
+        "title": "Completion & Handover",
+        "description": "Final inspection, documentation, and project handover to client",
+        "tasks": [
+          "Final Inspection",
+          "Documentation",
+          "Client Training",
+          "Warranty Activation"
+        ]
+      }
+    ]
+  },
+  "contactCTA": {
+    "tag": "Start Your Project",
+    "headline": {
+      "line1": "LET'S CONSTRUCT",
+      "highlight": "TOGETHER"
+    },
+    "description": "Ready to start your next infrastructure project? Our team of experts is here to help you bring your vision to life with precision and excellence.",
+    "buttons": {
+      "primary": "Get a Free Quote",
+      "secondary": "Call Us Now"
+    }
+  },
+  "parallaxStats": {
+    "tag": "By The Numbers",
+    "title": {
+      "prefix": "OUR",
+      "highlight": "IMPACT"
+    },
+    "stats": [
+      {
+        "label": "PROJECTS COMPLETED"
+      },
+      {
+        "label": "YEARS EXPERIENCE"
+      },
+      {
+        "label": "TRUSTED CLIENTS"
+      },
+      {
+        "value": 100,
+        "suffix": "%",
+        "label": "CLIENT SATISFACTION"
+      }
+    ]
+  },
+  "qualityAndCertifications": {
+    "watermark": "LICENSED",
+    "title": {
+      "prefix": "Legal Documents &",
+      "highlight": "Registration"
+    },
+    "description": "Fully licensed and registered company with all required government approvals and permits",
+    "certifications": [
+      {
+        "title": "CR 108122",
+        "subtitle": "Commercial Registration",
+        "description": "Ministry of Commerce - Valid until 08/12/2029 - Est. 11/12/2017"
+      },
+      {
+        "title": "14-1191-01",
+        "subtitle": "Establishment Card",
+        "description": "Ministry of Interior - Valid until 13/10/2028"
+      },
+      {
+        "title": "TIN 5000716308",
+        "subtitle": "Tax Registration Card",
+        "description": "General Tax Authority - Registered 11/12/2017"
+      },
+      {
+        "title": "License 111698",
+        "subtitle": "Commercial License",
+        "description": "Trade License - Valid until 13/10/2029"
+      }
+    ],
+    "complianceTitle": {
+      "prefix": "Our",
+      "highlight": "Compliance"
+    },
+    "standards": [
+      "Ministry of Commerce & Industry Registration",
+      "Ministry of Interior Establishment Approval",
+      "General Tax Authority Registered",
+      "Licensed for Construction & General Contracting (Activity 4100001)",
+      "Authorized for Roads & Pavements Construction (Activity 4210100)",
+      "Qatar Chamber of Commerce Member"
+    ],
+    "trustStatement": {
+      "highlight": "Fully Licensed",
+      "text": "& Government Approved",
+      "subtitle": "All legal documents verified and up to date"
+    }
+  },
+  "featuredShowcase": {
+    "title": {
+      "prefix": "Featured",
+      "highlight": "Excellence"
+    },
+    "description": "Our most prestigious projects and valued partnerships",
+    "projectsSection": {
+      "label": {
+        "prefix": "TOP",
+        "number": "5",
+        "suffix": "PROJECTS"
+      }
+    },
+    "clientsSection": {
+      "label": {
+        "prefix": "TOP",
+        "number": "3",
+        "suffix": "CLIENTS"
+      },
+      "hoverInstruction": "Hover to see project"
+    }
+  },
+  "clientLogosShowcase": {
+    "title": {
+      "prefix": "Trusted By",
+      "highlight": "Industry Leaders"
+    },
+    "description": "Partnering with Qatar's most prestigious organizations",
+    "badges": [
+      {
+        "number": "45+",
+        "label": "Major Clients"
+      },
+      {
+        "number": "90+",
+        "label": "Projects Delivered"
+      },
+      {
+        "number": "100%",
+        "label": "Satisfaction Rate"
+      }
+    ]
+  },
+  "immersiveTestimonials": {
+    "tag": "What They Say",
+    "title": {
+      "prefix": "CLIENT",
+      "highlight": "TESTIMONIALS"
+    },
+    "emptyState": "No testimonials available",
+    "loading": "Loading"
+  },
+  "megaCTA": {
+    "tag": "Ready to Construct?",
+    "headline": {
+      "line1": "LET'S CREATE",
+      "line2": "SOMETHING",
+      "line3": "EXTRAORDINARY"
+    },
+    "contactLabels": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    }
+  }
+}

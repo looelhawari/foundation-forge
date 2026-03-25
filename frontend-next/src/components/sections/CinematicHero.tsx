@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, memo, useState, useEffect } from "react";
+import { useTranslation } from "@/lib/i18n/client";
+
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 const heroImageMobile = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto,w_828/v1772312015/cpc-website/hero-construction.jpg";
 const flyoverVideo = "https://res.cloudinary.com/dhxlvvzih/video/upload/q_auto/v1772312001/cpc-website/cpc.mp4";
@@ -52,6 +54,11 @@ export const CinematicHero = memo(() => {
   const [ready, setReady] = useState(false);
   const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
   const [showVideo, setShowVideo] = useState(false);
+  const { t } = useTranslation('home');
+
+  // Guard for array translations
+  const statsData = t('cinematicHero.stats', { returnObjects: true });
+  const stats = Array.isArray(statsData) ? statsData as Array<{value: number; suffix: string; label: string}> : [];
 
   useEffect(() => {
     const w = window.innerWidth;
@@ -140,48 +147,44 @@ export const CinematicHero = memo(() => {
               <motion.p className="text-primary/80 text-xs md:text-sm tracking-[0.6em] uppercase mb-6"
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.7, ease }}>
-                SINCE 2017 — DOHA, QATAR
+                {t('cinematicHero.tagline')}
               </motion.p>
 
               {/* Headline — always renders text for SSR/Googlebot; animates after hydration */}
               <h1 className="font-display text-[clamp(2.5rem,10vw,7rem)] leading-[0.88] tracking-tight">
                 {ready && !isMobile ? (
                   <>
-                    <SplitReveal text="CONSTRUCTING THE" delay={0.5} />
+                    <SplitReveal text={t('cinematicHero.headline.line1')} delay={0.5} />
                     <br />
                     <span className="text-gradient">
-                      <SplitReveal text="ROADS" delay={0.75} />
+                      <SplitReveal text={t('cinematicHero.headline.line2')} delay={0.75} />
                     </span>
                     {" "}
-                    <SplitReveal text="OF TOMORROW" delay={0.85} />
+                    <SplitReveal text={t('cinematicHero.headline.line3')} delay={0.85} />
                   </>
                 ) : (
                   <>
-                    CONSTRUCTING THE{" "}
-                    <span className="text-gradient">ROADS</span>{" "}
-                    OF TOMORROW
+                    {t('cinematicHero.headline.line1')}{" "}
+                    <span className="text-gradient">{t('cinematicHero.headline.line2')}</span>{" "}
+                    {t('cinematicHero.headline.line3')}
                   </>
                 )}
-                <span className="sr-only"> — CPC Qatar, Road Construction &amp; Infrastructure Company in Doha, Qatar. Asphalt Paving, Earthworks &amp; Civil Engineering since 2017.</span>
+                <span className="sr-only"> — {t('cinematicHero.seoText')}</span>
               </h1>
 
               {/* Stats row */}
               <motion.div className="mt-10 sm:mt-14 flex flex-wrap gap-6 sm:gap-10 md:gap-16"
                 initial={{ opacity: 0, y: 30 }} animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 1.5, ease }}>
-                {[
-                  { n: 90, s: "+", l: "Projects Delivered" },
-                  { n: 10, s: "+", l: "Years of Excellence" },
-                  { n: 57, s: "+", l: "Major Clients" },
-                ].map((d, i) => (
-                  <motion.div key={d.l}
+                {stats.map((d, i) => (
+                  <motion.div key={d.label}
                     initial={{ opacity: 0, y: 20 }}
                     animate={ready ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.7, delay: 1.7 + i * 0.1, ease }}>
                     <div className="font-display text-3xl md:text-5xl text-primary tabular-nums">
-                      {ready && !isMobile ? <AnimNum to={d.n} suffix={d.s} /> : <span>{d.n}{d.s}</span>}
+                      {ready && !isMobile ? <AnimNum to={d.value} suffix={d.suffix} /> : <span>{d.value}{d.suffix}</span>}
                     </div>
-                    <div className="text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.l}</div>
+                    <div className="text-xs text-white/40 tracking-[0.2em] uppercase mt-1">{d.label}</div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -192,11 +195,11 @@ export const CinematicHero = memo(() => {
                 animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 2.0, ease }}>
                 <a href="/services" className="inline-flex items-center gap-2 text-primary border border-primary/30 rounded-full px-6 py-3 text-sm tracking-wider uppercase hover:bg-primary/10 transition-colors">
-                  Explore Our Services
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  {t('cinematicHero.cta.primary')}
+                  <svg className="w-4 h-4 rtl-flip" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </a>
                 <a href="/projects" className="inline-flex items-center gap-2 text-white/60 border border-white/10 rounded-full px-6 py-3 text-sm tracking-wider uppercase hover:text-white hover:border-white/30 transition-colors">
-                  View Projects
+                  {t('cinematicHero.cta.secondary')}
                 </a>
               </motion.div>
             </div>
@@ -206,7 +209,7 @@ export const CinematicHero = memo(() => {
           <motion.div
             className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}>
-            <span className="text-[9px] tracking-[0.5em] text-white/30 uppercase">Scroll</span>
+            <span className="text-[9px] tracking-[0.5em] text-white/30 uppercase">{t('cinematicHero.scroll')}</span>
             <div className="w-5 h-9 rounded-full border border-white/15 flex justify-center pt-2">
               <motion.div className="w-0.5 h-1.5 rounded-full bg-primary"
                 animate={{ y: [0, 10, 0], opacity: [0.8, 0.2, 0.8] }}

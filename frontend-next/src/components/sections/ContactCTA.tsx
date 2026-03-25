@@ -5,12 +5,14 @@ import { Link } from "@/lib/router-compat";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslation } from "@/lib/i18n/client";
 
 /** Strip non-digit characters except leading + for tel: links */
 const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const ContactCTA = () => {
   const { settings } = useSiteSettings();
+  const { t } = useTranslation('home');
 
   return (
     <section className="py-32 bg-gradient-dark relative overflow-hidden">
@@ -29,14 +31,13 @@ export const ContactCTA = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Start Your Project
+              {t('contactCTA.tag')}
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-              LET&apos;S CONSTRUCT <span className="text-gradient">TOGETHER</span>
+              {t('contactCTA.headline.line1')} <span className="text-gradient">{t('contactCTA.headline.highlight')}</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
-              Ready to start your next infrastructure project? Our team of experts is here
-              to help you bring your vision to life with precision and excellence.
+              {t('contactCTA.description')}
             </p>
           </motion.div>
 
@@ -49,14 +50,14 @@ export const ContactCTA = () => {
           >
             <Button variant="hero" size="xl" asChild>
               <Link to="/contact" className="group">
-                Get a Free Quote
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {t('contactCTA.buttons.primary')}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform rtl-flip" />
               </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
               <a href={toTelHref(settings.contact_phone)}>
                 <Phone className="w-5 h-5" />
-                Call Us Now
+                {t('contactCTA.buttons.secondary')}
               </a>
             </Button>
           </motion.div>

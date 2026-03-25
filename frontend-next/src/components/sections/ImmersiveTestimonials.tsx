@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "@/lib/i18n/client";
 const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
 const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
 const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
@@ -35,6 +36,7 @@ export const ImmersiveTestimonials = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
+  const { t } = useTranslation('home');
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -96,10 +98,10 @@ export const ImmersiveTestimonials = () => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            What They Say
+            {t('immersiveTestimonials.tag')}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
-            CLIENT <span className="text-gradient">TESTIMONIALS</span>
+            {t('immersiveTestimonials.title.prefix')} <span className="text-gradient">{t('immersiveTestimonials.title.highlight')}</span>
           </h2>
         </motion.div>
 
@@ -111,7 +113,7 @@ export const ImmersiveTestimonials = () => {
             </div>
           ) : testimonials.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-muted-foreground">No testimonials available</p>
+              <p className="text-muted-foreground">{t('immersiveTestimonials.emptyState')}</p>
             </div>
           ) : (
             <div className="relative min-h-[300px] sm:min-h-[400px]">
