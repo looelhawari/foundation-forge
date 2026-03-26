@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import processBg from "@/assets/real-process-bg.jpg";
 import process1 from "@/assets/process-1.jpg";
 import process2 from "@/assets/planning.jpg";
@@ -8,53 +9,84 @@ import process4 from "@/assets/mobilization.avif";
 import process5 from "@/assets/process-5.jpg";
 import process6 from "@/assets/process-6.jpg";
 
-const processSteps = [
-    {
-        step: "01",
-        title: "Initial Consultation",
-        description: "Understanding your project requirements, site conditions, and objectives through detailed discussions",
-        tasks: ["Site Assessment", "Requirements Analysis", "Budget Discussion", "Timeline Planning"],
-        image: process1
-    },
-    {
-        step: "02",
-        title: "Planning & Design",
-        description: "Developing comprehensive project plans with technical specifications and resource allocation",
-        tasks: ["Technical Design", "Material Selection", "Resource Planning", "Risk Assessment"],
-        image: process2
-    },
-    {
-        step: "03",
-        title: "Approval & Permits",
-        description: "Securing necessary approvals and permits from relevant authorities",
-        tasks: ["Documentation", "Authority Coordination", "Permit Acquisition", "Compliance Check"],
-        image: process3
-    },
-    {
-        step: "04",
-        title: "Mobilization",
-        description: "Deploying equipment, materials, and skilled workforce to the project site",
-        tasks: ["Site Preparation", "Equipment Deployment", "Team Assignment", "Safety Setup"],
-        image: process4
-    },
-    {
-        step: "05",
-        title: "Execution",
-        description: "Implementing the project plan with continuous monitoring and quality control",
-        tasks: ["Construction Work", "Quality Testing", "Progress Monitoring", "Safety Inspection"],
-        image: process5
-    },
-    {
-        step: "06",
-        title: "Completion & Handover",
-        description: "Final inspection, documentation, and project handover to client",
-        tasks: ["Final Inspection", "Documentation", "Client Training", "Warranty Activation"],
-        image: process6
-    }
-];
-
 export function ProcessTimeline() {
     const containerRef = useRef(null);
+    const { t } = useTranslation();
+
+    const processSteps = [
+        {
+            step: "01",
+            title: t("process.step1.title", "Initial Consultation"),
+            description: t("process.step1.desc", "Understanding your project requirements, site conditions, and objectives through detailed discussions"),
+            tasks: [
+                t("process.step1.task1", "Site Assessment"),
+                t("process.step1.task2", "Requirements Analysis"),
+                t("process.step1.task3", "Budget Discussion"),
+                t("process.step1.task4", "Timeline Planning"),
+            ],
+            image: process1
+        },
+        {
+            step: "02",
+            title: t("process.step2.title", "Planning & Design"),
+            description: t("process.step2.desc", "Developing comprehensive project plans with technical specifications and resource allocation"),
+            tasks: [
+                t("process.step2.task1", "Technical Design"),
+                t("process.step2.task2", "Material Selection"),
+                t("process.step2.task3", "Resource Planning"),
+                t("process.step2.task4", "Risk Assessment"),
+            ],
+            image: process2
+        },
+        {
+            step: "03",
+            title: t("process.step3.title", "Approval & Permits"),
+            description: t("process.step3.desc", "Securing necessary approvals and permits from relevant authorities"),
+            tasks: [
+                t("process.step3.task1", "Documentation"),
+                t("process.step3.task2", "Authority Coordination"),
+                t("process.step3.task3", "Permit Acquisition"),
+                t("process.step3.task4", "Compliance Check"),
+            ],
+            image: process3
+        },
+        {
+            step: "04",
+            title: t("process.step4.title", "Mobilization"),
+            description: t("process.step4.desc", "Deploying equipment, materials, and skilled workforce to the project site"),
+            tasks: [
+                t("process.step4.task1", "Site Preparation"),
+                t("process.step4.task2", "Equipment Deployment"),
+                t("process.step4.task3", "Team Assignment"),
+                t("process.step4.task4", "Safety Setup"),
+            ],
+            image: process4
+        },
+        {
+            step: "05",
+            title: t("process.step5.title", "Execution"),
+            description: t("process.step5.desc", "Implementing the project plan with continuous monitoring and quality control"),
+            tasks: [
+                t("process.step5.task1", "Construction Work"),
+                t("process.step5.task2", "Quality Testing"),
+                t("process.step5.task3", "Progress Monitoring"),
+                t("process.step5.task4", "Safety Inspection"),
+            ],
+            image: process5
+        },
+        {
+            step: "06",
+            title: t("process.step6.title", "Completion & Handover"),
+            description: t("process.step6.desc", "Final inspection, documentation, and project handover to client"),
+            tasks: [
+                t("process.step6.task1", "Final Inspection"),
+                t("process.step6.task2", "Documentation"),
+                t("process.step6.task3", "Client Training"),
+                t("process.step6.task4", "Warranty Activation"),
+            ],
+            image: process6
+        }
+    ];
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start center", "end center"]
@@ -91,7 +123,10 @@ export function ProcessTimeline() {
                         transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
                         viewport={{ once: true }}
                     >
-                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Process</span>
+                        {t("process.title", "Our")}{" "}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                            {t("process.titleHighlight", "Process")}
+                        </span>
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -107,7 +142,7 @@ export function ProcessTimeline() {
                         viewport={{ once: true }}
                         className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
                     >
-                        From consultation to completion - Our proven 6-step methodology
+                        {t("process.subtitle", "From consultation to completion - Our proven 6-step methodology")}
                     </motion.p>
                 </motion.div>
 

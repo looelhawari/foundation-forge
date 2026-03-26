@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import cpcLogo from "@/assets/cpc_logo-removebg-preview.png";
 import earthworks from "@/assets/services/earth work.jpg";
 import subgrade from "@/assets/services/subgrade and subbase.jpg";
@@ -7,43 +8,13 @@ import asphalt from "@/assets/services/asphalt.jpeg";
 import traffic from "@/assets/services/road-markings-masters.jpeg";
 import interlock from "@/assets/services/interllock.jpeg";
 
-const services = [
-  {
-    title: "Earth Works",
-    subtitle: "Foundation & Groundwork",
-    description: "Comprehensive earthmoving, excavation, and land preparation services for all construction needs.",
-    features: ["Site Clearing", "Excavation", "Grading", "Compaction"],
-    image: earthworks,
-  },
-  {
-    title: "Sub-Grade & Sub-Base",
-    subtitle: "Road Foundation",
-    description: "Professional sub-grade and sub-base preparation ensuring solid foundation for all road projects.",
-    features: ["Layer Preparation", "Material Testing", "Compaction Control", "Quality Assurance"],
-    image: subgrade,
-  },
-  {
-    title: "Asphalt Works",
-    subtitle: "Paving & Surfacing",
-    description: "Expert asphalt paving and road surfacing using latest technology and quality materials.",
-    features: ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Maintenance"],
-    image: asphalt,
-  },
-  {
-    title: "Traffic Signs & Road Marking",
-    subtitle: "Safety & Signage",
-    description: "Complete traffic management solutions including signage installation and road marking services.",
-    features: ["Thermoplastic Marking", "Sign Installation", "Safety Measures", "Line Marking"],
-    image: traffic,
-  },
-  {
-    title: "Interlock & Kerbstone",
-    subtitle: "Precision Paving",
-    description: "Precision installation of interlocking pavers and kerbstones for aesthetic and functional excellence.",
-    features: ["Paver Installation", "Kerbstone Laying", "Pattern Design", "Finishing Works"],
-    image: interlock,
-  },
-];
+type ServiceItem = {
+  title: string;
+  subtitle: string;
+  description: string;
+  features: string[];
+  image: string;
+};
 
 /* ─── Bento Card ─── */
 const BentoCard = ({
@@ -51,7 +22,7 @@ const BentoCard = ({
   index,
   isLarge = false,
 }: {
-  service: (typeof services)[0];
+  service: ServiceItem;
   index: number;
   isLarge?: boolean;
 }) => {
@@ -182,11 +153,75 @@ const BentoCard = ({
 /* ─── Main Section ─── */
 export const ServicesImageGrid = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
+  const services: ServiceItem[] = [
+    {
+      title: t("services.earthworks.title", "Earth Works"),
+      subtitle: t("services.earthworks.subtitle", "Foundation & Groundwork"),
+      description: t("services.earthworks.desc", "Comprehensive earthmoving, excavation, and land preparation services for all construction needs."),
+      features: [
+        t("services.earthworks.f1", "Site Clearing"),
+        t("services.earthworks.f2", "Excavation"),
+        t("services.earthworks.f3", "Grading"),
+        t("services.earthworks.f4", "Compaction"),
+      ],
+      image: earthworks,
+    },
+    {
+      title: t("services.subgrade.title", "Sub-Grade & Sub-Base"),
+      subtitle: t("services.subgrade.subtitle", "Road Foundation"),
+      description: t("services.subgrade.desc", "Professional sub-grade and sub-base preparation ensuring solid foundation for all road projects."),
+      features: [
+        t("services.subgrade.f1", "Layer Preparation"),
+        t("services.subgrade.f2", "Material Testing"),
+        t("services.subgrade.f3", "Compaction Control"),
+        t("services.subgrade.f4", "Quality Assurance"),
+      ],
+      image: subgrade,
+    },
+    {
+      title: t("services.asphalt.title", "Asphalt Works"),
+      subtitle: t("services.asphalt.subtitle", "Paving & Surfacing"),
+      description: t("services.asphalt.desc", "Expert asphalt paving and road surfacing using latest technology and quality materials."),
+      features: [
+        t("services.asphalt.f1", "Hot Mix Asphalt"),
+        t("services.asphalt.f2", "Cold Mix Asphalt"),
+        t("services.asphalt.f3", "Surface Treatment"),
+        t("services.asphalt.f4", "Maintenance"),
+      ],
+      image: asphalt,
+    },
+    {
+      title: t("services.traffic.title", "Traffic Signs & Road Marking"),
+      subtitle: t("services.traffic.subtitle", "Safety & Signage"),
+      description: t("services.traffic.desc", "Complete traffic management solutions including signage installation and road marking services."),
+      features: [
+        t("services.traffic.f1", "Thermoplastic Marking"),
+        t("services.traffic.f2", "Sign Installation"),
+        t("services.traffic.f3", "Safety Measures"),
+        t("services.traffic.f4", "Line Marking"),
+      ],
+      image: traffic,
+    },
+    {
+      title: t("services.interlock.title", "Interlock & Kerbstone"),
+      subtitle: t("services.interlock.subtitle", "Precision Paving"),
+      description: t("services.interlock.desc", "Precision installation of interlocking pavers and kerbstones for aesthetic and functional excellence."),
+      features: [
+        t("services.interlock.f1", "Paver Installation"),
+        t("services.interlock.f2", "Kerbstone Laying"),
+        t("services.interlock.f3", "Pattern Design"),
+        t("services.interlock.f4", "Finishing Works"),
+      ],
+      image: interlock,
+    },
+  ];
 
   return (
     <section ref={sectionRef} className="relative py-20 md:py-32 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden">
@@ -223,9 +258,9 @@ export const ServicesImageGrid = () => {
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
-            What We{" "}
+            {t("servicesGrid.title", "What We")}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-              Do
+              {t("servicesGrid.titleHighlight", "Do")}
             </span>
           </h2>
 
@@ -238,7 +273,7 @@ export const ServicesImageGrid = () => {
           />
 
           <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
-            Comprehensive construction solutions — from groundwork to final finish
+            {t("servicesGrid.subtitle", "Comprehensive construction solutions — from groundwork to final finish")}
           </p>
         </motion.div>
 

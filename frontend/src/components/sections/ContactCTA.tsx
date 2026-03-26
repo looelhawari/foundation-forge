@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export const ContactCTA = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-32 bg-gradient-dark relative overflow-hidden">
       {/* Decorative Elements */}
@@ -21,14 +23,14 @@ export const ContactCTA = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Start Your Project
+              {t("cinematicCta.eyebrow", "Start Your Project")}
             </span>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
-              LET'S CONSTRUCT <span className="text-gradient">TOGETHER</span>
+              {t("cinematicCta.line1", "LET'S CONSTRUCT")}{" "}
+              <span className="text-gradient">{t("cinematicCta.line2", "TOGETHER")}</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-10">
-              Ready to start your next infrastructure project? Our team of experts is here
-              to help you bring your vision to life with precision and excellence.
+              {t("cinematicCta.description", "Ready to start your next infrastructure project? Our team of experts is here to bring your vision to life with precision and excellence.")}
             </p>
           </motion.div>
 
@@ -41,14 +43,14 @@ export const ContactCTA = () => {
           >
             <Button variant="hero" size="xl" asChild>
               <Link to="/contact" className="group">
-                Get a Free Quote
+                {t("common.getFreeQuote", "Get a Free Quote")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
               <a href="tel:+97444322743">
                 <Phone className="w-5 h-5" />
-                Call Us Now
+                {t("common.callUsNow", "Call Us Now")}
               </a>
             </Button>
           </motion.div>

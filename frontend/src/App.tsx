@@ -9,6 +9,7 @@ import ConsentBanner from "./components/ConsentBanner";
 import { AuthProvider } from "./hooks/useAuth";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { LanguageProvider } from "./i18n/LanguageContext";
 
 // Public Pages - Index loaded immediately
 import Index from "./pages/Index";
@@ -54,6 +55,7 @@ const LoadingFallback = () => (
 );
 
 const App = () => (
+  <LanguageProvider>
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -176,6 +178,7 @@ const App = () => (
       </AuthProvider>
     </QueryClientProvider>
   </ErrorBoundary>
+  </LanguageProvider>
 );
 
 export default App;

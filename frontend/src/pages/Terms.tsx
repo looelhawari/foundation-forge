@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollText, Shield, FileText, Scale, AlertCircle } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 
 const Terms = () => {
+    const { t } = useTranslation();
     return (
         <div className="min-h-screen bg-background">
             <SEOHead
@@ -27,11 +29,11 @@ const Terms = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                                 <Scale className="w-8 h-8 text-primary" />
                                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-center">
-                                    TERMS <span className="text-gradient">OF USE</span>
+                                    {t("terms.title", "TERMS")} <span className="text-gradient">{t("terms.subtitle", "OF USE")}</span>
                                 </h1>
                             </div>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                Please read these terms and conditions carefully before using our website
+                                {t("terms.heroSubtitle", "Please read these terms and conditions carefully before using our website")}
                             </p>
                             <p className="text-muted-foreground text-sm mt-4">
                                 Last Updated: December 24, 2025

@@ -1,47 +1,16 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FileText, Building2, Shield, Award } from "lucide-react";
 
-const certifications = [
-    {
-        title: "CR 108122",
-        subtitle: "Commercial Registration",
-        description: "Ministry of Commerce - Valid until 08/12/2029 - Est. 11/12/2017",
-        icon: Building2,
-        doc: "Commercial Registration Dec 2029.pdf"
-    },
-    {
-        title: "14-1191-01",
-        subtitle: "Establishment Card",
-        description: "Ministry of Interior - Valid until 13/10/2028",
-        icon: Shield,
-        doc: "Computer Card 2028.pdf"
-    },
-    {
-        title: "TIN 5000716308",
-        subtitle: "Tax Registration Card",
-        description: "General Tax Authority - Registered 11/12/2017",
-        icon: FileText,
-        doc: "CPC TAX CARD.pdf"
-    },
-    {
-        title: "License 111698",
-        subtitle: "Commercial License",
-        description: "Trade License - Valid until 13/10/2029",
-        icon: Award,
-        doc: "CR Commercial Permit OCT 2029.pdf"
-    }
-];
+type CertEntry = {
+    title: string;
+    subtitle: string;
+    description: string;
+    icon: typeof Building2;
+    doc: string;
+};
 
-const standards = [
-    "Ministry of Commerce & Industry Registration",
-    "Ministry of Interior Establishment Approval",
-    "General Tax Authority Registered",
-    "Licensed for Construction & General Contracting (Activity 4100001)",
-    "Authorized for Roads & Pavements Construction (Activity 4210100)",
-    "Qatar Chamber of Commerce Member"
-];
-
-const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; index: number }) => {
+const CertificationBadge = ({ cert, index }: { cert: CertEntry; index: number }) => {
     const IconComponent = cert.icon;
 
     return (
@@ -102,6 +71,47 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
 };
 
 export function QualityAndCertifications() {
+    const { t } = useTranslation();
+
+    const certifications = [
+        {
+            title: "CR 108122",
+            subtitle: t("qualityCerts.cr.subtitle", "Commercial Registration"),
+            description: t("qualityCerts.cr.desc", "Ministry of Commerce - Valid until 08/12/2029 - Est. 11/12/2017"),
+            icon: Building2,
+            doc: "Commercial Registration Dec 2029.pdf"
+        },
+        {
+            title: "14-1191-01",
+            subtitle: t("qualityCerts.establishment.subtitle", "Establishment Card"),
+            description: t("qualityCerts.establishment.desc", "Ministry of Interior - Valid until 13/10/2028"),
+            icon: Shield,
+            doc: "Computer Card 2028.pdf"
+        },
+        {
+            title: "TIN 5000716308",
+            subtitle: t("qualityCerts.tax.subtitle", "Tax Registration Card"),
+            description: t("qualityCerts.tax.desc", "General Tax Authority - Registered 11/12/2017"),
+            icon: FileText,
+            doc: "CPC TAX CARD.pdf"
+        },
+        {
+            title: "License 111698",
+            subtitle: t("qualityCerts.license.subtitle", "Commercial License"),
+            description: t("qualityCerts.license.desc", "Trade License - Valid until 13/10/2029"),
+            icon: Award,
+            doc: "CR Commercial Permit OCT 2029.pdf"
+        }
+    ];
+
+    const standards = [
+        t("qualityCerts.standards.commerce", "Ministry of Commerce & Industry Registration"),
+        t("qualityCerts.standards.interior", "Ministry of Interior Establishment Approval"),
+        t("qualityCerts.standards.tax", "General Tax Authority Registered"),
+        t("qualityCerts.standards.contracting", "Licensed for Construction & General Contracting (Activity 4100001)"),
+        t("qualityCerts.standards.roads", "Authorized for Roads & Pavements Construction (Activity 4210100)"),
+        t("qualityCerts.standards.chamber", "Qatar Chamber of Commerce Member")
+    ];
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-black overflow-hidden">
             {/* Static watermark */}
@@ -129,7 +139,10 @@ export function QualityAndCertifications() {
                         transition={{ duration: 1, type: "spring" }}
                         viewport={{ once: true }}
                     >
-                        Legal Documents & <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Registration</span>
+                        {t("qualityCerts.title", "Legal Documents &")}{" "}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                            {t("qualityCerts.titleHighlight", "Registration")}
+                        </span>
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -145,7 +158,7 @@ export function QualityAndCertifications() {
                         viewport={{ once: true }}
                         className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
                     >
-                        Fully licensed and registered company with all required government approvals and permits
+                        {t("qualityCerts.subtitle", "Fully licensed and registered company with all required government approvals and permits")}
                     </motion.p>
                 </motion.div>
 
@@ -165,7 +178,8 @@ export function QualityAndCertifications() {
                     className="max-w-4xl mx-auto"
                 >
                     <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-8 md:mb-12">
-                        Our <span className="text-amber-400">Compliance</span>
+                        {t("qualityCerts.compliance.title", "Our")}{" "}
+                        <span className="text-amber-400">{t("qualityCerts.compliance.titleHighlight", "Compliance")}</span>
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {standards.map((standard, index) => (
@@ -234,10 +248,11 @@ export function QualityAndCertifications() {
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <p className="text-2xl text-white mb-2">
-                            <span className="text-amber-400 font-bold">Fully Licensed</span> & Government Approved
+                            <span className="text-amber-400 font-bold">{t("qualityCerts.trust.fullyLicensed", "Fully Licensed")}</span>{" "}
+                            {t("qualityCerts.trust.govApproved", "& Government Approved")}
                         </p>
                         <p className="text-gray-400">
-                            All legal documents verified and up to date
+                            {t("qualityCerts.trust.upToDate", "All legal documents verified and up to date")}
                         </p>
                     </motion.div>
                 </motion.div>

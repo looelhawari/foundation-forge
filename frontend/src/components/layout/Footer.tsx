@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, FileText } from "lucide-react";
 import cpcLogo from "@/assets/cpc_logo-removebg-preview.png";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-secondary border-t border-border">
       <div className="container mx-auto px-6 py-16">
@@ -13,30 +16,42 @@ export const Footer = () => {
               <img src={cpcLogo} alt="CPC Logo" className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Constructing the nation's infrastructure with excellence, precision, and over 10 years of trusted expertise.
+              {t("footer.about.description")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h4>
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">{t("footer.quickLinks.title")}</h4>
             <ul className="space-y-3">
-              {["Home", "About", "Projects", "Clients", "Contact"].map((item) => (
-                <li key={item}>
-                  <Link
-                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
               <li>
-                <Link
-                  to="/terms"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Terms of Use
+                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.quickLinks.home")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.quickLinks.about")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/projects" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.quickLinks.projects")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/clients" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.quickLinks.clients")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.quickLinks.contact")}
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.legal.terms")}
                 </Link>
               </li>
             </ul>
@@ -44,9 +59,16 @@ export const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h4>
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">{t("footer.services.title", "Services")}</h4>
             <ul className="space-y-3">
-              {["Earthworks & Grading", "Asphalt Paving", "Road Marking & Traffic Signs", "Interlock & Kerbstone", "Sub-Grade & Sub-Base", "Steel Works"].map((item) => (
+              {[
+                t("footer.services.earthworks", "Earthworks & Grading"),
+                t("footer.services.asphalt", "Asphalt Paving"),
+                t("footer.services.roadMarking", "Road Marking & Traffic Signs"),
+                t("footer.services.interlock", "Interlock & Kerbstone"),
+                t("footer.services.subGrade", "Sub-Grade & Sub-Base"),
+                t("footer.services.steelWorks", "Steel Works"),
+              ].map((item) => (
                 <li key={item}>
                   <span className="text-muted-foreground text-sm">{item}</span>
                 </li>
@@ -56,7 +78,7 @@ export const Footer = () => {
 
           {/* Legal Documents */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h4>
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">{t("footer.legalDocs.title", "Legal Documents")}</h4>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -64,31 +86,22 @@ export const Footer = () => {
                   className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" />
-                  Company Certificates
+                  {t("footer.legalDocs.certificates", "Company Certificates")}
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/certificates"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Commercial Registration
+                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.legalDocs.commercialReg", "Commercial Registration")}
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/certificates"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Tax Card
+                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.legalDocs.taxCard", "Tax Card")}
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/certificates"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Commercial Permit
+                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
+                  {t("footer.legalDocs.commercialPermit", "Commercial Permit")}
                 </Link>
               </li>
             </ul>
@@ -96,12 +109,12 @@ export const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h4>
+            <h4 className="font-display text-lg tracking-wide text-foreground mb-6">{t("footer.contact.title")}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span className="text-muted-foreground text-sm">
-                  Mirqab Mall, Area 39<br />P.O. Box 15776, Doha, Qatar
+                  {t("footer.contact.address")}
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -124,14 +137,14 @@ export const Footer = () => {
         <div className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} COSMO PROJECTS & CONSTRUCTION. All rights reserved.
+              {t("footer.copyright")}
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Privacy Policy
+                {t("footer.legal.privacy")}
               </Link>
               <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Terms of Use
+                {t("footer.legal.terms")}
               </Link>
             </div>
           </div>
@@ -144,7 +157,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground/70 hover:text-primary transition-colors text-xs flex items-center gap-2 group"
             >
-              <span>Designed by</span>
+              <span>{t("footer.designedBy", "Designed by")}</span>
               <span className="font-semibold tracking-wide group-hover:tracking-wider transition-all">
                 ELITEERA
               </span>

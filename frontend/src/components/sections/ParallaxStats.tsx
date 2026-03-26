@@ -1,20 +1,22 @@
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef, memo } from "react";
+import { useTranslation } from "react-i18next";
 import { AnimatedCounter } from "../animations/MotionGraphics";
 import { stats } from "@/data/projects";
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-const statsData = [
-  { value: stats.projectsCompleted, suffix: "+", label: "PROJECTS COMPLETED" },
-  { value: stats.yearsExperience, suffix: "+", label: "YEARS EXPERIENCE" },
-  { value: stats.satisfiedClients, suffix: "+", label: "TRUSTED CLIENTS" },
-  { value: 100, suffix: "%", label: "CLIENT SATISFACTION" },
-];
-
 export const ParallaxStats = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { t } = useTranslation();
+
+  const statsData = [
+    { value: stats.projectsCompleted, suffix: "+", label: t("stats.projectsCompleted", "PROJECTS COMPLETED") },
+    { value: stats.yearsExperience, suffix: "+", label: t("stats.yearsExperience", "YEARS EXPERIENCE") },
+    { value: stats.satisfiedClients, suffix: "+", label: t("stats.trustedClients", "TRUSTED CLIENTS") },
+    { value: 100, suffix: "%", label: t("stats.clientSatisfaction", "CLIENT SATISFACTION") },
+  ];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -52,10 +54,10 @@ export const ParallaxStats = memo(() => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            By The Numbers
+            {t("stats.eyebrow", "By The Numbers")}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] px-4">
-            OUR <span className="text-gradient">IMPACT</span>
+            {t("stats.titleLine1", "OUR")} <span className="text-gradient">{t("stats.titleLine2", "IMPACT")}</span>
           </h2>
         </motion.div>
 

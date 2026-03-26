@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import whyChooseBg from "@/assets/real-why-choose-bg.jpg";
 import whyChoose1 from "@/assets/why-choose-1.jpg";
 import whyChoose2 from "@/assets/services/expert team.webp";
@@ -48,7 +49,23 @@ const advantages = [
 
 const BRAND_COLOR = "#f59e0b";
 
+const advantageKeys = [
+    { number: "01", key: "track", image: whyChoose1 },
+    { number: "02", key: "team", image: whyChoose2 },
+    { number: "03", key: "quality", image: whyChoose3 },
+    { number: "04", key: "tech", image: whyChoose4 },
+    { number: "05", key: "time", image: whyChoose5 },
+    { number: "06", key: "client", image: whyChoose6 },
+];
+
 export function WhyChooseUs() {
+    const { t } = useTranslation();
+    const advantages = advantageKeys.map(({ number, key, image }) => ({
+        number,
+        title: t(`whyChoose.${key}.title`, t(`home.whyChoose.${key}.title`, key)),
+        description: t(`whyChoose.${key}.desc`, t(`home.whyChoose.${key}.description`, key)),
+        image,
+    }));
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-black via-gray-900 to-gray-900 overflow-hidden">
             {/* Background Image */}

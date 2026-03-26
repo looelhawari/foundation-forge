@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import cpcLogo from "@/assets/cpc_logo-removebg-preview.png";
-
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Projects", path: "/projects" },
-  { name: "Clients", path: "/clients" },
-  { name: "Contact", path: "/contact" },
-];
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
+  const { language, toggleLanguage } = useLanguage();
+
+  const navLinks = [
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.about"), path: "/about" },
+    { name: t("nav.projects"), path: "/projects" },
+    { name: t("nav.clients"), path: "/clients" },
+    { name: t("nav.contact"), path: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,10 +70,18 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* CTA Button + Language Switcher */}
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 px-3 py-2 rounded-md hover:bg-secondary"
+              title={language === "en" ? "Switch to Arabic" : "Switch to English"}
+            >
+              <Globe className="w-4 h-4" />
+              <span>{language === "en" ? "عربي" : "English"}</span>
+            </button>
             <Button variant="hero" size="lg" asChild>
-              <Link to="/contact">Get a Quote</Link>
+              <Link to="/contact">{t("common.getQuote")}</Link>
             </Button>
           </div>
 
@@ -116,8 +128,21 @@ export const Header = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
               >
+                <button
+                  onClick={toggleLanguage}
+                  className="flex items-center gap-2 py-2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="text-sm font-medium">{language === "en" ? "عربي" : "English"}</span>
+                </button>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (navLinks.length + 1) * 0.1 }}
+              >
                 <Button variant="hero" size="lg" className="w-full mt-4" asChild>
-                  <Link to="/contact">Get a Quote</Link>
+                  <Link to="/contact">{t("common.getQuote")}</Link>
                 </Button>
               </motion.div>
             </nav>

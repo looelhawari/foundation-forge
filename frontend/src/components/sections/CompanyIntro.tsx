@@ -1,35 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
-const introData = {
-    title: "WHO WE ARE",
-    subtitle: "Construction Excellence",
-    description: "Established in 2017, we've completed over 57 projects across Doha and beyond, serving government ministries, private developers, and international clients",
-
-    mission: {
-        title: "Mission",
-        content: "To sustain the high level of qualified personnel and construct a Professional team committed to serve our clients. Our pledge is to establish lasting relationships with our customers by exceeding their Expectations and gaining their trust, through exceptional Performance by every member of the construction team."
-    },
-
-    objectives: {
-        title: "Objectives",
-        content: "To be one of the leading firms in the state of Qatar in the field of road Construction. CPC will do the best to offer excellent services by providing high quality of work and applying the latest available technology for the industry."
-    },
-
-    overview: {
-        title: "Overview",
-        content: "CPC QATAR established to accept new challenges in Earthworks field especially Construction of Asphalt Pavements and Road Marking. CPC QATAR has proved its capacity to undertake projects in its related fields due to excellence in workmanship, professionalism and timely completion. Guided by able and experienced management, coupled by able and specialized staff in each of its divisions."
-    }
-};
-
-const features = [
-    "Project Planning",
-    "Construction Management",
-    "Engineering Supervision",
-    "Quality Assurance",
-    "Safety Inspection",
-    "Project Cost Control"
-];
+import { useTranslation } from "react-i18next";
 
 // Counter animation component
 const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
@@ -85,12 +56,40 @@ const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: strin
 
 export function CompanyIntro() {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"]
     });
 
     const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+    const introData = {
+        title: t("companyIntro.title", "WHO WE ARE"),
+        subtitle: t("companyIntro.subtitle", "Construction Excellence"),
+        description: t("companyIntro.description", "Established in 2017, we've completed over 57 projects across Doha and beyond, serving government ministries, private developers, and international clients"),
+        mission: {
+            title: t("companyIntro.mission.title", "Mission"),
+            content: t("companyIntro.mission.content", "To sustain the high level of qualified personnel and construct a Professional team committed to serve our clients. Our pledge is to establish lasting relationships with our customers by exceeding their Expectations and gaining their trust, through exceptional Performance by every member of the construction team.")
+        },
+        objectives: {
+            title: t("companyIntro.objectives.title", "Objectives"),
+            content: t("companyIntro.objectives.content", "To be one of the leading firms in the state of Qatar in the field of road Construction. CPC will do the best to offer excellent services by providing high quality of work and applying the latest available technology for the industry.")
+        },
+        overview: {
+            title: t("companyIntro.overview.title", "Overview"),
+            content: t("companyIntro.overview.content", "CPC QATAR established to accept new challenges in Earthworks field especially Construction of Asphalt Pavements and Road Marking. CPC QATAR has proved its capacity to undertake projects in its related fields due to excellence in workmanship, professionalism and timely completion. Guided by able and experienced management, coupled by able and specialized staff in each of its divisions.")
+        }
+    };
+
+    const features = [
+        t("companyIntro.features.planning", "Project Planning"),
+        t("companyIntro.features.management", "Construction Management"),
+        t("companyIntro.features.supervision", "Engineering Supervision"),
+        t("companyIntro.features.quality", "Quality Assurance"),
+        t("companyIntro.features.safety", "Safety Inspection"),
+        t("companyIntro.features.cost", "Project Cost Control"),
+    ];
 
     return (
         <section ref={sectionRef} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
@@ -163,13 +162,13 @@ export function CompanyIntro() {
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-2">
                                 <CounterNumber target={57} suffix="+" />
                             </div>
-                            <div className="text-gray-400">Projects</div>
+                            <div className="text-gray-400">{t("companyIntro.statsProjects", "Projects")}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-400 mb-2">
                                 <CounterNumber target={8} suffix="+" />
                             </div>
-                            <div className="text-gray-400">Years</div>
+                            <div className="text-gray-400">{t("companyIntro.statsYears", "Years")}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-2">
@@ -216,7 +215,7 @@ export function CompanyIntro() {
                     className="text-center"
                 >
                     <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                        Project Responsibilities
+                        {t("companyIntro.responsibilities", "Project Responsibilities")}
                     </h3>
 
                     <motion.div

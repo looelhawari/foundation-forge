@@ -228,7 +228,12 @@
             "required": "Required field",
             "submit": "Send Message",
             "success": "Message Sent!",
-            "successDescription": "Thank you for contacting us. We'll get back to you within 24 hours."
+            "successDescription": "Thank you for contacting us. We'll get back to you within 24 hours.",
+            "subject": "Subject",
+            "subjectPlaceholder": "What is this regarding?",
+            "sending": "Sending...",
+            "errorDescription": "Failed to send message. Please try again.",
+            "messageLabel": "MESSAGE"
         },
         "info": {
             "title": "CONTACT INFORMATION",
@@ -248,7 +253,10 @@
                 "title": "Business Hours",
                 "value": "Sunday - Thursday: 7:00 AM - 5:00 PM"
             }
-        }
+        },
+        "headOffice": "Head Office",
+        "errorTitle": "Error",
+        "infoLabel": "INFORMATION"
     },
     "privacy": {
         "title": "PRIVACY POLICY",
@@ -279,7 +287,8 @@
                 "title": "Contact Us",
                 "content": "If you have questions about this Privacy Policy, please contact us at info@cpcqatar.com"
             }
-        }
+        },
+        "heroSubtitle": "COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information"
     },
     "terms": {
         "title": "TERMS & CONDITIONS",
@@ -306,7 +315,8 @@
                 "title": "Changes to Terms",
                 "content": "We reserve the right to modify these terms at any time. Continued use of the website constitutes acceptance of modified terms."
             }
-        }
+        },
+        "heroSubtitle": "Please read these terms and conditions carefully before using our website"
     },
     "footer": {
         "about": {
@@ -333,6 +343,64 @@
             "email": "info@cpcqatar.com"
         },
         "copyright": "© 2024 COSMO PROJECTS & CONSTRUCTION. All rights reserved.",
-        "builtBy": "Built with excellence in Qatar"
+        "builtBy": "Built with excellence in Qatar",
+        "services": {
+            "title": "Services",
+            "earthworks": "Earthworks & Grading",
+            "asphalt": "Asphalt Paving",
+            "roadMarking": "Road Marking & Traffic Signs",
+            "interlock": "Interlock & Kerbstone",
+            "subGrade": "Sub-Grade & Sub-Base",
+            "steelWorks": "Steel Works"
+        },
+        "legalDocs": {
+            "title": "Legal Documents",
+            "certificates": "Company Certificates",
+            "commercialReg": "Commercial Registration",
+            "taxCard": "Tax Card",
+            "commercialPermit": "Commercial Permit"
+        },
+        "designedBy": "Designed by"
+    },
+    "megaCta": {
+        "eyebrow": "Ready to Construct?",
+        "line1": "LET'S CREATE",
+        "line2": "SOMETHING",
+        "line3": "EXTRAORDINARY",
+        "email": "Email",
+        "phone": "Phone",
+        "location": "Location"
+    },
+    "notFound": {
+        "message": "Oops! Page not found",
+        "returnHome": "Return to Home"
+    },
+    "whyChoose": {
+        "title": "Why Choose",
+        "titleHighlight": "CPC Qatar",
+        "track": {
+            "title": "Proven Track Record",
+            "desc": "Over 57 successfully completed projects with government ministries, international events, and private sector leaders"
+        },
+        "team": {
+            "title": "Expert Team",
+            "desc": "Highly qualified personnel with specialized expertise in road construction, earthworks, and infrastructure development"
+        },
+        "quality": {
+            "title": "Quality Assurance",
+            "desc": "Rigorous quality control measures ensuring excellence in workmanship and adherence to international standards"
+        },
+        "tech": {
+            "title": "Latest Technology",
+            "desc": "Utilizing cutting-edge equipment and modern construction techniques for efficient project delivery"
+        },
+        "time": {
+            "title": "Timely Completion",
+            "desc": "Strong project management ensuring on-time delivery without compromising quality or safety standards"
+        },
+        "client": {
+            "title": "Client Satisfaction",
+            "desc": "Constructing lasting relationships through exceptional performance and exceeding client expectations"
+        }
     }
 }

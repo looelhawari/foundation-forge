@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-construction.jpg";
+import { useTranslation } from "react-i18next";
 
 export const ServicesMarquee = () => {
+  const { t } = useTranslation();
+
   const services = [
-    "HIGHWAY CONSTRUCTION",
-    "STREET DEVELOPMENT", 
-    "INFRASTRUCTURE",
-    "BRIDGE CONSTRUCTION",
-    "ROAD MAINTENANCE",
+    t("servicesMarquee.highway", "HIGHWAY CONSTRUCTION"),
+    t("servicesMarquee.street", "STREET DEVELOPMENT"),
+    t("servicesMarquee.infrastructure", "INFRASTRUCTURE"),
+    t("servicesMarquee.bridge", "BRIDGE CONSTRUCTION"),
+    t("servicesMarquee.maintenance", "ROAD MAINTENANCE"),
   ];
 
   return (
@@ -67,7 +69,7 @@ export const ServicesMarquee = () => {
             viewport={{ once: true }}
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4"
           >
-            What We Do
+            {t("servicesMarquee.eyebrow", "What We Do")}
           </motion.span>
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
@@ -76,7 +78,7 @@ export const ServicesMarquee = () => {
             transition={{ delay: 0.1 }}
             className="font-display text-3xl md:text-4xl tracking-[0.2em]"
           >
-            OUR <span className="text-gradient">EXPERTISE</span>
+            {t("servicesMarquee.title", "OUR")} <span className="text-gradient">{t("servicesMarquee.titleHighlight", "EXPERTISE")}</span>
           </motion.h3>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import {
@@ -20,6 +21,7 @@ import SEOHead from "@/components/SEOHead";
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -45,9 +47,8 @@ const Contact = () => {
       });
 
       toast({
-        title: "Message Sent!",
-        description:
-          "Thank you for contacting us. We'll get back to you within 24 hours.",
+        title: t("contact.form.success", "Message Sent!"),
+        description: t("contact.form.successDescription", "Thank you for contacting us. We'll get back to you within 24 hours."),
       });
       setFormData({
         name: "",
@@ -59,11 +60,11 @@ const Contact = () => {
       });
     } catch (error) {
       toast({
-        title: "Error",
+        title: t("contact.errorTitle", "Error"),
         description:
           error instanceof Error
             ? error.message
-            : "Failed to send message. Please try again.",
+            : t("contact.form.errorDescription", "Failed to send message. Please try again."),
         variant: "destructive",
       });
     } finally {
@@ -98,14 +99,13 @@ const Contact = () => {
               className="max-w-4xl"
             >
               <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-                Get In Touch
+                {t("contact.hero.subtitle", "Get In Touch")}
               </span>
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
-                CONTACT <span className="text-gradient">US</span>
+                {t("contact.hero.title", "CONTACT")} <span className="text-gradient">{t("contact.title", "US")}</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl">
-                Ready to start your next project? Reach out to our team of
-                experts for a consultation and free quote.
+                {t("contact.hero.description", "Ready to start your next project? Reach out to our team of experts for a consultation and free quote.")}
               </p>
             </motion.div>
           </div>
@@ -123,13 +123,13 @@ const Contact = () => {
                 transition={{ duration: 0.8 }}
               >
                 <h2 className="font-display text-3xl tracking-wide mb-8">
-                  SEND US A <span className="text-gradient">MESSAGE</span>
+                  {t("contact.form.title", "SEND US A")} <span className="text-gradient">{t("contact.form.messageLabel", "MESSAGE")}</span>
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
-                        Full Name *
+                        {t("contact.form.name", "Full Name")} *
                       </label>
                       <Input
                         name="name"
@@ -137,12 +137,12 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="bg-secondary border-border focus:border-primary"
-                        placeholder="Your full name"
+                        placeholder={t("contact.form.namePlaceholder", "Your full name")}
                       />
                     </div>
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
-                        Email *
+                        {t("contact.form.email", "Email")} *
                       </label>
                       <Input
                         name="email"
@@ -151,51 +151,51 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="bg-secondary border-border focus:border-primary"
-                        placeholder="your@email.com"
+                        placeholder={t("contact.form.emailPlaceholder", "your@email.com")}
                       />
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
-                        Phone
+                        {t("contact.form.phone", "Phone")}
                       </label>
                       <Input
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         className="bg-secondary border-border focus:border-primary"
-                        placeholder="+974 XX XXX XXXX"
+                        placeholder={t("contact.form.phonePlaceholder", "+974 XX XXX XXXX")}
                       />
                     </div>
                     <div>
                       <label className="text-sm text-muted-foreground mb-2 block">
-                        Company
+                        {t("contact.form.company", "Company")}
                       </label>
                       <Input
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
                         className="bg-secondary border-border focus:border-primary"
-                        placeholder="Your company name"
+                        placeholder={t("contact.form.companyPlaceholder", "Your company name")}
                       />
                     </div>
                   </div>
                   <div>
                     <label className="text-sm text-muted-foreground mb-2 block">
-                      Subject
+                      {t("contact.form.subject", "Subject")}
                     </label>
                     <Input
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       className="bg-secondary border-border focus:border-primary"
-                      placeholder="What is this regarding?"
+                      placeholder={t("contact.form.subjectPlaceholder", "What is this regarding?")}
                     />
                   </div>
                   <div>
                     <label className="text-sm text-muted-foreground mb-2 block">
-                      Message *
+                      {t("contact.form.message", "Message")} *
                     </label>
                     <Textarea
                       name="message"
@@ -203,7 +203,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="bg-secondary border-border focus:border-primary min-h-[150px]"
-                      placeholder="Tell us about your project..."
+                      placeholder={t("contact.form.messagePlaceholder", "Tell us about your project...")}
                     />
                   </div>
                   <Button
@@ -216,12 +216,12 @@ const Contact = () => {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Sending...
+                        {t("contact.form.sending", "Sending...")}
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Send Message
+                        {t("contact.form.submit", "Send Message")}
                       </>
                     )}
                   </Button>
@@ -236,7 +236,7 @@ const Contact = () => {
                 transition={{ duration: 0.8 }}
               >
                 <h2 className="font-display text-3xl tracking-wide mb-8">
-                  CONTACT <span className="text-gradient">INFORMATION</span>
+                  {t("contact.info.title", "CONTACT")} <span className="text-gradient">{t("contact.infoLabel", "INFORMATION")}</span>
                 </h2>
 
                 <div className="space-y-6 mb-12">
@@ -246,7 +246,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">
-                        Head Office
+                        {t("contact.headOffice", "Head Office")}
                       </h4>
                       <p className="text-muted-foreground text-sm">
                         Mirqab Mall, Area No. 39, Street No.840
@@ -264,7 +264,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">
-                        Phone
+                        {t("contact.info.phone.title", "Phone")}
                       </h4>
                       <p className="text-muted-foreground text-sm">
                         <a
@@ -290,7 +290,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">
-                        Email
+                        {t("contact.info.email.title", "Email")}
                       </h4>
                       <p className="text-muted-foreground text-sm">
                         <a

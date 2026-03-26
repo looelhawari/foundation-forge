@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export const CinematicCTA = () => {
+  const { t } = useTranslation();
   return (
     <section className="relative py-32 md:py-48 overflow-hidden">
       {/* Background with Noise */}
@@ -21,7 +23,7 @@ export const CinematicCTA = () => {
             viewport={{ once: true }}
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
           >
-            Start Your Project
+            {t("cinematicCta.eyebrow", "Start Your Project")}
           </motion.span>
 
           <div className="overflow-hidden mb-4">
@@ -32,7 +34,7 @@ export const CinematicCTA = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-6xl md:text-7xl lg:text-8xl tracking-[0.05em]"
             >
-              LET'S CONSTRUCT
+              {t("cinematicCta.line1", "LET'S CONSTRUCT")}
             </motion.h2>
           </div>
           <div className="overflow-hidden mb-12">
@@ -43,7 +45,7 @@ export const CinematicCTA = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               className="font-display text-6xl md:text-7xl lg:text-8xl tracking-[0.05em] text-gradient"
             >
-              TOGETHER
+              {t("cinematicCta.line2", "TOGETHER")}
             </motion.h2>
           </div>
 
@@ -54,8 +56,7 @@ export const CinematicCTA = () => {
             transition={{ delay: 0.3 }}
             className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Ready to start your next infrastructure project? Our team of experts is here
-            to bring your vision to life with precision and excellence.
+            {t("cinematicCta.description", "Ready to start your next infrastructure project? Our team of experts is here to bring your vision to life with precision and excellence.")}
           </motion.p>
 
           <motion.div
@@ -67,14 +68,14 @@ export const CinematicCTA = () => {
           >
             <Button variant="hero" size="xl" asChild>
               <Link to="/contact" className="group">
-                Get a Free Quote
+                {t("common.getFreeQuote", "Get a Free Quote")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <a href="tel:+966123456789">
+              <a href="tel:+97444322743">
                 <Phone className="w-5 h-5" />
-                +966 12 345 6789
+                +974 4432-2743
               </a>
             </Button>
           </motion.div>
