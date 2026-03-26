@@ -770,6 +770,132 @@
     "subtitle": "Please read these terms and conditions carefully before using our website",
     "lastUpdated": "Last Updated: December 24, 2025"
   },
+  "contactPage": {
+    "hero": {
+      "subtitle": "Get In Touch",
+      "title1": "CONTACT",
+      "title2": "US",
+      "description": "Ready to start your next project? Reach out to our team of experts for a consultation and free quote."
+    },
+    "form": {
+      "title1": "SEND US A",
+      "title2": "MESSAGE",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+974 XX XXX XXXX",
+      "company": "Company",
+      "companyPlaceholder": "Your company name",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this regarding?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": {
+        "title": "Message Sent!",
+        "description": "Thank you for contacting us. We'll get back to you within 24 hours."
+      },
+      "error": {
+        "title": "Error",
+        "description": "Failed to send message. Please try again."
+      }
+    },
+    "info": {
+      "title1": "CONTACT",
+      "title2": "INFORMATION",
+      "headOffice": "Head Office",
+      "poBox": "P.O. Box",
+      "phone": "Phone",
+      "tel": "Tel",
+      "fax": "Fax",
+      "email": "Email"
+    },
+    "map": {
+      "notConfigured": "Map location not configured"
+    }
+  },
+  "certificates": {
+    "hero": {
+      "subtitle": "Our Credentials",
+      "title1": "CERTIFICATES &",
+      "title2": "DOCUMENTS",
+      "description": "Official company registration and certifications from Qatar authorities"
+    },
+    "downloadAll": "Download All Documents",
+    "documents": {
+      "cr": {
+        "title": "Commercial Registration",
+        "description": "Official company registration certificate"
+      },
+      "establishment": {
+        "title": "Establishment Card",
+        "description": "Business establishment certificate"
+      },
+      "tax": {
+        "title": "Tax Registration",
+        "description": "General Tax Authority registration"
+      },
+      "license": {
+        "title": "Trade License",
+        "description": "Official trade license"
+      }
+    },
+    "viewDocument": "View Document",
+    "downloadDocument": "Download"
+  },
+  "certificatesPage": {
+    "hero": {
+      "badge": "Legal Documents",
+      "title1": "Company",
+      "title2": "Certificates",
+      "description": "Access our official company documents and certifications. All documents are verified and up-to-date, demonstrating our commitment to transparency and compliance."
+    },
+    "documents": {
+      "cr": {
+        "title": "Commercial Registration",
+        "description": "Official commercial registration certificate valid until December 2029"
+      },
+      "computer": {
+        "title": "Computer Card",
+        "description": "Company computer card registration certificate valid until 2028"
+      },
+      "tax": {
+        "title": "Tax Card",
+        "description": "Official tax registration card from Qatar Tax Authority"
+      },
+      "permit": {
+        "title": "Commercial Permit",
+        "description": "Commercial permit certificate valid until October 2029"
+      }
+    },
+    "validUntil": "Valid until",
+    "viewDocument": "View Document",
+    "trust": {
+      "title": "Committed to Transparency",
+      "description": "At CPC Qatar, we believe in complete transparency. All our business operations are fully licensed and compliant with Qatar's regulatory requirements. These documents verify our legitimacy and commitment to operating with integrity."
+    },
+    "stats": {
+      "yearsInBusiness": {
+        "value": "10+",
+        "label": "Years in Business"
+      },
+      "projectsCompleted": {
+        "value": "100+",
+        "label": "Projects Completed"
+      },
+      "activeCertifications": {
+        "value": "4",
+        "label": "Active Certifications"
+      },
+      "complianceRate": {
+        "value": "100%",
+        "label": "Compliance Rate"
+      }
+    }
+  },
   "notFound": {
     "meta": {
       "title": "Page Not Found",
