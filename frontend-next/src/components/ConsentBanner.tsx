@@ -4,13 +4,25 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Shield } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale } from 'next-intl';
 
 const ConsentBanner = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const t = useTranslations('consentBanner');
     const locale = useLocale();
     const isRTL = locale === 'ar';
+
+    // Translations inline to avoid context issues
+    const t = {
+        title: isRTL ? 'خصوصيتك تهمنا' : 'Your Privacy Matters',
+        description: isRTL 
+            ? 'نستخدم معلومات الاتصال الخاصة بك فقط للرد على استفساراتك. باستخدامك لهذا الموقع، فإنك توافق على'
+            : 'We use your contact information only to respond to your inquiries. By using this website, you agree to our',
+        termsLink: isRTL ? 'شروط الاستخدام' : 'Terms of Use',
+        and: isRTL ? 'و' : 'and',
+        privacyLink: isRTL ? 'سياسة الخصوصية' : 'Privacy Policy',
+        accept: isRTL ? 'أفهم ذلك' : 'I Understand',
+        close: isRTL ? 'إغلاق' : 'Close banner',
+    };
 
     useEffect(() => {
         const hasAccepted = localStorage.getItem('termsAccepted');
@@ -53,7 +65,7 @@ const ConsentBanner = () => {
                                 <button
                                     onClick={handleClose}
                                     className={`absolute top-3 ${isRTL ? 'left-3' : 'right-3'} p-2 rounded-lg hover:bg-primary/10 transition-colors`}
-                                    aria-label={t('close')}
+                                    aria-label={t.close}
                                 >
                                     <X className="w-5 h-5 text-muted-foreground" />
                                 </button>
@@ -68,16 +80,16 @@ const ConsentBanner = () => {
 
                                         <div className="flex-1">
                                             <h3 className="font-display text-lg font-semibold mb-2">
-                                                {t('title')}
+                                                {t.title}
                                             </h3>
                                             <p className="text-muted-foreground text-sm leading-relaxed">
-                                                {t('description')}{' '}
+                                                {t.description}{' '}
                                                 <Link href="/terms" className="text-primary hover:underline font-medium">
-                                                    {t('termsLink')}
+                                                    {t.termsLink}
                                                 </Link>
-                                                {' '}{t('and')}{' '}
+                                                {' '}{t.and}{' '}
                                                 <Link href="/privacy" className="text-primary hover:underline font-medium">
-                                                    {t('privacyLink')}
+                                                    {t.privacyLink}
                                                 </Link>
                                                 .
                                             </p>
@@ -88,7 +100,7 @@ const ConsentBanner = () => {
                                                 onClick={handleAccept}
                                                 className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
                                             >
-                                                {t('accept')}
+                                                {t.accept}
                                             </button>
                                         </div>
                                     </div>
