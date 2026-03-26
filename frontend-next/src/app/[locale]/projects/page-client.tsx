@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/lib/router-compat";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -34,6 +35,7 @@ const categoryData: Record<string, { icon: string; description: string }> = {
 };
 
 const Projects = () => {
+  const t = useTranslations('projects');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedProjectType, setSelectedProjectType] = useState<"new" | "old" | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -158,7 +160,7 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <AnimatePresence mode="wait">
         {showLoader && (
-          <PageLoader title="PROJECTS" subtitle="Excellence in Every Construction" />
+          <PageLoader title={t('hero.pageLoader.title')} subtitle={t('hero.pageLoader.subtitle')} />
         )}
       </AnimatePresence>
 
@@ -196,11 +198,11 @@ const Projects = () => {
                       className="max-w-4xl mx-auto text-center"
                     >
                       <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
-                        OUR <span className="text-gradient">PROJECTS</span>
+                        {t('hero.title')}
                         <span className="sr-only"> — Road Construction &amp; Infrastructure Portfolio in Qatar</span>
                       </h1>
                       <p className="text-xl text-muted-foreground mb-8">
-                        Explore our portfolio of excellence
+                        {t('hero.subtitle')}
                       </p>
 
                       {/* Search Bar */}
@@ -209,7 +211,7 @@ const Projects = () => {
                         <Input
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          placeholder="Search projects..."
+                          placeholder={t('hero.searchPlaceholder')}
                           className="pl-12 h-12 bg-card border-border text-base"
                         />
                       </div>
@@ -235,7 +237,7 @@ const Projects = () => {
                           )}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Total Projects
+                          {t('stats.totalProjects')}
                         </div>
                       </div>
                       <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
@@ -247,7 +249,7 @@ const Projects = () => {
                           )}
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Categories
+                          {t('stats.categories')}
                         </div>
                       </div>
                       <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
@@ -255,7 +257,7 @@ const Projects = () => {
                           100%
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Success Rate
+                          {t('stats.successRate')}
                         </div>
                       </div>
                       <div className="bg-gradient-card border border-border rounded-lg p-4 sm:p-6 text-center">
@@ -263,7 +265,7 @@ const Projects = () => {
                           10+
                         </div>
                         <div className="text-sm text-muted-foreground">
-                          Years Experience
+                          {t('stats.yearsExperience')}
                         </div>
                       </div>
                     </motion.div>
@@ -278,14 +280,14 @@ const Projects = () => {
                       <div>
                         <div className="flex items-center justify-between mb-8">
                           <h2 className="text-2xl font-display">
-                            Search Results for "{searchQuery}"
+                            {t('search.title')} "{searchQuery}"
                           </h2>
                           <Button
                             variant="ghost"
                             onClick={() => setSearchQuery("")}
                             size="sm"
                           >
-                            Clear Search
+                            {t('search.clearSearch')}
                           </Button>
                         </div>
                         {isLoading ? (
@@ -331,7 +333,7 @@ const Projects = () => {
                                     </h3>
                                     <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                                       {project.description ||
-                                        "Road construction project"}
+                                        t('projectCard.defaultDescription')}
                                     </p>
                                     {project.location && (
                                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -348,10 +350,10 @@ const Projects = () => {
                           <div className="text-center py-16">
                             <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
                             <h3 className="text-xl font-medium mb-2">
-                              No projects found
+                              {t('search.noResults')}
                             </h3>
                             <p className="text-muted-foreground">
-                              Try a different search term
+                              {t('search.tryDifferent')}
                             </p>
                           </div>
                         )}
@@ -375,14 +377,14 @@ const Projects = () => {
                               </div>
                             </div>
                             <h3 className="font-display text-3xl tracking-wide mb-3 group-hover:text-primary transition-colors">
-                              New Projects
+                              {t('projectTypes.new.title')}
                             </h3>
                             <p className="text-muted-foreground mb-6">
-                              Explore our latest construction projects organized by category. Modern infrastructure and innovative designs.
+                              {t('projectTypes.new.description')}
                             </p>
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-primary font-medium">
-                                {categoriesWithCounts.length} Categories
+                                {categoriesWithCounts.length} {t('projectTypes.new.categoriesLabel')}
                               </span>
                               <span className="text-primary group-hover:translate-x-2 transition-transform text-2xl">
                                 →
@@ -407,14 +409,14 @@ const Projects = () => {
                               </div>
                             </div>
                             <h3 className="font-display text-3xl tracking-wide mb-3 group-hover:text-amber-500 transition-colors">
-                              Old Projects
+                              {t('projectTypes.old.title')}
                             </h3>
                             <p className="text-muted-foreground mb-6">
-                              Browse our historical portfolio of completed projects. A testament to our years of experience and expertise.
+                              {t('projectTypes.old.description')}
                             </p>
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-amber-500 font-medium">
-                                Legacy Collection
+                                {t('projectTypes.old.legacyLabel')}
                               </span>
                               <span className="text-amber-500 group-hover:translate-x-2 transition-transform text-2xl">
                                 →
@@ -449,7 +451,7 @@ const Projects = () => {
                       className="mb-6"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Projects
+                      {t('navigation.backToProjects')}
                     </Button>
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
@@ -463,10 +465,10 @@ const Projects = () => {
                         </div>
                         <div>
                           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
-                            New <span className="text-gradient">Projects</span>
+                            {t('projectTypes.new.title')} <span className="text-gradient">Projects</span>
                           </h2>
                           <p className="text-muted-foreground mt-2">
-                            Select a category to explore
+                            {t('navigation.selectCategory')}
                           </p>
                         </div>
                       </div>
@@ -537,7 +539,7 @@ const Projects = () => {
                       className="mb-6"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Projects
+                      {t('navigation.backToProjects')}
                     </Button>
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
@@ -550,13 +552,13 @@ const Projects = () => {
                         </div>
                         <div>
                           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide">
-                            Old <span className="text-amber-500">Projects</span>
+                            {t('projectTypes.old.title')} <span className="text-amber-500">Projects</span>
                           </h2>
                           <p className="text-muted-foreground mt-2">
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />
                             ) : (
-                              `${pagination?.totalItems || filteredProjects.length} Legacy Project${(pagination?.totalItems || filteredProjects.length) !== 1 ? "s" : ""}`
+                              `${pagination?.totalItems || filteredProjects.length} ${t('oldProjects.legacyLabel')}${(pagination?.totalItems || filteredProjects.length) !== 1 ? "s" : ""}`
                             )}
                           </p>
                         </div>
@@ -612,7 +614,7 @@ const Projects = () => {
                                     )}
                                     {project.client && (
                                       <div className="text-xs text-muted-foreground">
-                                        Client: <span className="text-foreground">{project.client}</span>
+                                        {t('projectCard.client')} <span className="text-foreground">{project.client}</span>
                                       </div>
                                     )}
                                     {project.year && (
@@ -635,10 +637,10 @@ const Projects = () => {
                       <div className="text-center py-16">
                         <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
                         <h3 className="text-xl font-medium mb-2">
-                          No old projects yet
+                          {t('oldProjects.noProjects')}
                         </h3>
                         <p className="text-muted-foreground">
-                          Legacy projects will appear here
+                          {t('oldProjects.legacyWillAppear')}
                         </p>
                       </div>
                     )}
@@ -651,18 +653,17 @@ const Projects = () => {
                           disabled={!pagination.hasPrevPage}
                           onClick={() => setCurrentPage((p) => p - 1)}
                         >
-                          Previous
+                          {t('navigation.previous')}
                         </Button>
                         <span className="flex items-center px-4 text-sm text-muted-foreground">
-                          Page {pagination.currentPage} of{" "}
-                          {pagination.totalPages}
+                          {t('navigation.pageOf', { current: pagination.currentPage, total: pagination.totalPages })}
                         </span>
                         <Button
                           variant="outline"
                           disabled={!pagination.hasNextPage}
                           onClick={() => setCurrentPage((p) => p + 1)}
                         >
-                          Next
+                          {t('navigation.next')}
                         </Button>
                       </div>
                     )}
@@ -692,7 +693,7 @@ const Projects = () => {
                       className="mb-6"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Categories
+                      {t('navigation.backToCategories')}
                     </Button>
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
@@ -712,7 +713,7 @@ const Projects = () => {
                             {isLoading ? (
                               <Skeleton className="h-5 w-24" />
                             ) : (
-                              `${filteredProjects.length} Project${filteredProjects.length !== 1 ? "s" : ""
+                              `${filteredProjects.length} ${t('categoryProjects.projectsLabel')}${filteredProjects.length !== 1 ? "s" : ""
                               }`
                             )}
                           </p>
@@ -789,10 +790,10 @@ const Projects = () => {
                       <div className="text-center py-16">
                         <FolderOpen className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
                         <h3 className="text-xl font-medium mb-2">
-                          No projects yet
+                          {t('categoryProjects.noProjects')}
                         </h3>
                         <p className="text-muted-foreground">
-                          Projects in this category will appear here
+                          {t('categoryProjects.projectsWillAppear')}
                         </p>
                       </div>
                     )}
@@ -805,18 +806,17 @@ const Projects = () => {
                           disabled={!pagination.hasPrevPage}
                           onClick={() => setCurrentPage((p) => p - 1)}
                         >
-                          Previous
+                          {t('navigation.previous')}
                         </Button>
                         <span className="flex items-center px-4 text-sm text-muted-foreground">
-                          Page {pagination.currentPage} of{" "}
-                          {pagination.totalPages}
+                          {t('navigation.pageOf', { current: pagination.currentPage, total: pagination.totalPages })}
                         </span>
                         <Button
                           variant="outline"
                           disabled={!pagination.hasNextPage}
                           onClick={() => setCurrentPage((p) => p + 1)}
                         >
-                          Next
+                          {t('navigation.next')}
                         </Button>
                       </div>
                     )}

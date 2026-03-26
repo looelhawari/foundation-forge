@@ -2,24 +2,26 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "@/lib/router-compat";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Projects", path: "/projects" },
-  { name: "Clients", path: "/clients" },
-  { name: "Contact", path: "/contact" },
-];
-
 export const MinimalHeader = () => {
+  const t = useTranslations('navigation');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  const navLinks = [
+    { nameKey: "home", path: "/" },
+    { nameKey: "about", path: "/about" },
+    { nameKey: "services", path: "/services" },
+    { nameKey: "projects", path: "/projects" },
+    { nameKey: "clients", path: "/clients" },
+    { nameKey: "contact", path: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +61,7 @@ export const MinimalHeader = () => {
                     : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
-                  {link.name}
+                  {t(link.nameKey)}
                 </Link>
               ))}
             </nav>
@@ -81,7 +83,7 @@ export const MinimalHeader = () => {
               to="/contact"
               className="hidden lg:block text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors"
             >
-              Get in Touch
+              {t('getInTouch')}
             </Link>
           </div>
         </div>
@@ -113,7 +115,7 @@ export const MinimalHeader = () => {
                       : "text-foreground hover:text-primary"
                       }`}
                   >
-                    {link.name.toUpperCase()}
+                    {t(link.nameKey).toUpperCase()}
                   </Link>
                 </motion.div>
               ))}

@@ -2,38 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
-const introData = {
-    title: "WHO WE ARE",
-    subtitle: "Construction Excellence",
-    description: "Established in 2017, we've completed over 57 projects across Doha and beyond, serving government ministries, private developers, and international clients",
-
-    mission: {
-        title: "Mission",
-        content: "To sustain the high level of qualified personnel and construct a Professional team committed to serve our clients. Our pledge is to establish lasting relationships with our customers by exceeding their Expectations and gaining their trust, through exceptional Performance by every member of the construction team."
-    },
-
-    objectives: {
-        title: "Objectives",
-        content: "To be one of the leading firms in the state of Qatar in the field of road Construction. CPC will do the best to offer excellent services by providing high quality of work and applying the latest available technology for the industry."
-    },
-
-    overview: {
-        title: "Overview",
-        content: "CPC QATAR established to accept new challenges in Earthworks field especially Construction of Asphalt Pavements and Road Marking. CPC QATAR has proved its capacity to undertake projects in its related fields due to excellence in workmanship, professionalism and timely completion. Guided by able and experienced management, coupled by able and specialized staff in each of its divisions."
-    }
-};
-
-const features = [
-    "Project Planning",
-    "Construction Management",
-    "Engineering Supervision",
-    "Quality Assurance",
-    "Safety Inspection",
-    "Project Cost Control"
-];
-
-// Counter animation component — SSR shows final value, then animates from 0 on client
 const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
     const [count, setCount] = useState(target);
     const ref = useRef<HTMLSpanElement>(null);
@@ -79,6 +49,7 @@ const CounterNumber = ({ target, suffix = "" }: { target: number; suffix?: strin
 };
 
 export function CompanyIntro() {
+    const t = useTranslations('companyIntro');
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: sectionRef,
@@ -114,7 +85,7 @@ export function CompanyIntro() {
                         className="mb-4"
                     >
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 mb-4">
-                            {introData.title}
+                            {t('title')}
                         </h2>
                     </motion.div>
 
@@ -133,7 +104,7 @@ export function CompanyIntro() {
                         transition={{ delay: 0.4, duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        {introData.subtitle}
+                        {t('subtitle')}
                     </motion.p>
 
                     <motion.p
@@ -143,7 +114,7 @@ export function CompanyIntro() {
                         transition={{ delay: 0.5, duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        {introData.description}
+                        {t('description')}
                     </motion.p>
 
                     {/* Stats */}
@@ -158,13 +129,13 @@ export function CompanyIntro() {
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-2">
                                 <CounterNumber target={57} suffix="+" />
                             </div>
-                            <div className="text-gray-400">Projects</div>
+                            <div className="text-gray-400">{t('stats.projects')}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-400 mb-2">
                                 <CounterNumber target={8} suffix="+" />
                             </div>
-                            <div className="text-gray-400">Years</div>
+                            <div className="text-gray-400">{t('stats.years')}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-amber-400 mb-2">
@@ -177,12 +148,12 @@ export function CompanyIntro() {
                 {/* Three Column Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-20">
                     {[
-                        { data: introData.mission, delay: 0 },
-                        { data: introData.objectives, delay: 0.1 },
-                        { data: introData.overview, delay: 0.2 }
+                        { titleKey: 'mission.title', contentKey: 'mission.content', delay: 0 },
+                        { titleKey: 'objectives.title', contentKey: 'objectives.content', delay: 0.1 },
+                        { titleKey: 'overview.title', contentKey: 'overview.content', delay: 0.2 }
                     ].map((item) => (
                         <motion.div
-                            key={item.data.title}
+                            key={item.titleKey}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: item.delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -191,11 +162,11 @@ export function CompanyIntro() {
                         >
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 mb-4">
-                                    {item.data.title}
+                                    {t(item.titleKey)}
                                 </h3>
                                 <div className="h-1 bg-gradient-to-r from-amber-400 to-transparent mb-6 w-16 group-hover:w-full transition-all duration-500" />
                                 <p className="text-gray-300 leading-relaxed">
-                                    {item.data.content}
+                                    {t(item.contentKey)}
                                 </p>
                             </div>
                         </motion.div>
@@ -211,7 +182,7 @@ export function CompanyIntro() {
                     className="text-center"
                 >
                     <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                        Project Responsibilities
+                        {t('responsibilities')}
                     </h3>
 
                     <motion.div
@@ -223,9 +194,16 @@ export function CompanyIntro() {
                     />
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                        {features.map((feature, index) => (
+                        {[
+                            { key: 'planning' },
+                            { key: 'management' },
+                            { key: 'supervision' },
+                            { key: 'assurance' },
+                            { key: 'safety' },
+                            { key: 'control' }
+                        ].map((feature, index) => (
                             <motion.div
-                                key={feature}
+                                key={feature.key}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{
@@ -236,7 +214,7 @@ export function CompanyIntro() {
                                 className="p-4 sm:p-6 rounded-2xl bg-gray-800/30 border border-white/10 hover:border-amber-500/30 transition-colors duration-300 cursor-pointer"
                             >
                                 <p className="text-white font-medium text-center">
-                                    {feature}
+                                    {t(`features.${feature.key}`)}
                                 </p>
                             </motion.div>
                         ))}

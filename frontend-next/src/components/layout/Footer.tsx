@@ -28,12 +28,12 @@ export const Footer = () => {
   ];
 
   const services = [
-    { name: tServices('list.earthworks.title'), href: "/services/earthworks" },
-    { name: tServices('list.asphalt.title'), href: "/services/asphalt-works" },
-    { name: tServices('list.roadMarking.title'), href: "/services/road-marking" },
-    { name: tServices('list.interlock.title'), href: "/services/interlock-kerbstone" },
-    { name: tServices('list.subgrade.title'), href: "/services/subgrade-subbase" },
-    { name: tServices('list.infrastructure.title'), href: "/services/infrastructure-development" },
+    { name: tServices('items.earthworks.title'), href: "/services/earthworks" },
+    { name: tServices('items.asphalt.title'), href: "/services/asphalt-works" },
+    { name: tServices('items.roadMarking.title'), href: "/services/road-marking" },
+    { name: tServices('items.interlock.title'), href: "/services/interlock-kerbstone" },
+    { name: tServices('items.subgrade.title'), href: "/services/subgrade-subbase" },
+    { name: tServices('items.infrastructure.title'), href: "/services/infrastructure-development" },
   ];
 
   return (

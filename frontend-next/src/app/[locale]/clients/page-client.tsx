@@ -6,9 +6,9 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { Header } from "@/components/layout/Header";
-import { MinimalHeader } from "@/components/layout/MinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { MegaCTA } from "@/components/sections/MegaCTA";
 import {
@@ -185,6 +185,7 @@ const getGradientColors = (colorClass: string): string => {
 };
 
 export default function Clients() {
+  const t = useTranslations('clients');
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
@@ -194,7 +195,7 @@ export default function Clients() {
         arDescription="عملاء شركة كوزمو للمشاريع والإنشاءات — وزارات حكومية وشركات خاصة في قطر"
         keywords="CPC Qatar clients, government contractor Qatar, construction clients Doha, Ministry of Education contractor, عملاء شركة مقاولات قطر"
       />
-      <MinimalHeader />
+      <Header />
       <main>
         <ClientCategoriesSection />
         <TestimonialsSection />
@@ -207,6 +208,7 @@ export default function Clients() {
 }
 
 function HeroSection() {
+  const t = useTranslations('clients');
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
@@ -239,7 +241,7 @@ function HeroSection() {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
           >
-            Trusted Partnerships
+            {t('hero.tagline')}
           </motion.span>
 
           {/* SEO H1 — screen-reader + Googlebot visible, hidden visually */}
@@ -256,7 +258,7 @@ function HeroSection() {
               }}
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em]"
             >
-              CONSTRUCTING
+              {t('hero.line1')}
             </motion.h2>
           </div>
           <div className="overflow-hidden">
@@ -270,7 +272,7 @@ function HeroSection() {
               }}
               className="font-display text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.9] tracking-[0.02em] text-gradient"
             >
-              QATAR'S FUTURE
+              {t('hero.line2')}
             </motion.h2>
           </div>
 
@@ -280,9 +282,7 @@ function HeroSection() {
             transition={{ delay: 1 }}
             className="mt-12 text-xl text-muted-foreground max-w-2xl"
           >
-            Trusted by Qatar's leading government ministries, international
-            corporations, and royal families since 2017. Over 57 completed
-            projects demonstrating excellence in infrastructure development.
+            {t('hero.description')}
           </motion.p>
         </motion.div>
       </div>
@@ -291,6 +291,7 @@ function HeroSection() {
 }
 
 function StatsBanner() {
+  const t = useTranslations('clients');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -314,26 +315,26 @@ function StatsBanner() {
             {
               value: 45,
               suffix: "+",
-              label: "MAJOR CLIENTS",
-              description: "Government & Private",
+              label: t('stats.majorClients'),
+              description: t('stats.majorClientsDesc'),
             },
             {
               value: 57,
               suffix: "+",
-              label: "COMPLETED PROJECTS",
-              description: "Since 2017",
+              label: t('stats.completedProjects'),
+              description: t('stats.completedProjectsDesc'),
             },
             {
               value: 26,
               suffix: "M+",
-              label: "TOTAL VALUE (QR)",
-              description: "Project Portfolio",
+              label: t('stats.totalValue'),
+              description: t('stats.totalValueDesc'),
             },
             {
               value: 100,
               suffix: "%",
-              label: "SATISFACTION",
-              description: "Client Trust",
+              label: t('stats.satisfaction'),
+              description: t('stats.satisfactionDesc'),
             },
           ].map((stat, index) => (
             <motion.div
@@ -366,6 +367,7 @@ function StatsBanner() {
 }
 
 function ClientCategoriesSection() {
+  const t = useTranslations('clients');
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [clientCategories, setClientCategories] = useState<ClientCategory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -445,6 +447,18 @@ function ClientCategoriesSection() {
 
   return (
     <section className="py-16 sm:py-24 md:py-32 lg:py-48 relative overflow-hidden">
+      {/* SEO Content - Hidden from users but visible to search engines */}
+      <h2 className="sr-only">Trusted by Qatar's Leading Authorities</h2>
+      <p className="sr-only">CPC Qatar is an approved contractor delivering road construction and infrastructure works for Qatar's most prominent government and private sector organizations.</p>
+      <p className="sr-only">Ashghal — Public Works Authority Qatar - Road &amp; infrastructure projects</p>
+      <p className="sr-only">Ministry of Education — Qatar - School campus infrastructure</p>
+      <p className="sr-only">Qatar Museums - Museum site development</p>
+      <p className="sr-only">DHL Qatar - Logistics facility works</p>
+      <p className="sr-only">Al Meera Consumer Goods - Retail branch infrastructure</p>
+      <p className="sr-only">IMALCO Qatar - Industrial facility works</p>
+      <p className="sr-only">Ministry of Awqaf &amp; Islamic Affairs - Mosque infrastructure</p>
+      <p className="sr-only">FIFA World Cup Qatar 2022 - World Cup venue works</p>
+
       <MorphingBlob className="w-[500px] h-[500px] bottom-0 -left-48" />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -455,7 +469,7 @@ function ClientCategoriesSection() {
           className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Diverse Portfolio
+            {t('categoriesSection.tagline')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -465,7 +479,7 @@ function ClientCategoriesSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              OUR <span className="text-gradient">CLIENTS</span>
+              {t('categoriesSection.title')} <span className="text-gradient">{t('categoriesSection.titleHighlight')}</span>
             </motion.h2>
           </div>
           <motion.p
@@ -475,9 +489,7 @@ function ClientCategoriesSection() {
             transition={{ delay: 0.3 }}
             className="mt-8 text-lg text-muted-foreground max-w-3xl mx-auto"
           >
-            From government ministries to royal families, from international
-            corporations to local businesseswe deliver excellence across all
-            sectors.
+            {t('categoriesSection.description')}
           </motion.p>
         </motion.div>
 
@@ -552,7 +564,7 @@ function ClientCategoriesSection() {
                       {client.projects}
                     </div>
                     <div className="text-xs text-muted-foreground tracking-wider">
-                      PROJECTS
+                      {t('clientCard.projects')}
                     </div>
                   </div>
                   {client.value && (
@@ -561,7 +573,7 @@ function ClientCategoriesSection() {
                         {client.value}
                       </div>
                       <div className="text-xs text-muted-foreground tracking-wider">
-                        VALUE
+                        {t('clientCard.value')}
                       </div>
                     </div>
                   )}
@@ -597,6 +609,7 @@ function ClientCategoriesSection() {
 }
 
 function TestimonialsSection() {
+  const t = useTranslations('clients');
   const [activeIndex, setActiveIndex] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -675,7 +688,7 @@ function TestimonialsSection() {
           className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            What They Say
+            {t('testimonials.tagline')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -685,7 +698,7 @@ function TestimonialsSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              CLIENT <span className="text-gradient">TESTIMONIALS</span>
+              {t('testimonials.title')} <span className="text-gradient">{t('testimonials.titleHighlight')}</span>
             </motion.h2>
           </div>
         </motion.div>
@@ -703,12 +716,10 @@ function TestimonialsSection() {
             >
               <div className="text-6xl mb-6">💬</div>
               <h3 className="font-display text-2xl mb-4">
-                No Testimonials Yet
+                {t('testimonials.noTestimonials')}
               </h3>
               <p className="text-muted-foreground mb-8">
-                Be the first to share your experience working with CPC Qatar!
-                Your feedback helps us improve and showcases our commitment to
-                excellence.
+                {t('testimonials.noTestimonialsDesc')}
               </p>
               <Button
                 onClick={() => setShowSubmitForm(true)}
@@ -716,7 +727,7 @@ function TestimonialsSection() {
                 className="px-8"
               >
                 <Send className="h-4 w-4 mr-2" />
-                Submit Your Testimonial
+                {t('testimonials.submitButton')}
               </Button>
             </motion.div>
           </div>
@@ -825,12 +836,10 @@ function TestimonialsSection() {
           className="mt-24 max-w-2xl mx-auto text-center"
         >
           <h3 className="font-display text-2xl md:text-3xl mb-4">
-            Share Your Experience
+            {t('testimonials.shareExperienceTitle')}
           </h3>
           <p className="text-muted-foreground mb-8">
-            Have you worked with CPC Qatar? We'd love to hear about your
-            experience! Your testimonial helps us improve and showcases our
-            commitment to excellence.
+            {t('testimonials.shareExperienceDesc')}
           </p>
 
           <AnimatePresence mode="wait">
@@ -847,7 +856,7 @@ function TestimonialsSection() {
                   className="px-8"
                 >
                   <Send className="h-4 w-4 mr-2" />
-                  Submit Your Testimonial
+                  {t('testimonials.submitButton')}
                 </Button>
               </motion.div>
             ) : (
@@ -870,6 +879,7 @@ function TestimonialsSection() {
 }
 
 function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
+  const t = useTranslations('clients');
   const [formData, setFormData] = useState<TestimonialFormData>({
     client_name: "",
     company_name: "",
@@ -888,7 +898,7 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
-        toast.error("Logo file must be less than 2MB");
+        toast.error(t('testimonialForm.logoTooLarge'));
         return;
       }
       setCompanyLogo(file);
@@ -902,11 +912,11 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
     e.preventDefault();
 
     if (!formData.client_name.trim()) {
-      toast.error("Please enter your name");
+      toast.error(t('testimonialForm.errorName'));
       return;
     }
     if (!formData.content.trim() || formData.content.trim().length < 20) {
-      toast.error("Testimonial must be at least 20 characters");
+      toast.error(t('testimonialForm.errorTestimonial'));
       return;
     }
 
@@ -925,7 +935,7 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
           );
           logoUrl = uploadResponse.data.url;
         } catch {
-          toast.error("Failed to upload logo. Submitting without logo.");
+          toast.error(t('testimonialForm.errorUpload'));
         }
         setIsUploading(false);
       }
@@ -937,7 +947,7 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
       });
 
       toast.success(
-        "Thank you! Your testimonial has been submitted for review.",
+        t('testimonialForm.successMessage'),
       );
       onClose();
     } catch (error) {
@@ -958,10 +968,10 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
         {/* Name and Company */}
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="client_name">Your Name *</Label>
+            <Label htmlFor="client_name">{t('testimonialForm.nameLabel')}</Label>
             <Input
               id="client_name"
-              placeholder="John Doe"
+              placeholder={t('testimonialForm.namePlaceholder')}
               value={formData.client_name}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -973,10 +983,10 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="company_name">Company Name</Label>
+            <Label htmlFor="company_name">{t('testimonialForm.companyLabel')}</Label>
             <Input
               id="company_name"
-              placeholder="Your Company"
+              placeholder={t('testimonialForm.companyPlaceholder')}
               value={formData.company_name}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -991,10 +1001,10 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
         {/* Position and Email */}
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="position">Your Position</Label>
+            <Label htmlFor="position">{t('testimonialForm.positionLabel')}</Label>
             <Input
               id="position"
-              placeholder="Project Manager"
+              placeholder={t('testimonialForm.positionPlaceholder')}
               value={formData.position}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, position: e.target.value }))
@@ -1002,11 +1012,11 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Email (Optional)</Label>
+            <Label htmlFor="email">{t('testimonialForm.emailLabel')}</Label>
             <Input
               id="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder={t('testimonialForm.emailPlaceholder')}
               value={formData.email}
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, email: e.target.value }))
@@ -1017,11 +1027,11 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
 
         {/* Company Logo */}
         <div className="space-y-2">
-          <Label>Company Logo (Optional)</Label>
+          <Label>{t('testimonialForm.logoLabel')}</Label>
           <div className="flex items-center gap-4">
             <label className="flex items-center gap-2 px-4 py-2 border border-dashed border-border rounded-lg cursor-pointer hover:border-primary transition-colors">
               <Upload className="h-4 w-4" />
-              <span className="text-sm">Upload Logo</span>
+              <span className="text-sm">{t('testimonialForm.logoLabel')}</span>
               <input
                 type="file"
                 accept="image/*"
@@ -1040,13 +1050,13 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             )}
           </div>
           <p className="text-xs text-muted-foreground">
-            Max 2MB. PNG or JPG recommended.
+            {t('testimonialForm.logoHint')}
           </p>
         </div>
 
         {/* Rating */}
         <div className="space-y-2">
-          <Label>Rating</Label>
+          <Label>{t('testimonialForm.ratingLabel')}</Label>
           <div className="flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -1070,10 +1080,10 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
 
         {/* Testimonial Content */}
         <div className="space-y-2">
-          <Label htmlFor="content">Your Testimonial *</Label>
+          <Label htmlFor="content">{t('testimonialForm.testimonialLabel')}</Label>
           <Textarea
             id="content"
-            placeholder="Share your experience working with CPC Qatar... (minimum 20 characters)"
+            placeholder={t('testimonialForm.testimonialPlaceholder')}
             value={formData.content}
             onChange={(e) =>
               setFormData((prev) => ({ ...prev, content: e.target.value }))
@@ -1083,7 +1093,7 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             minLength={20}
           />
           <p className="text-xs text-muted-foreground text-right">
-            {formData.content.length}/2000 characters
+            {formData.content.length}/2000 {t('testimonialForm.characters')}
           </p>
         </div>
 
@@ -1095,7 +1105,7 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             onClick={onClose}
             className="flex-1"
           >
-            Cancel
+            {t('testimonialForm.cancelButton')}
           </Button>
           <Button
             type="submit"
@@ -1105,20 +1115,19 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
             {isSubmitting || isUploading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                {isUploading ? "Uploading..." : "Submitting..."}
+                {isUploading ? t('testimonialForm.uploading') : t('testimonialForm.submitting')}
               </>
             ) : (
               <>
                 <Send className="h-4 w-4 mr-2" />
-                Submit Testimonial
+                {t('testimonialForm.submitButton')}
               </>
             )}
           </Button>
         </div>
 
         <p className="text-xs text-center text-muted-foreground pt-2">
-          Your testimonial will be reviewed by our team before being published.
-          Pending reviews expire after 72 hours.
+          {t('testimonialForm.reviewDisclaimer')}
         </p>
       </div>
     </motion.form>
@@ -1126,29 +1135,11 @@ function TestimonialSubmitForm({ onClose }: { onClose: () => void }) {
 }
 
 function WhyChooseSection() {
-  const features = [
-    {
-      title: "Government Approved",
-      description:
-        "C.R. 108122  Licensed by Qatar authorities  Full compliance",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Proven Track Record",
-      description: "90+ completed projects  26M+ QR total value  Since 2017",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Quality Assurance",
-      description: "ISO standards  Safety first  Timely completion",
-      icon: CheckCircle2,
-    },
-    {
-      title: "Diverse Expertise",
-      description: "8+ sectors  Government to private  Royal clients",
-      icon: CheckCircle2,
-    },
-  ];
+  const t = useTranslations('clients');
+  const features = t.raw('whyChoose.features') as Array<{
+    title: string;
+    description: string;
+  }>;
 
   return (
     <section className="py-32 md:py-48 relative overflow-hidden">
@@ -1162,7 +1153,7 @@ function WhyChooseSection() {
           className="text-center mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Why Choose Us
+            {t('whyChoose.tagline')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -1172,14 +1163,14 @@ function WhyChooseSection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
             >
-              TRUSTED <span className="text-gradient">EXCELLENCE</span>
+              {t('whyChoose.title')} <span className="text-gradient">{t('whyChoose.titleHighlight')}</span>
             </motion.h2>
           </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {features.map((feature, index) => {
-            const Icon = feature.icon;
+            const Icon = CheckCircle2;
             return (
               <motion.div
                 key={index}

@@ -9,10 +9,8 @@ const ConsentBanner = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Check if user has already accepted
         const hasAccepted = localStorage.getItem('termsAccepted');
         if (!hasAccepted) {
-            // Show banner after a short delay
             setTimeout(() => setIsVisible(true), 1000);
         }
     }, []);
@@ -24,11 +22,9 @@ const ConsentBanner = () => {
 
     const handleClose = () => {
         setIsVisible(false);
-        // Set a temporary flag to not show again during this session
         sessionStorage.setItem('bannerDismissed', 'true');
     };
 
-    // Don't show if dismissed this session
     useEffect(() => {
         const dismissed = sessionStorage.getItem('bannerDismissed');
         if (dismissed) {
@@ -49,7 +45,6 @@ const ConsentBanner = () => {
                     <div className="max-w-7xl mx-auto">
                         <div className="bg-background/95 backdrop-blur-lg border-2 border-primary/20 rounded-xl shadow-2xl overflow-hidden">
                             <div className="relative">
-                                {/* Close button */}
                                 <button
                                     onClick={handleClose}
                                     className="absolute top-3 right-3 p-2 rounded-lg hover:bg-primary/10 transition-colors"
@@ -60,14 +55,12 @@ const ConsentBanner = () => {
 
                                 <div className="p-6 md:p-8 pr-12">
                                     <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-                                        {/* Icon */}
                                         <div className="shrink-0">
                                             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                                                 <Shield className="w-6 h-6 text-primary" />
                                             </div>
                                         </div>
 
-                                        {/* Content */}
                                         <div className="flex-1">
                                             <h3 className="font-display text-lg font-semibold mb-2">
                                                 Your Privacy Matters
@@ -86,7 +79,6 @@ const ConsentBanner = () => {
                                             </p>
                                         </div>
 
-                                        {/* Accept button */}
                                         <div className="w-full md:w-auto">
                                             <button
                                                 onClick={handleAccept}
@@ -98,7 +90,6 @@ const ConsentBanner = () => {
                                     </div>
                                 </div>
 
-                                {/* Accent bar */}
                                 <div className="h-1 bg-gradient-to-r from-primary via-primary/50 to-primary" />
                             </div>
                         </div>

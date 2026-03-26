@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ProjectsPage from "./page-client";
 import { projects, projectCategories, stats } from "@/data/projects";
+import { getTranslations } from "next-intl/server";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 
@@ -59,7 +60,8 @@ const categoryGroups = projectCategories.filter(c => c !== "All").reduce((acc, c
     return acc;
 }, {} as Record<string, typeof projects>);
 
-export default function Page() {
+export default async function Page() {
+    const t = await getTranslations('projects');
     return (
         <>
             <script
@@ -68,57 +70,130 @@ export default function Page() {
             />
             <ProjectsPage />
 
-            {/* Server-rendered SEO content — ensures Google can crawl project data
-                even though the interactive client component loads projects via API */}
-            <section className="bg-background border-t border-border">
-                <div className="container mx-auto px-6 py-16 max-w-5xl">
-                    <h2 className="font-display text-3xl md:text-4xl mb-4">
-                        CPC Qatar — Road Construction & Infrastructure Project Portfolio
-                    </h2>
-                    <p className="text-muted-foreground text-lg mb-10 max-w-3xl">
-                        Since 2017, <strong>Cosmo Projects &amp; Construction and Trading W.L.L. (CPC Qatar)</strong> has
-                        delivered {stats.projectsCompleted}+ road construction, asphalt paving, earthworks, and civil
-                        infrastructure projects across Doha and Qatar — serving government ministries, international
-                        organisations, and private developers. Browse our full portfolio below.
-                    </p>
+            {/* Server-rendered SEO content — hidden from users but crawlable by search engines */}
+            <section className="hidden">
+                <div className="container mx-auto px-6 max-w-6xl">
+                    {/* Hero Section */}
+                    <div className="mb-16">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                            <span className="w-2 h-2 rounded-full bg-primary" />
+                            <span className="text-sm font-medium text-primary">Our Portfolio</span>
+                        </div>
+                        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-wide mb-6">
+                            CPC Qatar Project Portfolio
+                        </h2>
+                        <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+                            Since 2017, <strong>Cosmo Projects &amp; Construction and Trading W.L.L.</strong> has delivered <strong className="text-primary">{stats.projectsCompleted}+ projects</strong> across road construction, asphalt paving, earthworks, and civil infrastructure — serving government ministries, international organisations, and private developers throughout Doha and Qatar.
+                        </p>
+                    </div>
 
-                    {Object.entries(categoryGroups).map(([category, catProjects]) => (
-                        <div key={category} className="mb-10">
-                            <h3 className="text-xl font-semibold text-primary mb-3">
-                                {category} Projects ({catProjects.length})
+                    {/* Categories Grid */}
+                    <div className="mb-20">
+                        <h3 className="font-display text-2xl md:text-3xl tracking-wide mb-10 text-center">
+                            {t('categories.heading')}
+                        </h3>
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                            {Object.entries(categoryGroups).map(([category, catProjects]) => (
+                                <div key={category} className="group bg-card rounded-2xl border border-border p-6 hover:border-primary/50 hover:shadow-xl transition-all duration-300">
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div>
+                                            <h4 className="font-display text-xl tracking-wide text-foreground group-hover:text-primary transition-colors">
+                                                {category}
+                                            </h4>
+                                            <p className="text-sm text-muted-foreground mt-1">
+                                                {catProjects.length} {catProjects.length === 1 ? 'project' : 'projects'}
+                                            </p>
+                                        </div>
+                                        <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                                            {catProjects.length}
+                                        </span>
+                                    </div>
+                                    <ul className="space-y-2">
+                                        {catProjects.slice(0, 4).map((p) => (
+                                            <li key={p.id} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                                <a href={`/projects/${p.id}`} className="flex items-start gap-2 group/item">
+                                                    <span className="text-primary/60 group-hover/item:text-primary mt-0.5">→</span>
+                                                    <div>
+                                                        <div className="font-medium text-foreground">{p.title}</div>
+                                                        {p.location && <div className="text-xs text-muted-foreground">{p.location}</div>}
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        ))}
+                                        {catProjects.length > 4 && (
+                                            <li className="text-xs font-medium text-primary pt-2">
+                                                +{catProjects.length - 4} {t('seo.moreProjects')}
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Services & Clients */}
+                    <div className="grid md:grid-cols-2 gap-12">
+                        {/* Services */}
+                        <div>
+                            <h3 className="font-display text-2xl md:text-3xl tracking-wide mb-8">
+                                {t('seo.servicesHeading')}
                             </h3>
-                            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
-                                {catProjects.map((p) => (
-                                    <li key={p.id} className="text-muted-foreground py-1">
-                                        <a href={`/projects/${p.id}`} className="hover:text-primary transition-colors">
-                                            <strong>{p.title}</strong>
-                                            {p.location && <span className="text-sm"> — {p.location}</span>}
-                                        </a>
-                                    </li>
+                            <div className="grid grid-cols-1 gap-4">
+                                {[
+                                    { title: "Earthworks &amp; Site Preparation", href: "/services/earthworks" },
+                                    { title: "Asphalt Paving &amp; Hot Mix", href: "/services/asphalt-works" },
+                                    { title: "Road Marking &amp; Traffic Solutions", href: "/services/road-marking" },
+                                    { title: "Interlock &amp; Kerbstone Installation", href: "/services/interlock-kerbstone" },
+                                    { title: "Sub-grade &amp; Sub-base Preparation", href: "/services/subgrade-subbase" },
+                                    { title: "Infrastructure Development", href: "/services/infrastructure-development" }
+                                ].map((service, i) => (
+                                    <a
+                                        key={i}
+                                        href={service.href}
+                                        className="group flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                                    >
+                                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
+                                            ✓
+                                        </div>
+                                        <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                                            {service.title}
+                                        </span>
+                                    </a>
                                 ))}
-                            </ul>
+                            </div>
                         </div>
-                    ))}
 
-                    <div className="mt-12 pt-8 border-t border-border grid sm:grid-cols-2 gap-8">
+                        {/* Key Clients */}
                         <div>
-                            <h3 className="text-lg font-semibold mb-3">Our Services</h3>
-                            <ul className="space-y-2 text-muted-foreground">
-                                <li><a href="/services/earthworks" className="hover:text-primary transition-colors">Earthworks &amp; Site Preparation</a></li>
-                                <li><a href="/services/asphalt-works" className="hover:text-primary transition-colors">Asphalt Paving &amp; Hot Mix</a></li>
-                                <li><a href="/services/road-marking" className="hover:text-primary transition-colors">Road Marking &amp; Traffic Solutions</a></li>
-                                <li><a href="/services/interlock-kerbstone" className="hover:text-primary transition-colors">Interlock &amp; Kerbstone Installation</a></li>
-                                <li><a href="/services/subgrade-subbase" className="hover:text-primary transition-colors">Sub-grade &amp; Sub-base Preparation</a></li>
-                                <li><a href="/services/infrastructure-development" className="hover:text-primary transition-colors">Infrastructure Development</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-semibold mb-3">Key Clients</h3>
-                            <p className="text-muted-foreground leading-relaxed">
-                                Ministry of Education, Ministry of Waqif, Qatar Museums, FIFA World Cup Qatar 2022,
-                                DHL, Al Meera, Save Storage W.L.L., Galva Steel, National Factory for Foam and Furniture,
-                                Mesopotamia For General Contracting, and private developers across Qatar.
-                            </p>
+                            <h3 className="font-display text-2xl md:text-3xl tracking-wide mb-8">
+                                {t('seo.clientsHeading')}
+                            </h3>
+                            <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl border border-primary/20 p-8">
+                                <p className="text-muted-foreground leading-relaxed mb-6">
+                                    {t('seo.clientsIntro')}
+                                </p>
+                                <ul className="space-y-3">
+                                    {[
+                                        "Ministry of Education",
+                                        "Ministry of Waqif",
+                                        "Qatar Museums",
+                                        "FIFA World Cup Qatar 2022",
+                                        "DHL",
+                                        "Al Meera",
+                                        "Save Storage W.L.L.",
+                                        "Galva Steel",
+                                        "National Factory for Foam and Furniture",
+                                        "And leading private developers across Qatar"
+                                    ].map((client, i) => (
+                                        <li key={i} className="flex items-center gap-3">
+                                            <span className="inline-flex w-5 h-5 rounded-full bg-primary/20 items-center justify-center text-xs text-primary font-semibold">
+                                                ★
+                                            </span>
+                                            <span className="text-sm font-medium text-foreground">{client}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

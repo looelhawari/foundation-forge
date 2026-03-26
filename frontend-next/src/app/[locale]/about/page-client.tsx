@@ -9,6 +9,7 @@ import { CompanyIntro } from "@/components/sections/CompanyIntro";
 import { AnimatedCounter, ImageReveal } from "@/components/animations/MotionGraphics";
 import { Award, Users, Building, Target, Shield, Lightbulb, Star } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslations } from "next-intl";
 import SEOHead from "@/components/SEOHead";
 const engineerImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312006/cpc-website/engineer-portrait.jpg";
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
@@ -63,6 +64,7 @@ const milestones = [
 
 const About = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations('about');
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -111,7 +113,7 @@ const About = () => {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
               >
-                Our Story
+                {t('storyTagline')}
               </motion.span>
 
               <h2 aria-label="Constructing Legacy Since 2017 — CPC Qatar" className="font-display text-[18vw] sm:text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-[0.02em]">
@@ -122,7 +124,7 @@ const About = () => {
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
                   >
-                    CONSTRUCTING
+                    {t('heroLine1')}
                   </motion.span>
                 </span>
                 <span className="block overflow-hidden mb-4">
@@ -132,7 +134,7 @@ const About = () => {
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
                   >
-                    LEGACY
+                    {t('heroLine2')}
                   </motion.span>
                 </span>
                 <span className="block overflow-hidden">
@@ -142,7 +144,7 @@ const About = () => {
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
                   >
-                    SINCE 2017
+                    {t('heroLine3')}
                   </motion.span>
                 </span>
               </h2>
@@ -174,6 +176,7 @@ const About = () => {
 
 const StorySection = () => {
   const { settings } = useSiteSettings();
+  const t = useTranslations('about');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -196,7 +199,7 @@ const StorySection = () => {
               viewport={{ once: true }}
               className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
             >
-              The Beginning
+              {t('beginningTagline')}
             </motion.span>
 
             <div className="overflow-hidden mb-4">
@@ -207,7 +210,7 @@ const StorySection = () => {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em]"
               >
-                SMALL BUT
+                {t('storyHeadline1')}
               </motion.p>
             </div>
             <div className="overflow-hidden mb-8 md:mb-12">
@@ -218,7 +221,7 @@ const StorySection = () => {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.05em] text-gradient"
               >
-                MIGHTY
+                {t('storyHeadline2')}
               </motion.p>
             </div>
 
@@ -230,16 +233,16 @@ const StorySection = () => {
               className="space-y-4 md:space-y-6 text-muted-foreground text-base md:text-lg leading-relaxed"
             >
               <p className="text-lg sm:text-xl font-medium text-foreground">
-                <span className="text-gradient">CPC Qatar</span> (Cosmo Projects & Construction and Trading Co.) is a premier construction company specializing in civil engineering, road construction, and infrastructure development across the State of Qatar.
+                <span className="text-gradient">CPC Qatar</span> {t('storyP1')}
               </p>
               <p>
-                Founded in 2017 by <span className="text-primary font-medium">Chairman Mohammed Ahmed Mubarak Al-Nasr</span> and <span className="text-primary font-medium">Founder Hisham Abdelfattah Radwan Mohamed</span>, our company was established with a clear vision: to deliver world-class infrastructure projects that serve Qatar's rapidly growing educational, cultural, and commercial sectors.
+                {t('storyP2')}
               </p>
               <p>
-                With <span className="text-primary font-semibold">Commercial Registration No. 108122</span>, CPC Qatar operates from our headquarters at {settings.public_location}, bringing together a team of highly qualified engineers and construction specialists who share our commitment to excellence.
+                {t('storyP3', { location: settings.public_location })}
               </p>
               <p>
-                Today, we stand proud with <span className="text-gradient font-bold">57 completed projects</span> valued at over <span className="text-gradient font-bold">26 Million QR</span>, serving prestigious clients including the Ministry of Education, Qatar Museums, FIFA World Cup Qatar 2022, DHL, Al Meera, and many more. Our expertise spans educational facilities, cultural heritage sites, parking infrastructure, roads and streets, earthworks, and asphalt paving.
+                {t('storyP4')}
               </p>
             </motion.div>
           </motion.div>
@@ -259,11 +262,11 @@ const StorySection = () => {
               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
               className="absolute -bottom-4 -left-4 sm:-bottom-8 sm:-left-8 bg-gradient-card border border-primary/50 rounded-lg p-4 sm:p-6 shadow-card cursor-pointer"
             >
-              <div className="font-display text-xl sm:text-2xl text-primary mb-1">M.A.M Al-Nasr</div>
-              <div className="text-xs text-muted-foreground mb-3">Chairman & Co-Founder</div>
+              <div className="font-display text-xl sm:text-2xl text-primary mb-1">{t('founderBadge.alumniMubarak')}</div>
+              <div className="text-xs text-muted-foreground mb-3">{t('founderBadge.chairman')}</div>
               <div className="h-px bg-border my-2"></div>
-              <div className="font-display text-xl sm:text-2xl text-primary mb-1">H.A.R Mohamed</div>
-              <div className="text-xs text-muted-foreground">Co-Founder</div>
+              <div className="font-display text-xl sm:text-2xl text-primary mb-1">{t('founderBadge.alumniRadwan')}</div>
+              <div className="text-xs text-muted-foreground">{t('founderBadge.coFounder')}</div>
             </motion.div>
           </motion.div>
         </div>
@@ -274,6 +277,7 @@ const StorySection = () => {
 
 const WhatIsCPCSection = () => {
   const { settings } = useSiteSettings();
+  const t = useTranslations('about');
   return (
     <section className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-gradient-to-b from-background via-secondary to-background overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -284,7 +288,7 @@ const WhatIsCPCSection = () => {
           className="text-center mb-12 md:mb-20"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Company Overview
+            {t('companyOverview')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -294,7 +298,7 @@ const WhatIsCPCSection = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em]"
             >
-              WHAT IS <span className="text-gradient">CPC?</span>
+              {t('whatIsCPCHeading')}
             </motion.h2>
           </div>
           <motion.div
@@ -314,24 +318,24 @@ const WhatIsCPCSection = () => {
             viewport={{ once: true }}
             className="bg-gradient-card border border-primary/20 rounded-2xl p-6 sm:p-8 md:p-12"
           >
-            <h3 className="font-display text-2xl sm:text-3xl mb-4 md:mb-6 text-gradient">Complete Construction Solutions</h3>
+            <h3 className="font-display text-2xl sm:text-3xl mb-4 md:mb-6 text-gradient">{t('completeSolutions')}</h3>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-4 md:mb-6">
-              <span className="text-primary font-bold">Cosmo Projects & Construction and Trading Co. (CPC Qatar)</span> is a leading construction company registered under <span className="text-primary">CR No. 108122</span>, dedicated to delivering exceptional civil engineering and infrastructure projects throughout the State of Qatar.
+              {t('completeDesc')}
             </p>
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-              Headquartered at <span className="text-foreground">{settings.head_office_address}, {settings.public_location}</span>, we serve as a trusted partner for government ministries, cultural institutions, private enterprises, and international organizations.
+              {t('headquarterDesc', { address: settings.head_office_address, location: settings.public_location })}
             </p>
           </motion.div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { title: "Earthworks", desc: "Site preparation, excavation, grading, and compaction for solid foundations", href: "/services/earthworks" },
-              { title: "Road Construction", desc: "Sub-grade, sub-base preparation, and complete asphalt paving solutions", href: "/services/subgrade-subbase" },
-              { title: "Asphalt Works", desc: "Hot mix asphalt, cold mix, surface treatment, and maintenance", href: "/services/asphalt-works" },
-              { title: "Traffic Solutions", desc: "Thermoplastic road marking, traffic signs, and safety installations", href: "/services/road-marking" },
-              { title: "Interlock & Kerbstone", desc: "Precision paver installation, kerbstone laying, and pattern design", href: "/services/interlock-kerbstone" },
-              { title: "Infrastructure Development", desc: "Drainage, utilities, and complete civil infrastructure services", href: "/services/infrastructure-development" },
+              { key: 'earthworks', href: "/services/earthworks" },
+              { key: 'roadConstruction', href: "/services/subgrade-subbase" },
+              { key: 'asphaltWorks', href: "/services/asphalt-works" },
+              { key: 'trafficSolutions', href: "/services/road-marking" },
+              { key: 'interlock', href: "/services/interlock-kerbstone" },
+              { key: 'infrastructure', href: "/services/infrastructure-development" },
             ].map((service, index) => (
               <motion.a
                 key={index}
@@ -346,8 +350,8 @@ const WhatIsCPCSection = () => {
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <div className="w-6 h-6 rounded-full bg-gradient-gold"></div>
                 </div>
-                <h4 className="font-display text-xl mb-2 group-hover:text-primary transition-colors">{service.title}</h4>
-                <p className="text-sm text-muted-foreground">{service.desc}</p>
+                <h4 className="font-display text-xl mb-2 group-hover:text-primary transition-colors">{t(`services.${service.key}.title`)}</h4>
+                <p className="text-sm text-muted-foreground">{t(`services.${service.key}.description`)}</p>
               </motion.a>
             ))}
           </div>
@@ -361,15 +365,15 @@ const WhatIsCPCSection = () => {
           >
             <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
               <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">57</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Projects Completed</div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">{t('highlights.projects')}</div>
             </div>
             <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
               <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">26M+ QR</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Total Project Value</div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">{t('highlights.value')}</div>
             </div>
             <div className="bg-gradient-to-br from-amber-400/10 to-orange-600/10 border border-primary/30 rounded-xl p-4 sm:p-6 text-center">
               <div className="font-display text-3xl sm:text-4xl text-gradient mb-2">45+</div>
-              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">Satisfied Clients</div>
+              <div className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider">{t('highlights.clients')}</div>
             </div>
           </motion.div>
 
@@ -380,7 +384,7 @@ const WhatIsCPCSection = () => {
             viewport={{ once: true }}
             className="bg-gradient-card border border-border rounded-2xl p-6 sm:p-8 md:p-12"
           >
-            <h3 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">Trusted by Leading Organizations</h3>
+            <h3 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">{t('trustedBy')}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
               {majorClients.map((client, index) => (
                 <motion.div
@@ -409,6 +413,7 @@ const WhatIsCPCSection = () => {
 };
 
 const ValuesSection = ({ values }: { values: typeof import("lucide-react") extends { Target: infer T } ? { icon: T; title: string; description: string }[] : never }) => {
+  const t = useTranslations('about');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -437,7 +442,7 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
           className="text-center mb-12 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            What Drives Us
+            {t('whatDrivesUs')}
           </span>
           <div className="overflow-hidden">
             <motion.h2
@@ -447,7 +452,7 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em]"
             >
-              OUR <span className="text-gradient">VALUES</span>
+              {t('ourValues')}
             </motion.h2>
           </div>
           <motion.div
@@ -460,7 +465,11 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          {values.map((value, index) => (
+          {[
+            { icon: Target, titleKey: 'values.precision', descKey: 'values.precisionDesc' },
+            { icon: Shield, titleKey: 'values.quality', descKey: 'values.qualityDesc' },
+            { icon: Lightbulb, titleKey: 'values.innovation', descKey: 'values.innovationDesc' },
+          ].map((value, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 80, rotateX: 45 }}
@@ -482,9 +491,9 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
                 </div>
 
                 <h3 className="font-display text-xl sm:text-2xl tracking-[0.1em] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
-                  {value.title}
+                  {t(value.titleKey)}
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{value.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{t(value.descKey)}</p>
               </motion.div>
             </motion.div>
           ))}
@@ -495,6 +504,7 @@ const ValuesSection = ({ values }: { values: typeof import("lucide-react") exten
 };
 
 const TimelineSection = ({ milestones }: { milestones: { year: string; title: string; description: string }[] }) => {
+  const t = useTranslations('about');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -502,6 +512,15 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  // Get milestones from translations
+  const translatedMilestones = [
+    { year: "2017", titleKey: 'milestones.m2017', descKey: 'milestones.m2017Desc' },
+    { year: "2019", titleKey: 'milestones.m2019', descKey: 'milestones.m2019Desc' },
+    { year: "2021", titleKey: 'milestones.m2021', descKey: 'milestones.m2021Desc' },
+    { year: "2022", titleKey: 'milestones.m2022', descKey: 'milestones.m2022Desc' },
+    { year: "2024", titleKey: 'milestones.m2024', descKey: 'milestones.m2024Desc' },
+  ];
 
   return (
     <section ref={ref} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
@@ -516,7 +535,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
           className="text-center mb-12 md:mb-20"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            Our Journey
+            {t('ourJourney')}
           </span>
           <motion.h2
             className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4"
@@ -525,7 +544,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
             viewport={{ once: true }}
           >
-            KEY <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">MILESTONES</span>
+            {t('keyMilestones')}
           </motion.h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -541,7 +560,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
             viewport={{ once: true }}
             className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4"
           >
-            From our founding in 2017 to becoming a trusted name in Qatar's construction industry
+            {t('milestoneSubtitle')}
           </motion.p>
         </motion.div>
 
@@ -556,7 +575,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
           </div>
 
           {/* Timeline steps */}
-          {milestones.map((milestone, index) => {
+          {translatedMilestones.map((milestone, index) => {
             const isEven = index % 2 === 0;
 
             return (
@@ -584,7 +603,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
 
                       {/* Title */}
                       <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
-                        {milestone.title}
+                        {t(milestone.titleKey)}
                       </h3>
 
                       {/* Divider */}
@@ -598,7 +617,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
 
                       {/* Description */}
                       <p className="text-sm sm:text-base text-gray-400">
-                        {milestone.description}
+                        {t(milestone.descKey)}
                       </p>
                     </div>
                   </div>
@@ -632,6 +651,7 @@ const TimelineSection = ({ milestones }: { milestones: { year: string; title: st
 };
 
 const StatsSection = () => {
+  const t = useTranslations('about');
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -641,10 +661,10 @@ const StatsSection = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
 
   const stats = [
-    { icon: Building, value: 57, suffix: "", label: "PROJECTS COMPLETED" },
-    { icon: Users, value: 45, suffix: "+", label: "SATISFIED CLIENTS" },
-    { icon: Award, value: 26, suffix: "M+", label: "TOTAL VALUE (QR)" },
-    { icon: Star, value: 100, suffix: "%", label: "CLIENT SATISFACTION" },
+    { icon: Building, value: 57, suffix: "", labelKey: 'stats.projectsCompleted' },
+    { icon: Users, value: 45, suffix: "+", labelKey: 'stats.satisfiedClients' },
+    { icon: Award, value: 26, suffix: "M+", labelKey: 'stats.totalValue' },
+    { icon: Star, value: 100, suffix: "%", labelKey: 'stats.satisfaction' },
   ];
 
   return (
@@ -659,10 +679,10 @@ const StatsSection = () => {
           className="text-center mb-12 md:mb-16"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4">
-            By The Numbers
+            {t('byTheNumbers')}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.05em] mb-4">
-            OUR <span className="text-gradient">IMPACT</span>
+            {t('ourImpact')}
           </h2>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -696,7 +716,7 @@ const StatsSection = () => {
               </div>
 
               <div className="text-xs tracking-[0.2em] text-muted-foreground group-hover:text-primary transition-colors">
-                {stat.label}
+                {t(stat.labelKey)}
               </div>
             </motion.div>
           ))}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { getTranslations } from "next-intl/server";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://cpc-qa.com";
 
@@ -41,92 +42,56 @@ export const metadata: Metadata = {
     },
 };
 
-const services = [
-    {
-        title: "Asphalt Works",
-        slug: "asphalt-works",
-        description:
-            "Professional asphalt pavement construction for highways, streets, and commercial areas across Qatar. Hot mix asphalt, cold mix, surface treatment, and road resurfacing.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312049/cpc-website/services/asphalt.jpg",
-        features: ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Road Resurfacing", "Patching & Repairs"],
-    },
-    {
-        title: "Road Marking & Traffic Signs",
-        slug: "road-marking",
-        description:
-            "Thermoplastic and cold paint road marking, traffic signs installation, lane striping, and road safety solutions throughout Qatar.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg",
-        features: ["Thermoplastic Marking", "Cold Paint Marking", "Traffic Signs", "Lane Striping", "Safety Barriers"],
-    },
-    {
-        title: "Earthworks & Grading",
-        slug: "earthworks",
-        description:
-            "Complete site preparation including excavation, grading, filling, compaction, and land leveling for construction projects in Doha and across Qatar.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
-        features: ["Excavation", "Site Clearing", "Grading & Leveling", "Fill & Compaction", "Cut & Fill Operations"],
-    },
-    {
-        title: "Interlock & Kerbstone",
-        slug: "interlock-kerbstone",
-        description:
-            "Precision installation of interlocking block pavers, kerbstones, walkways, driveways, and decorative paving for commercial and public spaces in Qatar.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg",
-        features: ["Interlock Paving", "Kerbstone Installation", "Walkway Construction", "Pattern Design", "Finishing Works"],
-    },
-    {
-        title: "Subgrade & Subbase Works",
-        slug: "subgrade-subbase",
-        description:
-            "Foundation layer construction including subgrade preparation, subbase installation, base course works, and material testing for road projects in Qatar.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg",
-        features: ["Subgrade Preparation", "Subbase Installation", "Base Course", "Material Testing", "Compaction Control"],
-    },
-    {
-        title: "Infrastructure Development",
-        slug: "infrastructure-development",
-        description:
-            "Complete civil infrastructure services including drainage systems, utilities installation, stormwater management, and public works across Qatar.",
-        image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
-        features: ["Drainage Systems", "Utilities Installation", "Stormwater Management", "Curb Construction", "Public Works"],
-    },
-];
+export default async function ServicesPage() {
+    const t = await getTranslations('services');
 
-const servicesJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "CPC Qatar Construction Services",
-    description:
-        "Comprehensive road construction and infrastructure services in Doha, Qatar — asphalt paving, road marking, earthworks, interlock, subgrade, and infrastructure development.",
-    url: `${SITE_URL}/services`,
-    isPartOf: { "@type": "WebSite", name: "CPC Qatar", url: SITE_URL },
-    mainEntity: {
-        "@type": "ItemList",
-        name: "CPC Qatar Services",
-        itemListElement: services.map((s, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-                "@type": "Service",
-                name: s.title,
-                description: s.description,
-                url: `${SITE_URL}/services/${s.slug}`,
-                provider: {
-                    "@type": "Organization",
-                    name: "CPC Qatar — Cosmo Projects & Construction",
-                },
-            },
-        })),
-    },
-};
+    const services = [
+        {
+            slug: "asphalt-works",
+            titleKey: "items.asphalt.title",
+            descKey: "items.asphalt.description",
+            featuresKey: "items.asphalt.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312049/cpc-website/services/asphalt.jpg",
+        },
+        {
+            slug: "road-marking",
+            titleKey: "items.roadMarking.title",
+            descKey: "items.roadMarking.description",
+            featuresKey: "items.roadMarking.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg",
+        },
+        {
+            slug: "earthworks",
+            titleKey: "items.earthworks.title",
+            descKey: "items.earthworks.description",
+            featuresKey: "items.earthworks.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
+        },
+        {
+            slug: "interlock-kerbstone",
+            titleKey: "items.interlock.title",
+            descKey: "items.interlock.description",
+            featuresKey: "items.interlock.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg",
+        },
+        {
+            slug: "subgrade-subbase",
+            titleKey: "items.subgrade.title",
+            descKey: "items.subgrade.description",
+            featuresKey: "items.subgrade.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg",
+        },
+        {
+            slug: "infrastructure-development",
+            titleKey: "items.infrastructure.title",
+            descKey: "items.infrastructure.description",
+            featuresKey: "items.infrastructure.features",
+            image: "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg",
+        },
+    ];
 
-export default function ServicesPage() {
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
-            />
             <div className="min-h-screen bg-background">
                 <Header />
                 <main>
@@ -134,18 +99,16 @@ export default function ServicesPage() {
                     <section className="pt-32 pb-16 bg-gradient-to-b from-background to-card">
                         <div className="container mx-auto px-6 max-w-5xl text-center">
                             <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-                                What We Do
+                                {t('hero.tagline')}
                             </span>
                             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide mb-6">
-                                Our <span className="text-gradient">Services</span>
+                                {t('hero.heading')}
                                 <span className="sr-only">
-                                    {" "}— Road Construction, Asphalt Paving &amp; Infrastructure Services in Doha, Qatar
+                                    {" "}— {t('hero.subheading')}
                                 </span>
                             </h1>
                             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                                CPC Qatar delivers comprehensive road construction and civil engineering services across Qatar.
-                                From asphalt paving and road marking to earthworks and infrastructure development — we handle
-                                every phase of your road and infrastructure project with excellence.
+                                {t('hero.description')}
                             </p>
                         </div>
                     </section>
@@ -163,7 +126,7 @@ export default function ServicesPage() {
                                         <div className="aspect-[16/10] overflow-hidden relative">
                                             <Image
                                                 src={service.image}
-                                                alt={`${service.title} — CPC Qatar road construction service in Doha, Qatar`}
+                                                alt={`${t(service.titleKey)} — CPC Qatar road construction service in Doha, Qatar`}
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -172,13 +135,13 @@ export default function ServicesPage() {
                                         </div>
                                         <div className="p-6">
                                             <h2 className="font-display text-2xl tracking-wide mb-3 group-hover:text-primary transition-colors">
-                                                {service.title}
+                                                {t(service.titleKey)}
                                             </h2>
                                             <p className="text-muted-foreground mb-4 leading-relaxed">
-                                                {service.description}
+                                                {t(service.descKey)}
                                             </p>
                                             <div className="flex flex-wrap gap-2">
-                                                {service.features.map((f) => (
+                                                {t.raw(service.featuresKey).map((f: string) => (
                                                     <span
                                                         key={f}
                                                         className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full"
@@ -198,25 +161,17 @@ export default function ServicesPage() {
                     <section className="py-16 bg-card">
                         <div className="container mx-auto px-6 max-w-4xl">
                             <h2 className="font-display text-3xl md:text-4xl tracking-wide mb-8 text-center">
-                                Why Choose CPC Qatar for Road Construction in Qatar?
+                                {t('seo.heading')}
                             </h2>
                             <div className="prose prose-lg prose-invert mx-auto text-muted-foreground leading-relaxed space-y-4">
                                 <p>
-                                    <strong>CPC Qatar (Cosmo Projects &amp; Construction and Trading W.L.L.)</strong> is a government-approved
-                                    road construction and infrastructure contractor based in Doha, Qatar. Since our establishment in 2017,
-                                    we have delivered over 90 projects for major clients including the Ministry of Education, Ashghal (Public Works Authority),
-                                    FIFA World Cup Qatar 2022 contractors, Qatar Museums, DHL, and Al Meera.
+                                    {t('seo.p1')}
                                 </p>
                                 <p>
-                                    Our services cover the full spectrum of road construction — from initial <strong>earthworks and site preparation</strong>,
-                                    through <strong>subgrade and subbase installation</strong>, to <strong>asphalt pavement construction</strong>,
-                                    <strong>road marking and traffic sign installation</strong>, and <strong>interlock and kerbstone paving</strong>.
-                                    We operate across all areas of Qatar including Doha, Al Wakrah, Al Khor, Lusail, Al Rayyan, and Al Shahaniya.
+                                    {t('seo.p2')}
                                 </p>
                                 <p>
-                                    Every project is managed by experienced civil engineers using modern equipment and materials that meet
-                                    Qatar Construction Standards (QCS). We are committed to timely delivery, safety compliance, and
-                                    quality assurance on every project.
+                                    {t('seo.p3')}
                                 </p>
                             </div>
                         </div>
@@ -226,16 +181,16 @@ export default function ServicesPage() {
                     <section className="py-16">
                         <div className="container mx-auto px-6 text-center">
                             <h2 className="font-display text-3xl md:text-4xl tracking-wide mb-6">
-                                Ready to Start Your Project?
+                                {t('cta.heading')}
                             </h2>
                             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                                Contact our team for a free consultation and quote for your road construction or infrastructure project in Qatar.
+                                {t('cta.description')}
                             </p>
                             <Link
                                 href="/contact"
                                 className="inline-flex items-center justify-center bg-gradient-gold text-primary-foreground font-semibold h-14 rounded-md px-10 text-lg hover:shadow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
                             >
-                                Get a Free Quote
+                                {t('cta.button')}
                             </Link>
                         </div>
                     </section>

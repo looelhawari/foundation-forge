@@ -2,11 +2,15 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useTranslations, useLocale } from "next-intl";
 const heroImage = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312015/cpc-website/hero-construction.jpg";
 
 export const FullscreenVideo = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const t = useTranslations('fullscreenVideo');
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -49,7 +53,7 @@ export const FullscreenVideo = () => {
             viewport={{ once: true }}
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-8"
           >
-            Engineering Excellence
+            {t('tagline')}
           </motion.span>
 
           <h2 className="font-display text-5xl md:text-7xl lg:text-[10vw] tracking-[0.1em] leading-none" aria-label="Where Vision Meets Road — CPC Qatar Engineering Excellence">
@@ -61,7 +65,7 @@ export const FullscreenVideo = () => {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="block"
               >
-                WHERE
+                {t('line1')}
               </motion.span>
             </div>
             <div className="overflow-hidden">
@@ -72,7 +76,7 @@ export const FullscreenVideo = () => {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="block text-gradient"
               >
-                VISION
+                {t('line2')}
               </motion.span>
             </div>
             <div className="overflow-hidden">
@@ -83,7 +87,7 @@ export const FullscreenVideo = () => {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                 className="block"
               >
-                MEETS ROAD
+                {t('line3')}
               </motion.span>
             </div>
           </h2>
