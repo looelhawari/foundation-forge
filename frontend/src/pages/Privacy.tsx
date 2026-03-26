@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Shield, Lock, Eye, Database, UserCheck, FileText, AlertTriangle, CheckCircle } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 
 const Privacy = () => {
+    const { t } = useTranslation();
     return (
         <div className="min-h-screen bg-background">
             <SEOHead
@@ -27,14 +29,14 @@ const Privacy = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                                 <Shield className="w-8 h-8 text-primary" />
                                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-center">
-                                    PRIVACY <span className="text-gradient">POLICY</span>
+                                    {t("privacy.title", "PRIVACY")} <span className="text-gradient">{t("privacy.subtitle", "POLICY")}</span>
                                 </h1>
                             </div>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information
+                                {t("privacy.heroSubtitle", "COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information")}
                             </p>
                             <p className="text-muted-foreground text-sm mt-4">
-                                Last Updated: December 24, 2025
+                                {t("privacy.lastUpdated", "Last Updated")}: December 24, 2025
                             </p>
                         </motion.div>
                     </div>
