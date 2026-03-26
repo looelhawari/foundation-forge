@@ -4,17 +4,22 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollText, Shield, FileText, Scale, AlertCircle } from "lucide-react";
-import { Link } from "@/lib/router-compat";
+import { Link } from "@/i18n/navigation";
 import SEOHead from "@/components/SEOHead";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslations, useLocale } from "next-intl";
 
 const Terms = () => {
     const { settings } = useSiteSettings();
+    const t = useTranslations('termsPage');
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
+    
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
             <SEOHead
-                title="Terms of Use | CPC Qatar"
-                description="Terms and conditions for using the CPC Qatar website. Cosmo Projects & Construction and Trading W.L.L."
+                title={t('meta.title')}
+                description={t('meta.description')}
                 canonical="/terms"
                 noindex={true}
             />
@@ -32,14 +37,14 @@ const Terms = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                                 <Scale className="w-8 h-8 text-primary" />
                                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-center">
-                                    TERMS <span className="text-gradient">OF USE</span>
+                                    {t('hero.title1')} <span className="text-gradient">{t('hero.title2')}</span>
                                 </h1>
                             </div>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                Please read these terms and conditions carefully before using our website
+                                {t('hero.description')}
                             </p>
                             <p className="text-muted-foreground text-sm mt-4">
-                                Last Updated: December 24, 2025
+                                {t('hero.lastUpdated')}
                             </p>
                         </motion.div>
                     </div>
@@ -55,20 +60,16 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        1. ABOUT THIS WEBSITE
+                                        {t('sections.about.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            This is a presentation website showcasing COSMO PROJECTS & CONSTRUCTION AND TRADING
-                                            ("CPC Qatar"). The website displays our completed construction projects, services,
-                                            and company information. By using this website, you agree to these simple terms.
-                                        </p>
+                                        <p>{t('sections.about.content')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -81,31 +82,27 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <ScrollText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        2. COMPANY INFORMATION
+                                        {t('sections.company.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            CPC Qatar is a registered company in the State of Qatar established on December 11, 2017,
-                                            with Commercial Registration No. 108122, valid until December 8, 2029. We specialize in
-                                            road construction, earthworks, asphalt paving, and infrastructure development services.
-                                        </p>
-                                        <p className="font-medium text-foreground">Company Details:</p>
-                                        <ul className="list-disc list-inside space-y-2 ml-4">
-                                            <li>Legal Name: {settings.site_name}</li>
-                                            <li>Commercial Registration: 108122</li>
-                                            <li>Location: {settings.head_office_address}</li>
-                                            <li>P.O. Box: {settings.po_box}, {settings.public_location}</li>
-                                            <li>Phone: {settings.contact_phone}</li>
-                                            {settings.contact_phone_2 && <li>Phone 2: {settings.contact_phone_2}</li>}
-                                            {settings.contact_telephone && <li>Telephone: {settings.contact_telephone}</li>}
-                                            <li>Fax: {settings.contact_fax}</li>
-                                            <li>Email: {settings.contact_email}</li>
+                                        <p>{t('sections.company.content')}</p>
+                                        <p className="font-medium text-foreground">{t('sections.company.detailsLabel')}</p>
+                                        <ul className={`list-disc space-y-2 ${isRTL ? 'mr-4 list-inside' : 'ml-4 list-inside'}`}>
+                                            <li>{t('sections.company.legalName')}: {settings.site_name}</li>
+                                            <li>{t('sections.company.crNumber')}: 108122</li>
+                                            <li>{t('sections.company.location')}: {settings.head_office_address}</li>
+                                            <li>{t('sections.company.poBox')}: {settings.po_box}, {settings.public_location}</li>
+                                            <li>{t('sections.company.phone')}: {settings.contact_phone}</li>
+                                            {settings.contact_phone_2 && <li>{t('sections.company.phone2')}: {settings.contact_phone_2}</li>}
+                                            {settings.contact_telephone && <li>{t('sections.company.telephone')}: {settings.contact_telephone}</li>}
+                                            <li>{t('sections.company.fax')}: {settings.contact_fax}</li>
+                                            <li>{t('sections.company.email')}: {settings.contact_email}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -119,23 +116,17 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <Shield className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        3. WEBSITE CONTENT
+                                        {t('sections.content.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            All content on this website - including project photos, company logo, and text -
-                                            belongs to CPC Qatar. The information is provided for showcase purposes.
-                                        </p>
-                                        <p>
-                                            Please don't copy or misuse our project photos or company information. If you're
-                                            interested in our work, contact us directly.
-                                        </p>
+                                        <p>{t('sections.content.content1')}</p>
+                                        <p>{t('sections.content.content2')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -148,23 +139,17 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        4. PROJECT INFORMATION
+                                        {t('sections.projects.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            The projects and information shown on this website are examples of our work.
-                                            Actual project details, pricing, and timelines vary based on specific requirements.
-                                        </p>
-                                        <p>
-                                            If you're interested in our construction services, please contact us for a proper
-                                            quote based on your specific project needs.
-                                        </p>
+                                        <p>{t('sections.projects.content1')}</p>
+                                        <p>{t('sections.projects.content2')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -177,20 +162,16 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <AlertCircle className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        5. PROJECT QUOTES
+                                        {t('sections.quotes.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            The project examples and information on this website are for showcase purposes. Every construction
-                                            project is unique and requires proper assessment. Contact us for an accurate quote based on your
-                                            specific needs, site conditions, and requirements.
-                                        </p>
+                                        <p>{t('sections.quotes.content')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -203,18 +184,19 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        6. YOUR PRIVACY
+                                        {t('sections.privacy.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
                                         <p>
-                                            When you contact us through the website, we only collect the information you provide (name, email, message).
-                                            Please read our <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link> to learn how we handle your information.
+                                            {t('sections.privacy.content')}{' '}
+                                            <Link href="/privacy" className="text-primary hover:underline">{t('sections.privacy.link')}</Link>
+                                            {' '}{t('sections.privacy.contentAfterLink')}
                                         </p>
                                     </div>
                                 </div>
@@ -228,19 +210,16 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <AlertCircle className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        7. UPDATES TO TERMS
+                                        {t('sections.updates.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            We may update these terms occasionally to reflect changes to our website or services.
-                                            When we do, we'll update the date at the top of this page.
-                                        </p>
+                                        <p>{t('sections.updates.content')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -253,28 +232,26 @@ const Terms = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        8. CONTACT US
+                                        {t('sections.contact.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            If you have any questions about these Terms of Use, please contact us:
-                                        </p>
+                                        <p>{t('sections.contact.content')}</p>
                                         <div className="bg-gradient-card border border-border rounded-lg p-6 mt-4">
                                             <p className="font-semibold text-foreground mb-3">{settings.site_name.toUpperCase()}</p>
                                             <ul className="space-y-2 text-sm">
-                                                <li><span className="text-primary font-medium">Address:</span> {settings.head_office_address}, P.O. Box: {settings.po_box}, {settings.public_location}</li>
-                                                <li><span className="text-primary font-medium">Phone:</span> {settings.contact_phone}</li>
-                                                {settings.contact_phone_2 && <li><span className="text-primary font-medium">Phone 2:</span> {settings.contact_phone_2}</li>}
-                                                {settings.contact_telephone && <li><span className="text-primary font-medium">Telephone:</span> {settings.contact_telephone}</li>}
-                                                <li><span className="text-primary font-medium">Fax:</span> {settings.contact_fax}</li>
-                                                <li><span className="text-primary font-medium">Email:</span> {settings.contact_email}</li>
-                                                <li><span className="text-primary font-medium">Commercial Registration:</span> 108122</li>
+                                                <li><span className="text-primary font-medium">{t('contact.address')}:</span> {settings.head_office_address}, {t('contact.poBox')}: {settings.po_box}, {settings.public_location}</li>
+                                                <li><span className="text-primary font-medium">{t('contact.phone')}:</span> {settings.contact_phone}</li>
+                                                {settings.contact_phone_2 && <li><span className="text-primary font-medium">{t('contact.phone2')}:</span> {settings.contact_phone_2}</li>}
+                                                {settings.contact_telephone && <li><span className="text-primary font-medium">{t('contact.telephone')}:</span> {settings.contact_telephone}</li>}
+                                                <li><span className="text-primary font-medium">{t('contact.fax')}:</span> {settings.contact_fax}</li>
+                                                <li><span className="text-primary font-medium">{t('contact.email')}:</span> {settings.contact_email}</li>
+                                                <li><span className="text-primary font-medium">{t('contact.cr')}:</span> 108122</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -287,10 +264,10 @@ const Terms = () => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="mt-16 p-8 bg-primary/5 border-l-4 border-primary rounded-r-lg"
+                            className={`mt-16 p-8 bg-primary/5 ${isRTL ? 'border-r-4' : 'border-l-4'} border-primary ${isRTL ? 'rounded-l-lg' : 'rounded-r-lg'}`}
                         >
                             <p className="text-muted-foreground text-sm leading-relaxed">
-                                By using this website, you agree to these terms. If you have any questions, feel free to contact us.
+                                {t('notice')}
                             </p>
                         </motion.div>
                     </div>

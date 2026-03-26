@@ -6,14 +6,19 @@ import { Footer } from "@/components/layout/Footer";
 import { Shield, Lock, Eye, Database, UserCheck, FileText, AlertTriangle, CheckCircle } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslations, useLocale } from "next-intl";
 
 const Privacy = () => {
     const { settings } = useSiteSettings();
+    const t = useTranslations('privacyPage');
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
+    
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
             <SEOHead
-                title="Privacy Policy | CPC Qatar"
-                description="Privacy policy for CPC Qatar (Cosmo Projects & Construction). How we collect, use, and protect your personal information."
+                title={t('meta.title')}
+                description={t('meta.description')}
                 canonical="/privacy"
                 noindex={true}
             />
@@ -31,14 +36,14 @@ const Privacy = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                                 <Shield className="w-8 h-8 text-primary" />
                                 <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide text-center">
-                                    PRIVACY <span className="text-gradient">POLICY</span>
+                                    {t('hero.title1')} <span className="text-gradient">{t('hero.title2')}</span>
                                 </h1>
                             </div>
                             <p className="text-muted-foreground text-lg leading-relaxed">
-                                COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information
+                                {t('hero.description')}
                             </p>
                             <p className="text-muted-foreground text-sm mt-4">
-                                Last Updated: December 24, 2025
+                                {t('hero.lastUpdated')}
                             </p>
                         </motion.div>
                     </div>
@@ -54,20 +59,16 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        1. ABOUT THIS WEBSITE
+                                        {t('sections.about.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            This is a presentation website for COSMO PROJECTS & CONSTRUCTION AND TRADING ("CPC Qatar").
-                                            The website showcases our completed projects, services, and company information. We collect
-                                            minimal personal information, only when you choose to contact us.
-                                        </p>
+                                        <p>{t('sections.about.content')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -80,29 +81,24 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <Database className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        2. WHAT INFORMATION WE COLLECT
+                                        {t('sections.collect.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            We only collect information when you voluntarily submit the contact form on our website:
-                                        </p>
-                                        <ul className="list-disc list-inside space-y-2 ml-4">
-                                            <li>Your name</li>
-                                            <li>Email address</li>
-                                            <li>Phone number (optional)</li>
-                                            <li>Company name (optional)</li>
-                                            <li>Your message or inquiry</li>
+                                        <p>{t('sections.collect.intro')}</p>
+                                        <ul className={`list-disc space-y-2 ${isRTL ? 'mr-4 list-inside' : 'ml-4 list-inside'}`}>
+                                            <li>{t('sections.collect.items.name')}</li>
+                                            <li>{t('sections.collect.items.email')}</li>
+                                            <li>{t('sections.collect.items.phone')}</li>
+                                            <li>{t('sections.collect.items.company')}</li>
+                                            <li>{t('sections.collect.items.message')}</li>
                                         </ul>
-                                        <p className="mt-3">
-                                            We do not use cookies, tracking tools, or collect any browsing data. This is a simple
-                                            presentation website to showcase our construction work.
-                                        </p>
+                                        <p className="mt-3">{t('sections.collect.noCookies')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -115,24 +111,23 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <Eye className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        3. HOW WE USE YOUR INFORMATION
+                                        {t('sections.use.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>We use your contact information only to:</p>
-                                        <ul className="list-disc list-inside space-y-2 ml-4">
-                                            <li>Respond to your inquiry or message</li>
-                                            <li>Provide information about our construction services</li>
-                                            <li>Prepare project quotes if requested</li>
+                                        <p>{t('sections.use.intro')}</p>
+                                        <ul className={`list-disc space-y-2 ${isRTL ? 'mr-4 list-inside' : 'ml-4 list-inside'}`}>
+                                            <li>{t('sections.use.items.respond')}</li>
+                                            <li>{t('sections.use.items.provide')}</li>
+                                            <li>{t('sections.use.items.quotes')}</li>
                                         </ul>
                                         <p className="mt-3">
-                                            <strong>That's it.</strong> We do not sell, share, or use your information for any other purpose.
-                                            We do not send marketing emails unless you specifically request updates about our services.
+                                            <strong>{t('sections.use.thatsIt')}</strong> {t('sections.use.noSell')}
                                         </p>
                                     </div>
                                 </div>
@@ -146,19 +141,16 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <Lock className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        4. HOW WE PROTECT YOUR INFORMATION
+                                        {t('sections.protect.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            Your contact information is stored securely and is only accessible to authorized personnel
-                                            who need it to respond to your inquiry. We do not share your information with third parties.
-                                        </p>
+                                        <p>{t('sections.protect.content')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -171,23 +163,23 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <UserCheck className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        5. YOUR RIGHTS
+                                        {t('sections.rights.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>You can request to:</p>
-                                        <ul className="list-disc list-inside space-y-2 ml-4">
-                                            <li>See what information we have about you</li>
-                                            <li>Correct any information</li>
-                                            <li>Delete your information</li>
+                                        <p>{t('sections.rights.intro')}</p>
+                                        <ul className={`list-disc space-y-2 ${isRTL ? 'mr-4 list-inside' : 'ml-4 list-inside'}`}>
+                                            <li>{t('sections.rights.items.see')}</li>
+                                            <li>{t('sections.rights.items.correct')}</li>
+                                            <li>{t('sections.rights.items.delete')}</li>
                                         </ul>
                                         <p>
-                                            Contact us at {settings.contact_email} or call {settings.contact_phone}{settings.contact_phone_2 ? ` / ${settings.contact_phone_2}` : ''} for any requests.
+                                            {t('sections.rights.contact')} {settings.contact_email} {t('sections.rights.orCall')} {settings.contact_phone}{settings.contact_phone_2 ? ` / ${settings.contact_phone_2}` : ''} {t('sections.rights.forRequests')}
                                         </p>
                                     </div>
                                 </div>
@@ -201,83 +193,71 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <Shield className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        6. HEALTH & SAFETY POLICY
+                                        {t('sections.safety.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-4">
-                                        <p>
-                                            CPC strives to attain and maintain the highest possible level of safety practices on all
-                                            CPC projects. CPC aims to achieve this through the implementation of the following:
-                                        </p>
+                                        <p>{t('sections.safety.intro')}</p>
 
                                         <div className="bg-gradient-card border border-border rounded-lg p-6 space-y-4">
                                             <div>
-                                                <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                <h4 className={`font-semibold text-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                                     <CheckCircle className="w-5 h-5 text-primary" />
-                                                    1) OPERATIONAL SAFETY
+                                                    {t('sections.safety.operational.title')}
                                                 </h4>
-                                                <p className="text-sm ml-7">
-                                                    The Company and its employees are dedicated towards making sure that all operations
-                                                    are monitored for safety and are conducted and executed in the safest manner possible.
+                                                <p className={`text-sm ${isRTL ? 'mr-7' : 'ml-7'}`}>
+                                                    {t('sections.safety.operational.content')}
                                                 </p>
                                             </div>
 
                                             <div>
-                                                <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                <h4 className={`font-semibold text-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                                     <CheckCircle className="w-5 h-5 text-primary" />
-                                                    2) COMPLIANCE
+                                                    {t('sections.safety.compliance.title')}
                                                 </h4>
-                                                <p className="text-sm ml-7">
-                                                    CPC will at all times comply with all Government Laws, Regulations and Company policies
-                                                    and procedures that have been established.
+                                                <p className={`text-sm ${isRTL ? 'mr-7' : 'ml-7'}`}>
+                                                    {t('sections.safety.compliance.content')}
                                                 </p>
                                             </div>
 
                                             <div>
-                                                <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                <h4 className={`font-semibold text-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                                     <CheckCircle className="w-5 h-5 text-primary" />
-                                                    3) SAFETY MEASURES
+                                                    {t('sections.safety.measures.title')}
                                                 </h4>
-                                                <p className="text-sm ml-7">
-                                                    Assess potential risks and hazards and develop safety measures to counteract these problems.
+                                                <p className={`text-sm ${isRTL ? 'mr-7' : 'ml-7'}`}>
+                                                    {t('sections.safety.measures.content')}
                                                 </p>
                                             </div>
 
                                             <div>
-                                                <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                <h4 className={`font-semibold text-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                                     <CheckCircle className="w-5 h-5 text-primary" />
-                                                    4) RESPONSE TO EMERGENCIES
+                                                    {t('sections.safety.emergency.title')}
                                                 </h4>
-                                                <p className="text-sm ml-7">
-                                                    Safety awareness programs, safety drills and exercises must be conducted.
+                                                <p className={`text-sm ${isRTL ? 'mr-7' : 'ml-7'}`}>
+                                                    {t('sections.safety.emergency.content')}
                                                 </p>
                                             </div>
 
                                             <div>
-                                                <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                                                <h4 className={`font-semibold text-foreground mb-2 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                                     <CheckCircle className="w-5 h-5 text-primary" />
-                                                    5) COMMUNITY AWARENESS & OUTREACH
+                                                    {t('sections.safety.community.title')}
                                                 </h4>
-                                                <p className="text-sm ml-7">
-                                                    Encourage open communication and understanding between CPC and the community, this
-                                                    includes recognizing and responding as appropriate to community concerns about safety issues.
+                                                <p className={`text-sm ${isRTL ? 'mr-7' : 'ml-7'}`}>
+                                                    {t('sections.safety.community.content')}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="p-4 bg-primary/5 border-l-4 border-primary rounded-r-lg mt-4">
-                                            <p className="text-sm">
-                                                This policy needs the commitment and support of each employee and sub-contractors.
-                                                Management and supervisors at every level are requested to demonstrate dedication to
-                                                the safety policy by means of informing and creating awareness of the policy to all
-                                                employees and giving them the responsibility and resources to address safety issues
-                                                that may be encountered.
-                                            </p>
+                                        <div className={`p-4 bg-primary/5 ${isRTL ? 'border-r-4' : 'border-l-4'} border-primary ${isRTL ? 'rounded-l-lg' : 'rounded-r-lg'} mt-4`}>
+                                            <p className="text-sm">{t('sections.safety.commitment')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -291,137 +271,106 @@ const Privacy = () => {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <AlertTriangle className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        7. QUALITY POLICY
+                                        {t('sections.quality.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-4">
-                                        <p>
-                                            CPC Co. is committed to supplying construction services of consistent quality that conform
-                                            fully with company and statutory requirements and in meeting our client's documented and
-                                            implied expectations in terms of technical, budget and time compliance.
-                                        </p>
-                                        <p>
-                                            Dedicated to the continual review, development and improvement of all aspects of its business,
-                                            in particular:
-                                        </p>
+                                        <p>{t('sections.quality.intro')}</p>
+                                        <p>{t('sections.quality.dedicated')}</p>
 
                                         <div className="bg-gradient-card border border-border rounded-lg p-6 space-y-3">
-                                            <div className="flex items-start gap-3">
+                                            <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                                <p className="text-sm">
-                                                    The development and improvement of the Company's construction services in line with
-                                                    client's needs and expectations.
-                                                </p>
+                                                <p className="text-sm">{t('sections.quality.items.development')}</p>
                                             </div>
 
-                                            <div className="flex items-start gap-3">
+                                            <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                                <p className="text-sm">
-                                                    The development of an efficient and effective Quality System and generally accepted
-                                                    best practices in the management of Construction Projects, a system which not only
-                                                    ensures that the construction quality is consistent, but also helps to ensure minimal
-                                                    wastage in all our construction phases.
-                                                </p>
+                                                <p className="text-sm">{t('sections.quality.items.system')}</p>
                                             </div>
 
-                                            <div className="flex items-start gap-3">
+                                            <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                                <p className="text-sm">
-                                                    The evaluation, training and development of our employees in order to meet the company's objectives.
-                                                </p>
+                                                <p className="text-sm">{t('sections.quality.items.training')}</p>
                                             </div>
 
-                                            <div className="flex items-start gap-3">
+                                            <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                                <p className="text-sm">
-                                                    The ongoing development of the corporate culture that incorporates constant problem
-                                                    solving and continuous improvement, encouraging all employees to take total pride in,
-                                                    and responsibility for, their work and the development of better working practices.
-                                                </p>
+                                                <p className="text-sm">{t('sections.quality.items.culture')}</p>
                                             </div>
 
-                                            <div className="flex items-start gap-3">
+                                            <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                                 <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                                <p className="text-sm">
-                                                    Establishing and reviewing quality objectives for all levels that are realistic,
-                                                    achievable and measurable taking into cognizance preventive action for outside
-                                                    influences that could prevent the achievement of the objectives.
-                                                </p>
+                                                <p className="text-sm">{t('sections.quality.items.objectives')}</p>
                                             </div>
                                         </div>
 
-                                        <div className="p-4 bg-primary/5 border-l-4 border-primary rounded-r-lg mt-4">
-                                            <p className="text-sm">
-                                                Management will communicate this policy to all employees and staff in such a way that
-                                                it is properly understood and followed.
-                                            </p>
+                                        <div className={`p-4 bg-primary/5 ${isRTL ? 'border-r-4' : 'border-l-4'} border-primary ${isRTL ? 'rounded-l-lg' : 'rounded-r-lg'} mt-4`}>
+                                            <p className="text-sm">{t('sections.quality.management')}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div >
+                        </motion.div>
 
                         {/* Section 8 - Contact */}
-                        < motion.div
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <div className="flex items-start gap-4 mb-4">
+                            <div className={`flex items-start gap-4 mb-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
                                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                                     <FileText className="w-6 h-6 text-primary" />
                                 </div>
                                 <div>
                                     <h2 className="font-display text-2xl tracking-wide mb-4">
-                                        8. CONTACT US
+                                        {t('sections.contact.title')}
                                     </h2>
                                     <div className="text-muted-foreground leading-relaxed space-y-3">
-                                        <p>
-                                            Questions about this policy? Contact us:
-                                        </p>
+                                        <p>{t('sections.contact.content')}</p>
                                         <div className="bg-gradient-card border border-border rounded-lg p-6 mt-4">
                                             <p className="font-semibold text-foreground mb-3">{settings.site_name.toUpperCase()}</p>
                                             <ul className="space-y-2 text-sm">
-                                                <li><span className="text-primary font-medium">Address:</span> {settings.head_office_address}, P.O. Box: {settings.po_box}, {settings.public_location}</li>
-                                                <li><span className="text-primary font-medium">Phone:</span> {settings.contact_phone}</li>
-                                                {settings.contact_phone_2 && <li><span className="text-primary font-medium">Phone 2:</span> {settings.contact_phone_2}</li>}
-                                                {settings.contact_telephone && <li><span className="text-primary font-medium">Telephone:</span> {settings.contact_telephone}</li>}
-                                                {settings.contact_fax && <li><span className="text-primary font-medium">Fax:</span> {settings.contact_fax}</li>}
-                                                <li><span className="text-primary font-medium">Email:</span> {settings.contact_email}</li>
-                                                <li><span className="text-primary font-medium">CR:</span> 108122</li>
+                                                <li><span className="text-primary font-medium">{t('contact.address')}:</span> {settings.head_office_address}, {t('contact.poBox')}: {settings.po_box}, {settings.public_location}</li>
+                                                <li><span className="text-primary font-medium">{t('contact.phone')}:</span> {settings.contact_phone}</li>
+                                                {settings.contact_phone_2 && <li><span className="text-primary font-medium">{t('contact.phone2')}:</span> {settings.contact_phone_2}</li>}
+                                                {settings.contact_telephone && <li><span className="text-primary font-medium">{t('contact.telephone')}:</span> {settings.contact_telephone}</li>}
+                                                {settings.contact_fax && <li><span className="text-primary font-medium">{t('contact.fax')}:</span> {settings.contact_fax}</li>}
+                                                <li><span className="text-primary font-medium">{t('contact.email')}:</span> {settings.contact_email}</li>
+                                                <li><span className="text-primary font-medium">{t('contact.cr')}:</span> 108122</li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div >
+                        </motion.div>
 
                         {/* Acknowledgment Notice */}
-                        < motion.div
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="mt-16 p-8 bg-primary/5 border-l-4 border-primary rounded-r-lg"
+                            className={`mt-16 p-8 bg-primary/5 ${isRTL ? 'border-r-4' : 'border-l-4'} border-primary ${isRTL ? 'rounded-l-lg' : 'rounded-r-lg'}`}
                         >
                             <p className="text-foreground font-medium mb-2">
-                                CONSENT
+                                {t('consent.title')}
                             </p>
                             <p className="text-muted-foreground text-sm leading-relaxed">
-                                This is a simple presentation website. We only collect what you voluntarily submit through
-                                our contact form, and we use it solely to respond to your inquiry.
+                                {t('consent.content')}
                             </p>
-                        </motion.div >
-                    </div >
-                </section >
-            </main >
+                        </motion.div>
+                    </div>
+                </section>
+            </main>
             <Footer />
-        </div >
+        </div>
     );
 };
 
