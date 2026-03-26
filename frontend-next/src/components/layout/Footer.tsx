@@ -1,6 +1,7 @@
 "use client";
 
-import { Link } from "@/lib/router-compat";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Phone, Mail, MapPin, FileText } from "lucide-react";
 import Image from "next/image";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
@@ -12,7 +13,28 @@ const toTelHref = (phone: string) =>
   `tel:${phone.replace(/[^\d+]/g, "")}`;
 
 export const Footer = () => {
+  const t = useTranslations('footer');
+  const tCommon = useTranslations('common');
+  const tServices = useTranslations('services');
   const { settings } = useSiteSettings();
+
+  const quickLinks = [
+    { name: tCommon('home'), path: "/" },
+    { name: tCommon('about'), path: "/about" },
+    { name: tCommon('projects'), path: "/projects" },
+    { name: tCommon('clients'), path: "/clients" },
+    { name: tCommon('contact'), path: "/contact" },
+    { name: tCommon('terms'), path: "/terms" },
+  ];
+
+  const services = [
+    { name: tServices('list.earthworks.title'), href: "/services/earthworks" },
+    { name: tServices('list.asphalt.title'), href: "/services/asphalt-works" },
+    { name: tServices('list.roadMarking.title'), href: "/services/road-marking" },
+    { name: tServices('list.interlock.title'), href: "/services/interlock-kerbstone" },
+    { name: tServices('list.subgrade.title'), href: "/services/subgrade-subbase" },
+    { name: tServices('list.infrastructure.title'), href: "/services/infrastructure-development" },
+  ];
 
   return (
     <footer className="bg-secondary border-t border-border">
@@ -24,50 +46,35 @@ export const Footer = () => {
               <Image src={cpcLogo} alt={`${settings.site_name} logo`} width={224} height={112} className="h-28 w-auto object-contain" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Constructing the nation&apos;s infrastructure with excellence, precision, and over 10 years of trusted expertise.
+              {t('description')}
             </p>
           </div>
 
           {/* Quick Links */}
           <nav aria-label="Quick links">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Quick Links</h2>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('quickLinks')}</h2>
             <ul className="space-y-3">
-              {["Home", "About", "Projects", "Clients", "Contact"].map((item) => (
-                <li key={item}>
+              {quickLinks.map((item) => (
+                <li key={item.path}>
                   <Link
-                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    href={item.path}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  to="/terms"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
-                >
-                  Terms of Use
-                </Link>
-              </li>
             </ul>
           </nav>
 
           {/* Services */}
           <nav aria-label="Services">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Services</h2>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{t('ourServices')}</h2>
             <ul className="space-y-3">
-              {[
-                { name: "Earthworks & Grading", href: "/services/earthworks" },
-                { name: "Asphalt Paving", href: "/services/asphalt-works" },
-                { name: "Road Marking & Traffic Signs", href: "/services/road-marking" },
-                { name: "Interlock & Kerbstone", href: "/services/interlock-kerbstone" },
-                { name: "Sub-Grade & Sub-Base", href: "/services/subgrade-subbase" },
-                { name: "Infrastructure Development", href: "/services/infrastructure-development" },
-              ].map((item) => (
-                <li key={item.name}>
+              {services.map((item) => (
+                <li key={item.href}>
                   <Link
-                    to={item.href}
+                    href={item.href}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
                     {item.name}
@@ -79,30 +86,15 @@ export const Footer = () => {
 
           {/* Legal Documents */}
           <nav aria-label="Legal documents">
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Legal Documents</h2>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{tCommon('legalDocs')}</h2>
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/certificates"
+                  href="/certificates"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm flex items-center gap-2"
                 >
                   <FileText className="w-4 h-4" />
-                  Company Certificates
-                </Link>
-              </li>
-              <li>
-                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Commercial Registration
-                </Link>
-              </li>
-              <li>
-                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Tax Card
-                </Link>
-              </li>
-              <li>
-                <Link to="/certificates" className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm">
-                  Commercial Permit
+                  {tCommon('certificates')}
                 </Link>
               </li>
             </ul>
@@ -110,7 +102,7 @@ export const Footer = () => {
 
           {/* Contact Info — dynamic from site_settings */}
           <div>
-            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">Contact Us</h2>
+            <h2 className="font-display text-lg tracking-wide text-foreground mb-6">{tCommon('contactUs')}</h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -187,14 +179,14 @@ export const Footer = () => {
         <div className="mt-16 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} {settings.site_name.toUpperCase()}. All rights reserved.
+              {t('copyright', { year: new Date().getFullYear() })}
             </p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Privacy Policy
+              <Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                {tCommon('privacy')}
               </Link>
-              <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                Terms of Use
+              <Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                {tCommon('terms')}
               </Link>
             </div>
           </div>

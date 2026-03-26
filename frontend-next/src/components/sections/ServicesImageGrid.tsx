@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import { Link } from "@/lib/router-compat";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 const earthworks = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312051/cpc-website/services/earth_work.jpg";
 const subgrade = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312062/cpc-website/services/subgrade_and_subbase.jpg";
@@ -10,66 +11,40 @@ const asphalt = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto
 const traffic = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312058/cpc-website/services/road-markings-masters.jpg";
 const interlock = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312054/cpc-website/services/interllock.jpg";
 
-const services = [
-  {
-    title: "Earth Works",
-    subtitle: "Foundation & Groundwork",
-    description: "Comprehensive earthmoving, excavation, and land preparation services for all construction needs.",
-    features: ["Site Clearing", "Excavation", "Grading", "Compaction"],
-    image: earthworks,
-    alt: "Earthworks and excavation services by CPC Qatar — site grading and land preparation in Doha, Qatar",
-    href: "/services/earthworks",
-  },
-  {
-    title: "Sub-Grade & Sub-Base",
-    subtitle: "Road Foundation",
-    description: "Professional sub-grade and sub-base preparation ensuring solid foundation for all road projects.",
-    features: ["Layer Preparation", "Material Testing", "Compaction Control", "Quality Assurance"],
-    image: subgrade,
-    alt: "Subgrade and subbase road foundation construction by CPC Qatar in Doha, Qatar",
-    href: "/services/subgrade-subbase",
-  },
-  {
-    title: "Asphalt Works",
-    subtitle: "Paving & Surfacing",
-    description: "Expert asphalt paving and road surfacing using latest technology and quality materials.",
-    features: ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Maintenance"],
-    image: asphalt,
-    alt: "Asphalt paving and road surfacing project by CPC Qatar — hot mix asphalt in Doha, Qatar",
-    href: "/services/asphalt-works",
-  },
-  {
-    title: "Traffic Signs & Road Marking",
-    subtitle: "Safety & Signage",
-    description: "Complete traffic management solutions including signage installation and road marking services.",
-    features: ["Thermoplastic Marking", "Sign Installation", "Safety Measures", "Line Marking"],
-    image: traffic,
-    alt: "Road marking and traffic sign installation by CPC Qatar — thermoplastic marking in Doha, Qatar",
-    href: "/services/road-marking",
-  },
-  {
-    title: "Interlock & Kerbstone",
-    subtitle: "Precision Paving",
-    description: "Precision installation of interlocking pavers and kerbstones for aesthetic and functional excellence.",
-    features: ["Paver Installation", "Kerbstone Laying", "Pattern Design", "Finishing Works"],
-    image: interlock,
-    alt: "Interlock paving and kerbstone installation by CPC Qatar in Doha, Qatar",
-    href: "/services/interlock-kerbstone",
-  },
+const serviceImages = {
+  earthworks,
+  subgrade,
+  asphalt,
+  traffic,
+  interlock
+};
+
+const serviceHrefs = [
+  "/services/earthworks",
+  "/services/subgrade-subbase",
+  "/services/asphalt-works",
+  "/services/road-marking",
+  "/services/interlock-kerbstone",
 ];
 
 /* ─── Bento Card ─── */
 const BentoCard = ({
-  service,
+  serviceKey,
   index,
   isLarge = false,
+  t,
 }: {
-  service: (typeof services)[0];
+  serviceKey: string;
   index: number;
   isLarge?: boolean;
+  t: ReturnType<typeof useTranslations>;
 }) => {
   const [hovered, setHovered] = useState(false);
   const num = String(index + 1).padStart(2, "0");
+  
+  const images = ['earthworks', 'subgrade', 'asphalt', 'traffic', 'interlock'];
+  const image = serviceImages[images[index] as keyof typeof serviceImages];
+  const href = serviceHrefs[index];
 
   return (
     <motion.div
@@ -89,8 +64,8 @@ const BentoCard = ({
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <img
-          src={service.image}
-          alt={service.alt}
+          src={image}
+          alt={t(`${serviceKey}.alt`)}
           className="w-full h-full object-cover"
           width={800}
           height={600}
@@ -131,7 +106,7 @@ const BentoCard = ({
           transition={{ duration: 0.35, ease: "easeOut" }}
         >
           <span className="inline-block text-[10px] sm:text-xs uppercase tracking-[0.25em] text-amber-400 font-medium bg-amber-400/10 border border-amber-400/20 rounded-full px-3 py-1">
-            {service.subtitle}
+            {t(`${serviceKey}.subtitle`)}
           </span>
         </motion.div>
 
@@ -144,7 +119,7 @@ const BentoCard = ({
           animate={{ y: hovered ? -4 : 0 }}
           transition={{ duration: 0.35 }}
         >
-          {service.title}
+          {t(`${serviceKey}.title`)}
         </motion.h3>
 
         {/* Description — always in DOM for crawlers, visually animated */}
@@ -154,7 +129,7 @@ const BentoCard = ({
           transition={{ duration: 0.4, ease: "easeOut" }}
           style={{ height: "auto", overflow: "hidden" }}
         >
-          {service.description}
+          {t(`${serviceKey}.description`)}
         </motion.p>
 
         {/* Feature tags — always in DOM for crawlers */}
@@ -163,7 +138,7 @@ const BentoCard = ({
           animate={{ y: hovered ? 0 : 20, opacity: hovered ? 1 : 0.001 }}
           transition={{ duration: 0.4, delay: 0.08, ease: "easeOut" }}
         >
-          {service.features.map((f, i) => (
+          {(t.raw(`${serviceKey}.features`) as string[]).map((f: string, i: number) => (
             <motion.span
               key={i}
               className="text-[11px] sm:text-xs text-white/90 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10"
@@ -192,8 +167,8 @@ const BentoCard = ({
         transition={{ duration: 0.4 }}
       />
       {/* Link overlay for crawlers + accessibility */}
-      <Link to={service.href} className="absolute inset-0 z-30" aria-label={`${service.title} — View details`}>
-        <span className="sr-only">{service.description}</span>
+      <Link href={href} className="absolute inset-0 z-30" aria-label={`${t(`${serviceKey}.title`)} — ${t('viewDetails')}`}>
+        <span className="sr-only">{t(`${serviceKey}.description`)}</span>
       </Link>    </motion.div>
   );
 };
@@ -206,6 +181,9 @@ export const ServicesImageGrid = () => {
     offset: ["start end", "end start"],
   });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const t = useTranslations('servicesGrid');
+  
+  const serviceKeys = ['earthworks', 'subgrade', 'asphalt', 'traffic', 'interlock'];
 
   return (
     <section ref={sectionRef} className="relative py-20 md:py-32 bg-gradient-to-b from-gray-950 via-black to-gray-950 overflow-hidden">
@@ -242,9 +220,9 @@ export const ServicesImageGrid = () => {
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 px-4">
-            What We{" "}
+            {t('whatWe')}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-              Do
+              {t('do')}
             </span>
           </h2>
 
@@ -257,7 +235,7 @@ export const ServicesImageGrid = () => {
           />
 
           <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
-            Comprehensive construction solutions — from groundwork to final finish
+            {t('description')}
           </p>
         </motion.div>
 
@@ -266,11 +244,11 @@ export const ServicesImageGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-4 md:mb-5">
           {/* Earth Works — hero card spanning 2 cols on lg */}
           <div className="lg:col-span-2">
-            <BentoCard service={services[0]} index={0} isLarge />
+            <BentoCard serviceKey={serviceKeys[0]} index={0} isLarge t={t} />
           </div>
           {/* Sub-Grade */}
           <div className="lg:col-span-1">
-            <BentoCard service={services[1]} index={1} />
+            <BentoCard serviceKey={serviceKeys[1]} index={1} t={t} />
           </div>
         </div>
 
@@ -278,18 +256,18 @@ export const ServicesImageGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {/* Asphalt */}
           <div className="lg:col-span-1">
-            <BentoCard service={services[2]} index={2} />
+            <BentoCard serviceKey={serviceKeys[2]} index={2} t={t} />
           </div>
           {/* Traffic — hero card spanning 2 cols on lg */}
           <div className="lg:col-span-2">
-            <BentoCard service={services[3]} index={3} isLarge />
+            <BentoCard serviceKey={serviceKeys[3]} index={3} isLarge t={t} />
           </div>
         </div>
 
         {/* Row 3 — centered single card */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mt-4 md:mt-5">
           <div className="md:col-start-1 md:col-span-3 lg:col-start-1 lg:col-span-3">
-            <BentoCard service={services[4]} index={4} isLarge />
+            <BentoCard serviceKey={serviceKeys[4]} index={4} isLarge t={t} />
           </div>
         </div>
       </div>

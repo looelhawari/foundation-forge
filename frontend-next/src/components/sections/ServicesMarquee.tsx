@@ -1,12 +1,16 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 export const ServicesMarquee = () => {
+  const t = useTranslations('servicesMarquee');
+  
   const services = [
-    "HIGHWAY CONSTRUCTION",
-    "STREET DEVELOPMENT",
-    "INFRASTRUCTURE",
-    "BRIDGE CONSTRUCTION",
-    "ROAD MAINTENANCE",
+    t('services.highway'),
+    t('services.street'),
+    t('services.infrastructure'),
+    t('services.bridge'),
+    t('services.roadMaintenance'),
   ];
 
   const serviceItems = [...services, ...services].map((service, index) => (
@@ -42,12 +46,12 @@ export const ServicesMarquee = () => {
           <span
             className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-4"
           >
-            What We Do
+            {t('whatWeDo')}
           </span>
           <p
             className="font-display text-3xl md:text-4xl tracking-[0.2em]"
           >
-            OUR <span className="text-gradient">EXPERTISE</span>
+            {t('our')} <span className="text-gradient">{t('expertise')}</span>
           </p>
         </div>
       </div>

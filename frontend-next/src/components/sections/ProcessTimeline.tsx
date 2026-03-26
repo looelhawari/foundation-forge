@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 const processBg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312042/cpc-website/real-process-bg.jpg";
 const process1 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312029/cpc-website/process-1.jpg";
 const process2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312027/cpc-website/planning.jpg";
@@ -10,50 +11,8 @@ const process4 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_aut
 const process5 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312034/cpc-website/process-5.jpg";
 const process6 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312035/cpc-website/process-6.jpg";
 
-const processSteps = [
-    {
-        step: "01",
-        title: "Initial Consultation",
-        description: "Understanding your project requirements, site conditions, and objectives through detailed discussions",
-        tasks: ["Site Assessment", "Requirements Analysis", "Budget Discussion", "Timeline Planning"],
-        image: process1
-    },
-    {
-        step: "02",
-        title: "Planning & Design",
-        description: "Developing comprehensive project plans with technical specifications and resource allocation",
-        tasks: ["Technical Design", "Material Selection", "Resource Planning", "Risk Assessment"],
-        image: process2
-    },
-    {
-        step: "03",
-        title: "Approval & Permits",
-        description: "Securing necessary approvals and permits from relevant authorities",
-        tasks: ["Documentation", "Authority Coordination", "Permit Acquisition", "Compliance Check"],
-        image: process3
-    },
-    {
-        step: "04",
-        title: "Mobilization",
-        description: "Deploying equipment, materials, and skilled workforce to the project site",
-        tasks: ["Site Preparation", "Equipment Deployment", "Team Assignment", "Safety Setup"],
-        image: process4
-    },
-    {
-        step: "05",
-        title: "Execution",
-        description: "Implementing the project plan with continuous monitoring and quality control",
-        tasks: ["Construction Work", "Quality Testing", "Progress Monitoring", "Safety Inspection"],
-        image: process5
-    },
-    {
-        step: "06",
-        title: "Completion & Handover",
-        description: "Final inspection, documentation, and project handover to client",
-        tasks: ["Final Inspection", "Documentation", "Client Training", "Warranty Activation"],
-        image: process6
-    }
-];
+const processImages = [process1, process2, process3, process4, process5, process6];
+const processKeys = ['consultation', 'planning', 'approval', 'mobilization', 'execution', 'completion'];
 
 export function ProcessTimeline() {
     const containerRef = useRef(null);
@@ -63,6 +22,7 @@ export function ProcessTimeline() {
     });
 
     const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const t = useTranslations('processTimeline');
 
     return (
         <section ref={containerRef} className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
@@ -70,7 +30,7 @@ export function ProcessTimeline() {
             <div className="absolute inset-0">
                 <img
                     src={processBg}
-                    alt="CPC Qatar construction methodology — road building and infrastructure development process"
+                    alt={t('bgAlt')}
                     className="w-full h-full object-cover opacity-10"
                     width={1920}
                     height={1080}
@@ -95,7 +55,7 @@ export function ProcessTimeline() {
                         transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
                         viewport={{ once: true }}
                     >
-                        Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Process</span>
+                        {t('our')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{t('process')}</span>
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -111,7 +71,7 @@ export function ProcessTimeline() {
                         viewport={{ once: true }}
                         className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4"
                     >
-                        From consultation to completion - Our proven 6-step methodology
+                        {t('subtitle')}
                     </motion.p>
                 </motion.div>
 
@@ -126,12 +86,13 @@ export function ProcessTimeline() {
                     </div>
 
                     {/* Timeline steps */}
-                    {processSteps.map((process, index) => {
+                    {processKeys.map((key, index) => {
                         const isEven = index % 2 === 0;
+                        const stepNum = String(index + 1).padStart(2, '0');
 
                         return (
                             <motion.div
-                                key={process.step}
+                                key={key}
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{
@@ -150,8 +111,8 @@ export function ProcessTimeline() {
                                             {/* Project Image */}
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
-                                                    src={process.image}
-                                                    alt={`Step ${process.step}: ${process.title} — ${process.description}`}
+                                                    src={processImages[index]}
+                                                    alt={`${t('step')} ${stepNum}: ${t(`steps.${key}.title`)} — ${t(`steps.${key}.description`)}`}
                                                     className="w-full h-full object-cover"
                                                     width={600}
                                                     height={400}
@@ -161,7 +122,7 @@ export function ProcessTimeline() {
 
                                                 {/* Step number overlay on image */}
                                                 <div className="absolute top-4 right-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-bold text-lg sm:text-xl md:text-2xl">
-                                                    {process.step}
+                                                    {stepNum}
                                                 </div>
                                             </div>
 
@@ -169,7 +130,7 @@ export function ProcessTimeline() {
 
                                                 {/* Title */}
                                                 <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">
-                                                    {process.title}
+                                                    {t(`steps.${key}.title`)}
                                                 </h3>
 
                                                 {/* Divider */}
@@ -183,12 +144,12 @@ export function ProcessTimeline() {
 
                                                 {/* Description */}
                                                 <p className="text-sm sm:text-base text-gray-300 mb-3 md:mb-4">
-                                                    {process.description}
+                                                    {t(`steps.${key}.description`)}
                                                 </p>
 
                                                 {/* Tasks list */}
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                                    {process.tasks.map((task, taskIndex) => (
+                                                    {(t.raw(`steps.${key}.tasks`) as string[]).map((task: string, taskIndex: number) => (
                                                         <motion.div
                                                             key={task}
                                                             className="flex items-center gap-2 text-xs sm:text-sm text-gray-500"

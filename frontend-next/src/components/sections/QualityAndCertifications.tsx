@@ -2,49 +2,14 @@
 
 import { motion } from "framer-motion";
 import { FileText, Building2, Shield, Award } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const certifications = [
-    {
-        title: "CR 108122",
-        subtitle: "Commercial Registration",
-        description: "Ministry of Commerce - Valid until 08/12/2029 - Est. 11/12/2017",
-        icon: Building2,
-        doc: "Commercial Registration Dec 2029.pdf"
-    },
-    {
-        title: "14-1191-01",
-        subtitle: "Establishment Card",
-        description: "Ministry of Interior - Valid until 13/10/2028",
-        icon: Shield,
-        doc: "Computer Card 2028.pdf"
-    },
-    {
-        title: "TIN 5000716308",
-        subtitle: "Tax Registration Card",
-        description: "General Tax Authority - Registered 11/12/2017",
-        icon: FileText,
-        doc: "CPC TAX CARD.pdf"
-    },
-    {
-        title: "License 111698",
-        subtitle: "Commercial License",
-        description: "Trade License - Valid until 13/10/2029",
-        icon: Award,
-        doc: "CR Commercial Permit OCT 2029.pdf"
-    }
-];
+const certificationIcons = [Building2, Shield, FileText, Award];
+const certificationKeys = ['cr', 'establishment', 'tax', 'license'];
+const standardKeys = ['commerce', 'interior', 'tax', 'construction', 'roads', 'chamber'];
 
-const standards = [
-    "Ministry of Commerce & Industry Registration",
-    "Ministry of Interior Establishment Approval",
-    "General Tax Authority Registered",
-    "Licensed for Construction & General Contracting (Activity 4100001)",
-    "Authorized for Roads & Pavements Construction (Activity 4210100)",
-    "Qatar Chamber of Commerce Member"
-];
-
-const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; index: number }) => {
-    const IconComponent = cert.icon;
+const CertificationBadge = ({ certKey, index, t }: { certKey: string; index: number; t: ReturnType<typeof useTranslations> }) => {
+    const IconComponent = certificationIcons[index];
 
     return (
         <motion.div
@@ -93,9 +58,9 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
                         className="relative z-10"
                     >
                         <IconComponent className="w-10 h-10 mx-auto mb-2 text-amber-400" />
-                        <div className="text-xl font-bold text-white mb-1">{cert.title}</div>
-                        <div className="text-sm text-amber-400 mb-2">{cert.subtitle}</div>
-                        <div className="text-xs text-gray-400 px-2">{cert.description}</div>
+                        <div className="text-xl font-bold text-white mb-1">{t(`certifications.${certKey}.title`)}</div>
+                        <div className="text-sm text-amber-400 mb-2">{t(`certifications.${certKey}.subtitle`)}</div>
+                        <div className="text-xs text-gray-400 px-2">{t(`certifications.${certKey}.description`)}</div>
                     </motion.div>
                 </div>
             </div>
@@ -104,6 +69,8 @@ const CertificationBadge = ({ cert, index }: { cert: typeof certifications[0]; i
 };
 
 export function QualityAndCertifications() {
+    const t = useTranslations('quality');
+    
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-gray-900 via-black to-black overflow-hidden">
             {/* Static watermark */}
@@ -111,7 +78,7 @@ export function QualityAndCertifications() {
                 <div
                     className="text-[20rem] font-bold text-amber-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap -rotate-45"
                 >
-                    LICENSED
+                    {t('watermark')}
                 </div>
             </div>
 
@@ -131,7 +98,7 @@ export function QualityAndCertifications() {
                         transition={{ duration: 1, type: "spring" }}
                         viewport={{ once: true }}
                     >
-                        Legal Documents & <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Registration</span>
+                        {t('title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">{t('registration')}</span>
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -147,14 +114,14 @@ export function QualityAndCertifications() {
                         viewport={{ once: true }}
                         className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4"
                     >
-                        Fully licensed and registered company with all required government approvals and permits
+                        {t('subtitle')}
                     </motion.p>
                 </motion.div>
 
                 {/* Certification badges */}
                 <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 mb-12 md:mb-24">
-                    {certifications.map((cert, index) => (
-                        <CertificationBadge key={cert.title} cert={cert} index={index} />
+                    {certificationKeys.map((certKey, index) => (
+                        <CertificationBadge key={certKey} certKey={certKey} index={index} t={t} />
                     ))}
                 </div>
 
@@ -167,12 +134,12 @@ export function QualityAndCertifications() {
                     className="max-w-4xl mx-auto"
                 >
                     <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-8 md:mb-12">
-                        Our <span className="text-amber-400">Compliance</span>
+                        {t('our')} <span className="text-amber-400">{t('compliance')}</span>
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {standards.map((standard, index) => (
+                        {standardKeys.map((key, index) => (
                             <motion.div
-                                key={standard}
+                                key={key}
                                 initial={{ opacity: 0, x: -50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{
@@ -208,7 +175,7 @@ export function QualityAndCertifications() {
                                     />
                                 </motion.svg>
 
-                                <p className="text-white font-bold text-base sm:text-lg">{standard}</p>
+                                <p className="text-white font-bold text-base sm:text-lg">{t(`standards.${key}`)}</p>
 
                                 {/* Shine effect */}
                                 <motion.div
@@ -236,10 +203,10 @@ export function QualityAndCertifications() {
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <p className="text-2xl text-white mb-2">
-                            <span className="text-amber-400 font-bold">Fully Licensed</span> & Government Approved
+                            <span className="text-amber-400 font-bold">{t('fullyLicensed')}</span> {t('governmentApproved')}
                         </p>
                         <p className="text-gray-400">
-                            All legal documents verified and up to date
+                            {t('documentsVerified')}
                         </p>
                     </motion.div>
                 </motion.div>

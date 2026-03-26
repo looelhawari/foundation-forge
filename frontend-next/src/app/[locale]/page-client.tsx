@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { Link } from "@/lib/router-compat";
+import { Link } from "@/i18n/navigation";
 import { FileText } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CinematicHero } from "@/components/sections/CinematicHero";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import SEOHead from "@/components/SEOHead";
+import { useTranslations } from "next-intl";
 
 // Dynamic imports — code-split heavy components to reduce TBT
 const FloatingContactButtons = dynamic(() => import("@/components/layout/FloatingContactButtons").then(m => ({ default: m.FloatingContactButtons })), { ssr: false });
@@ -29,6 +30,7 @@ const MegaCTA = dynamic(() => import("@/components/sections/MegaCTA").then(m => 
 const Index = () => {
     // Default true = mobile-first SSR — prevents CLS from removing sections on mobile hydration
     const [isMobile, setIsMobile] = useState(true);
+    const t = useTranslations('common');
 
     // Initialize smooth scroll
     useSmoothScroll();
@@ -77,13 +79,13 @@ const Index = () => {
             {/* Floating Legal Documents Button — CSS animation instead of framer-motion */}
             <div className="fixed bottom-6 right-6 z-50 animate-slide-in-right">
                 <Link
-                    to="/certificates"
+                    href="/certificates"
                     className="group flex items-center gap-2 bg-primary/90 hover:bg-primary text-primary-foreground px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                     aria-label="View company certificates and legal documents"
                 >
                     <FileText className="w-5 h-5" />
                     <span className="text-sm font-medium hidden sm:inline-block group-hover:inline-block transition-all">
-                        Legal Docs
+                        {t('legalDocs')}
                     </span>
                 </Link>
             </div>

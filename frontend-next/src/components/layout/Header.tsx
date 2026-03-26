@@ -1,26 +1,35 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "@/lib/router-compat";
+import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import Image from "next/image";
 const cpcLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Projects", path: "/projects" },
-  { name: "Clients", path: "/clients" },
-  { name: "Contact", path: "/contact" },
-];
-
 export const Header = () => {
+  const t = useTranslations('header');
+  const tCommon = useTranslations('common');
+  const locale = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: t('nav.home'), path: "/" },
+    { name: t('nav.about'), path: "/about" },
+    { name: t('nav.services'), path: "/services" },
+    { name: t('nav.projects'), path: "/projects" },
+    { name: t('nav.clients'), path: "/clients" },
+    { name: t('nav.contact'), path: "/contact" },
+  ];
+
+  // Get current path without locale prefix for comparison
+  const currentPath = pathname.replace(`/${locale}`, '') || '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +41,7 @@ export const Header = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   return (
     <>
@@ -41,7 +50,7 @@ export const Header = () => {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none"
       >
-        Skip to main content
+        {t('skipToContent')}
       </a>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
@@ -52,7 +61,7 @@ export const Header = () => {
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 group">
               <Image src={cpcLogo} alt="CPC Qatar - Cosmo Projects & Construction logo" width={160} height={80} className="h-14 sm:h-16 md:h-20 w-auto object-contain" priority />
             </Link>
 
@@ -61,14 +70,14 @@ export const Header = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
-                  to={link.path}
-                  className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${location.pathname === link.path
+                  href={link.path}
+                  className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${currentPath === link.path
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"
                     }`}
                 >
                   {link.name}
-                  {location.pathname === link.path && (
+                  {currentPath === link.path && (
                     <motion.div
                       layoutId="activeNav"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-gold"
@@ -78,22 +87,26 @@ export const Header = () => {
               ))}
             </nav>
 
-            {/* CTA Button */}
-            <div className="hidden lg:block">
+            {/* Language Switcher + CTA Button */}
+            <div className="hidden lg:flex items-center gap-4">
+              <LanguageSwitcher />
               <Button variant="hero" size="lg" asChild>
-                <Link to="/contact">Get a Quote</Link>
+                <Link href="/contact">{tCommon('getQuote')}</Link>
               </Button>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-foreground"
-              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="lg:hidden flex items-center gap-2">
+              <LanguageSwitcher />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-foreground"
+                aria-label={isMobileMenuOpen ? t('closeMenu') : t('menu')}
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -110,13 +123,13 @@ export const Header = () => {
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.path}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: locale === 'ar' ? 20 : -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
                     <Link
-                      to={link.path}
-                      className={`block py-3 text-lg font-medium ${location.pathname === link.path
+                      href={link.path}
+                      className={`block py-3 text-lg font-medium ${currentPath === link.path
                         ? "text-primary"
                         : "text-muted-foreground"
                         }`}
@@ -126,12 +139,12 @@ export const Header = () => {
                   </motion.div>
                 ))}
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: locale === 'ar' ? 20 : -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
                 >
                   <Button variant="hero" size="lg" className="w-full mt-4" asChild>
-                    <Link to="/contact">Get a Quote</Link>
+                    <Link href="/contact">{tCommon('getQuote')}</Link>
                   </Button>
                 </motion.div>
               </nav>

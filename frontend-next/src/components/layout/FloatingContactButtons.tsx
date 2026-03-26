@@ -3,8 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin, MessageSquare } from "lucide-react";
 import { useState } from "react";
-import { Link } from "@/lib/router-compat";
+import { Link } from "@/i18n/navigation";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useTranslations } from "next-intl";
 
 /** Strip non-digit characters except leading + for tel: links */
 const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
@@ -12,33 +13,34 @@ const toTelHref = (phone: string) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 export const FloatingContactButtons = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const { settings } = useSiteSettings();
+    const t = useTranslations('floatingContact');
 
     const contactButtons = [
         {
             icon: MessageSquare,
-            label: "Contact Us",
+            labelKey: "contactUs",
             href: "/contact",
             isInternal: true,
-            ariaLabel: "Go to contact page"
+            ariaLabelKey: "goToContact"
         },
         {
             icon: Mail,
             label: settings.contact_email,
             href: `mailto:${settings.contact_email}`,
-            ariaLabel: "Send us an email"
+            ariaLabelKey: "sendEmail"
         },
         {
             icon: MapPin,
             label: settings.public_location,
             href: `https://www.google.com/maps/place/Cosmo+Projects+%26+Construction+and+Trading/@25.2734836,51.5014973,17z`,
             external: true,
-            ariaLabel: "View our location on Google Maps"
+            ariaLabelKey: "viewLocation"
         },
         {
             icon: Phone,
             label: settings.contact_phone,
             href: toTelHref(settings.contact_phone),
-            ariaLabel: "Call us"
+            ariaLabelKey: "callUs"
         }
     ];
 
@@ -52,8 +54,8 @@ export const FloatingContactButtons = () => {
                 className="fixed bottom-6 right-6 z-40 lg:hidden"
             >
                 <Link
-                    to="/contact"
-                    aria-label="Contact us"
+                    href="/contact"
+                    aria-label={t('contactUs')}
                     className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-shadow"
                 >
                     <MessageSquare size={22} strokeWidth={2} />
@@ -70,6 +72,7 @@ export const FloatingContactButtons = () => {
                 {contactButtons.map((button, index) => {
                     const Icon = button.icon;
                     const isHovered = hoveredIndex === index;
+                    const displayLabel = button.labelKey ? t(button.labelKey) : button.label;
 
                     const ButtonContent = (
                         <motion.div
@@ -97,7 +100,7 @@ export const FloatingContactButtons = () => {
                                             transition={{ delay: 0.1, duration: 0.2 }}
                                             className="px-5 py-3 text-primary-foreground font-medium text-sm whitespace-nowrap"
                                         >
-                                            {button.label}
+                                            {displayLabel}
                                         </motion.span>
                                     </motion.div>
                                 )}
@@ -126,7 +129,7 @@ export const FloatingContactButtons = () => {
 
                     return (
                         <motion.div
-                            key={button.label}
+                            key={displayLabel}
                             initial={{ opacity: 0, x: 60 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{
@@ -137,8 +140,8 @@ export const FloatingContactButtons = () => {
                         >
                             {button.isInternal ? (
                                 <Link
-                                    to={button.href}
-                                    aria-label={button.ariaLabel}
+                                    href={button.href}
+                                    aria-label={t(button.ariaLabelKey)}
                                     className="block"
                                 >
                                     {ButtonContent}
@@ -148,7 +151,7 @@ export const FloatingContactButtons = () => {
                                     href={button.href}
                                     target={button.external ? "_blank" : undefined}
                                     rel={button.external ? "noopener noreferrer" : undefined}
-                                    aria-label={button.ariaLabel}
+                                    aria-label={t(button.ariaLabelKey)}
                                     className="block"
                                 >
                                     {ButtonContent}

@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 // Import project images
 const busParking2 = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772311992/cpc-website/bus_parking_stage_2_.jpg";
@@ -20,78 +21,17 @@ const moeProjectImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,
 const fwcq2ClientImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312012/cpc-website/FWCQ2%28in_client_section%29.jpg";
 const mosquesImg = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312024/cpc-website/mosques.jpg";
 
-const topProjects = [
-    {
-        id: 1,
-        title: "School Bus Parking - Stage 2",
-        client: "Ministry of Education",
-        area: "22,000 m²",
-        status: "Completed",
-        image: busParking2
-    },
-    {
-        id: 2,
-        title: "School Bus Parking - Stage 1",
-        client: "Ministry of Education",
-        area: "16,000 m²",
-        status: "Completed",
-        image: busParking1
-    },
-    {
-        id: 3,
-        title: "Warehouse",
-        client: "Manateq",
-        area: "11,400 m²",
-        status: "Completed",
-        image: warehouseImg
-    },
-    {
-        id: 4,
-        title: "FIFA World Cup 2022",
-        client: "FIFA Qatar 2022",
-        area: "45,000 m²",
-        status: "Delivered",
-        image: fwcq2Project
-    },
-    {
-        id: 5,
-        title: "Farms",
-        client: "",
-        area: "6,800 m²",
-        status: "Completed",
-        image: farmsImg
-    }
-];
+const projectImages = [busParking2, busParking1, warehouseImg, fwcq2Project, farmsImg];
+const projectKeys = ['busParking2', 'busParking1', 'warehouse', 'fifa', 'farms'];
 
-const topClients = [
-    {
-        name: "Ministry of Education",
-        projects: "3 Major Projects",
-        highlight: "Government Partner",
-        color: "#fbbf24",
-        logo: moeLogo,
-        projectImage: moeProjectImg
-    },
-    {
-        name: "FIFA World Cup Qatar 2022",
-        projects: "International Event",
-        highlight: "Global Event",
-        color: "#f97316",
-        logo: fifaLogo,
-        projectImage: fwcq2ClientImg
-    },
-    {
-        name: "Ministry of Endowments and Islamic Affairs",
-        projects: "Heritage Sites",
-        highlight: "Cultural Heritage",
-        color: "#ea580c",
-        logo: waqifLogo,
-        projectImage: mosquesImg
-    }
+const clientData = [
+    { key: "moe", color: "#fbbf24", logo: moeLogo, projectImage: moeProjectImg },
+    { key: "fifa", color: "#f97316", logo: fifaLogo, projectImage: fwcq2ClientImg },
+    { key: "endowments", color: "#ea580c", logo: waqifLogo, projectImage: mosquesImg }
 ];
 
 // Minimal glass morphism project card with scroll reveal
-const MinimalProjectCard = ({ project, index }: any) => {
+const MinimalProjectCard = ({ projectKey, index, image, t }: { projectKey: string; index: number; image: string; t: ReturnType<typeof useTranslations> }) => {
     const [isHovered, setIsHovered] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
 
@@ -126,8 +66,8 @@ const MinimalProjectCard = ({ project, index }: any) => {
                 {/* Project Image Background */}
                 <div className="absolute inset-0">
                     <motion.img
-                        src={project.image}
-                        alt={`CPC Qatar project: ${project.title} — ${project.area} for ${project.client || 'private client'}, ${project.status}`}
+                        src={image}
+                        alt={`CPC Qatar project: ${t(`projects.${projectKey}.title`)} — ${t(`projects.${projectKey}.area`)} for ${t(`projects.${projectKey}.client`) || 'private client'}, ${t(`projects.${projectKey}.status`)}`}
                         className="w-full h-full object-cover"
                         width={800}
                         height={600}
@@ -161,7 +101,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                         <motion.div
                             className="text-[60px] sm:text-[80px] md:text-[120px] font-bold leading-none text-primary/30"
                         >
-                            {project.id}
+                            {index + 1}
                         </motion.div>
 
                         {/* Badge */}
@@ -171,7 +111,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
                             animate={{ x: 0, opacity: 1 }}
                             transition={{ delay: index * 0.1 + 0.3 }}
                         >
-                            <span className="text-primary">TOP {project.id}</span>
+                            <span className="text-primary">{t('top')} {index + 1}</span>
                         </motion.div>
                     </div>
 
@@ -184,10 +124,10 @@ const MinimalProjectCard = ({ project, index }: any) => {
                             viewport={{ once: true }}
                         >
                             <h3 className="text-3xl font-bold text-white mb-2">
-                                {project.title}
+                                {t(`projects.${projectKey}.title`)}
                             </h3>
                             <p className="text-lg text-primary">
-                                {project.client}
+                                {t(`projects.${projectKey}.client`)}
                             </p>
                         </motion.div>
 
@@ -202,12 +142,12 @@ const MinimalProjectCard = ({ project, index }: any) => {
                         >
                             <div className="flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                <span>{project.area}</span>
+                                <span>{t(`projects.${projectKey}.area`)}</span>
                             </div>
                             <div className="h-4 w-px bg-gray-700" />
                             <div className="flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                                <span className="font-bold text-green-400">{project.status}</span>
+                                <span className="font-bold text-green-400">{t(`projects.${projectKey}.status`)}</span>
                             </div>
                         </motion.div>
                     </div>
@@ -232,7 +172,7 @@ const MinimalProjectCard = ({ project, index }: any) => {
 };
 
 // Origami Folding Client Card
-const OrigamiClientCard = ({ client, index }: any) => {
+const OrigamiClientCard = ({ clientKey, clientInfo, index, t }: { clientKey: string; clientInfo: typeof clientData[0]; index: number; t: ReturnType<typeof useTranslations> }) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
     return (
@@ -269,7 +209,7 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 <div
                     className="absolute inset-0 opacity-10"
                     style={{
-                        backgroundImage: `radial-gradient(circle at 20px 20px, ${client.color} 1px, transparent 1px)`,
+                        backgroundImage: `radial-gradient(circle at 20px 20px, ${clientInfo.color} 1px, transparent 1px)`,
                         backgroundSize: "40px 40px"
                     }}
                 />
@@ -277,8 +217,8 @@ const OrigamiClientCard = ({ client, index }: any) => {
                 {/* Logo */}
                 <div className="w-36 h-36 mb-4 relative z-10 flex items-center justify-center">
                     <img
-                        src={client.logo}
-                        alt={client.name}
+                        src={clientInfo.logo}
+                        alt={t(`clients.${clientKey}.name`)}
                         className="w-full h-full object-contain drop-shadow-lg"
                         width={144}
                         height={144}
@@ -286,11 +226,11 @@ const OrigamiClientCard = ({ client, index }: any) => {
                     />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 text-center relative z-10">
-                    {client.name}
+                    {t(`clients.${clientKey}.name`)}
                 </h3>
                 <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
                     <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
-                    Hover to see project
+                    {t('hoverToSeeProject')}
                     <span className="inline-block w-4 h-0.5 bg-gray-400"></span>
                 </p>
             </motion.div>
@@ -311,8 +251,8 @@ const OrigamiClientCard = ({ client, index }: any) => {
             >
                 {/* Project Image */}
                 <img
-                    src={client.projectImage}
-                    alt={`${client.name} project`}
+                    src={clientInfo.projectImage}
+                    alt={`${t(`clients.${clientKey}.name`)} project`}
                     className="w-full h-full object-cover"
                     width={600}
                     height={400}
@@ -326,10 +266,10 @@ const OrigamiClientCard = ({ client, index }: any) => {
                         animate={{ y: isFlipped ? 0 : 20, opacity: isFlipped ? 1 : 0 }}
                         transition={{ delay: 0.3, duration: 0.5 }}
                     >
-                        <p className="text-lg font-bold text-white mb-1">{client.name}</p>
-                        <p className="text-gray-300 text-sm">{client.projects}</p>
-                        <p className="text-sm font-bold mt-2" style={{ color: client.color }}>
-                            {client.highlight}
+                        <p className="text-lg font-bold text-white mb-1">{t(`clients.${clientKey}.name`)}</p>
+                        <p className="text-gray-300 text-sm">{t(`clients.${clientKey}.projects`)}</p>
+                        <p className="text-sm font-bold mt-2" style={{ color: clientInfo.color }}>
+                            {t(`clients.${clientKey}.highlight`)}
                         </p>
                     </motion.div>
                 </div>
@@ -349,6 +289,8 @@ const OrigamiClientCard = ({ client, index }: any) => {
 };
 
 export function FeaturedShowcase() {
+    const t = useTranslations('featured');
+    
     return (
         <section className="relative py-16 sm:py-24 md:py-32 bg-black overflow-hidden">
             {/* Subtle grid background */}
@@ -377,13 +319,13 @@ export function FeaturedShowcase() {
                     />
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 px-4">
-                        <span className="text-white">Featured </span>
+                        <span className="text-white">{t('featured')} </span>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400">
-                            Excellence
+                            {t('excellence')}
                         </span>
                     </h2>
                     <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-                        Our most prestigious projects and valued partnerships
+                        {t('subtitle')}
                     </p>
                 </motion.div>
 
@@ -396,15 +338,17 @@ export function FeaturedShowcase() {
                         viewport={{ once: true }}
                         className="text-xl sm:text-2xl font-light text-gray-400 mb-8 md:mb-12 tracking-wider"
                     >
-                        TOP <span className="text-white font-bold">5</span> PROJECTS
+                        {t('top')} <span className="text-white font-bold">5</span> {t('projectsLabel')}
                     </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
-                        {topProjects.map((project, index) => (
+                        {projectKeys.map((key, index) => (
                             <MinimalProjectCard
-                                key={project.id}
-                                project={project}
+                                key={key}
+                                projectKey={key}
                                 index={index}
+                                image={projectImages[index]}
+                                t={t}
                             />
                         ))}
                     </div>
@@ -419,12 +363,12 @@ export function FeaturedShowcase() {
                         viewport={{ once: true }}
                         className="text-xl sm:text-2xl font-light text-gray-400 mb-8 md:mb-12 tracking-wider"
                     >
-                        TOP <span className="text-white font-bold">3</span> CLIENTS
+                        {t('top')} <span className="text-white font-bold">3</span> {t('clientsLabel')}
                     </motion.div>
 
                     <div className="flex justify-center gap-6 sm:gap-8 md:gap-12 flex-wrap">
-                        {topClients.map((client, index) => (
-                            <OrigamiClientCard key={client.name} client={client} index={index} />
+                        {clientData.map((client, index) => (
+                            <OrigamiClientCard key={client.key} clientKey={client.key} clientInfo={client} index={index} t={t} />
                         ))}
                     </div>
                 </div>

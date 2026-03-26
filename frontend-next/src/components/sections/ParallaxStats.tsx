@@ -4,18 +4,20 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { useRef, useState, useEffect, memo } from "react";
 import { AnimatedCounter } from "../animations/MotionGraphics";
 import { stats } from "@/data/projects";
-
-const statsData = [
-  { value: stats.projectsCompleted, suffix: "+", label: "PROJECTS COMPLETED" },
-  { value: stats.yearsExperience, suffix: "+", label: "YEARS EXPERIENCE" },
-  { value: stats.satisfiedClients, suffix: "+", label: "TRUSTED CLIENTS" },
-  { value: 100, suffix: "%", label: "CLIENT SATISFACTION" },
-];
+import { useTranslations } from "next-intl";
 
 export const ParallaxStats = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
+  const t = useTranslations('parallaxStats');
+
+  const statsData = [
+    { value: stats.projectsCompleted, suffix: "+", labelKey: "projectsCompleted" },
+    { value: stats.yearsExperience, suffix: "+", labelKey: "yearsExperience" },
+    { value: stats.satisfiedClients, suffix: "+", labelKey: "trustedClients" },
+    { value: 100, suffix: "%", labelKey: "clientSatisfaction" },
+  ];
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -57,10 +59,10 @@ export const ParallaxStats = memo(() => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            By The Numbers
+            {t('byTheNumbers')}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] px-4">
-            OUR <span className="text-gradient">IMPACT</span>
+            {t('our')} <span className="text-gradient">{t('impact')}</span>
           </h2>
         </motion.div>
 
@@ -86,7 +88,7 @@ export const ParallaxStats = memo(() => {
               </div>
 
               <div className="text-xs tracking-[0.3em] text-muted-foreground">
-                {stat.label}
+                {t(`stats.${stat.labelKey}`)}
               </div>
             </motion.div>
           ))}

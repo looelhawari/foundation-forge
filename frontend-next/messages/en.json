@@ -1,0 +1,1093 @@
+{
+  "common": {
+    "companyName": "CPC Qatar",
+    "companyFullName": "Cosmo Projects & Construction and Trading W.L.L.",
+    "tagline": "Building Qatar's Infrastructure Since 2017",
+    "getQuote": "Get a Free Quote",
+    "contactUs": "Contact Us",
+    "learnMore": "Learn More",
+    "viewProjects": "View Our Projects",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "clients": "Clients",
+    "certificates": "Certificates",
+    "contact": "Contact",
+    "legalDocs": "Legal Docs",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "language": "Language",
+    "english": "English",
+    "arabic": "العربية"
+  },
+  "header": {
+    "skipToContent": "Skip to main content",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "projects": "Projects",
+      "clients": "Clients",
+      "certificates": "Certificates",
+      "contact": "Contact"
+    }
+  },
+  "footer": {
+    "description": "Leading road construction and infrastructure company in Qatar since 2017. Delivering excellence in asphalt paving, road marking, earthworks, and civil engineering.",
+    "quickLinks": "Quick Links",
+    "ourServices": "Our Services",
+    "contactInfo": "Contact Information",
+    "address": "Al Markhiya, Doha, Qatar",
+    "phone": "+974 4432 2743",
+    "email": "info@cpc-qa.com",
+    "workingHours": "Working Hours",
+    "workingDays": "Sunday - Thursday",
+    "workingTime": "7:00 AM - 5:00 PM",
+    "friday": "Friday - Saturday: Closed",
+    "copyright": "© {year} CPC Qatar. All rights reserved.",
+    "followUs": "Follow Us"
+  },
+  "hero": {
+    "title": "Building Qatar's Future",
+    "subtitle": "Road Construction & Infrastructure Excellence",
+    "description": "Premier road construction company in Doha delivering asphalt paving, road marking, earthworks, and infrastructure development since 2017.",
+    "cta": "Start Your Project",
+    "stats": {
+      "projects": "90+ Projects",
+      "years": "Since 2017",
+      "clients": "Trusted Partners"
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "CPC Qatar | Road Construction & Infrastructure Company in Doha, Qatar",
+      "description": "CPC Qatar (Cosmo Projects & Construction) — Leading road construction & infrastructure company in Doha. Asphalt paving, road marking, earthworks, interlock & subbase works. 90+ projects delivered since 2017."
+    },
+    "servicesMarquee": {
+      "title": "What We Do"
+    },
+    "servicesGrid": {
+      "title": "Our Expertise",
+      "subtitle": "Comprehensive Road & Infrastructure Solutions"
+    },
+    "clientsShowcase": {
+      "title": "Trusted by Industry Leaders",
+      "subtitle": "Government & Private Sector Clients"
+    },
+    "whyChoose": {
+      "title": "Why Choose CPC Qatar?",
+      "subtitle": "Your Trusted Construction Partner",
+      "items": {
+        "experience": {
+          "title": "90+ Projects Delivered",
+          "description": "Proven track record across Qatar"
+        },
+        "quality": {
+          "title": "QCS Compliant",
+          "description": "Adhering to Qatar Construction Standards"
+        },
+        "equipment": {
+          "title": "Modern Fleet",
+          "description": "State-of-the-art construction equipment"
+        },
+        "team": {
+          "title": "Expert Team",
+          "description": "Skilled engineers and technicians"
+        }
+      }
+    },
+    "process": {
+      "title": "Our Process",
+      "subtitle": "From Consultation to Completion",
+      "steps": {
+        "consultation": {
+          "title": "Consultation",
+          "description": "We assess your project requirements and provide expert guidance"
+        },
+        "planning": {
+          "title": "Planning",
+          "description": "Detailed project planning and resource allocation"
+        },
+        "execution": {
+          "title": "Execution",
+          "description": "Professional implementation with quality control"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "description": "On-time completion with full documentation"
+        }
+      }
+    },
+    "quality": {
+      "title": "Quality & Certifications",
+      "subtitle": "Committed to Excellence",
+      "description": "All our work complies with Qatar Construction Standards (QCS) and Ashghal specifications. We maintain rigorous quality control throughout every project."
+    },
+    "featured": {
+      "title": "Featured Projects",
+      "subtitle": "Recent Work Across Qatar"
+    },
+    "stats": {
+      "projects": "Projects Completed",
+      "value": "Million QR Value",
+      "clients": "Satisfied Clients",
+      "years": "Years Experience"
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "Testimonials from Our Partners"
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Get a free consultation and quote",
+      "description": "Contact CPC Qatar today for professional road construction and infrastructure services anywhere in Qatar.",
+      "button": "Get Free Quote"
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About CPC Qatar | Road Construction & Civil Engineering Since 2017",
+      "description": "CPC Qatar — founded 2017 in Doha. 90+ road & infrastructure projects. Approved contractor CR 108122. Trusted by Ashghal, Ministry of Education & FIFA 2022."
+    },
+    "hero": {
+      "subtitle": "Our Story",
+      "title": "CONSTRUCTING A LEGACY SINCE 2017"
+    },
+    "intro": {
+      "title": "Who We Are",
+      "description": "Cosmo Projects & Construction and Trading W.L.L. (CPC Qatar) is a leading road construction and infrastructure company established in Doha, Qatar in 2017. Under the leadership of Chairman Mohammed Ahmed Mubarak Al-Nasr, we have grown to become a trusted name in Qatar's construction industry."
+    },
+    "timeline": {
+      "title": "Our Journey",
+      "2017": {
+        "title": "Company Founded",
+        "description": "CPC Qatar established under Chairman Mohammed Ahmed Mubarak Al-Nasr"
+      },
+      "2018": {
+        "title": "Educational Excellence",
+        "description": "Major contracts with Ministry of Education for school infrastructure"
+      },
+      "2019": {
+        "title": "Cultural Heritage",
+        "description": "Qatar Museums projects - preserving cultural landmarks"
+      },
+      "2022": {
+        "title": "FIFA World Cup",
+        "description": "Delivered parking infrastructure for FIFA World Cup Qatar 2022"
+      },
+      "2024": {
+        "title": "57 Projects Strong",
+        "description": "Achieved 57 completed projects with 26M+ QR total value"
+      }
+    },
+    "values": {
+      "title": "Our Values",
+      "precision": {
+        "title": "PRECISION",
+        "description": "Every project is executed with meticulous attention to detail and engineering accuracy."
+      },
+      "quality": {
+        "title": "QUALITY",
+        "description": "We never compromise on materials or workmanship, ensuring lasting infrastructure."
+      },
+      "innovation": {
+        "title": "INNOVATION",
+        "description": "Embracing modern technologies and methods to deliver superior results."
+      }
+    },
+    "team": {
+      "title": "Leadership",
+      "chairman": "Chairman"
+    }
+  },
+  "services": {
+    "meta": {
+      "title": "Our Services | Road Construction, Asphalt Paving & Infrastructure in Qatar",
+      "description": "Asphalt paving, road marking, earthworks, interlock & infrastructure by CPC Qatar in Doha. Government-approved contractor serving Qatar since 2017."
+    },
+    "hero": {
+      "subtitle": "What We Do",
+      "title": "Our Services",
+      "description": "CPC Qatar delivers comprehensive road construction and civil engineering services across Qatar. From asphalt paving and road marking to earthworks and infrastructure development — we handle every phase of your road and infrastructure project with excellence."
+    },
+    "list": {
+      "asphalt": {
+        "title": "Asphalt Works",
+        "description": "Professional asphalt pavement construction for highways, streets, and commercial areas across Qatar. Hot mix asphalt, cold mix, surface treatment, and road resurfacing.",
+        "features": ["Hot Mix Asphalt", "Cold Mix Asphalt", "Surface Treatment", "Road Resurfacing", "Patching & Repairs"]
+      },
+      "roadMarking": {
+        "title": "Road Marking & Traffic Signs",
+        "description": "Thermoplastic and cold paint road marking, traffic signs installation, lane striping, and road safety solutions throughout Qatar.",
+        "features": ["Thermoplastic Marking", "Cold Paint Marking", "Traffic Signs", "Lane Striping", "Safety Barriers"]
+      },
+      "earthworks": {
+        "title": "Earthworks & Grading",
+        "description": "Complete site preparation including excavation, grading, filling, compaction, and land leveling for construction projects in Doha and across Qatar.",
+        "features": ["Excavation", "Site Clearing", "Grading & Leveling", "Fill & Compaction", "Cut & Fill Operations"]
+      },
+      "interlock": {
+        "title": "Interlock & Kerbstone",
+        "description": "Precision installation of interlocking block pavers, kerbstones, walkways, driveways, and decorative paving for commercial and public spaces in Qatar.",
+        "features": ["Interlock Paving", "Kerbstone Installation", "Walkway Construction", "Pattern Design", "Finishing Works"]
+      },
+      "subgrade": {
+        "title": "Subgrade & Subbase Works",
+        "description": "Foundation layer construction including subgrade preparation, subbase installation, base course works, and material testing for road projects in Qatar.",
+        "features": ["Subgrade Preparation", "Subbase Installation", "Base Course", "Material Testing", "Compaction Control"]
+      },
+      "infrastructure": {
+        "title": "Infrastructure Development",
+        "description": "Complete civil infrastructure services including drainage systems, utilities installation, stormwater management, and public works across Qatar.",
+        "features": ["Drainage Systems", "Utilities Installation", "Stormwater Management", "Curb Construction", "Public Works"]
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "description": "Contact our team for a free consultation and quote for your road construction or infrastructure project in Qatar."
+    }
+  },
+  "asphalt": {
+    "meta": {
+      "title": "Asphalt Works & Road Paving Services in Qatar | CPC Qatar",
+      "description": "Asphalt paving, road resurfacing & hot mix asphalt in Doha, Qatar. Durable pavements for highways, parking lots & roads. Government-approved."
+    },
+    "hero": {
+      "subtitle": "Road Paving & Surfacing",
+      "title": "Asphalt Works & Road Paving"
+    },
+    "intro": "CPC Qatar delivers high-quality asphalt paving solutions for highways, internal roads, parking lots, and commercial areas across Qatar. We use hot mix asphalt (HMA) produced to Qatar Construction Standards specifications for maximum durability.",
+    "services": {
+      "title": "Our Asphalt Paving Services",
+      "hma": {
+        "title": "Hot Mix Asphalt (HMA) Paving",
+        "description": "Dense graded and open graded HMA for highways, arterial roads, collector roads, and internal streets. We handle wearing course, binder course, and base course layers at specified compaction levels."
+      },
+      "resurfacing": {
+        "title": "Road Resurfacing & Milling",
+        "description": "Complete road rehabilitation including milling of existing pavement, leveling course application, and new wearing course overlay. Ideal for aging roads that need structural renewal."
+      },
+      "parking": {
+        "title": "Parking Lot Construction",
+        "description": "Full parking area construction from grading and compaction through subbase, base course, and asphalt wearing course. Includes line marking and traffic flow design."
+      },
+      "patching": {
+        "title": "Patching & Repair Works",
+        "description": "Pothole repair, utility cut restoration, and localized pavement patching using both hot and cold mix asphalt. Quick turnaround to minimize disruption."
+      },
+      "treatment": {
+        "title": "Surface Treatment & Tack Coat",
+        "description": "Prime coat, tack coat, and chip seal applications to prepare surfaces and extend pavement life. Applied between asphalt layers for structural bonding."
+      },
+      "testing": {
+        "title": "Asphalt Testing & Quality Control",
+        "description": "Marshall stability tests, density testing, core sampling, and temperature monitoring. All works comply with QCS 2014 specifications and Ashghal requirements."
+      }
+    },
+    "process": {
+      "title": "Our Asphalt Paving Process",
+      "step1": {
+        "number": "01",
+        "title": "Site Preparation",
+        "description": "Grading, compaction, and subbase installation to create a stable foundation."
+      },
+      "step2": {
+        "number": "02",
+        "title": "Base Course",
+        "description": "Aggregate base course placement and compaction per design thickness."
+      },
+      "step3": {
+        "number": "03",
+        "title": "Tack & Paving",
+        "description": "Tack coat application followed by machine paving of HMA layers."
+      },
+      "step4": {
+        "number": "04",
+        "title": "Compaction & QC",
+        "description": "Roller compaction to achieve target density, then core sampling and testing."
+      }
+    },
+    "whyUs": {
+      "title": "Trusted Asphalt Contractor in Qatar",
+      "description": "CPC Qatar has completed asphalt paving projects for government ministries, Ashghal contractors, FIFA World Cup 2022 infrastructure, and private developments across Doha, Al Wakrah, Al Khor, Lusail, and other areas of Qatar."
+    },
+    "cta": {
+      "title": "Need Asphalt Paving in Qatar?",
+      "description": "Contact CPC Qatar today for a free consultation and competitive quote on your asphalt project."
+    }
+  },
+  "earthworks": {
+    "meta": {
+      "title": "Earthworks & Grading Services in Qatar | CPC Qatar",
+      "description": "Earthworks, excavation, grading & site preparation in Doha, Qatar. Cut & fill, compaction and earthmoving for road and construction projects."
+    },
+    "hero": {
+      "subtitle": "Site Preparation & Grading",
+      "title": "Earthworks & Grading"
+    },
+    "intro": "CPC Qatar provides comprehensive earthworks and grading services for road construction, building sites, and infrastructure projects. From excavation and site clearing to precision grading and compaction — we prepare the ground for success.",
+    "services": {
+      "title": "Our Earthworks Services",
+      "excavation": {
+        "title": "Excavation & Trenching",
+        "description": "Bulk excavation for road alignment, trenching for utilities and drainage, and foundation excavation for structures. All earth removed is disposed of or stockpiled per project requirements."
+      },
+      "clearing": {
+        "title": "Site Clearing & Demolition",
+        "description": "Removal of existing structures, vegetation, debris, and unsuitable materials to prepare the site for construction. Includes stripping of topsoil as required."
+      },
+      "grading": {
+        "title": "Grading & Leveling",
+        "description": "Precision grading to achieve design levels and slopes using GPS-guided graders. Essential for proper drainage and road geometry on every project."
+      },
+      "cutFill": {
+        "title": "Cut & Fill Operations",
+        "description": "Earth balancing by cutting high areas and filling low areas to achieve design profile. Includes transport, placement, and compaction of fill materials in controlled lifts."
+      },
+      "compaction": {
+        "title": "Compaction & Soil Stabilization",
+        "description": "Mechanical compaction using vibratory rollers and padfoot rollers. Soil stabilization with cement, lime, or geosynthetics for weak subgrade conditions."
+      },
+      "haulage": {
+        "title": "Material Supply & Haulage",
+        "description": "Supply and transport of approved fill materials including granular fill, select fill, and rock fill. Coordinated fleet of dump trucks and loaders for efficient material movement."
+      }
+    },
+    "equipment": {
+      "title": "Heavy Equipment Fleet",
+      "description": "CPC Qatar operates a modern fleet of earthmoving equipment to handle projects of any scale.",
+      "list": ["Excavators", "Wheel Loaders", "Motor Graders", "Dump Trucks", "Bulldozers", "Vibratory Rollers", "Backhoe Loaders", "Skid Steer Loaders"]
+    },
+    "cta": {
+      "title": "Need Earthworks Services in Qatar?",
+      "description": "Contact CPC Qatar for professional excavation, grading, and site preparation services."
+    }
+  },
+  "infrastructure": {
+    "meta": {
+      "title": "Infrastructure Development & Civil Works in Qatar | CPC Qatar",
+      "description": "Drainage systems, stormwater management, utility duct installation and civil works in Doha, Qatar. Government-approved infrastructure contractor."
+    },
+    "hero": {
+      "subtitle": "Civil & Infrastructure Works",
+      "title": "Infrastructure Development"
+    },
+    "intro": "CPC Qatar delivers complete infrastructure development solutions encompassing drainage systems, utility installations, stormwater management, and civil engineering works. We build the essential infrastructure that supports Qatar's growth.",
+    "services": {
+      "title": "Our Infrastructure Services",
+      "drainage": {
+        "title": "Drainage & Sewer Systems",
+        "description": "Installation of stormwater drains, foul sewer networks, manholes, catch basins, and gully connections. HDPE, GRP, and concrete pipe installation with proper bedding and backfill."
+      },
+      "stormwater": {
+        "title": "Stormwater Management",
+        "description": "Design-assisted construction of stormwater collection systems, attenuation tanks, soakaways, and outfall structures. Critical for Qatar's flash flood management requirements."
+      },
+      "utility": {
+        "title": "Utility Duct Installation",
+        "description": "Trenching and installation of utility ducts for telecommunications, electrical cables, and water services. Includes duct banks, pull boxes, and handhole chambers."
+      },
+      "water": {
+        "title": "Water Network Works",
+        "description": "Installation of potable water mains (DI, HDPE), service connections, valve chambers, and fire hydrant connections. Pressure testing and chlorination per Kahramaa standards."
+      },
+      "concrete": {
+        "title": "Concrete Structures",
+        "description": "Construction of retaining walls, culverts, box culverts, headwalls, wing walls, boundary walls, and concrete channels. Reinforced concrete works with formwork and steel fixing."
+      },
+      "site": {
+        "title": "Site Infrastructure",
+        "description": "Complete site infrastructure packages including internal roads, parking, lighting foundations, fencing, landscaping preparation, and surface water drainage for developments."
+      }
+    },
+    "projectTypes": {
+      "title": "Types of Infrastructure Projects",
+      "road": {
+        "title": "Road Infrastructure",
+        "description": "Complete road construction packages including earthworks, drainage, utilities, pavement, and finishing."
+      },
+      "building": {
+        "title": "Building Infrastructure",
+        "description": "External works for buildings including access roads, parking, drainage, utilities, and landscaping."
+      },
+      "public": {
+        "title": "Public Areas",
+        "description": "Infrastructure for parks, plazas, waterfronts, and public spaces including pathways, lighting, and drainage."
+      },
+      "industrial": {
+        "title": "Industrial Sites",
+        "description": "Heavy-duty infrastructure for warehouses, factories, and logistics facilities including heavy pavement and drainage."
+      },
+      "school": {
+        "title": "School Campuses",
+        "description": "Complete campus infrastructure — roads, walkways, parking, drainage, sports facilities, and fencing."
+      },
+      "utility": {
+        "title": "Utility Corridors",
+        "description": "Multi-utility corridor construction with coordinated trenching, duct installation, and reinstatement."
+      }
+    },
+    "cta": {
+      "title": "Need Infrastructure Development in Qatar?",
+      "description": "Contact CPC Qatar for complete infrastructure solutions — from drainage and utilities to full site development."
+    }
+  },
+  "interlock": {
+    "meta": {
+      "title": "Interlock & Kerbstone Installation in Qatar | CPC Qatar",
+      "description": "Interlock paving & kerbstone installation in Doha, Qatar. Walkways, driveways, plazas and decorative block paving for commercial and government projects."
+    },
+    "hero": {
+      "subtitle": "Paving & Finishing Works",
+      "title": "Interlock & Kerbstone"
+    },
+    "intro": "CPC Qatar specializes in precision interlock block paving and kerbstone installation for walkways, driveways, plazas, parking areas, and public spaces. Our skilled teams deliver clean, durable, and aesthetically pleasing results across Qatar.",
+    "services": {
+      "title": "Our Interlock & Kerbstone Services",
+      "paving": {
+        "title": "Interlock Block Paving",
+        "description": "Installation of concrete interlocking pavers in various patterns (herringbone, basket weave, running bond) for walkways, driveways, and plazas. Includes sand bedding layer preparation and joint filling."
+      },
+      "kerbstone": {
+        "title": "Kerbstone Installation",
+        "description": "Precast concrete kerbstone placement including upright kerbs, mountable kerbs, barrier kerbs, and drop kerbs. Set on concrete bed with precise alignment to design levels."
+      },
+      "walkway": {
+        "title": "Walkway & Pathway Construction",
+        "description": "Complete walkway construction from subgrade preparation through base course, bedding sand, and interlock paver installation. Includes tactile paving for accessibility compliance."
+      },
+      "decorative": {
+        "title": "Decorative Paving",
+        "description": "Colored and patterned interlock pavers for commercial areas, hotel entrances, public plazas, and premium developments. Multiple color and pattern options available."
+      },
+      "median": {
+        "title": "Median & Island Finishing",
+        "description": "Kerbstone and interlock installation for road medians, traffic islands, and roundabouts. Includes bollard installation and landscaping preparation."
+      },
+      "repair": {
+        "title": "Repair & Reinstatement",
+        "description": "Removal and reinstatement of interlock and kerbstone after utility works or damage. Careful matching of existing patterns and colors for seamless integration."
+      }
+    },
+    "cta": {
+      "title": "Need Interlock or Kerbstone Installation?",
+      "description": "Contact CPC Qatar for professional interlock paving and kerbstone installation anywhere in Qatar."
+    }
+  },
+  "roadMarking": {
+    "meta": {
+      "title": "Road Marking & Traffic Signs Installation in Qatar | CPC Qatar",
+      "description": "Thermoplastic & cold paint road marking, traffic sign installation and lane striping in Doha, Qatar. Government-approved road safety contractor."
+    },
+    "hero": {
+      "subtitle": "Road Safety & Marking",
+      "title": "Road Marking & Traffic Signs"
+    },
+    "intro": "CPC Qatar provides professional road marking and traffic sign installation services throughout Qatar. From thermoplastic line marking to reflective traffic signs, we enhance road safety and traffic management with precision and compliance to Ashghal standards.",
+    "services": {
+      "title": "Our Road Marking Services",
+      "thermoplastic": {
+        "title": "Thermoplastic Road Marking",
+        "description": "Hot-applied thermoplastic markings for center lines, edge lines, crosswalks, arrows, and symbols. High retroreflectivity with glass beads for night visibility. Long-lasting and suitable for high-traffic roads."
+      },
+      "coldPaint": {
+        "title": "Cold Paint Road Marking",
+        "description": "Solvent-based and water-based cold paint for internal roads, parking lots, and temporary markings. Quick drying and cost-effective for lighter traffic applications."
+      },
+      "signs": {
+        "title": "Traffic Sign Installation",
+        "description": "Manufacturing and installation of regulatory, warning, and informational traffic signs. Reflective sheeting (diamond grade and high-intensity grade) per Qatar Traffic Manual standards."
+      },
+      "striping": {
+        "title": "Lane Striping & Delineation",
+        "description": "Precision lane striping for multi-lane highways, roundabouts, intersections, and merging zones. Raised pavement markers (RPMs) and road studs for enhanced delineation."
+      },
+      "parking": {
+        "title": "Parking Lot Marking",
+        "description": "Complete parking area marking including stall lines, directional arrows, handicap symbols, fire lane markings, speed bumps, and numbering systems."
+      },
+      "safety": {
+        "title": "Road Safety Elements",
+        "description": "Installation of guardrails, delineator posts, chevron signs, speed bumps, bollards, and other road safety furniture to improve traffic management."
+      }
+    },
+    "cta": {
+      "title": "Need Road Marking Services in Qatar?",
+      "description": "Contact CPC Qatar for professional road marking and traffic sign installation anywhere in Qatar."
+    }
+  },
+  "subgrade": {
+    "meta": {
+      "title": "Subgrade & Subbase Works for Roads in Qatar | CPC Qatar",
+      "description": "Subgrade preparation, subbase installation & base course construction in Doha, Qatar. Material testing, compaction control and QCS compliance."
+    },
+    "hero": {
+      "subtitle": "Road Foundation Layers",
+      "title": "Subgrade & Subbase Works"
+    },
+    "intro": "CPC Qatar builds strong, lasting road foundations through expert subgrade preparation, subbase installation, and base course construction. Proper foundation layers are critical for pavement longevity — we get them right every time.",
+    "layers": {
+      "title": "Road Pavement Layers We Build",
+      "subgrade": {
+        "title": "Subgrade",
+        "description": "The natural soil foundation. We prepare the subgrade by grading to design levels, treating weak soils (lime or cement stabilization), and compacting to 95%+ MDD. We perform CBR testing and proof rolling to verify bearing capacity before proceeding."
+      },
+      "capping": {
+        "title": "Capping Layer",
+        "description": "Where the natural subgrade is weak, we install a capping layer of select granular material to improve bearing capacity. Placed in controlled lifts and compacted to specification."
+      },
+      "subbase": {
+        "title": "Subbase Course",
+        "description": "Crushed aggregate subbase installed on the prepared subgrade. CPC places subbase in specified lift thicknesses (typically 150-200mm) with controlled compaction to 98%+ MDD. Material is tested for gradation, plasticity, and CBR value."
+      },
+      "base": {
+        "title": "Road Base Course",
+        "description": "The main structural layer beneath the asphalt. We install crushed rock or stabilized base course at design thickness with precise level control and high compaction. This layer distributes traffic loads to the layers below."
+      }
+    },
+    "testing": {
+      "title": "Material Testing & Quality Control",
+      "description": "Every layer is tested before, during, and after placement to ensure compliance with project specifications and QCS standards.",
+      "types": ["In-situ Density Testing", "CBR Testing", "Gradation Analysis", "Moisture Content", "Proof Rolling", "Level Survey"]
+    },
+    "cta": {
+      "title": "Need Subgrade & Subbase Works in Qatar?",
+      "description": "Contact CPC Qatar for professional road foundation construction services."
+    }
+  },
+  "projects": {
+    "meta": {
+      "title": "Projects | Road Construction & Infrastructure Portfolio",
+      "description": "Browse 90+ completed road construction & infrastructure projects by CPC Qatar across Doha and Qatar. Asphalt paving, road marking, earthworks, drainage and more."
+    },
+    "hero": {
+      "title": "Our Projects",
+      "subtitle": "Road Construction & Infrastructure Portfolio",
+      "description": "Since 2017, Cosmo Projects & Construction and Trading W.L.L. (CPC Qatar) has delivered 90+ road construction, asphalt paving, earthworks, and civil infrastructure projects across Doha and Qatar — serving government ministries, international organisations, and private developers."
+    },
+    "filters": {
+      "all": "All Projects",
+      "category": "Category",
+      "client": "Client",
+      "year": "Year"
+    },
+    "card": {
+      "viewProject": "View Project",
+      "completedIn": "Completed in",
+      "client": "Client",
+      "location": "Location",
+      "value": "Value",
+      "scope": "Scope of Work"
+    },
+    "empty": "No projects found matching your criteria.",
+    "detail": {
+      "overview": "Project Overview",
+      "gallery": "Project Gallery",
+      "specifications": "Specifications",
+      "relatedProjects": "Related Projects"
+    }
+  },
+  "clients": {
+    "meta": {
+      "title": "Clients & Testimonials | Trusted by Leading Qatar Organizations",
+      "description": "See CPC Qatar trusted clients and testimonials — Ministry of Education, Ashghal, FIFA 2022 contractors, and leading construction firms across Qatar."
+    },
+    "hero": {
+      "title": "Trusted by Qatar's Leading Authorities",
+      "description": "CPC Qatar is an approved contractor delivering road construction and infrastructure works for Qatar's most prominent government and private sector organizations."
+    },
+    "organizations": {
+      "ashghal": {
+        "name": "Ashghal — Public Works Authority Qatar",
+        "description": "Road & infrastructure projects"
+      },
+      "moe": {
+        "name": "Ministry of Education — Qatar",
+        "description": "School campus infrastructure"
+      },
+      "museums": {
+        "name": "Qatar Museums",
+        "description": "Museum site development"
+      },
+      "dhl": {
+        "name": "DHL Qatar",
+        "description": "Logistics facility works"
+      },
+      "meera": {
+        "name": "Al Meera Consumer Goods",
+        "description": "Retail branch infrastructure"
+      },
+      "imalco": {
+        "name": "IMALCO Qatar",
+        "description": "Industrial facility works"
+      },
+      "awqaf": {
+        "name": "Ministry of Awqaf & Islamic Affairs",
+        "description": "Mosque infrastructure"
+      },
+      "fifa": {
+        "name": "FIFA World Cup Qatar 2022",
+        "description": "World Cup venue works"
+      }
+    },
+    "testimonials": {
+      "title": "Client Testimonials"
+    }
+  },
+  "certificates": {
+    "meta": {
+      "title": "Certificates & Accreditations | CPC Qatar Quality Standards",
+      "description": "View CPC Qatar official certificates, accreditations and quality standards. Government-approved contractor CR 108122 with ISO-compliant road construction practices."
+    },
+    "hero": {
+      "subtitle": "Legal Documents",
+      "title": "Company Certificates",
+      "description": "Access our official company documents and certifications. All documents are verified and up-to-date, demonstrating our commitment to transparency and compliance."
+    },
+    "documents": {
+      "cr": {
+        "title": "Commercial Registration",
+        "description": "Official commercial registration certificate valid until December 2029"
+      },
+      "computerCard": {
+        "title": "Computer Card",
+        "description": "Company computer card registration certificate valid until 2028"
+      },
+      "taxCard": {
+        "title": "Tax Card",
+        "description": "Official tax registration card from Qatar Tax Authority"
+      },
+      "permit": {
+        "title": "Commercial Permit",
+        "description": "Commercial permit certificate valid until October 2029"
+      }
+    },
+    "validUntil": "Valid until:",
+    "viewDocument": "View Document",
+    "commitment": {
+      "title": "Committed to Transparency",
+      "description": "At CPC Qatar, we believe in complete transparency. All our business operations are fully licensed and compliant with Qatar's regulatory requirements. These documents verify our legitimacy and commitment to operating with integrity."
+    },
+    "stats": {
+      "years": "Years in Business",
+      "projects": "Projects Completed",
+      "certifications": "Active Certifications",
+      "compliance": "Compliance Rate"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact CPC Qatar | Get a Free Quote for Road Construction",
+      "description": "Contact CPC Qatar for road construction, asphalt paving, earthworks & infrastructure projects in Doha, Qatar. Call +974 4432 2743 or request a free quote online."
+    },
+    "hero": {
+      "title": "Contact Us",
+      "subtitle": "Get in Touch",
+      "description": "Ready to discuss your project? Contact our team for a free consultation and quote."
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+974 XXXX XXXX",
+      "company": "Company Name",
+      "companyPlaceholder": "Your company name (optional)",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": {
+        "title": "Message Sent!",
+        "description": "Thank you for contacting us. We'll get back to you within 24 hours."
+      },
+      "error": {
+        "title": "Error",
+        "description": "Failed to send message. Please try again."
+      }
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": {
+        "title": "Office Address",
+        "value": "Al Markhiya, Doha, Qatar"
+      },
+      "phone": {
+        "title": "Phone",
+        "value": "+974 4432 2743"
+      },
+      "email": {
+        "title": "Email",
+        "value": "info@cpc-qa.com"
+      },
+      "hours": {
+        "title": "Working Hours",
+        "weekdays": "Sunday - Thursday: 7:00 AM - 5:00 PM",
+        "weekend": "Friday - Saturday: Closed"
+      }
+    },
+    "map": {
+      "title": "Our Location"
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy",
+      "description": "CPC Qatar privacy policy — How we collect, use and protect your personal data. Read our data protection and privacy practices."
+    },
+    "title": "PRIVACY POLICY",
+    "subtitle": "COSMO PROJECTS & CONSTRUCTION is committed to protecting your privacy and personal information",
+    "lastUpdated": "Last Updated: December 24, 2025"
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms & Conditions",
+      "description": "Terms and conditions for CPC Qatar website and services. Read our terms of service, usage policies, and legal information."
+    },
+    "title": "TERMS OF USE",
+    "subtitle": "Please read these terms and conditions carefully before using our website",
+    "lastUpdated": "Last Updated: December 24, 2025"
+  },
+  "notFound": {
+    "meta": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for does not exist. Return to CPC Qatar homepage."
+    },
+    "code": "404",
+    "title": "Oops! Page not found",
+    "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "backHome": "Return to Home"
+  },
+  "consent": {
+    "title": "Cookie Consent",
+    "description": "We use cookies to enhance your browsing experience and analyze site traffic.",
+    "accept": "Accept All",
+    "decline": "Decline",
+    "learnMore": "Learn More"
+  },
+  "floatingButtons": {
+    "whatsapp": "Chat on WhatsApp",
+    "call": "Call Us",
+    "email": "Send Email"
+  },
+  "floatingContact": {
+    "contactUs": "Contact Us",
+    "goToContact": "Go to contact page",
+    "sendEmail": "Send us an email",
+    "viewLocation": "View our location on Google Maps",
+    "callUs": "Call us"
+  },
+  "cinematic": {
+    "tagline": "Qatar's Premier Road Construction Company",
+    "headline1": "BUILDING",
+    "headline2": "QATAR'S",
+    "headline3": "FUTURE",
+    "stats": {
+      "projects": "90+",
+      "projectsLabel": "Projects",
+      "years": "Since 2017",
+      "yearsLabel": "Established",
+      "rating": "5★",
+      "ratingLabel": "Rating"
+    },
+    "exploreServices": "Explore Services",
+    "viewProjects": "View Projects",
+    "scroll": "Scroll",
+    "srOnly": "Qatar road construction site showing CPC Qatar work"
+  },
+  "servicesMarquee": {
+    "services": {
+      "highway": "Highway Construction",
+      "street": "Street Paving",
+      "infrastructure": "Infrastructure",
+      "bridge": "Bridge Works",
+      "roadMaintenance": "Road Maintenance"
+    },
+    "whatWeDo": "WHAT WE DO",
+    "our": "OUR",
+    "expertise": "EXPERTISE"
+  },
+  "servicesGrid": {
+    "whatWe": "WHAT WE",
+    "do": "DO",
+    "description": "We specialize in road construction and infrastructure development.",
+    "earthworks": {
+      "title": "Earthworks",
+      "subtitle": "Foundation Excellence",
+      "alt": "Professional earthworks and excavation services by CPC Qatar",
+      "description": "Professional excavation, grading, and site preparation for all construction projects.",
+      "features": ["Excavation", "Site Grading", "Compaction", "Land Leveling"]
+    },
+    "subgrade": {
+      "title": "Subgrade & Subbase",
+      "subtitle": "Road Foundation",
+      "alt": "Subgrade and subbase preparation for road construction",
+      "description": "Building solid foundations with quality subgrade and subbase works.",
+      "features": ["Subgrade Prep", "Base Course", "Compaction Testing", "Material Supply"]
+    },
+    "asphalt": {
+      "title": "Asphalt Works",
+      "subtitle": "Premium Paving",
+      "alt": "High quality asphalt paving services in Qatar",
+      "description": "High-quality asphalt paving for roads, parking lots, and commercial areas.",
+      "features": ["Hot Mix Asphalt", "Resurfacing", "Patching", "Seal Coating"]
+    },
+    "traffic": {
+      "title": "Road Marking & Traffic",
+      "subtitle": "Safety Solutions",
+      "alt": "Road marking and traffic sign installation",
+      "description": "Professional road marking and traffic management installations.",
+      "features": ["Thermoplastic", "Cold Paint", "Traffic Signs", "Safety Barriers"]
+    },
+    "interlock": {
+      "title": "Interlock & Kerbstone",
+      "subtitle": "Precision Paving",
+      "alt": "Interlocking block and kerbstone installation",
+      "description": "Expert installation of interlocking pavers and kerbstones.",
+      "features": ["Interlock Paving", "Kerbstones", "Walkways", "Decorative"]
+    },
+    "viewDetails": "View Details"
+  },
+  "clientsShowcase": {
+    "trustedBy": "TRUSTED BY",
+    "industryLeaders": "INDUSTRY LEADERS",
+    "subtitle": "Working with Qatar's most prestigious organizations",
+    "clients": {
+      "moe": "Ministry of Education",
+      "fifa": "FIFA World Cup 2022",
+      "museum": "Qatar Museums",
+      "dhl": "DHL",
+      "meera": "Al Meera",
+      "ariane": "Ariane Real Estate",
+      "ashghaal": "Ashghal",
+      "fba": "FBA Real Estate",
+      "imalco": "Imalco",
+      "qnie": "QNIE"
+    },
+    "stats": {
+      "majorClients": "Major Clients",
+      "projectsDelivered": "Projects Delivered",
+      "satisfactionRate": "Satisfaction Rate"
+    }
+  },
+  "whyChooseUs": {
+    "whyChoose": "WHY CHOOSE",
+    "cpcQatar": "CPC QATAR",
+    "subtitle": "Your Trusted Partner in Road Construction",
+    "bgAlt": "CPC Qatar construction site",
+    "advantages": {
+      "proven": {
+        "title": "Proven Track Record",
+        "description": "90+ successful projects delivered across Qatar with consistent quality."
+      },
+      "expert": {
+        "title": "Expert Team",
+        "description": "Skilled engineers and technicians with years of construction experience."
+      },
+      "quality": {
+        "title": "Quality Assurance",
+        "description": "QCS compliant and Ashghal approved contractor ensuring top standards."
+      },
+      "technology": {
+        "title": "Modern Technology",
+        "description": "State-of-the-art equipment and innovative construction methods."
+      },
+      "timely": {
+        "title": "Timely Delivery",
+        "description": "Committed to completing projects on schedule without compromising quality."
+      },
+      "satisfaction": {
+        "title": "Client Satisfaction",
+        "description": "100% commitment to exceeding client expectations on every project."
+      }
+    }
+  },
+  "processTimeline": {
+    "our": "OUR",
+    "process": "PROCESS",
+    "subtitle": "From consultation to completion — our systematic approach ensures quality results",
+    "step": "STEP",
+    "bgAlt": "CPC Qatar work process",
+    "steps": {
+      "consultation": {
+        "title": "Consultation",
+        "description": "We meet to understand your project requirements and provide expert recommendations.",
+        "tasks": ["Site Visit", "Requirement Analysis", "Feasibility Study"]
+      },
+      "planning": {
+        "title": "Planning",
+        "description": "Detailed project planning including timelines, resources, and cost estimates.",
+        "tasks": ["Project Schedule", "Resource Allocation", "Cost Estimation"]
+      },
+      "approval": {
+        "title": "Approval",
+        "description": "Getting necessary permits and approvals from authorities.",
+        "tasks": ["Permit Applications", "Authority Approvals", "Documentation"]
+      },
+      "mobilization": {
+        "title": "Mobilization",
+        "description": "Equipment and team mobilization to prepare for project execution.",
+        "tasks": ["Equipment Deployment", "Team Assignment", "Site Preparation"]
+      },
+      "execution": {
+        "title": "Execution",
+        "description": "Professional implementation with strict quality control measures.",
+        "tasks": ["Quality Control", "Progress Monitoring", "Safety Compliance"]
+      },
+      "completion": {
+        "title": "Completion",
+        "description": "Project handover with complete documentation and warranty.",
+        "tasks": ["Final Inspection", "Documentation", "Handover"]
+      }
+    }
+  },
+  "quality": {
+    "title": "Quality &",
+    "registration": "Certifications",
+    "subtitle": "Committed to Excellence — All documents verified and government approved",
+    "watermark": "QCS",
+    "certifications": {
+      "cr": {
+        "title": "Commercial Registration",
+        "subtitle": "CR 108122",
+        "description": "Official company registration with Qatar authorities"
+      },
+      "establishment": {
+        "title": "Establishment Card",
+        "subtitle": "Valid",
+        "description": "Registered business establishment in Qatar"
+      },
+      "tax": {
+        "title": "Tax Registration",
+        "subtitle": "Active",
+        "description": "Registered with General Tax Authority"
+      },
+      "license": {
+        "title": "Trade License",
+        "subtitle": "Approved",
+        "description": "Licensed for construction and trading activities"
+      }
+    },
+    "standards": {
+      "commerce": "Ministry of Commerce Registered",
+      "interior": "Ministry of Interior Approved",
+      "tax": "General Tax Authority Registered",
+      "construction": "Licensed Construction Contractor",
+      "roads": "Road Construction Specialist",
+      "chamber": "Qatar Chamber Member"
+    },
+    "our": "OUR",
+    "compliance": "COMPLIANCE",
+    "fullyLicensed": "Fully Licensed & Insured",
+    "governmentApproved": "Government Approved",
+    "documentsVerified": "All Documents Verified"
+  },
+  "parallaxStats": {
+    "byTheNumbers": "BY THE NUMBERS",
+    "our": "OUR",
+    "impact": "IMPACT",
+    "stats": {
+      "projectsCompleted": "Projects Completed",
+      "yearsExperience": "Years Experience",
+      "trustedClients": "Trusted Clients",
+      "clientSatisfaction": "Client Satisfaction"
+    }
+  },
+  "megaCta": {
+    "readyToConstruct": "Ready to Construct?",
+    "ariaLabel": "Contact information section",
+    "headline1": "READY TO",
+    "headline2": "START YOUR",
+    "headline3": "PROJECT?",
+    "buttonAriaLabel": "Contact us to start your project",
+    "startProject": "Start Your Project",
+    "email": "info@cpc-qa.com",
+    "phone": "+974 4432 2743",
+    "location": "Al Markhiya, Doha"
+  },
+  "testimonials": {
+    "whatTheySay": "What They Say",
+    "client": "CLIENT",
+    "testimonials": "TESTIMONIALS",
+    "noTestimonials": "Testimonials coming soon.",
+    "clientCompanyLogo": "client company logo",
+    "viewTestimonial": "View testimonial",
+    "clients": {
+      "moe": "Ministry of Education",
+      "fifa": "FIFA World Cup 2022",
+      "qm": "Qatar Museums",
+      "ashghal": "Ashghal"
+    }
+  },
+  "featured": {
+    "featured": "Featured",
+    "excellence": "Excellence",
+    "subtitle": "Our most prestigious projects and valued partnerships",
+    "top": "TOP",
+    "projectsLabel": "PROJECTS",
+    "clientsLabel": "CLIENTS",
+    "hoverToSeeProject": "Hover to see project",
+    "projects": {
+      "busParking2": {
+        "title": "School Bus Parking - Stage 2",
+        "client": "Ministry of Education",
+        "area": "22,000 m²",
+        "status": "Completed"
+      },
+      "busParking1": {
+        "title": "School Bus Parking - Stage 1",
+        "client": "Ministry of Education",
+        "area": "16,000 m²",
+        "status": "Completed"
+      },
+      "warehouse": {
+        "title": "Warehouse",
+        "client": "Manateq",
+        "area": "11,400 m²",
+        "status": "Completed"
+      },
+      "fifa": {
+        "title": "FIFA World Cup 2022",
+        "client": "FIFA Qatar 2022",
+        "area": "45,000 m²",
+        "status": "Delivered"
+      },
+      "farms": {
+        "title": "Farms",
+        "client": "",
+        "area": "6,800 m²",
+        "status": "Completed"
+      }
+    },
+    "clients": {
+      "moe": {
+        "name": "Ministry of Education",
+        "projects": "3 Major Projects",
+        "highlight": "Government Partner"
+      },
+      "fifa": {
+        "name": "FIFA World Cup Qatar 2022",
+        "projects": "International Event",
+        "highlight": "Global Event"
+      },
+      "endowments": {
+        "name": "Ministry of Endowments and Islamic Affairs",
+        "projects": "Heritage Sites",
+        "highlight": "Cultural Heritage"
+      }
+    }
+  }
+}

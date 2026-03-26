@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 const moelogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312021/cpc-website/MOE-removebg-preview.png";
 const fifaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312010/cpc-website/FIFA-removebg-preview.png";
 const museumLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312025/cpc-website/museum-removebg-preview.png";
@@ -16,17 +17,17 @@ const fbaLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto
 const imalcoLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312017/cpc-website/imalco.jpg";
 const qnieLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312041/cpc-website/qnie.jpg";
 
-const clients = [
-  { name: "MINISTRY OF EDUCATION", logo: moelogo },
-  { name: "QATAR MUSEUMS", logo: museumLogo },
-  { name: "FIFA WORLD CUP QATAR 2022", logo: fifaLogo },
-  { name: "DHL QATAR", logo: dhlLogo },
-  { name: "AL MEERA", logo: meeraLogo },
-  { name: "ARIANE REAL ESTATE", logo: arianeLogo },
-  { name: "ASHGHAAL", logo: ashghaalLogo },
-  { name: "FBA REAL ESTATE", logo: fbaLogo },
-  { name: "IMALCO", logo: imalcoLogo },
-  { name: "QNIE", logo: qnieLogo },
+const clientLogos = [
+  { key: "moe", logo: moelogo },
+  { key: "museum", logo: museumLogo },
+  { key: "fifa", logo: fifaLogo },
+  { key: "dhl", logo: dhlLogo },
+  { key: "meera", logo: meeraLogo },
+  { key: "ariane", logo: arianeLogo },
+  { key: "ashghaal", logo: ashghaalLogo },
+  { key: "fba", logo: fbaLogo },
+  { key: "imalco", logo: imalcoLogo },
+  { key: "qnie", logo: qnieLogo },
 ];
 
 export const ImmersiveTestimonials = () => {
@@ -35,6 +36,7 @@ export const ImmersiveTestimonials = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(true); // mobile-first SSR default
+  const t = useTranslations('testimonials');
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -96,10 +98,10 @@ export const ImmersiveTestimonials = () => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            What They Say
+            {t('whatTheySay')}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
-            CLIENT <span className="text-gradient">TESTIMONIALS</span>
+            {t('client')} <span className="text-gradient">{t('testimonials')}</span>
           </h2>
         </motion.div>
 
@@ -111,7 +113,7 @@ export const ImmersiveTestimonials = () => {
             </div>
           ) : testimonials.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-muted-foreground">No testimonials available</p>
+              <p className="text-muted-foreground">{t('noTestimonials')}</p>
             </div>
           ) : (
             <div className="relative min-h-[300px] sm:min-h-[400px]">
@@ -157,7 +159,7 @@ export const ImmersiveTestimonials = () => {
                           <div className="w-16 h-16 flex items-center justify-center">
                             <img
                               src={testimonial.company_logo}
-                              alt={testimonial.company_name || 'Client company logo'}
+                              alt={testimonial.company_name || t('clientCompanyLogo')}
                               className="w-full h-full object-contain"
                               width={64}
                               height={64}
@@ -189,7 +191,7 @@ export const ImmersiveTestimonials = () => {
                     onClick={() => setActiveIndex(index)}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
-                    aria-label={`View testimonial ${index + 1} of ${testimonials.length}`}
+                    aria-label={t('viewTestimonial', { current: index + 1, total: testimonials.length })}
                     className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-500`}
                   >
                     <span className={`w-3 h-3 rounded-full transition-all duration-500 ${index === activeIndex
@@ -220,14 +222,14 @@ export const ImmersiveTestimonials = () => {
                 className="flex items-center shrink-0 will-change-transform"
                 style={{ animation: 'marquee 50s linear infinite' }}
               >
-                {clients.map((client, index) => (
+                {clientLogos.map((client, index) => (
                   <div
                     key={index}
                     className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg"
                   >
                     <img
                       src={client.logo}
-                      alt={client.name}
+                      alt={t(`clients.${client.key}`)}
                       width={100}
                       height={64}
                       className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
@@ -240,14 +242,14 @@ export const ImmersiveTestimonials = () => {
                 className="flex items-center shrink-0 will-change-transform"
                 style={{ animation: 'marquee 50s linear infinite' }}
               >
-                {clients.map((client, index) => (
+                {clientLogos.map((client, index) => (
                   <div
                     key={index}
                     className="mx-6 md:mx-10 flex-shrink-0 bg-white/90 rounded-xl p-3 shadow-lg"
                   >
                     <img
                       src={client.logo}
-                      alt={client.name}
+                      alt={t(`clients.${client.key}`)}
                       width={100}
                       height={64}
                       className="h-12 md:h-16 w-auto object-contain min-w-[80px] md:min-w-[100px]"
