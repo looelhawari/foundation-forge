@@ -955,46 +955,45 @@
     }
   },
   "quality": {
-    "title": "الجودة والشهادات",
-    "registration": "تسجيل الشركة",
-    "subtitle": "ملتزمون بالتميز",
+    "title": "الجودة و",
+    "registration": "الشهادات",
+    "subtitle": "ملتزمون بالتميز — جميع المستندات موثقة ومعتمدة حكومياً",
     "watermark": "QCS",
     "certifications": {
       "cr": {
         "title": "السجل التجاري",
-        "number": "CR 108122",
+        "subtitle": "CR 108122",
         "description": "تسجيل رسمي للشركة لدى السلطات القطرية"
       },
-      "mmup": {
-        "title": "رخصة MMUP",
-        "number": "معتمد",
-        "description": "رخصة وزارة البلدية لأعمال البناء"
+      "establishment": {
+        "title": "بطاقة المؤسسة",
+        "subtitle": "صالحة",
+        "description": "مؤسسة تجارية مسجلة في قطر"
       },
-      "ashghal": {
-        "title": "معتمد من أشغال",
-        "number": "مقاول",
-        "description": "مقاول معتمد لمشاريع هيئة الأشغال العامة"
+      "tax": {
+        "title": "التسجيل الضريبي",
+        "subtitle": "فعال",
+        "description": "مسجل لدى هيئة الضريبة العامة"
+      },
+      "license": {
+        "title": "رخصة التجارة",
+        "subtitle": "معتمد",
+        "description": "مرخص لأنشطة البناء والتجارة"
       }
     },
     "standards": {
-      "qcs": {
-        "title": "QCS 2014",
-        "description": "جميع الأعمال متوافقة مع معايير البناء القطرية"
-      },
-      "safety": {
-        "title": "السلامة أولاً",
-        "description": "لا تنازل عن معايير السلامة في مكان العمل"
-      },
-      "environment": {
-        "title": "البيئة",
-        "description": "ممارسات بناء مسؤولة بيئياً"
-      }
+      "commerce": "مسجل بوزارة التجارة",
+      "interior": "معتمد من وزارة الداخلية",
+      "tax": "مسجل بهيئة الضريبة العامة",
+      "construction": "مقاول بناء مرخص",
+      "roads": "متخصص في بناء الطرق",
+      "chamber": "عضو في غرفة قطر"
     },
     "our": "معايير",
     "compliance": "امتثالنا",
     "fullyLicensed": "مرخص ومؤمن بالكامل",
     "governmentApproved": "معتمد حكومياً",
-    "documentsVerified": "جميع الوثائق موثقة"
+    "documentsVerified": "جميع المستندات موثقة"
   },
   "parallaxStats": {
     "byTheNumbers": "بالأرقام",
