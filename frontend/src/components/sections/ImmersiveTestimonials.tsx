@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useAnimationFrame, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { TiltCard } from "../animations/MotionGraphics";
 import { testimonialsApi, Testimonial } from "@/lib/api";
 import { Loader2 } from "lucide-react";
@@ -32,6 +33,7 @@ export const ImmersiveTestimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
@@ -106,10 +108,11 @@ export const ImmersiveTestimonials = () => {
           className="text-center mb-16 md:mb-24"
         >
           <span className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6">
-            What They Say
+            {t("testimonials.eyebrow", "What They Say")}
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.05em]">
-            CLIENT <span className="text-gradient">TESTIMONIALS</span>
+            {t("testimonials.title", "CLIENT")}{" "}
+            <span className="text-gradient">{t("testimonials.titleHighlight", "TESTIMONIALS")}</span>
           </h2>
         </motion.div>
 
@@ -121,7 +124,7 @@ export const ImmersiveTestimonials = () => {
             </div>
           ) : testimonials.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-muted-foreground">No testimonials available</p>
+              <p className="text-muted-foreground">{t("testimonials.noResults", "No testimonials available")}</p>
             </div>
           ) : (
             <div className="relative min-h-[300px] sm:min-h-[400px]">

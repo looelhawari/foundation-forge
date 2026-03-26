@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import engineerImage from "@/assets/engineer-portrait.jpg";
 
 export const StorySection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -27,7 +29,7 @@ export const StorySection = () => {
               viewport={{ once: true }}
               className="text-primary text-xs font-medium tracking-[0.5em] uppercase block mb-6"
             >
-              The Story
+              {t("story.eyebrow", "The Story")}
             </motion.span>
 
             <div className="overflow-hidden mb-4">
@@ -38,7 +40,7 @@ export const StorySection = () => {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em]"
               >
-                SMALL BUT
+                {t("story.titleLine1", "SMALL BUT")}
               </motion.h2>
             </div>
             <div className="overflow-hidden mb-6 md:mb-8">
@@ -49,7 +51,7 @@ export const StorySection = () => {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-[0.05em] text-gradient"
               >
-                MIGHTY
+                {t("story.titleLine2", "MIGHTY")}
               </motion.h2>
             </div>
 
@@ -61,13 +63,10 @@ export const StorySection = () => {
               className="space-y-4 md:space-y-6 text-muted-foreground"
             >
               <p className="text-base sm:text-lg leading-relaxed">
-                A team of dedicated engineers proves that excellence knows no limits when it comes to
-                delivering Qatar's most prestigious infrastructure projects.
+                {t("story.para1", "A team of dedicated engineers proves that excellence knows no limits when it comes to delivering Qatar's most prestigious infrastructure projects.")}
               </p>
               <p className="leading-relaxed">
-                Established in 2017 under the leadership of Chairman Mohammed Ahmed Mubarak Al-Nasr,
-                CPC Qatar has rapidly grown to become one of the region's most trusted names in civil engineering,
-                completing 57 projects across educational facilities, cultural landmarks, and complex infrastructure.
+                {t("story.para2", "Established in 2017 under the leadership of Chairman Mohammed Ahmed Mubarak Al-Nasr, CPC Qatar has rapidly grown to become one of the region's most trusted names in civil engineering, completing 57 projects across educational facilities, cultural landmarks, and complex infrastructure.")}
               </p>
             </motion.div>
 
@@ -80,9 +79,9 @@ export const StorySection = () => {
               className="grid grid-cols-3 gap-8 mt-12 pt-12 border-t border-border"
             >
               {[
-                { value: "57", label: "Completed" },
-                { value: "10+", label: "Years" },
-                { value: "100%", label: "Satisfaction" },
+                { value: "57", label: t("story.stat1", "Completed") },
+                { value: "10+", label: t("story.stat2", "Years") },
+                { value: "100%", label: t("story.stat3", "Satisfaction") },
               ].map((stat, index) => (
                 <div key={index}>
                   <div className="font-display text-3xl md:text-4xl text-primary">{stat.value}</div>
@@ -113,7 +112,7 @@ export const StorySection = () => {
               className="absolute -bottom-8 -left-8 bg-gradient-card border border-border rounded-lg p-6 shadow-card"
             >
               <div className="font-display text-4xl text-primary">10+</div>
-              <div className="text-sm text-muted-foreground">Years of<br />Excellence</div>
+              <div className="text-sm text-muted-foreground">{t("story.yearsOfExcellence", "Years of")}<br />{t("story.excellence", "Excellence")}</div>
             </motion.div>
           </motion.div>
         </div>

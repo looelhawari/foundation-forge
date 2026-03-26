@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, memo, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import heroImage from "@/assets/hero-construction.jpg";
 import flyoverVideo from "@/assets/cpc.mp4";
 
@@ -48,6 +49,7 @@ export const CinematicHero = memo(() => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const mobile = window.innerWidth < 768;
@@ -126,13 +128,13 @@ export const CinematicHero = memo(() => {
               <h1 className="font-display text-[clamp(2.5rem,10vw,7rem)] leading-[0.88] tracking-tight">
                 {ready && (
                   <>
-                    <SplitReveal text="CONSTRUCTING THE" delay={0.5} />
+                    <SplitReveal text={t("hero.line1", "CONSTRUCTING THE")} delay={0.5} />
                     <br />
                     <span className="text-gradient">
-                      <SplitReveal text="ROADS" delay={0.75} />
+                      <SplitReveal text={t("hero.line2", "ROADS")} delay={0.75} />
                     </span>
                     {" "}
-                    <SplitReveal text="OF TOMORROW" delay={0.85} />
+                    <SplitReveal text={t("hero.line3", "OF TOMORROW")} delay={0.85} />
                   </>
                 )}
               </h1>
@@ -142,9 +144,9 @@ export const CinematicHero = memo(() => {
                 initial={{ opacity: 0, y: 30 }} animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 1.5, ease }}>
                 {[
-                  { n: 90, s: "+", l: "Projects Delivered" },
-                  { n: 10, s: "+", l: "Years of Excellence" },
-                  { n: 57, s: "+", l: "Major Clients" },
+                  { n: 90, s: "+", l: t("hero.stat1", "Projects Delivered") },
+                  { n: 10, s: "+", l: t("hero.stat2", "Years of Excellence") },
+                  { n: 57, s: "+", l: t("hero.stat3", "Major Clients") },
                 ].map((d, i) => (
                   <motion.div key={d.l}
                     initial={{ opacity: 0, y: 20 }}
@@ -164,7 +166,7 @@ export const CinematicHero = memo(() => {
           <motion.div
             className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}>
-            <span className="text-[9px] tracking-[0.5em] text-white/30 uppercase">Scroll</span>
+            <span className="text-[9px] tracking-[0.5em] text-white/30 uppercase">{t("hero.scroll", "Scroll")}</span>
             <div className="w-5 h-9 rounded-full border border-white/15 flex justify-center pt-2">
               <motion.div className="w-0.5 h-1.5 rounded-full bg-primary"
                 animate={{ y: [0, 10, 0], opacity: [0.8, 0.2, 0.8] }}
