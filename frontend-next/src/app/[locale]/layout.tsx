@@ -3,6 +3,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales, type Locale } from '@/i18n/config';
 import { Tajawal } from 'next/font/google';
+import dynamic from 'next/dynamic';
 
 // Arabic font for RTL support
 const tajawal = Tajawal({
@@ -12,6 +13,9 @@ const tajawal = Tajawal({
   variable: '--font-tajawal',
   preload: true,
 });
+
+// Lazy-load ConsentBanner — not needed until after page renders
+const ConsentBanner = dynamic(() => import('@/components/ConsentBanner'), { ssr: false });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -47,6 +51,7 @@ export default async function LocaleLayout({
     >
       <NextIntlClientProvider messages={messages}>
         {children}
+        <ConsentBanner />
       </NextIntlClientProvider>
     </div>
   );
