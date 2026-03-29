@@ -16,28 +16,24 @@ import { useProjects, useCategories } from "@/hooks/useProjects";
 const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 import SEOHead from "@/components/SEOHead";
 
-// Category data with icons and descriptions - MATCHES DATABASE CATEGORIES
-const categoryData: Record<string, { icon: string; description: string }> = {
-  School: { icon: "🎓", description: "Educational Facilities & Schools" },
-  Mosque: { icon: "🕌", description: "Religious Constructions & Mosques" },
-  "Commercial Building": {
-    icon: "🏢",
-    description: "Commercial & Residential Constructions",
-  },
-  "Stores and Factory": {
-    icon: "🏭",
-    description: "Warehouses, Factories & Storage Facilities",
-  },
-  "Public Project": {
-    icon: "🏗️",
-    description: "Roads, Parking & Public Infrastructure",
-  },
-};
-
 const Projects = () => {
   const t = useTranslations('projects');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedProjectType, setSelectedProjectType] = useState<"new" | "old" | null>(null);
+
+  // Category data with icons - descriptions now come from translations
+  const categoryData: Record<string, { icon: string }> = {
+    School: { icon: "🎓" },
+    Mosque: { icon: "🕌" },
+    "Commercial Building": { icon: "🏢" },
+    "Stores and Factory": { icon: "🏭" },
+    "Public Project": { icon: "🏗️" },
+  };
+
+  // Helper to get category description
+  const getCategoryDescription = (categoryName: string): string => {
+    return t(`categories.${categoryName}` as any) || categoryName;
+  };
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -498,13 +494,11 @@ const Projects = () => {
                               {category.name}
                             </h3>
                             <p className="text-sm text-muted-foreground mb-4">
-                              {categoryData[category.name]?.description ||
-                                "Construction projects"}
+                              {getCategoryDescription(category.name)}
                             </p>
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-primary font-medium">
-                                {category.count} Project
-                                {category.count !== 1 ? "s" : ""}
+                                {category.count} {t('categoryProjects.projectsLabel')}
                               </span>
                               <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                                 →

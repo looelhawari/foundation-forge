@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProjects";
 import SEOHead from "@/components/SEOHead";
+import { useTranslations } from "next-intl";
 
 const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
@@ -32,6 +33,7 @@ const ProjectDetail = () => {
     const { id } = useParams();
     const { project, isLoading, error } = useProject(id);
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const t = useTranslations('projects.detail');
 
     // Keyboard navigation for lightbox
     useEffect(() => {
@@ -111,12 +113,12 @@ const ProjectDetail = () => {
                 <Header />
                 <div className="flex items-center justify-center min-h-[60vh] px-6">
                     <div className="text-center">
-                        <h1 className="font-display text-3xl sm:text-4xl mb-4">Project Not Found</h1>
+                        <h1 className="font-display text-3xl sm:text-4xl mb-4">{t('notFound.title')}</h1>
                         <p className="text-muted-foreground mb-6 text-sm sm:text-base">
-                            {error || "The project you're looking for doesn't exist."}
+                            {error || t('notFound.message')}
                         </p>
                         <Button variant="hero" asChild>
-                            <Link to="/projects">Back to Projects</Link>
+                            <Link to="/projects">{t('notFound.backButton')}</Link>
                         </Button>
                     </div>
                 </div>
@@ -167,7 +169,7 @@ const ProjectDetail = () => {
                                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
                             >
                                 <ArrowLeft className="w-4 h-4" />
-                                Back to Projects
+                                {t('backToProjects')}
                             </Link>
                             <span className="block px-3 py-1 bg-primary text-primary-foreground text-xs sm:text-sm font-medium rounded-full w-fit mb-4">
                                 {project.category}
@@ -191,11 +193,10 @@ const ProjectDetail = () => {
                                     transition={{ duration: 0.8, delay: 0.2 }}
                                 >
                                     <h2 className="font-display text-3xl tracking-wide mb-6">
-                                        PROJECT <span className="text-gradient">OVERVIEW</span>
+                                        {t('projectOverview')} <span className="text-gradient">{t('overview')}</span>
                                     </h2>
                                     <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                                        {project.description ||
-                                            "A quality road construction project delivered with excellence."}
+                                        {project.description || t('defaultDescription')}
                                     </p>
 
                                     {/* Gallery */}
@@ -233,7 +234,7 @@ const ProjectDetail = () => {
                                     ) : (
                                         <div className="mb-8 p-8 bg-amber-500/5 border border-amber-500/20 rounded-lg">
                                             <p className="text-sm text-muted-foreground text-center">
-                                                This is a legacy project from our archives. Image documentation is not available.
+                                                {t('legacyMessage')}
                                             </p>
                                         </div>
                                     )}
@@ -248,7 +249,7 @@ const ProjectDetail = () => {
                             >
                                 <div className="bg-gradient-card border border-border rounded-lg p-6 sticky top-24">
                                     <h3 className="font-display text-xl tracking-wide mb-6">
-                                        PROJECT DETAILS
+                                        {t('projectDetails')}
                                     </h3>
                                     <div className="space-y-4">
                                         {project.location && (
@@ -256,7 +257,7 @@ const ProjectDetail = () => {
                                                 <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Location
+                                                        {t('location')}
                                                     </div>
                                                     <div className="text-sm">{project.location}</div>
                                                 </div>
@@ -267,7 +268,7 @@ const ProjectDetail = () => {
                                                 <Calendar className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Year
+                                                        {t('year')}
                                                     </div>
                                                     <div className="text-sm">{project.year}</div>
                                                 </div>
@@ -278,7 +279,7 @@ const ProjectDetail = () => {
                                                 <Building className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Client
+                                                        {t('client')}
                                                     </div>
                                                     <div className="text-sm">{project.client}</div>
                                                 </div>
@@ -289,7 +290,7 @@ const ProjectDetail = () => {
                                                 <Wrench className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Main Contractor
+                                                        {t('mainContractor')}
                                                     </div>
                                                     <div className="text-sm">
                                                         {project.main_contractor}
@@ -302,7 +303,7 @@ const ProjectDetail = () => {
                                                 <Users className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Consultant
+                                                        {t('consultant')}
                                                     </div>
                                                     <div className="text-sm">{project.consultant}</div>
                                                 </div>
@@ -313,7 +314,7 @@ const ProjectDetail = () => {
                                                 <Ruler className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Area
+                                                        {t('area')}
                                                     </div>
                                                     <div className="text-sm">{project.area}</div>
                                                 </div>
@@ -324,7 +325,7 @@ const ProjectDetail = () => {
                                                 <DollarSign className="w-5 h-5 text-primary flex-shrink-0" />
                                                 <div>
                                                     <div className="text-xs text-muted-foreground">
-                                                        Project Value
+                                                        {t('projectValue')}
                                                     </div>
                                                     <div className="text-sm">{project.value}</div>
                                                 </div>
@@ -334,7 +335,7 @@ const ProjectDetail = () => {
 
                                     <div className="mt-8 pt-6 border-t border-border">
                                         <Button variant="hero" className="w-full" asChild>
-                                            <Link to="/contact">Start Your Project</Link>
+                                            <Link to="/contact">{t('startYourProject')}</Link>
                                         </Button>
                                     </div>
                                 </div>
@@ -348,7 +349,7 @@ const ProjectDetail = () => {
                                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                             >
                                 <ArrowLeft className="w-4 h-4" />
-                                <span>Back to All Projects</span>
+                                <span>{t('backToAllProjects')}</span>
                             </Link>
                         </div>
                     </div>
