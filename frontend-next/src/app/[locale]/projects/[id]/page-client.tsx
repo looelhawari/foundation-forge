@@ -26,12 +26,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useProject } from "@/hooks/useProjects";
 import SEOHead from "@/components/SEOHead";
 import { useTranslations } from "next-intl";
+import type { Project } from "@/lib/api";
 
 const companyLogo = "https://res.cloudinary.com/dhxlvvzih/image/upload/f_auto,q_auto/v1772312003/cpc-website/cpc_logo-removebg-preview.png";
 
-const ProjectDetail = () => {
+interface ProjectDetailProps {
+    initialProject?: Project | null;
+}
+
+const ProjectDetail = ({ initialProject }: ProjectDetailProps) => {
     const { id } = useParams();
-    const { project, isLoading, error } = useProject(id);
+    // Use initialProject from server if available, otherwise fetch client-side (fallback)
+    const { project: clientProject, isLoading: clientLoading, error } = useProject(initialProject ? undefined : id);
+    const project = initialProject || clientProject;
+    const isLoading = !initialProject && clientLoading;
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
     const t = useTranslations('projects.detail');
 

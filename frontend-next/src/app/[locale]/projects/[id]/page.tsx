@@ -112,7 +112,7 @@ export async function generateMetadata({
     };
 }
 
-// Server component — render JSON-LD structured data + client page
+// Server component — render JSON-LD structured data + client page with SSR data
 export default async function Page({
     params,
 }: {
@@ -160,7 +160,8 @@ export default async function Page({
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <ProjectDetailPage />
+            {/* Pass server-fetched project data to client component for instant render (no loading state for Googlebot) */}
+            <ProjectDetailPage initialProject={project} />
         </>
     );
 }
