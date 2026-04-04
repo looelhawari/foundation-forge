@@ -95,9 +95,11 @@ export interface SiteSettings {
   public_location: string;
   head_office_address: string;
   contact_email: string;
+  contact_emails: string[];
   contact_phone: string;
   contact_phone_2: string;
   contact_telephone: string;
+  contact_phones: string[];
   contact_fax: string;
   po_box: string;
   google_maps_url: string;
@@ -109,6 +111,12 @@ export interface SiteSettings {
   show_linkedin: boolean;
   twitter_url: string;
   show_twitter: boolean;
+  show_email_sales: boolean;
+  show_email_support: boolean;
+  show_email_inquiry: boolean;
+  email_sales: string;
+  email_support: string;
+  email_inquiry: string;
   updated_at: string;
 }
 

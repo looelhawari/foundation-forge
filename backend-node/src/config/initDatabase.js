@@ -195,6 +195,9 @@ const initDatabase = async () => {
         show_linkedin TINYINT(1) NOT NULL DEFAULT 1,
         twitter_url VARCHAR(500) DEFAULT '',
         show_twitter TINYINT(1) NOT NULL DEFAULT 0,
+        show_email_sales TINYINT(1) NOT NULL DEFAULT 0,
+        show_email_support TINYINT(1) NOT NULL DEFAULT 0,
+        show_email_inquiry TINYINT(1) NOT NULL DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         CONSTRAINT chk_singleton CHECK (id = 1)
@@ -224,13 +227,70 @@ const initDatabase = async () => {
       }
     }
 
+    // ── Add contact_emails and contact_phones JSON array columns (migration) ──
+    const jsonArrayColumns = [
+      { col: "contact_emails", after: "contact_email", type: "JSON DEFAULT NULL" },
+      { col: "contact_phones", after: "contact_telephone", type: "JSON DEFAULT NULL" },
+    ];
+    for (const { col, after, type } of jsonArrayColumns) {
+      try {
+        const [cols] = await connection.execute(
+          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'site_settings' AND COLUMN_NAME = ?`,
+          [col]
+        );
+        if (cols.length === 0) {
+          await connection.execute(
+            `ALTER TABLE site_settings ADD COLUMN ${col} ${type} AFTER ${after}`
+          );
+          console.log(`✅ Added column ${col} to site_settings`);
+        }
+      } catch (err) {
+        console.log(`ℹ️  Column ${col} migration skipped:`, err.message);
+      }
+    }
+
+    // ── Add show_* toggle columns if they don't exist yet (migration for existing DBs) ──
+    // RUN BEFORE INSERT so columns exist for seed data
+    const toggleColumns = [
+      { col: "show_facebook", after: "facebook_url" },
+      { col: "show_instagram", after: "instagram_url" },
+      { col: "show_linkedin", after: "linkedin_url" },
+      { col: "show_twitter", after: "twitter_url" },
+      { col: "show_email_sales", after: "show_twitter" },
+      { col: "show_email_support", after: "show_email_sales" },
+      { col: "show_email_inquiry", after: "show_email_support" },
+      { col: "email_sales", after: "show_email_inquiry", type: "VARCHAR(255) DEFAULT 'sales@cpc-qa.com'" },
+      { col: "email_support", after: "email_sales", type: "VARCHAR(255) DEFAULT 'support@cpc-qa.com'" },
+      { col: "email_inquiry", after: "email_support", type: "VARCHAR(255) DEFAULT 'inquiry@cpc-qa.com'" },
+    ];
+    for (const { col, after, type } of toggleColumns) {
+      try {
+        const [cols] = await connection.execute(
+          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'site_settings' AND COLUMN_NAME = ?`,
+          [col]
+        );
+        if (cols.length === 0) {
+          const colType = type || "TINYINT(1) NOT NULL DEFAULT 0";
+          const defaultVal = col === "show_linkedin" ? 1 : 0;
+          await connection.execute(
+            `ALTER TABLE site_settings ADD COLUMN ${col} ${colType} AFTER ${after}`
+          );
+          console.log(`✅ Added column ${col} to site_settings`);
+        }
+      } catch (err) {
+        console.log(`ℹ️  Column ${col} migration skipped:`, err.message);
+      }
+    }
+
     // Seed the singleton row with current production data (INSERT IGNORE = skip if exists)
     await connection.execute(`
       INSERT IGNORE INTO site_settings (
         id, site_name, public_location, head_office_address,
         contact_email, contact_phone, contact_phone_2, contact_telephone, contact_fax, po_box, google_maps_url,
         facebook_url, show_facebook, instagram_url, show_instagram,
-        linkedin_url, show_linkedin, twitter_url, show_twitter
+        linkedin_url, show_linkedin, twitter_url, show_twitter,
+        show_email_sales, show_email_support, show_email_inquiry,
+        email_sales, email_support, email_inquiry
       ) VALUES (
         1,
         'Cosmo Projects & Construction',
@@ -246,35 +306,12 @@ const initDatabase = async () => {
         '', 0,
         '', 0,
         'https://www.linkedin.com/company/cpc-qatar', 1,
-        '', 0
+        '', 0,
+        0, 0, 0,
+        'sales@cpc-qa.com', 'support@cpc-qa.com', 'inquiry@cpc-qa.com'
       )
     `);
     console.log("✅ Site settings default row seeded");
-
-    // ── Add show_* toggle columns if they don't exist yet (migration for existing DBs) ──
-    const toggleColumns = [
-      { col: "show_facebook", after: "facebook_url" },
-      { col: "show_instagram", after: "instagram_url" },
-      { col: "show_linkedin", after: "linkedin_url" },
-      { col: "show_twitter", after: "twitter_url" },
-    ];
-    for (const { col, after } of toggleColumns) {
-      try {
-        const [cols] = await connection.execute(
-          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'site_settings' AND COLUMN_NAME = ?`,
-          [col]
-        );
-        if (cols.length === 0) {
-          const defaultVal = col === "show_linkedin" ? 1 : 0;
-          await connection.execute(
-            `ALTER TABLE site_settings ADD COLUMN ${col} TINYINT(1) NOT NULL DEFAULT ${defaultVal} AFTER ${after}`
-          );
-          console.log(`✅ Added column ${col} to site_settings`);
-        }
-      } catch (err) {
-        console.log(`ℹ️  Column ${col} migration skipped:`, err.message);
-      }
-    }
 
     // ── Migrate any values from old settings table into site_settings ──
     try {

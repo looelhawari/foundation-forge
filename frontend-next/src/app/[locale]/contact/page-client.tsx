@@ -276,47 +276,46 @@ const Contact = () => {
                       <h4 className="font-semibold text-foreground mb-1">
                         {t('info.phone')}
                       </h4>
-                      <p className="text-muted-foreground text-sm">
-                        <a
-                          href={toTelHref(settings.contact_phone)}
-                          className="hover:text-primary transition-colors"
-                        >
-                          {settings.contact_phone}
-                        </a>
+                      <div className="text-muted-foreground text-sm space-y-1">
+                        <p>
+                          <a
+                            href={toTelHref(settings.contact_phone)}
+                            className="hover:text-primary transition-colors"
+                          >
+                            {settings.contact_phone}
+                          </a>
+                        </p>
                         {settings.contact_phone_2 && (
-                          <>
-                            <br />
+                          <p>
                             <a
                               href={toTelHref(settings.contact_phone_2)}
                               className="hover:text-primary transition-colors"
                             >
                               {settings.contact_phone_2}
                             </a>
-                          </>
+                          </p>
                         )}
                         {settings.contact_telephone && (
-                          <>
-                            <br />
+                          <p>
                             <a
                               href={toTelHref(settings.contact_telephone)}
                               className="hover:text-primary transition-colors"
                             >
                               {settings.contact_telephone} ({t('info.tel')})
                             </a>
-                          </>
+                          </p>
                         )}
                         {settings.contact_fax && (
-                          <>
-                            <br />
+                          <p>
                             <a
                               href={toTelHref(settings.contact_fax)}
                               className="hover:text-primary transition-colors"
                             >
                               {settings.contact_fax} ({t('info.fax')})
                             </a>
-                          </>
+                          </p>
                         )}
-                      </p>
+                      </div>
                     </div>
                   </div>
 
@@ -328,14 +327,48 @@ const Contact = () => {
                       <h4 className="font-semibold text-foreground mb-1">
                         {t('info.email')}
                       </h4>
-                      <p className="text-muted-foreground text-sm">
-                        <a
-                          href={`mailto:${settings.contact_email}`}
-                          className="hover:text-primary transition-colors"
-                        >
-                          {settings.contact_email}
-                        </a>
-                      </p>
+                      <div className="text-muted-foreground text-sm space-y-1">
+                        {/* Primary email - always shown */}
+                        <p>
+                          <a
+                            href="mailto:info@cpc-qa.com"
+                            className="hover:text-primary transition-colors"
+                          >
+                            info@cpc-qa.com
+                          </a>
+                        </p>
+                        {/* Additional emails - toggle controlled */}
+                        {settings.show_email_sales && (
+                          <p>
+                            <a
+                              href="mailto:sales@cpc-qa.com"
+                              className="hover:text-primary transition-colors"
+                            >
+                              sales@cpc-qa.com
+                            </a>
+                          </p>
+                        )}
+                        {settings.show_email_support && (
+                          <p>
+                            <a
+                              href="mailto:support@cpc-qa.com"
+                              className="hover:text-primary transition-colors"
+                            >
+                              support@cpc-qa.com
+                            </a>
+                          </p>
+                        )}
+                        {settings.show_email_inquiry && (
+                          <p>
+                            <a
+                              href="mailto:inquiry@cpc-qa.com"
+                              className="hover:text-primary transition-colors"
+                            >
+                              inquiry@cpc-qa.com
+                            </a>
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

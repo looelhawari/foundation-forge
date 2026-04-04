@@ -29,6 +29,7 @@ import {
   Home,
   Users,
   Star,
+  Mail,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -41,6 +42,7 @@ const navigation = [
   { name: "Clients", href: "/admin/clients", icon: Users },
   { name: "Testimonials", href: "/admin/testimonials", icon: Star },
   { name: "Messages", href: "/admin/messages", icon: MessageSquare },
+  { name: "Mailboxes", href: "/admin/mailboxes", icon: Mail },
   { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 

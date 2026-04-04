@@ -21,9 +21,11 @@ const DEFAULT_SETTINGS: SiteSettings = {
     head_office_address:
         "Mirqab Mall, Area No. 39, Street No. 840, Building No. 53, Block D, Office No. 307-308",
     contact_email: "Info@ctgroups.net",
+    contact_emails: [],
     contact_phone: "+974 4432-2743",
     contact_phone_2: "",
     contact_telephone: "",
+    contact_phones: [],
     contact_fax: "+974 4029-1295",
     po_box: "15776",
     google_maps_url:
@@ -36,6 +38,12 @@ const DEFAULT_SETTINGS: SiteSettings = {
     show_linkedin: true,
     twitter_url: "",
     show_twitter: false,
+    show_email_sales: false,
+    show_email_support: false,
+    show_email_inquiry: false,
+    email_sales: "sales@cpc-qa.com",
+    email_support: "support@cpc-qa.com",
+    email_inquiry: "inquiry@cpc-qa.com",
     updated_at: "",
 };
 

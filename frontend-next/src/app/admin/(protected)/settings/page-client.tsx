@@ -67,9 +67,11 @@ export default function AdminSettings() {
     public_location: "",
     head_office_address: "",
     contact_email: "",
+    contact_emails: [],
     contact_phone: "",
     contact_phone_2: "",
     contact_telephone: "",
+    contact_phones: [],
     contact_fax: "",
     po_box: "",
     google_maps_url: "",
@@ -81,6 +83,9 @@ export default function AdminSettings() {
     show_linkedin: false,
     twitter_url: "",
     show_twitter: false,
+    email_sales: "",
+    email_support: "",
+    email_inquiry: "",
   });
 
   // Track which fields the user has actually changed

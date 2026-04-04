@@ -136,9 +136,26 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <a href={`mailto:${settings.contact_email}`} className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                  {settings.contact_email}
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a href={`mailto:${settings.contact_email}`} className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    {settings.contact_email}
+                  </a>
+                  {settings.show_email_sales && (
+                    <a href="mailto:sales@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                      sales@cpc-qa.com
+                    </a>
+                  )}
+                  {settings.show_email_support && (
+                    <a href="mailto:support@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                      support@cpc-qa.com
+                    </a>
+                  )}
+                  {settings.show_email_inquiry && (
+                    <a href="mailto:inquiry@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                      inquiry@cpc-qa.com
+                    </a>
+                  )}
+                </div>
               </li>
             </ul>
 

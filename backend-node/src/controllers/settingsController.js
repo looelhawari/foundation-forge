@@ -6,7 +6,7 @@ const { asyncHandler, successResponse, ApiError, sanitizeInput } = require("../u
 // ═══════════════════════════════════════════════════════
 let settingsCache = null;
 let cacheTimestamp = 0;
-const CACHE_TTL_MS = 60 * 1000; // 1 minute
+const CACHE_TTL_MS = 5 * 1000; // 5 seconds - short enough for instant updates
 
 /**
  * Read the singleton row from site_settings, with caching.
@@ -36,6 +36,19 @@ const invalidateCache = () => {
 };
 
 /**
+ * Parse JSON array from DB or return default
+ */
+const parseJsonArray = (value, defaultVal = []) => {
+    if (!value) return defaultVal;
+    try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed) ? parsed : defaultVal;
+    } catch {
+        return defaultVal;
+    }
+};
+
+/**
  * Format raw DB row → clean JSON with proper types.
  * MySQL TINYINT → JS boolean for show_* fields.
  */
@@ -44,20 +57,28 @@ const formatSettingsRow = (row) => ({
     public_location: row.public_location,
     head_office_address: row.head_office_address,
     contact_email: row.contact_email,
+    contact_emails: parseJsonArray(row.contact_emails, []),
     contact_phone: row.contact_phone,
     contact_phone_2: row.contact_phone_2 || "",
     contact_telephone: row.contact_telephone || "",
+    contact_phones: parseJsonArray(row.contact_phones, []),
     contact_fax: row.contact_fax || "",
     po_box: row.po_box || "",
     google_maps_url: row.google_maps_url || "",
     facebook_url: row.facebook_url || "",
-    show_facebook: !!row.show_facebook,
+    show_facebook: Number(row.show_facebook) === 1,
     instagram_url: row.instagram_url || "",
-    show_instagram: !!row.show_instagram,
+    show_instagram: Number(row.show_instagram) === 1,
     linkedin_url: row.linkedin_url || "",
-    show_linkedin: !!row.show_linkedin,
+    show_linkedin: Number(row.show_linkedin) === 1,
     twitter_url: row.twitter_url || "",
-    show_twitter: !!row.show_twitter,
+    show_twitter: Number(row.show_twitter) === 1,
+    show_email_sales: Number(row.show_email_sales) === 1,
+    show_email_support: Number(row.show_email_support) === 1,
+    show_email_inquiry: Number(row.show_email_inquiry) === 1,
+    email_sales: row.email_sales || "sales@cpc-qa.com",
+    email_support: row.email_support || "support@cpc-qa.com",
+    email_inquiry: row.email_inquiry || "inquiry@cpc-qa.com",
     updated_at: row.updated_at,
 });
 
@@ -67,8 +88,8 @@ const formatSettingsRow = (row) => ({
 const getPublicSettings = asyncHandler(async (_req, res) => {
     const row = await getSiteSettingsRow();
 
-    // Cache header — CDN / browser can reuse for 60s
-    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=120");
+    // Cache: browser 10s, CDN 30s. Fresh requests (?_=timestamp) bypass cache
+    res.set("Cache-Control", "public, max-age=10, s-maxage=30, stale-while-revalidate=60");
     res.json(successResponse(formatSettingsRow(row), "Site settings retrieved successfully"));
 });
 
@@ -96,10 +117,24 @@ const ALLOWED_FIELDS = [
     "show_linkedin",
     "twitter_url",
     "show_twitter",
+    "show_email_sales",
+    "show_email_support",
+    "show_email_inquiry",
+    "email_sales",
+    "email_support",
+    "email_inquiry",
 ];
 
 /** Boolean toggle fields — coerce to 0/1 for MySQL TINYINT */
-const BOOLEAN_FIELDS = ["show_facebook", "show_instagram", "show_linkedin", "show_twitter"];
+const BOOLEAN_FIELDS = [
+    "show_facebook",
+    "show_instagram",
+    "show_linkedin",
+    "show_twitter",
+    "show_email_sales",
+    "show_email_support",
+    "show_email_inquiry",
+];
 
 /** Simple URL validator */
 const isValidUrl = (str) => {
