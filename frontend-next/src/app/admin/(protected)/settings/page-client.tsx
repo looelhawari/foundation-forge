@@ -86,6 +86,9 @@ export default function AdminSettings() {
     email_sales: "",
     email_support: "",
     email_inquiry: "",
+    show_email_sales: false,
+    show_email_support: false,
+    show_email_inquiry: false,
   });
 
   // Track which fields the user has actually changed
@@ -742,6 +745,108 @@ export default function AdminSettings() {
                           placeholder="https://instagram.com/yourhandle"
                           disabled={!settings.show_instagram}
                           className={!settings.show_instagram ? "opacity-50" : ""}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Department Emails */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Mail className="h-5 w-5" />
+                        Department Emails
+                      </CardTitle>
+                      <CardDescription>
+                        Toggle each department email on/off. When off, the email is hidden on the site even if a value is saved.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      {/* Sales Email */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="email_sales" className="flex items-center gap-2 text-base">
+                            <Mail className="h-5 w-5 text-blue-500" />
+                            Sales Email
+                          </Label>
+                          <div className="flex items-center gap-2">
+                            <span className={`text-xs font-medium ${settings.show_email_sales ? "text-green-500" : "text-muted-foreground"}`}>
+                              {settings.show_email_sales ? "Visible" : "Hidden"}
+                            </span>
+                            <Switch
+                              checked={!!settings.show_email_sales}
+                              onCheckedChange={(val) => updateToggle("show_email_sales", val)}
+                            />
+                          </div>
+                        </div>
+                        <Input
+                          id="email_sales"
+                          type="email"
+                          value={settings.email_sales || ""}
+                          onChange={(e) => updateSetting("email_sales", e.target.value)}
+                          placeholder="sales@company.com"
+                          disabled={!settings.show_email_sales}
+                          className={!settings.show_email_sales ? "opacity-50" : ""}
+                        />
+                      </div>
+
+                      <Separator />
+
+                      {/* Support Email */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="email_support" className="flex items-center gap-2 text-base">
+                            <Mail className="h-5 w-5 text-green-500" />
+                            Support Email
+                          </Label>
+                          <div className="flex items-center gap-2">
+                            <span className={`text-xs font-medium ${settings.show_email_support ? "text-green-500" : "text-muted-foreground"}`}>
+                              {settings.show_email_support ? "Visible" : "Hidden"}
+                            </span>
+                            <Switch
+                              checked={!!settings.show_email_support}
+                              onCheckedChange={(val) => updateToggle("show_email_support", val)}
+                            />
+                          </div>
+                        </div>
+                        <Input
+                          id="email_support"
+                          type="email"
+                          value={settings.email_support || ""}
+                          onChange={(e) => updateSetting("email_support", e.target.value)}
+                          placeholder="support@company.com"
+                          disabled={!settings.show_email_support}
+                          className={!settings.show_email_support ? "opacity-50" : ""}
+                        />
+                      </div>
+
+                      <Separator />
+
+                      {/* Inquiry Email */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="email_inquiry" className="flex items-center gap-2 text-base">
+                            <Mail className="h-5 w-5 text-orange-500" />
+                            Inquiry Email
+                          </Label>
+                          <div className="flex items-center gap-2">
+                            <span className={`text-xs font-medium ${settings.show_email_inquiry ? "text-green-500" : "text-muted-foreground"}`}>
+                              {settings.show_email_inquiry ? "Visible" : "Hidden"}
+                            </span>
+                            <Switch
+                              checked={!!settings.show_email_inquiry}
+                              onCheckedChange={(val) => updateToggle("show_email_inquiry", val)}
+                            />
+                          </div>
+                        </div>
+                        <Input
+                          id="email_inquiry"
+                          type="email"
+                          value={settings.email_inquiry || ""}
+                          onChange={(e) => updateSetting("email_inquiry", e.target.value)}
+                          placeholder="inquiry@company.com"
+                          disabled={!settings.show_email_inquiry}
+                          className={!settings.show_email_inquiry ? "opacity-50" : ""}
                         />
                       </div>
                     </CardContent>
