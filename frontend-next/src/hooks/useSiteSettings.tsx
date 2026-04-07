@@ -38,12 +38,8 @@ const DEFAULT_SETTINGS: SiteSettings = {
     show_linkedin: true,
     twitter_url: "",
     show_twitter: false,
-    show_email_sales: false,
-    show_email_support: false,
-    show_email_inquiry: false,
-    email_sales: "sales@cpc-qa.com",
-    email_support: "support@cpc-qa.com",
-    email_inquiry: "inquiry@cpc-qa.com",
+    show_email_accounts: false,
+    email_accounts: "accounts@cpc-qa.com",
     updated_at: "",
 };
 

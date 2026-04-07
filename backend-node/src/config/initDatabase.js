@@ -195,9 +195,8 @@ const initDatabase = async () => {
         show_linkedin TINYINT(1) NOT NULL DEFAULT 1,
         twitter_url VARCHAR(500) DEFAULT '',
         show_twitter TINYINT(1) NOT NULL DEFAULT 0,
-        show_email_sales TINYINT(1) NOT NULL DEFAULT 0,
-        show_email_support TINYINT(1) NOT NULL DEFAULT 0,
-        show_email_inquiry TINYINT(1) NOT NULL DEFAULT 0,
+        show_email_accounts TINYINT(1) NOT NULL DEFAULT 0,
+        email_accounts VARCHAR(255) DEFAULT 'accounts@cpc-qa.com',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         CONSTRAINT chk_singleton CHECK (id = 1)
@@ -256,12 +255,8 @@ const initDatabase = async () => {
       { col: "show_instagram", after: "instagram_url" },
       { col: "show_linkedin", after: "linkedin_url" },
       { col: "show_twitter", after: "twitter_url" },
-      { col: "show_email_sales", after: "show_twitter" },
-      { col: "show_email_support", after: "show_email_sales" },
-      { col: "show_email_inquiry", after: "show_email_support" },
-      { col: "email_sales", after: "show_email_inquiry", type: "VARCHAR(255) DEFAULT 'sales@cpc-qa.com'" },
-      { col: "email_support", after: "email_sales", type: "VARCHAR(255) DEFAULT 'support@cpc-qa.com'" },
-      { col: "email_inquiry", after: "email_support", type: "VARCHAR(255) DEFAULT 'inquiry@cpc-qa.com'" },
+      { col: "show_email_accounts", after: "show_twitter" },
+      { col: "email_accounts", after: "show_email_accounts", type: "VARCHAR(255) DEFAULT 'accounts@cpc-qa.com'" },
     ];
     for (const { col, after, type } of toggleColumns) {
       try {
@@ -289,8 +284,7 @@ const initDatabase = async () => {
         contact_email, contact_phone, contact_phone_2, contact_telephone, contact_fax, po_box, google_maps_url,
         facebook_url, show_facebook, instagram_url, show_instagram,
         linkedin_url, show_linkedin, twitter_url, show_twitter,
-        show_email_sales, show_email_support, show_email_inquiry,
-        email_sales, email_support, email_inquiry
+        show_email_accounts, email_accounts
       ) VALUES (
         1,
         'Cosmo Projects & Construction',
@@ -307,8 +301,7 @@ const initDatabase = async () => {
         '', 0,
         'https://www.linkedin.com/company/cpc-qatar', 1,
         '', 0,
-        0, 0, 0,
-        'sales@cpc-qa.com', 'support@cpc-qa.com', 'inquiry@cpc-qa.com'
+        0, 'accounts@cpc-qa.com'
       )
     `);
     console.log("✅ Site settings default row seeded");

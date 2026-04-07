@@ -338,33 +338,13 @@ const Contact = () => {
                           </a>
                         </p>
                         {/* Additional emails - toggle controlled */}
-                        {settings.show_email_sales && (
+                        {settings.show_email_accounts && (
                           <p>
                             <a
-                              href="mailto:sales@cpc-qa.com"
+                              href={`mailto:${settings.email_accounts}`}
                               className="hover:text-primary transition-colors"
                             >
-                              sales@cpc-qa.com
-                            </a>
-                          </p>
-                        )}
-                        {settings.show_email_support && (
-                          <p>
-                            <a
-                              href="mailto:support@cpc-qa.com"
-                              className="hover:text-primary transition-colors"
-                            >
-                              support@cpc-qa.com
-                            </a>
-                          </p>
-                        )}
-                        {settings.show_email_inquiry && (
-                          <p>
-                            <a
-                              href="mailto:inquiry@cpc-qa.com"
-                              className="hover:text-primary transition-colors"
-                            >
-                              inquiry@cpc-qa.com
+                              {settings.email_accounts}
                             </a>
                           </p>
                         )}

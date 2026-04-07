@@ -73,12 +73,8 @@ const formatSettingsRow = (row) => ({
     show_linkedin: Number(row.show_linkedin) === 1,
     twitter_url: row.twitter_url || "",
     show_twitter: Number(row.show_twitter) === 1,
-    show_email_sales: Number(row.show_email_sales) === 1,
-    show_email_support: Number(row.show_email_support) === 1,
-    show_email_inquiry: Number(row.show_email_inquiry) === 1,
-    email_sales: row.email_sales || "sales@cpc-qa.com",
-    email_support: row.email_support || "support@cpc-qa.com",
-    email_inquiry: row.email_inquiry || "inquiry@cpc-qa.com",
+    show_email_accounts: Number(row.show_email_accounts) === 1,
+    email_accounts: row.email_accounts || "accounts@cpc-qa.com",
     updated_at: row.updated_at,
 });
 
@@ -117,12 +113,8 @@ const ALLOWED_FIELDS = [
     "show_linkedin",
     "twitter_url",
     "show_twitter",
-    "show_email_sales",
-    "show_email_support",
-    "show_email_inquiry",
-    "email_sales",
-    "email_support",
-    "email_inquiry",
+    "show_email_accounts",
+    "email_accounts",
 ];
 
 /** Boolean toggle fields — coerce to 0/1 for MySQL TINYINT */
@@ -131,9 +123,7 @@ const BOOLEAN_FIELDS = [
     "show_instagram",
     "show_linkedin",
     "show_twitter",
-    "show_email_sales",
-    "show_email_support",
-    "show_email_inquiry",
+    "show_email_accounts",
 ];
 
 /** Simple URL validator */

@@ -111,12 +111,8 @@ export interface SiteSettings {
   show_linkedin: boolean;
   twitter_url: string;
   show_twitter: boolean;
-  show_email_sales: boolean;
-  show_email_support: boolean;
-  show_email_inquiry: boolean;
-  email_sales: string;
-  email_support: string;
-  email_inquiry: string;
+  show_email_accounts: boolean;
+  email_accounts: string;
   updated_at: string;
 }
 

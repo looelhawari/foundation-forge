@@ -8,9 +8,7 @@ export const dynamic = "force-dynamic";
 // Email aliases that route to the main mailbox
 const EMAIL_ALIASES: Record<string, string> = {
   info: "info@cpc-qa.com",
-  sales: "sales@cpc-qa.com",
-  support: "support@cpc-qa.com",
-  inquiry: "inquiry@cpc-qa.com",
+  accounts: "accounts@cpc-qa.com",
 };
 
 export async function GET(

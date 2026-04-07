@@ -140,19 +140,9 @@ export const Footer = () => {
                   <a href={`mailto:${settings.contact_email}`} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                     {settings.contact_email}
                   </a>
-                  {settings.show_email_sales && (
-                    <a href="mailto:sales@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                      sales@cpc-qa.com
-                    </a>
-                  )}
-                  {settings.show_email_support && (
-                    <a href="mailto:support@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                      support@cpc-qa.com
-                    </a>
-                  )}
-                  {settings.show_email_inquiry && (
-                    <a href="mailto:inquiry@cpc-qa.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                      inquiry@cpc-qa.com
+                  {settings.show_email_accounts && (
+                    <a href={`mailto:${settings.email_accounts}`} className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                      {settings.email_accounts}
                     </a>
                   )}
                 </div>
